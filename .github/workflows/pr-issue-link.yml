@@ -19,6 +19,8 @@ concurrency:
 jobs:
   check-issue-link:
     name: Closing-issue reference
+    # The maintainer may open PRs with no linked issue, so the check skips them.
+    if: github.event.pull_request.user.login != 'salazarsebas'
     runs-on: ubuntu-latest
     # -----------------------------------------------------------------------
     # Design decision: this is a VISIBILITY check, not a hard merge gate.
