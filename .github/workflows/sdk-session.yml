@@ -34,4 +34,4 @@ jobs:
       # clippy -D warnings gate.
       - name: Run package tests
         working-directory: ./packages/sdk-session
-        run: node --test test/session.test.ts test/vectors.test.ts
+        run: npm test
