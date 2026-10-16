@@ -8,18 +8,25 @@
   },
   "packageRules": [
     {
+      "description": "Group every non-major update into one PR",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-non-major"
+    },
+    {
+      "description": "Group every major update into one PR",
+      "matchUpdateTypes": ["major"],
+      "groupName": "all major dependencies",
+      "groupSlug": "all-major"
+    },
+    {
       "matchManagers": ["cargo"],
-      "groupName": "cargo dependencies",
       "rangeStrategy": "bump"
-    },
-    {
-      "matchManagers": ["npm"],
-      "groupName": "npm dependencies"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "groupName": "github actions"
     }
   ],
-  "schedule": ["before 4am on monday"]
+  "schedule": ["before 4am on monday"],
+  "prConcurrentLimit": 3,
+  "vulnerabilityAlerts": {
+    "groupName": "security updates"
+  }
 }
