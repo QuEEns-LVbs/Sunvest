@@ -1,5 +1,10 @@
 # Arkanoid On-Chain Game
 
+> **Transitional example**: This example is not yet part of the canonical set.
+> It is kept as a reference implementation while it is being brought up to the
+> standard described in `examples/EXAMPLE_STANDARD.md`. For the closest
+> canonical example, see [`examples/snake`](../snake/README.md).
+
 A practical example demonstrating how to use the `cougr-core` package to implement Arkanoid game logic on the Stellar blockchain via Soroban smart contracts.
 
 ## Overview

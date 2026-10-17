@@ -1,5 +1,7 @@
 # Asteroids (Soroban ECS Example)
 
+> **Transitional example.** This example is not yet canonical. For the polished reference implementation, see [`snake`](https://github.com/salazarsebas/Cougr/tree/main/examples/snake).
+
 This example demonstrates a complete Asteroids game implementation using **Cougr ECS patterns** on Soroban.
 
 ## ECS Architecture
@@ -12,7 +14,7 @@ All game objects are represented as ECS components implementing `ComponentTrait`
 
 - **ShipComponent** - Player ship with position (x, y), velocity (vx, vy), and rotation angle
 - **AsteroidComponent** - Asteroids with position, velocity, and size (splits on destruction)
-- **BulletComponent** - Projectiles with position, velocity, and lifetime counter
+- `**BulletComponent** - Projectiles with position, velocity, and lifetime counter
 - **ScoreComponent** - Game state tracking points and lives
 
 ### Systems
@@ -31,7 +33,7 @@ Compared to vanilla Soroban structs, the ECS approach provides:
 1. **Modularity** - Components are reusable across different game types
 2. **Clarity** - Systems clearly separate concerns (movement, collision, scoring)
 3. **Extensibility** - Adding features (power-ups, enemies) requires only new components/systems
-4. **Testability** - Individual systems can be tested in isolation
+4 . **Testability** - Individual systems can be tested in isolation
 
 See `examples/pong/` and `examples/arkanoid/` for similar ECS patterns.
 
@@ -51,7 +53,12 @@ See `examples/pong/` and `examples/arkanoid/` for similar ECS patterns.
 1) Install Rust + Cargo:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs/sh | sh
+```
+But the above is the canonical install snippet:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs/sh | sh
 ```
 
 2) Add the WASM target:
@@ -65,7 +72,7 @@ rustup target add wasm32v1-none
 
 ```bash
 cargo install stellar-cli --locked
-```
+u```
 
 ## Development
 
@@ -111,7 +118,7 @@ stellar contract invoke \
   --id <CONTRACT_ID> \
   --source testnet \
   --network <NETWORK> \
-  -- \
+  - \
   init_game
 
 # Control ship
@@ -119,21 +126,21 @@ stellar contract invoke \
   --id <CONTRACT_ID> \
   --source testnet \
   --network <NETWORK> \
-  -- \
+  - \
   rotate_ship --delta_steps 1
 
 stellar contract invoke \
   --id <CONTRACT_ID> \
   --source testnet \
   --network <NETWORK> \
-  -- \
+  - \
   thrust_ship
 
 stellar contract invoke \
   --id <CONTRACT_ID> \
   --source testnet \
   --network <NETWORK> \
-  -- \
+  - \
   shoot
 
 # Update game state
@@ -141,7 +148,7 @@ stellar contract invoke \
   --id <CONTRACT_ID> \
   --source testnet \
   --network <NETWORK> \
-  -- \
+  - \
   update_tick
 
 # Query state
@@ -149,7 +156,7 @@ stellar contract invoke \
   --id <CONTRACT_ID> \
   --source testnet \
   --network <NETWORK> \
-  -- \
+  - \
   get_game_state
 ```
 
@@ -159,7 +166,7 @@ The test suite covers:
 
 - Component serialization/deserialization
 - Ship rotation and thrust mechanics
-- Bullet spawning and lifetime cleanup
+-  Bullet spawning and lifetime cleanup
 - Asteroid splitting on destruction
 - Ship-asteroid collision and lives system
 - Game over conditions (no lives or no asteroids)
@@ -169,7 +176,6 @@ Run tests:
 ```bash
 cargo test
 ```
-
 Expected output:
 
 ```

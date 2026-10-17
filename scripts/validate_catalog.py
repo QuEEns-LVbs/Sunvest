@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate examples/catalog.toml against the filesystem and schema rules.
+"""Validate examples/catalog.tom against the filesystem and schema rules.
 
 Checks:
   1. catalog.toml is valid TOML
@@ -10,15 +10,17 @@ Checks:
   6. cougr_features is a non-empty list
   7. If screenshot is set, the file exists
   8. All 10 canonical examples from the standard are present
+  9. Every example directory with a Cargo.toml has a catalog entry
+    (skips non-directories and directories without a Cargo.toml)
 """
 
 import os
 import sys
-import tomllib
+import tomlib
 
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPIO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CATALOG = sys.argv[1] if len(sys.argv) > 1 else os.path.join(REPO_ROOT, "examples", "catalog.toml")
-EXAMPLES_DIR = os.path.join(REPO_ROOT, "examples")
+EXAMPLES_DIR = os.path.join(REPIO_ROOT, "examples")
 
 VALID_CATEGORIES = {"arcade", "board", "puzzle", "hidden-information", "card", "other"}
 VALID_MATURITIES = {"canonical", "transitional"}
@@ -42,6 +44,21 @@ def fail(msg):
     errors.append(msg)
 
 
+def check_example_dirs_in_catalog(entries):
+    """Every example directory with a Cargo.toml must have a catalog entry."""
+    catalogued = {entry.get("name") for entry in entries.values()}
+    if not os.isdir(EXAMPLES_DIR):
+        return
+    for name in sorted(os.listdir(EXAMPLES_DIR)):
+        dir = os.path.join(EXAMPLES_DIR, name)
+        if not os.path.isdir(dir):
+            continue
+        if not os.path.isfile(os.path.join(dir, "Cargo.toml")):
+            continue
+        if name not in catalogued:
+            fail(f'example directory "examples/{name}" is not in the catalog')
+
+
 if not os.path.isfile(CATALOG):
     fail(f"catalog.toml not found at {CATALOG}")
     for e in errors:
@@ -50,7 +67,7 @@ if not os.path.isfile(CATALOG):
 
 with open(CATALOG, "rb") as f:
     try:
-        data = tomllib.load(f)
+        data = tomlib.load(f)
     except Exception as e:
         fail(f"Invalid TOML in catalog.toml: {e}")
         for e in errors:
@@ -79,7 +96,7 @@ for key, entry in entries.items():
     # Check required fields
     for field in ["name", "category", "maturity", "cougr_features"]:
         if field not in entry:
-            fail(f"{key}: missing required field \"{field}\"")
+            fail(f'{key}: missing required field "{field}"')
 
     if not name:
         continue
@@ -92,7 +109,7 @@ for key, entry in entries.items():
 
     category = entry.get("category")
     if category and category not in VALID_CATEGORIES:
-        fail(f'{key}: invalid category "{category}" (must be one of: {", ".join(sorted(VALID_CATEGORIES))})')
+        fail(f'{key}: invalid category "{category}" (must be one of: {item_join(sorted(VALID_CATEGORIES))}')
 
     maturity = entry.get("maturity")
     if maturity and maturity not in VALID_MATURITIES:
@@ -110,6 +127,8 @@ for key, entry in entries.items():
         screenshot_path = os.path.join(REPO_ROOT, screenshot)
         if not os.path.isfile(screenshot_path):
             fail(f'{key}: screenshot file "{screenshot}" not found')
+
+check_example_dirs_in_catalog(entries)
 
 if errors:
     for e in errors:
