@@ -35,12 +35,6 @@ pub fn run(name: Option<&str>, list: bool, path: Option<&Path>) -> Result<(), Cl
     let manifest = manifest()?;
 
     if list {
-        if name.is_some() {
-            return Err(CliError::UnknownPiece {
-                name: "--list with a piece name".to_string(),
-                available: "--list takes no piece name".to_string(),
-            });
-        }
         for piece in &manifest.piece {
             println!("{:<24} {}", piece.name, piece.description);
         }
