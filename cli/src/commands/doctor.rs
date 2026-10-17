@@ -2,7 +2,7 @@
 //!
 //! Checks that the toolchain, compilation targets, and external tools required
 //! to build and deploy a Cougr project are all present and meet the minimum
-//! versions specified in the workspace `Cargo.toml`.
+//! versions declared by the CLI manifest.
 //!
 //! Each check reports **pass**, **fail**, or **warn**, with remediation for
 //! failures and warnings. A failed rustup target query warns with rustup's
@@ -17,12 +17,14 @@ use std::process::Command;
 
 // ── Minimum versions ─────────────────────────────────────────────────────────
 //
-// The Rust minimum comes from the root workspace `Cargo.toml` (`rust-version =
-// "1.70.0"`).  The stellar-cli minimum tracks the first release of the
-// current stable v21 series.
+// The Rust minimum comes from this crate's `rust-version` in `cli/Cargo.toml`,
+// which Cargo exposes at compile time as `CARGO_PKG_RUST_VERSION`. Reading it
+// here keeps the doctor in step with the MSRV the rest of the repository pins.
+// The stellar-cli minimum tracks the first release of the current stable v21
+// series.
 
-/// Minimum Rust version required by the workspace (from root `Cargo.toml`).
-const MIN_RUST: (u64, u64, u64) = (1, 70, 0);
+/// The `rust-version` declared by `cli/Cargo.toml`.
+const MIN_RUST: &str = env!("CARGO_PKG_RUST_VERSION");
 
 /// Minimum `stellar` CLI version that ships the v21 API surface.
 const MIN_STELLAR: (u64, u64, u64) = (21, 0, 0);
@@ -99,6 +101,28 @@ fn parse_version(s: &str) -> Option<(u64, u64, u64)> {
     Some((major, minor, patch))
 }
 
+/// Parse the `rust-version` field, which Cargo accepts as `"MAJOR.MINOR"` or
+/// `"MAJOR.MINOR.PATCH"`.
+fn parse_msrv(s: &str) -> Option<(u64, u64, u64)> {
+    let mut parts = s.trim().split('.');
+    let major = parts.next()?.parse().ok()?;
+    let minor = parts.next()?.parse().ok()?;
+    let patch = match parts.next() {
+        Some(patch) => patch.parse().ok()?,
+        None => 0,
+    };
+    if parts.next().is_some() {
+        return None;
+    }
+    Some((major, minor, patch))
+}
+
+/// Minimum Rust the doctor enforces. `None` means `cli/Cargo.toml` declares no
+/// `rust-version`, so there is no minimum to check against.
+fn min_rust() -> Option<(u64, u64, u64)> {
+    parse_msrv(MIN_RUST)
+}
+
 fn version_ok(actual: (u64, u64, u64), minimum: (u64, u64, u64)) -> bool {
     actual >= minimum
 }
@@ -129,7 +153,7 @@ fn check_cargo() -> CheckResult {
     }
 }
 
-/// Check 2: `rustup` / Rust toolchain present and meets `MIN_RUST`.
+/// Check 2: `rustup` / Rust toolchain present and meets the declared minimum.
 fn check_rust() -> CheckResult {
     let output = match Command::new("rustc").arg("--version").output() {
         Ok(o) => o,
@@ -154,28 +178,35 @@ fn check_rust() -> CheckResult {
     // rustc --version → "rustc 1.82.0 (f6e511eec 2024-10-15)"
     let version_str = raw.split_whitespace().nth(1).unwrap_or("0.0.0");
 
+    let minimum = min_rust();
+
     match parse_version(version_str) {
         None => CheckResult::warn(
             "rust",
             format!("could not parse rustc version from: {raw}"),
-            format!(
-                "rustup update  # ensure Rust >= {}",
-                version_string(MIN_RUST)
-            ),
+            match minimum {
+                Some(minimum) => format!(
+                    "rustup update  # ensure Rust >= {}",
+                    version_string(minimum)
+                ),
+                None => "rustup update  # install the latest stable Rust".to_string(),
+            },
         ),
-        Some(actual) if !version_ok(actual, MIN_RUST) => CheckResult::fail(
-            "rust",
-            format!(
-                "rustc {} is below the minimum {}",
-                version_string(actual),
-                version_string(MIN_RUST)
+        Some(actual) => match minimum {
+            Some(minimum) if !version_ok(actual, minimum) => CheckResult::fail(
+                "rust",
+                format!(
+                    "rustc {} is below the minimum {}",
+                    version_string(actual),
+                    version_string(minimum)
+                ),
+                format!(
+                    "rustup update  # upgrades to the latest stable (>= {})",
+                    version_string(minimum)
+                ),
             ),
-            format!(
-                "rustup update  # upgrades to the latest stable (>= {})",
-                version_string(MIN_RUST)
-            ),
-        ),
-        Some(actual) => CheckResult::pass("rust", format!("rustc {}", version_string(actual))),
+            _ => CheckResult::pass("rust", format!("rustc {}", version_string(actual))),
+        },
     }
 }
 
@@ -486,7 +517,7 @@ mod tests {
 
     #[test]
     fn parse_version_strips_prerelease_suffix() {
-        assert_eq!(parse_version("1.70.0-beta.1"), Some((1, 70, 0)));
+        assert_eq!(parse_version("1.80.0-beta.1"), Some((1, 80, 0)));
         assert_eq!(parse_version("21.0.0-rc.2"), Some((21, 0, 0)));
     }
 
@@ -497,22 +528,49 @@ mod tests {
         assert_eq!(parse_version(""), None);
     }
 
+    // ── parse_msrv ───────────────────────────────────────────────────────────
+
+    #[test]
+    fn parse_msrv_accepts_two_and_three_components() {
+        assert_eq!(parse_msrv("1.88.0"), Some((1, 88, 0)));
+        assert_eq!(parse_msrv("1.88"), Some((1, 88, 0)));
+        assert_eq!(parse_msrv(" 1.80.0 "), Some((1, 80, 0)));
+    }
+
+    #[test]
+    fn parse_msrv_rejects_garbage() {
+        assert_eq!(parse_msrv(""), None);
+        assert_eq!(parse_msrv("1"), None);
+        assert_eq!(parse_msrv("1.x"), None);
+        assert_eq!(parse_msrv("1.88.0.1"), None);
+    }
+
+    #[test]
+    fn min_rust_equals_the_parsed_rust_version() {
+        assert_eq!(MIN_RUST, env!("CARGO_PKG_RUST_VERSION"));
+        assert_eq!(min_rust(), parse_msrv(MIN_RUST));
+        assert!(
+            min_rust().is_some(),
+            "cli/Cargo.toml must declare rust-version so `cougr doctor` can enforce it"
+        );
+    }
+
     // ── version_ok ──────────────────────────────────────────────────────────
 
     #[test]
     fn version_ok_exact_match() {
-        assert!(version_ok((1, 70, 0), (1, 70, 0)));
+        assert!(version_ok((1, 80, 0), (1, 80, 0)));
     }
 
     #[test]
     fn version_ok_newer_is_fine() {
-        assert!(version_ok((1, 82, 0), (1, 70, 0)));
+        assert!(version_ok((1, 82, 0), (1, 80, 0)));
         assert!(version_ok((2, 0, 0), (1, 99, 99)));
     }
 
     #[test]
     fn version_ok_older_fails() {
-        assert!(!version_ok((1, 69, 9), (1, 70, 0)));
+        assert!(!version_ok((1, 79, 9), (1, 80, 0)));
         assert!(!version_ok((20, 99, 99), (21, 0, 0)));
     }
 
@@ -560,7 +618,7 @@ mod tests {
         let r = check_rust();
         assert!(
             r.is_pass(),
-            "rustc should be available and >= 1.70.0 during tests"
+            "rustc should be available and meet the declared rust-version during tests"
         );
     }
 }

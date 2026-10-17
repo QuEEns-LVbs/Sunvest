@@ -32,13 +32,10 @@ jobs:
           node-version: 24
           check-latest: true
           cache: npm
-          cache-dependency-path: clients/checkpoint-web/package.json
-
-      - name: Upgrade npm
-        run: npm install --global npm@11
+          cache-dependency-path: clients/checkpoint-web/package-lock.json
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci
 
       - name: Unit tests
         run: npm test

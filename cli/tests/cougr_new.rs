@@ -147,6 +147,20 @@ fn add_list_shows_the_v1_pieces() {
 }
 
 #[test]
+fn add_list_rejects_a_piece_name_at_parse_time() {
+    let output = cougr(&["add", "--list", "session-auth"]);
+
+    assert!(!output.status.success());
+    assert_eq!(
+        output.status.code(),
+        Some(2),
+        "--list with a piece name should be a clap usage error"
+    );
+    let message = stderr(&output);
+    assert!(message.contains("cannot be used with"), "{message}");
+}
+
+#[test]
 fn add_wires_a_piece_and_refuses_to_overwrite_it() {
     let dir = tempfile::tempdir().unwrap();
     let generated = generate("demo", "starter", dir.path());

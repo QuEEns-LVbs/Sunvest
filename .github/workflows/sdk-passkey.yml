@@ -34,6 +34,4 @@ jobs:
       # clippy -D warnings gate.
       - name: Run package tests
         working-directory: ./packages/sdk-passkey
-        run: >-
-          node --test test/bytes.test.ts test/der.test.ts test/cbor.test.ts
-          test/mapper.test.ts test/registration.test.ts test/vectors.test.ts
+        run: npm test

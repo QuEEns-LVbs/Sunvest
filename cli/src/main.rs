@@ -86,7 +86,7 @@ enum Command {
     /// are installed and meet the minimum versions:
     ///
     ///   - cargo (sanity check)
-    ///   - Rust toolchain (>= 1.70.0, from workspace Cargo.toml)
+    ///   - Rust toolchain (at least the CLI's `rust-version` from Cargo.toml)
     ///   - wasm32v1-none target (required for Soroban contracts)
     ///   - Stellar CLI (>= 21.0.0)
     ///
@@ -128,7 +128,7 @@ enum Command {
         piece: Option<String>,
 
         /// List all embedded capabilities.
-        #[arg(long)]
+        #[arg(long, conflicts_with = "piece")]
         list: bool,
 
         /// Directory of the target project. Defaults to the current directory.

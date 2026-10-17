@@ -31,7 +31,7 @@ cargo clippy --all-targets --all-features -- -D warnings
 cargo test
 ```
 
-If you modify an example project, also run that example's local checks from its own directory. If the example supports Soroban contract builds, validate that flow as well.
+If you modify an example project, also run that example's local checks from its own directory. If the example supports Soroban contract builds, validate that flow as well. If you change `examples/catalog.toml` or the example directories it references, run `python3 scripts/validate_catalog.py` as described in [Adding Examples](#adding-examples).
 
 ## Documentation Expectations
 
@@ -60,6 +60,17 @@ When adding a new example:
 - include a local `README.md`
 - keep the example focused on one or two clear patterns
 - add CI coverage when the example is meant to remain a maintained reference
+- add a matching `[example.<name>]` entry to `examples/catalog.toml` and validate the catalog locally (requires Python 3.11 or newer):
+
+  ```bash
+  python3 scripts/validate_catalog.py
+  ```
+
+  The validator checks required fields, allowed `category` and `maturity` values, that each `name` maps to a directory under `examples/`, that `cougr_features` is a non-empty list, and that any `screenshot` path exists. `examples/catalog_broken.toml` is a deliberately invalid fixture; running the validator against it must exit non-zero, which is how CI confirms the rules still fire:
+
+  ```bash
+  python3 scripts/validate_catalog.py examples/catalog_broken.toml  # expected to fail
+  ```
 
 ## Review Criteria
 
