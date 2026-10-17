@@ -1,0 +1,73 @@
+name: Example Catalog
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'examples/catalog*.toml'
+      - 'scripts/validate_catalog.py'
+      - 'scripts/validate_catalog.sh'
+      - '.github/workflows/catalog.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'examples/catalog*.toml'
+      - 'scripts/validate_catalog.py'
+      - 'scripts/validate_catalog.sh'
+      - '.github/workflows/catalog.yml'
+
+concurrency:
+  group: catalog-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate example catalog
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate examples/catalog.toml
+        run: python3 scripts/validate_catalog.py
+
+      # The fixture only proves the rules still fire if the validator rejects it,
+      # so this step fails when the script exits zero or stops reporting a defect.
+      - name: Confirm the validator rejects examples/catalog_broken.toml
+        run: |
+          status=0
+          output="$(python3 scripts/validate_catalog.py examples/catalog_broken.toml 2>&1)" || status=$?
+          echo "$output"
+
+          if [ "$status" -eq 0 ]; then
+            echo "::error::Validator accepted examples/catalog_broken.toml; it must exit non-zero."
+            exit 1
+          fi
+
+          expected=(
+            'FAIL: example.missing_name: missing required field "name"'
+            'FAIL: example.bad_category: invalid category "sports"'
+            'FAIL: example.bad_maturity: invalid maturity "obsolete"'
+            'FAIL: example.nonexistent_dir: example directory "this_does_not_exist"'
+            'FAIL: example.empty_features: cougr_features must be a non-empty list'
+            'FAIL: example.missing_screenshot: screenshot file "screenshots/ghost.png" not found'
+            'FAIL: Missing required canonical example:'
+          )
+
+          missing=0
+          for line in "${expected[@]}"; do
+            if ! grep -qF -- "$line" <<< "$output"; then
+              echo "::error::Expected failure was not reported: $line"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+          echo "fixture rejected as expected (exit $status)"

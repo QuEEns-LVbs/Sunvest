@@ -14,6 +14,16 @@ Checks:
 
 import os
 import sys
+
+# tomllib is part of the standard library from Python 3.11 onward. Fail with a
+# clear message instead of a ModuleNotFoundError traceback on older versions.
+if sys.version_info < (3, 11):
+    sys.exit(
+        "validate_catalog.py requires Python 3.11 or newer "
+        f"(this interpreter is {sys.version.split()[0]}), because it uses the "
+        "standard-library tomllib module."
+    )
+
 import tomllib
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
