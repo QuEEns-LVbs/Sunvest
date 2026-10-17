@@ -1,5 +1,8 @@
 use super::*;
-use soroban_sdk::{testutils::Address as _, Env};
+use soroban_sdk::{
+    testutils::{Address as _, MockAuth, MockAuthInvoke},
+    Address, Env, IntoVal,
+};
 
 fn setup_game() -> (Env, TicTacToeContractClient<'static>, Address, Address) {
     let env = Env::default();
@@ -429,7 +432,7 @@ fn test_get_winner_none_draw() {
 
 #[test]
 fn test_reset_game() {
-    let (_, client, player_x, player_o) = setup_game();
+    let (env, client, player_x, player_o) = setup_game();
 
     client.make_move(&player_x, &0);
     client.make_move(&player_o, &4);
@@ -445,6 +448,10 @@ fn test_reset_game() {
     assert!(reset_state.is_x_turn);
     assert_eq!(reset_state.move_count, 0);
     assert_eq!(reset_state.status, 0);
+    assert!(
+        env.auths().iter().any(|(address, _)| address == &player_x),
+        "Expected player_x in recorded authorizations"
+    );
 }
 
 #[test]
@@ -506,6 +513,108 @@ fn test_move_count_increments() {
 }
 
 #[test]
+fn test_make_move_auth_names_player_x() {
+    let env = Env::default();
+    let contract_id = env.register(TicTacToeContract, ());
+    let client = TicTacToeContractClient::new(&env, &contract_id);
+    let player_x = Address::generate(&env);
+    let player_o = Address::generate(&env);
+
+    client.init_game(&player_x, &player_o);
+
+    env.mock_auths(&[MockAuth {
+        address: &player_x,
+        invoke: &MockAuthInvoke {
+            contract: &contract_id,
+            fn_name: "make_move",
+            args: (&player_x, 0u32).into_val(&env),
+            sub_invokes: &[],
+        },
+    }]);
+
+    let result = client.make_move(&player_x, &0);
+    assert!(result.success);
+    assert!(
+        env.auths().iter().any(|(address, _)| address == &player_x),
+        "Expected player_x in recorded authorizations"
+    );
+}
+
+#[test]
+#[should_panic(expected = "HostError: Error(Auth, InvalidAction)")]
+fn test_player_o_cannot_authorize_player_x_move() {
+    let env = Env::default();
+    let contract_id = env.register(TicTacToeContract, ());
+    let client = TicTacToeContractClient::new(&env, &contract_id);
+    let player_x = Address::generate(&env);
+    let player_o = Address::generate(&env);
+
+    client.init_game(&player_x, &player_o);
+
+    env.mock_auths(&[MockAuth {
+        address: &player_o,
+        invoke: &MockAuthInvoke {
+            contract: &contract_id,
+            fn_name: "make_move",
+            args: (&player_x, 0u32).into_val(&env),
+            sub_invokes: &[],
+        },
+    }]);
+
+    client.make_move(&player_x, &0);
+}
+
+#[test]
+#[should_panic(expected = "HostError: Error(Auth, InvalidAction)")]
+fn test_stranger_cannot_authorize_player_x_move() {
+    let env = Env::default();
+    let contract_id = env.register(TicTacToeContract, ());
+    let client = TicTacToeContractClient::new(&env, &contract_id);
+    let player_x = Address::generate(&env);
+    let player_o = Address::generate(&env);
+    let stranger = Address::generate(&env);
+
+    client.init_game(&player_x, &player_o);
+
+    env.mock_auths(&[MockAuth {
+        address: &stranger,
+        invoke: &MockAuthInvoke {
+            contract: &contract_id,
+            fn_name: "make_move",
+            args: (&player_x, 0u32).into_val(&env),
+            sub_invokes: &[],
+        },
+    }]);
+
+    client.make_move(&player_x, &0);
+}
+
+#[test]
+#[should_panic(expected = "HostError: Error(Auth, InvalidAction)")]
+fn test_stranger_cannot_authorize_reset_game() {
+    let env = Env::default();
+    let contract_id = env.register(TicTacToeContract, ());
+    let client = TicTacToeContractClient::new(&env, &contract_id);
+    let player_x = Address::generate(&env);
+    let player_o = Address::generate(&env);
+    let stranger = Address::generate(&env);
+
+    client.init_game(&player_x, &player_o);
+
+    env.mock_auths(&[MockAuth {
+        address: &stranger,
+        invoke: &MockAuthInvoke {
+            contract: &contract_id,
+            fn_name: "reset_game",
+            args: (&player_x,).into_val(&env),
+            sub_invokes: &[],
+        },
+    }]);
+
+    client.reset_game(&player_x);
+}
+
+#[test]
 #[should_panic]
 fn test_make_move_requires_auth() {
     let env = Env::default();
@@ -529,7 +638,7 @@ fn test_wrong_player_cannot_move() {
 }
 
 #[test]
-#[should_panic]
+#[should_panic(expected = "gameinprogress")]
 fn test_init_game_cannot_overwrite_live_match() {
     let (env, client, player_x, _) = setup_game();
 
@@ -541,7 +650,7 @@ fn test_init_game_cannot_overwrite_live_match() {
 }
 
 #[test]
-#[should_panic]
+#[should_panic(expected = "notplay")]
 fn test_non_player_cannot_reset_game() {
     let (env, client, _, _) = setup_game();
     let stranger = Address::generate(&env);
