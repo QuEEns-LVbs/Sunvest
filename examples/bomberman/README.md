@@ -1,6 +1,7 @@
 # Bomberman On-Chain Game
 
-> **Transitional example** - this example is not yet fully classified. For the closest canonical reference, see [`examples/snake`](https://github.com/salazarsebas/Cougr/tree/main/examples/snake).
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 This example demonstrates how to implement a Bomberman game as a smart contract on the Stellar blockchain using Soroban and cougr-core.
 
@@ -48,7 +49,7 @@ stellar contract build
 cargo fmt --check
 
 # Lint check
-cargo clippy --all-targets --all-features - -D warnings
+cargo clippy --all-targets --all-features -- -D warnings
 
 # Run unit tests
 cargo test
@@ -81,7 +82,7 @@ Three power-up types are supported and modelled as first-class ECS entities:
 | `Speed` | `speed += 1` - reserved for future movement throttling |
 
 Power-ups are spawned at game start (deterministic grid positions) and when a
-bomb destroys a destructible block (~25% chance via (`x+y)%4==0`).
+bomb destroys a destructible block (~25% chance via `(x+y)%4==0`).
 Walking over a `PowerUpComponent` entity silently applies the buff and removes
 the entity from the world (**PickupSystem**).
 
@@ -128,7 +129,6 @@ This example demonstrates how cougr-core simplifies on-chain game development by
 ### Prerequisites for Deployment
 
 1. **Test Account**: Fund a test account using the Friendbot: https://faucet-stellar.acachete.xyz
-***Note:** the Friendbot URL above is a third-party mirror. The official Stellar testnet Friendbot is at https://friendbot.stellar.org.
 2. **Stellar CLI**: Install with `cargo install --locked stellar-cli`
 3. **WASM Build**: Ensure the contract builds successfully
 
@@ -147,9 +147,9 @@ This example demonstrates how cougr-core simplifies on-chain game development by
      --network <NETWORK>
    ```
 
-3. Record the contract ID for future invocations (e.g., `<CONTRACT_ID>`)
+3.  the contract ID for future invocations (e.g., `<CONTRACT_ID>`)
 
-https://stellar.expert/explorer/testnet/account/GAQQXKUQYNBHZYZ2OYISPXDZDP2HV57534VMGARGGICH2BGNKDTKXOX
+https://stellar.expert/explorer/testnet/account/GAQAXKUQYNBHZYZ2OYISPXDZDP2HV57534VMGARGGIICH2BGNKDTKXOX
 
 ### Testing the Contract
 
@@ -161,7 +161,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <your-secret-key> \
   --network <NETWORK> \
-  - \
+  -- \
   init_game
 
 # Move player (directions: 0=up, 1=right, 2=down, 3=left)
@@ -169,7 +169,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <your-secret-key> \
   --network <NETWORK> \
-  - \
+  -- \
   move_player \
   --player_id 1 \
   --direction 1
@@ -179,7 +179,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <your-secret-key> \
   --network <NETWORK> \
-  - \
+  -- \
   place_bomb \
   --player_id 1
 
@@ -188,7 +188,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <your-secret-key> \
   --network <NETWORK> \
-  - \
+  -- \
   update_tick
 
 # Get player score
@@ -196,7 +196,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <your-secret-key> \
   --network <NETWORK> \
-  - \
+  -- \
   get_score \
   --player_id 1
 
@@ -205,7 +205,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <your-secret-key> \
   --network <NETWORK> \
-  - \
+  -- \
   check_game_over
 ```
 
@@ -223,7 +223,7 @@ stellar contract invoke \
 ### Cost Monitoring
 
 Monitor transaction costs during testing:
-- -**Rent**: Storage costs on Stellar ledger
+- **Rent**: Storage costs on Stellar ledger
 - **Fees**: Network transaction fees
 - **CPU/RAM**: Contract execution costs
 
@@ -255,7 +255,7 @@ stellar contract deploy --wasm target/wasm32v1-none/release/bomberman.wasm --sim
 
 ## Architecture
 
-The contract uses the **cougr-core ECS (Entity-Component-System)** pattern for all game state:
+The contract uses the **cougr-core ECS (Entity–Component–System)** pattern for all game state:
 
 - **Entities**: Numeric IDs created by `world.spawn_entity()` / removed by `world.despawn_entity()`
 - **Components**: Plain structs implementing `ComponentTrait` (typed `serialize` / `deserialize`)

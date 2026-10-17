@@ -130,13 +130,13 @@ cougr_features = ["ecs"]
 name = "flappy_bird"
 category = "arcade"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["game-app", "ecs"]
 
 [example.geometry_dash]
 name = "geometry_dash"
 category = "arcade"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["game-app", "ecs"]
 
 [example.pac_man]
 name = "pac_man"
@@ -148,19 +148,19 @@ cougr_features = ["ecs"]
 name = "pong"
 category = "arcade"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["game-app", "ecs"]
 
 [example.space_invaders]
 name = "space_invaders"
 category = "arcade"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["game-app", "ecs"]
 
 [example.tetris]
 name = "tetris"
 category = "arcade"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["game-app", "ecs"]
 
 [example.tower_defense]
 name = "tower_defense"
@@ -180,7 +180,7 @@ cougr_features = ["ecs"]
 name = "chess"
 category = "board"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "zk-circuits", "privacy", "ecs"]
 
 [example.connect_four]
 name = "connect_four"
@@ -192,7 +192,7 @@ cougr_features = ["ecs"]
 name = "reversi"
 category = "board"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "ecs"]
 
 # Puzzle
 
@@ -212,7 +212,7 @@ cougr_features = ["ecs"]
 name = "murdoku"
 category = "puzzle"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "session-auth", "zk-circuits", "privacy", "game-app", "ecs"]
 
 [example.sudoku]
 name = "sudoku"
@@ -226,13 +226,13 @@ cougr_features = ["ecs"]
 name = "proof_of_hunt"
 category = "hidden-information"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "zk-circuits", "privacy"]
 
 [example.treasure_hunt]
 name = "treasure_hunt"
 category = "hidden-information"
 maturity = "transitional"
-cougr_features = ["privacy", "ecs"]
+cougr_features = ["auth", "privacy"]
 
 # Card
 
@@ -240,13 +240,13 @@ cougr_features = ["privacy", "ecs"]
 name = "shadow_draft_card_game"
 category = "card"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "zk-circuits", "privacy", "commit-reveal", "ecs"]
 
 [example.trading_card_game]
 name = "trading_card_game"
 category = "card"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "session-auth", "ecs"]
 
 # Other
 
@@ -254,19 +254,19 @@ cougr_features = ["ecs"]
 name = "ai_dungeon_master_arena"
 category = "other"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "zk-circuits"]
 
 [example.cross_asset_racing_league]
 name = "cross_asset_racing_league"
 category = "other"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "zk-circuits", "privacy", "ecs"]
 
 [example.guild_treasury_wars]
 name = "guild_treasury_wars"
 category = "other"
 maturity = "transitional"
-cougr_features = ["auth", "ecs"]
+cougr_features = ["auth", "privacy", "commit-reveal", "ecs"]
 
 [example.pokemon_mini]
 name = "pokemon_mini"
@@ -278,10 +278,11 @@ cougr_features = ["ecs"]
 name = "rock_paper_scissors"
 category = "other"
 maturity = "transitional"
-cougr_features = ["ecs"]
+cougr_features = ["auth", "privacy", "commit-reveal", "ecs"]
 
 [example.tap_battle]
 name = "tap_battle"
 category = "other"
 maturity = "transitional"
-cougr_features = ["session-auth", "ecs"]
+cougr_features = ["auth", "session-auth", "ecs"]
+

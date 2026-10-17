@@ -1,5 +1,8 @@
 # Treasure Hunt (Merkle Map Pattern)
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A single-player exploration game demonstrating **hidden information** using Merkle map commitments and sparse fog-of-war on Stellar Soroban. The full map is committed off-chain, and players prove cell contents via Merkle inclusion proofs as they explore.
 
 ## Status

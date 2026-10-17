@@ -1,5 +1,8 @@
 # ️ Guild Treasury Wars - DAO-Governed Factions with stellar-zk Commitments
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/salazarsebas/Cougr)
 [![Tests](https://img.shields.io/badge/tests-14%20passing-brightgreen)](https://github.com/salazarsebas/Cougr)
 [![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)](https://stellar.org)

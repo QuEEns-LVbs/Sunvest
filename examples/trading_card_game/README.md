@@ -1,5 +1,8 @@
 # Trading Card Game
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A two-player on-chain trading card game built with the [Cougr](https://github.com/salazarsebas/Cougr) ECS framework on Stellar Soroban. This example demonstrates **atomic multi-action turns** via `BatchBuilder` and **match-scoped sessions** via `SessionBuilder`.
 
 ## Why Atomic Turns Matter

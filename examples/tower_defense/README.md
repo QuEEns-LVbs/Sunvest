@@ -1,5 +1,8 @@
 # Tower Defense Example
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A minimal tower defense game implemented as a Soroban smart contract using the `cougr-core` ECS framework. This example demonstrates wave spawning, enemy path progression, tower attacks, health reduction, and win/loss conditions.
 
 ## Features

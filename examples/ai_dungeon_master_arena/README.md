@@ -1,8 +1,7 @@
 # AI Dungeon Master Arena Example
 
-> **Transitional example**: This example is not yet part of the canonical set.
-> It is kept for reference and may change without notice. For the closest
-> canonical example, see [`examples/snake`](../snake).
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 This example demonstrates a complex gameplay loop on Stellar/Soroban using:
 1.  **x402-style Paid Actions**: Premium encounters or rerolls purchased in-game via a request-driven model.

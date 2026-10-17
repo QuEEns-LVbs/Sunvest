@@ -1,5 +1,8 @@
 # Pokemon Mini On-Chain Game
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A Pokemon-style mini game implemented as a Soroban smart contract using the **cougr-core** ECS framework on the Stellar blockchain.
 
 ## Overview

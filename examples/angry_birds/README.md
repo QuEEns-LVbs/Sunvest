@@ -1,6 +1,7 @@
 # Angry Birds on Stellar Soroban
 
-> **Transitional example** - This example is functional but not yet fully polished to the canonical standard. For the closest canonical reference, see [`snke`](../snake/).
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 A turn-based physics puzzle implementation using the Cougr ECS framework on Stellar/Soroban. This contract demonstrates complex state transitions, entity relationships, and bounded on-chain computation suitable for blockchain gaming.
 
@@ -10,11 +11,11 @@ Angry Birds is a physics-based puzzle game where players launch projectiles (bir
 
 ### Core Mechanics
 
-- Players submit angle and power parameters for each shot
-- Deterministic physics: fixed-point mathematics ensure reproducible results
-- Material system: different materials (wood, glass, stone) that have varying damage resistance
-- Bounded computation: maximum 50 simulation steps per shot prevents gas limit issues
-- Win/loss conditions: win by destroying all targets, lose by running out of birds
+- **Turn-based shooting**: Players submit angle and power parameters for each shot
+- **Deterministic physics**: Fixed-point mathematics ensure reproducible results
+- **Material system**: Different materials (wood, glass, stone) have varying damage resistance
+- **Bounded computation**: Maximum 50 simulation steps per shot prevents gas limit issues
+- **Win/loss conditions**: Win by destroying all targets, lose by running out of birds
 
 ## ECS Architecture
 
@@ -63,7 +64,8 @@ Initializes a new game level with default configuration:
 - Score reset to 0
 - Game status set to InProgress
 
-### `shoot(env: Env, player: Address, angle: i32, power: i32) -> ShotOutcome`Executes a shot with specified parameters:
+### `shoot(env: Env, player: Address, angle: i32, power: i32) -> ShotOutcome`
+Executes a shot with specified parameters:
 - `angle`: Launch angle in degrees (scaled by 1000)
 - `power`: Launch power (scaled by 1000)
 - Returns shot outcome (hit, miss, win, loss)
@@ -101,7 +103,7 @@ rustup target add wasm32v1-none
 # Install Stellar CLI
 brew install stellar-cli  # macOS
 # or follow https://github.com/stellar/stellar-cli for other platforms
-p``
+```
 
 ### Build Commands
 
@@ -119,7 +121,7 @@ stellar contract build
 cargo fmt
 
 # Lint code
-cargo clippy --all-targets --all-features - -D warnings
+cargo clippy --all-targets --all-features -- -D warnings
 ```
 
 ### Testing
@@ -160,7 +162,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <player-account> \
   --network <NETWORK> \
-  - init_level \
+  -- init_level \
   --player <player-address> \
   --level_id 1
 
@@ -169,7 +171,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <player-account> \
   --network <NETWORK> \
-  - shoot \
+  -- shoot \
   --player <player-address> \
   --angle 45000 \
   --power 500000
@@ -179,7 +181,7 @@ stellar contract invoke \
   --id <contract-id> \
   --source <any-account> \
   --network <NETWORK> \
-  - get_state
+  -- get_state
 ```
 
 ## Game Example
@@ -201,19 +203,19 @@ let state = AngryBirdsContract::get_state(env);
 ## Design Tradeoffs
 
 ### Fixed-Point vs Floating-Point
-- `Choice`: Fixed-point mathematics scaled by 1000
-- `Rationale`: Ensures deterministic behavior across different execution environments
-- `Tradeoff`: Limited precision compared to floating-point, but sufficient for game physics
+- **Choice**: Fixed-point mathematics scaled by 1000
+- **Rationale**: Ensures deterministic behavior across different execution environments
+- **Tradeoff**: Limited precision compared to floating-point, but sufficient for game physics
 
 ### Bounded Simulation
-- `Choice`: Maximum 50 simulation steps per shot
-- `Rationale`: Prevents gas limit issues and ensures predictable execution cost
-- `Tradeoff`: May limit complex trajectory calculations, but adequate for turn-based gameplay
+- **Choice**: Maximum 50 simulation steps per shot
+- **Rationale**: Prevents gas limit issues and ensures predictable execution cost
+- **Tradeoff**: May limit complex trajectory calculations, but adequate for turn-based gameplay
 
 ### Grid-Based Collisions
-- `Choice`: Simple circular collision detection with fixed radius
-- `Rationale`: Computationally efficient and easy to verify
-- `Tradeoff`: Less precise than continuous collision detection, but sufficient for puzzle gameplay
+- **Choice**: Simple circular collision detection with fixed radius
+- **Rationale**: Computationally efficient and easy to verify
+- **Tradeoff**: Less precise than continuous collision detection, but sufficient for puzzle gameplay
 
 ## Integration with Cougr Framework
 
@@ -229,12 +231,12 @@ This example demonstrates several key benefits of the Cougr ECS framework:
 
 Potential extensions that showcase Cougr's flexibility:
 
-- Multiple bird types with unique behaviors
-- Power-up system using additional components
-- Level editor for creating custom scenarios
-- Multiplayer support with turn management
-- Leaderboard system for high scores
-- Visual themes using component-based rendering
+- **Multiple bird types** with unique behaviors
+- **Power-up system** using additional components
+- **Level editor** for creating custom scenarios
+- **Multiplayer support** with turn management
+- **Leaderboard system** for high scores
+- **Visual themes** using component-based rendering
 
 ## Contributing
 

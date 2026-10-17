@@ -1,5 +1,8 @@
 # Tap Battle - Mobile-First Competitive Tapping Game
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/salazarsebas/Cougr)
 [![Tests](https://img.shields.io/badge/tests-17%20passing-brightgreen)](https://github.com/salazarsebas/Cougr)
 [![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)](https://stellar.org)

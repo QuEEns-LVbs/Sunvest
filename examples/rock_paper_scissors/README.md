@@ -1,5 +1,8 @@
 # Rock Paper Scissors with Commit-Reveal
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A two-player Rock Paper Scissors game demonstrating the **commit-reveal pattern** using cryptographic hashing on Stellar Soroban. This is the simplest example of hidden information in the Cougr framework.
 
 ## Status
