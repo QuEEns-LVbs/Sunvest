@@ -3,6 +3,7 @@ use soroban_sdk::{testutils::Address as _, Env};
 
 fn setup_game() -> (Env, TicTacToeContractClient<'static>, Address, Address) {
     let env = Env::default();
+    env.mock_all_auths();
     let contract_id = env.register(TicTacToeContract, ());
     let client = TicTacToeContractClient::new(&env, &contract_id);
 
@@ -434,7 +435,7 @@ fn test_reset_game() {
     client.make_move(&player_o, &4);
     client.make_move(&player_x, &8);
 
-    let reset_state = client.reset_game();
+    let reset_state = client.reset_game(&player_x);
 
     for i in 0..9 {
         assert_eq!(reset_state.cells.get(i).unwrap(), 0);
@@ -459,7 +460,7 @@ fn test_reset_after_win() {
     let state_before_reset = client.get_state();
     assert_eq!(state_before_reset.status, 1);
 
-    let reset_state = client.reset_game();
+    let reset_state = client.reset_game(&player_x);
     assert_eq!(reset_state.status, 0);
     assert_eq!(reset_state.move_count, 0);
 
@@ -502,4 +503,48 @@ fn test_move_count_increments() {
     client.make_move(&player_x, &2);
     let state3 = client.get_state();
     assert_eq!(state3.move_count, 3);
+}
+
+#[test]
+#[should_panic]
+fn test_make_move_requires_auth() {
+    let env = Env::default();
+    let contract_id = env.register(TicTacToeContract, ());
+    let client = TicTacToeContractClient::new(&env, &contract_id);
+    let player_x = Address::generate(&env);
+    let player_o = Address::generate(&env);
+
+    client.init_game(&player_x, &player_o);
+    client.make_move(&player_x, &0);
+}
+
+#[test]
+fn test_wrong_player_cannot_move() {
+    let (_, client, _, player_o) = setup_game();
+
+    let result = client.make_move(&player_o, &0);
+
+    assert!(!result.success);
+    assert_eq!(result.message, symbol_short!("notturn"));
+}
+
+#[test]
+#[should_panic]
+fn test_init_game_cannot_overwrite_live_match() {
+    let (env, client, player_x, _) = setup_game();
+
+    client.make_move(&player_x, &0);
+
+    let new_x = Address::generate(&env);
+    let new_o = Address::generate(&env);
+    client.init_game(&new_x, &new_o);
+}
+
+#[test]
+#[should_panic]
+fn test_non_player_cannot_reset_game() {
+    let (env, client, _, _) = setup_game();
+    let stranger = Address::generate(&env);
+
+    client.reset_game(&stranger);
 }

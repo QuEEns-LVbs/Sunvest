@@ -22,12 +22,12 @@ or repeat the storage key in every contract function.
 
 | Function | Parameters | Returns | Description |
 |---|---|---|---|
-| `init_game` | `player_x: Address`, `player_o: Address` | `GameState` | Spawns the single game entity, seeds an empty 9-cell board, and sets X to move first. Overwrites any previous game. |
-| `make_move` | `player: Address`, `position: u32` | `MoveResult` | Validates and applies a move at `position` (0–8). Returns `success: false` with a status `message` symbol instead of panicking on illegal input. |
+| `init_game` | `player_x: Address`, `player_o: Address` | `GameState` | Starts a game with an empty 9-cell board and X moving first. Refuses to overwrite a game while its status is in progress (`0`). |
+| `make_move` | `player: Address`, `position: u32` | `MoveResult` | Requires authorization from `player`, then validates and applies a move at `position` (0–8). Illegal moves return `success: false` with a status `message` symbol. |
 | `get_state` | - | `GameState` | Current board, both player addresses, whose turn it is, move count, and status. |
 | `is_valid_move` | `position: u32` | `bool` | Whether `position` is a legal move right now (in range, empty cell, game still in progress). |
 | `get_winner` | - | `Option<Address>` | The winning player's address, or `None` if the game is in progress or drawn. |
-| `reset_game` | - | `GameState` | Re-initializes the board with the same two players, discarding moves. |
+| `reset_game` | `player: Address` | `GameState` | Requires authorization from a registered player. Resets the board while keeping both players. |
 
 ### Status codes
 
@@ -35,6 +35,13 @@ or repeat the storage key in every contract function.
 
 `MoveResult.message`: `ok`, `invalid` (out of range), `occupied`, `notturn`, `notplay`,
 `gameover`.
+
+### Authentication and limitations
+
+- `make_move` requires Soroban authorization from `player`. The address must be a registered player, and it must be their turn.
+- `reset_game` requires authorization from one of the two registered players.
+- `init_game` refuses to replace a game in progress. A new game can be initialized after a win or draw.
+- The contract stores one game per contract instance. Initialization does not require authorization from both players.
 
 ## Architecture overview
 
@@ -73,9 +80,7 @@ TTL management.
 
 ## Main gameplay flow
 
-1. Deployer calls `init_game(player_x, player_o)`; a new entity is spawned, the board is
-   seeded with 9 empty cells, and `TurnState` is set to X's turn, move count 0, status
-   in-progress.
+1. A caller invokes `init_game(player_x, player_o)` to start a game with an empty board and X moving first. Initialization is rejected while a game is in progress.
 2. X calls `make_move(player_x, position)`. The contract checks the game isn't over, the
    position is in range, the caller is a registered player, and it's their turn.
 3. On a legal move, the cell is marked, `systems::detect_winner` re-checks all 8 winning
@@ -83,8 +88,7 @@ TTL management.
    is next).
 4. Players alternate `make_move` calls until `detect_winner` reports a win (status `1` or
    `2`) or a draw (status `3`), after which further moves return `gameover`.
-5. Either player can call `get_state` or `get_winner` to read the outcome, or `reset_game` to
-   start over with the same two players.
+5. Either player can call `get_state` or `get_winner` to read the outcome. Either registered player can call `reset_game(player)` with authorization to start over.
 
 ## Cougr APIs used
 
