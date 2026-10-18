@@ -30,4 +30,6 @@ pub enum AccountError {
     SignerMismatch = 42,
     SessionRevoked = 43,
     SignerNotRegistered = 44,
+    InvalidThreshold = 45,
+    InsufficientGuardians = 46,
 }
