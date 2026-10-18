@@ -3,6 +3,7 @@ use soroban_sdk::testutils::Address as _;
 use soroban_sdk::{Address, Env};
 
 fn create_test_addresses(env: &Env) -> (Address, Address) {
+    env.mock_all_auths();
     let player_one = Address::generate(env);
     let player_two = Address::generate(env);
     (player_one, player_two)
