@@ -257,6 +257,14 @@ if touched "$SITE_PATHS"; then
     printf '#!/bin/sh\ncat >/dev/null\n' >"$keep/mdbook-linkcheck"
     chmod +x "$keep/mdbook-linkcheck"
     run cougr-site "site: mdbook build" env PATH="$keep:$PATH" mdbook build
+    # docs-site.yml builds with mdbook 0.4.43 and mdbook-linkcheck 0.7.7, which rejects broken links.
+    if touched '^(cougr-site|docs)/|^\.github/workflows/docs-site\.yml$'; then
+      if mdbook --version 2>/dev/null | grep -q 'v0\.4\.' && command -v mdbook-linkcheck >/dev/null 2>&1; then
+        run cougr-site "site: link check" mdbook build
+      else
+        SKIPPED+=("site: link check (needs mdbook 0.4.43 and mdbook-linkcheck 0.7.7: cargo install mdbook --version 0.4.43 --locked && cargo install mdbook-linkcheck --version 0.7.7 --locked)")
+      fi
+    fi
     [ -f "$keep/SUMMARY.md" ] && cp "$keep/SUMMARY.md" cougr-site/src/SUMMARY.md
     [ -f "$keep/gallery.md" ] && cp "$keep/gallery.md" cougr-site/src/showcase/gallery.md
     rm -rf "$keep"

@@ -36,7 +36,7 @@ It runs the same checks as CI for the parts of the repository your branch change
 - If a tool is missing (for example `stellar`, `mdbook`, or `cargo-deny`), `make check` tells you how to install it. Skipped checks still run in CI.
 - CI tests your branch merged into `main`. Keep it current with `git fetch upstream && git rebase upstream/main` (add the remote once with `git remote add upstream https://github.com/salazarsebas/Cougr.git`).
 
-If you use an AI assistant, see [AGENTS.md](AGENTS.md).
+If you use an AI assistant, see [AGENTS.md](https://github.com/salazarsebas/Cougr/blob/main/AGENTS.md).
 
 ## Documentation Expectations
 
