@@ -1,5 +1,8 @@
 # Shadow Draft Card Game
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A Soroban smart-contract example demonstrating:
 
 - **Hidden-hand draft gameplay** - players commit to a card choice via a SHA-256 hash before either reveal is visible, preventing last-second strategy adaptation.

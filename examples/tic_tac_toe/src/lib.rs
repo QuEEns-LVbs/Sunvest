@@ -50,8 +50,16 @@ impl_soroban_game!(TicTacToeContract, "ttt_world");
 
 #[contractimpl]
 impl TicTacToeContract {
-    /// Initialise a new game, discarding any previous state.
+    /// Initialise a new game unless a match is already in progress.
     pub fn init_game(env: Env, player_x: Address, player_o: Address) -> GameState {
+        let existing_world = TicTacToeContract::load_world(&env);
+
+        if let Some(turn) = existing_world.get_typed::<TurnState>(&env, GAME_ENTITY) {
+            if turn.status == 0 {
+                panic!("gameinprogress");
+            }
+        }
+
         let mut world = cougr_core::simple_world::SimpleWorld::new(&env);
         let entity = world.spawn_entity(); // always 1
         debug_assert_eq!(entity, GAME_ENTITY);
@@ -74,6 +82,8 @@ impl TicTacToeContract {
 
     /// Attempt to place the caller's mark at `position` (0–8).
     pub fn make_move(env: Env, player: Address, position: u32) -> MoveResult {
+        player.require_auth();
+
         let mut world = TicTacToeContract::load_world(&env);
 
         let players: Players = world
@@ -179,12 +189,32 @@ impl TicTacToeContract {
     }
 
     /// Reset the board but keep the same players.
-    pub fn reset_game(env: Env) -> GameState {
-        let world = TicTacToeContract::load_world(&env);
+    /// Reset the board. Only a registered player may reset the game.
+    pub fn reset_game(env: Env, player: Address) -> GameState {
+        player.require_auth();
+
+        let mut world = TicTacToeContract::load_world(&env);
         let players: Players = world
             .get_rich::<Players>(&env, GAME_ENTITY)
             .unwrap_or_else(|| panic!("game not initialised"));
-        Self::init_game(env, players.player_x, players.player_o)
+
+        if player != players.player_x && player != players.player_o {
+            panic!("notplay");
+        }
+
+        world.set_rich(&env, GAME_ENTITY, &Board::new(&env));
+        world.set_typed(
+            &env,
+            GAME_ENTITY,
+            &TurnState {
+                is_x_turn: true,
+                move_count: 0,
+                status: 0,
+            },
+        );
+
+        TicTacToeContract::save_world(&env, &world);
+        Self::read_game_state(&env, &world)
     }
 
     // ─── Internal helpers ─────────────────────────────────────────────────────

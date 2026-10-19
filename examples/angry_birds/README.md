@@ -1,5 +1,8 @@
 # Angry Birds on Stellar Soroban
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A turn-based physics puzzle implementation using the Cougr ECS framework on Stellar/Soroban. This contract demonstrates complex state transitions, entity relationships, and bounded on-chain computation suitable for blockchain gaming.
 
 ## Game Design

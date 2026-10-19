@@ -1,5 +1,8 @@
 # Murdoku
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 Murdoku is a murder mystery logic puzzle built with the [Cougr](../../README.md) ECS framework on Stellar Soroban. It demonstrates how to combine Entity Component System (ECS) game state, Pollar social logins, session key authorization, and zero-knowledge proof verification for privacy-preserving puzzle solving.
 
 ## Purpose and Pattern

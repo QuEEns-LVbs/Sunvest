@@ -10,10 +10,22 @@ Checks:
   6. cougr_features is a non-empty list
   7. If screenshot is set, the file exists
   8. All 10 canonical examples from the standard are present
+  9. Every example directory with a Cargo.toml has a catalog entry
+     (skips non-directories and directories without a Cargo.toml)
 """
 
 import os
 import sys
+
+# tomllib is part of the standard library from Python 3.11 onward. Fail with a
+# clear message instead of a ModuleNotFoundError traceback on older versions.
+if sys.version_info < (3, 11):
+    sys.exit(
+        "validate_catalog.py requires Python 3.11 or newer "
+        f"(this interpreter is {sys.version.split()[0]}), because it uses the "
+        "standard-library tomllib module."
+    )
+
 import tomllib
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +52,21 @@ errors = []
 
 def fail(msg):
     errors.append(msg)
+
+
+def check_example_dirs_in_catalog(entries):
+    """Every example directory with a Cargo.toml must have a catalog entry."""
+    catalogued = {entry.get("name") for entry in entries.values()}
+    if not os.path.isdir(EXAMPLES_DIR):
+        return
+    for name in sorted(os.listdir(EXAMPLES_DIR)):
+        example_dir = os.path.join(EXAMPLES_DIR, name)
+        if not os.path.isdir(example_dir):
+            continue
+        if not os.path.isfile(os.path.join(example_dir, "Cargo.toml")):
+            continue
+        if name not in catalogued:
+            fail(f'example directory "examples/{name}" is not in the catalog')
 
 
 if not os.path.isfile(CATALOG):
@@ -110,6 +137,8 @@ for key, entry in entries.items():
         screenshot_path = os.path.join(REPO_ROOT, screenshot)
         if not os.path.isfile(screenshot_path):
             fail(f'{key}: screenshot file "{screenshot}" not found')
+
+check_example_dirs_in_catalog(entries)
 
 if errors:
     for e in errors:

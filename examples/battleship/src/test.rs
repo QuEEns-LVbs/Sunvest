@@ -190,6 +190,71 @@ fn test_invalid_proof_rejected() {
 }
 
 #[test]
+#[should_panic(expected = "Invalid proof")]
+fn test_relabelled_proof_from_spare_slot_rejected() {
+    // A defender commits a 128-leaf tree (100 real cells plus the 28 spare
+    // padding slots every board's tree has). Spare slot 100 is set to the
+    // leaf a genuine "coord 0, value 0" (miss) cell would produce, even
+    // though coord 0 is a real ship. The defender then reveals coord 0 with
+    // the real proof for slot 100, relabelled with `leaf_index = 0`. Before
+    // the local depth/path_bits check, this verified: the hash chain
+    // legitimately walks slot 100 up to the real root, and nothing checked
+    // that `leaf_index` agreed with the position `path_bits` actually walks.
+    let (env, client, player_a, player_b) = setup_game();
+    env.mock_all_auths();
+
+    client.new_game(&player_a, &player_b);
+
+    let board_a = [0u32; 100];
+    let mut board_b = [0u32; 100];
+    board_b[0] = 1; // real ship at coord 0
+
+    let salt_a = BytesN::from_array(&env, &[1u8; 32]);
+    let salt_b = BytesN::from_array(&env, &[2u8; 32]);
+    let commitment_a = make_commitment(&env, &board_a, &salt_a);
+    let commitment_b = make_commitment(&env, &board_b, &salt_b);
+    let (root_a, _) = build_merkle_tree(&env, &board_a);
+
+    let mut cheat_leaves = [[0u8; 32]; 128];
+    for idx in 0..100u32 {
+        let value = board_b[idx as usize];
+        let mut data = Bytes::new(&env);
+        data.append(&Bytes::from_array(&env, &idx.to_be_bytes()));
+        data.append(&Bytes::from_array(&env, &value.to_be_bytes()));
+        let leaf: BytesN<32> = env.crypto().sha256(&data).into();
+        cheat_leaves[idx as usize] = leaf.to_array();
+    }
+    // Spare slot 100: deliberately the leaf a genuine (coord 0, value 0)
+    // cell would produce.
+    let mut data = Bytes::new(&env);
+    data.append(&Bytes::from_array(&env, &0u32.to_be_bytes()));
+    data.append(&Bytes::from_array(&env, &0u32.to_be_bytes()));
+    let spare_leaf: BytesN<32> = env.crypto().sha256(&data).into();
+    cheat_leaves[100] = spare_leaf.to_array();
+    for (idx, leaf_slot) in cheat_leaves.iter_mut().enumerate().skip(101) {
+        let mut data = Bytes::new(&env);
+        data.append(&Bytes::from_array(&env, &(idx as u32).to_be_bytes()));
+        data.append(&Bytes::from_array(&env, &0u32.to_be_bytes()));
+        let leaf: BytesN<32> = env.crypto().sha256(&data).into();
+        *leaf_slot = leaf.to_array();
+    }
+
+    let cheat_tree = MerkleTree::from_leaves(&env, &cheat_leaves).unwrap();
+    let cheat_root = cheat_tree.root_bytes(&env);
+
+    client.commit_board(&player_a, &commitment_a, &root_a);
+    client.commit_board(&player_b, &commitment_b, &cheat_root);
+
+    client.attack(&player_a, &0, &0);
+
+    // Real proof for the spare slot, relabelled to claim coord 0.
+    let mut forged_proof = to_on_chain_proof(&cheat_tree.proof(100).unwrap(), &env);
+    forged_proof.leaf_index = 0;
+
+    client.reveal_cell(&player_b, &0, &0, &0, &forged_proof);
+}
+
+#[test]
 #[should_panic(expected = "Already attacked")]
 fn test_cannot_attack_same_cell_twice() {
     let (env, client, player_a, player_b) = setup_game();

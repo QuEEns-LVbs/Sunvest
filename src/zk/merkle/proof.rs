@@ -3,7 +3,7 @@
 use crate::zk::error::ZKError;
 use soroban_sdk::{contracttype, BytesN, Env, Vec};
 
-use super::tree::MerkleProof;
+use super::tree::{MerkleProof, MAX_DEPTH};
 
 /// On-chain proof representation (`#[contracttype]` for contract arguments).
 #[contracttype]
@@ -52,8 +52,21 @@ pub fn verify_inclusion(
     proof: &OnChainMerkleProof,
     expected_root: &BytesN<32>,
 ) -> Result<bool, ZKError> {
+    if proof.depth > MAX_DEPTH {
+        return Err(ZKError::MaxDepthExceeded);
+    }
+
     if proof.siblings.len() != proof.depth {
         return Err(ZKError::InvalidProofLength);
+    }
+
+    if proof.leaf_index >= (1u32 << proof.depth) {
+        return Err(ZKError::LeafOutOfBounds);
+    }
+
+    let path_mask = (1u32 << proof.depth) - 1;
+    if proof.path_bits & path_mask != proof.leaf_index {
+        return Err(ZKError::LeafIndexMismatch);
     }
 
     let mut current = proof.leaf.to_array();
@@ -72,6 +85,27 @@ pub fn verify_inclusion(
     }
 
     Ok(current == expected_root.to_array())
+}
+
+/// Verify a Merkle inclusion proof, additionally pinning the proof to an
+/// exact expected depth.
+///
+/// Use this instead of [`verify_inclusion`] whenever the caller knows the
+/// tree's depth ahead of time (for example, a fixed-size game board). A
+/// proof whose `depth` does not match `expected_depth` is rejected before
+/// any hashing happens, closing the gap where a shorter-than-expected proof
+/// (including a zero-depth proof with `leaf == root`) would otherwise verify.
+pub fn verify_inclusion_at_depth(
+    env: &Env,
+    proof: &OnChainMerkleProof,
+    expected_root: &BytesN<32>,
+    expected_depth: u32,
+) -> Result<bool, ZKError> {
+    if proof.depth != expected_depth {
+        return Err(ZKError::InvalidProofLength);
+    }
+
+    verify_inclusion(env, proof, expected_root)
 }
 
 /// Hash two children: SHA256(0x01 || left || right).
@@ -157,5 +191,79 @@ mod tests {
         // Leaf 3: path = [true, true] → path_bits = 0b11
         let p3 = to_on_chain_proof(&tree.proof(3).unwrap(), &env);
         assert_eq!(p3.path_bits, 3);
+    }
+
+    #[test]
+    fn test_verify_inclusion_rejects_relabelled_leaf_index() {
+        let env = Env::default();
+        let leaves = [[1u8; 32], [2u8; 32], [3u8; 32], [4u8; 32]];
+        let tree = MerkleTree::from_leaves(&env, &leaves).unwrap();
+        let root = tree.root_bytes(&env);
+
+        // A genuine proof for leaf 1, relabelled to claim leaf 2. The path
+        // bits still walk position 1, so the two no longer agree.
+        let mut proof = to_on_chain_proof(&tree.proof(1).unwrap(), &env);
+        proof.leaf_index = 2;
+
+        let result = verify_inclusion(&env, &proof, &root);
+        assert_eq!(result.unwrap_err(), ZKError::LeafIndexMismatch);
+    }
+
+    #[test]
+    fn test_verify_inclusion_at_depth_rejects_short_proof() {
+        let env = Env::default();
+        let leaves = [[1u8; 32], [2u8; 32], [3u8; 32], [4u8; 32]];
+        let tree = MerkleTree::from_leaves(&env, &leaves).unwrap();
+        let root = tree.root_bytes(&env);
+
+        // A degenerate depth-0 proof claiming the root itself is the leaf.
+        // `verify_inclusion` alone finds it internally consistent (0
+        // siblings, leaf_index 0 < 2^0, path_bits 0 == leaf_index), so it
+        // only becomes wrong once the caller states the depth it expects.
+        let degenerate = OnChainMerkleProof {
+            siblings: Vec::new(&env),
+            path_bits: 0,
+            leaf: root.clone(),
+            leaf_index: 0,
+            depth: 0,
+        };
+        assert!(verify_inclusion(&env, &degenerate, &root).unwrap());
+
+        let result = verify_inclusion_at_depth(&env, &degenerate, &root, tree.depth());
+        assert_eq!(result.unwrap_err(), ZKError::InvalidProofLength);
+    }
+
+    #[test]
+    fn test_verify_inclusion_rejects_depth_over_max_without_panicking() {
+        let env = Env::default();
+        let proof = OnChainMerkleProof {
+            siblings: Vec::new(&env),
+            path_bits: 0,
+            leaf: BytesN::from_array(&env, &[0u8; 32]),
+            leaf_index: 0,
+            // Exceeds both MAX_DEPTH (20) and the 32-bit width of path_bits;
+            // must return an error rather than panic on the shift below.
+            depth: 33,
+        };
+        let root = BytesN::from_array(&env, &[0u8; 32]);
+
+        let result = verify_inclusion(&env, &proof, &root);
+        assert_eq!(result.unwrap_err(), ZKError::MaxDepthExceeded);
+    }
+
+    #[test]
+    fn test_verify_inclusion_rejects_out_of_bounds_leaf_index() {
+        let env = Env::default();
+        let leaves = [[1u8; 32], [2u8; 32], [3u8; 32], [4u8; 32]];
+        let tree = MerkleTree::from_leaves(&env, &leaves).unwrap();
+        let root = tree.root_bytes(&env);
+
+        let mut proof = to_on_chain_proof(&tree.proof(1).unwrap(), &env);
+        // depth 2 allows indices 0..=3; 4 is out of bounds regardless of
+        // what path_bits says.
+        proof.leaf_index = 4;
+
+        let result = verify_inclusion(&env, &proof, &root);
+        assert_eq!(result.unwrap_err(), ZKError::LeafOutOfBounds);
     }
 }

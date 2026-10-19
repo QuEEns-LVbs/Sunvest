@@ -22,7 +22,7 @@ pub mod proof;
 pub mod sparse;
 pub mod tree;
 
-pub use proof::{verify_inclusion, OnChainMerkleProof};
+pub use proof::{verify_inclusion, verify_inclusion_at_depth, OnChainMerkleProof};
 pub use sparse::SparseMerkleTree;
 pub use tree::{MerkleProof, MerkleTree};
 

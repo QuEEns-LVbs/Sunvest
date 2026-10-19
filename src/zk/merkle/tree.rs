@@ -171,6 +171,22 @@ fn hash_pair(env: &Env, left: &[u8; 32], right: &[u8; 32]) -> [u8; 32] {
 
 /// Verify a proof against a known root (standalone function).
 pub fn verify_proof(env: &Env, proof: &MerkleProof, expected_root: &[u8; 32]) -> bool {
+    // A path longer than 31 bits can't be reconstructed into a u32 index at
+    // all, so treat it as a mismatch rather than overflow the shift below.
+    if proof.path_indices.len() >= 32 {
+        return false;
+    }
+
+    let mut reconstructed_index: u32 = 0;
+    for (i, on_right) in proof.path_indices.iter().enumerate() {
+        if *on_right {
+            reconstructed_index |= 1 << i;
+        }
+    }
+    if reconstructed_index != proof.leaf_index {
+        return false;
+    }
+
     let mut current = proof.leaf;
 
     for i in 0..proof.siblings.len() {
@@ -440,6 +456,21 @@ mod tests {
             let proof = tree.proof(i).unwrap();
             assert!(verify_proof(&env, &proof, &root));
         }
+    }
+
+    #[test]
+    fn test_proof_verification_rejects_relabelled_leaf_index() {
+        let env = Env::default();
+        let leaves = [[1u8; 32], [2u8; 32], [3u8; 32], [4u8; 32]];
+        let tree = MerkleTree::from_leaves(&env, &leaves).unwrap();
+        let root = tree.root();
+
+        // A genuine proof for leaf 1, relabelled to claim leaf 2. The path
+        // indices still walk position 1, so the two no longer agree.
+        let mut proof = tree.proof(1).unwrap();
+        proof.leaf_index = 2;
+
+        assert!(!verify_proof(&env, &proof, &root));
     }
 
     #[test]

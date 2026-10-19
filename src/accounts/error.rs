@@ -31,4 +31,5 @@ pub enum AccountError {
     SessionRevoked = 43,
     SignerNotRegistered = 44,
     SessionKeyIdCollision = 45,
+    DuplicateDeviceKey = 46,
 }

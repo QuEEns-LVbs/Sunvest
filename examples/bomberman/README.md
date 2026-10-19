@@ -1,5 +1,8 @@
 # Bomberman On-Chain Game
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 This example demonstrates how to implement a Bomberman game as a smart contract on the Stellar blockchain using Soroban and cougr-core.
 
 ## Overview

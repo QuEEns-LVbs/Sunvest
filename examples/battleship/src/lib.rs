@@ -84,6 +84,7 @@ pub struct GameState {
 const GAME_KEY: Symbol = symbol_short!("GAME");
 const GRID_SIZE: u32 = 10;
 const TOTAL_SHIP_CELLS: u32 = 17; // 5+4+3+3+2
+const BOARD_DEPTH: u32 = 7; // 100 cells pad to 128 leaves (2^7)
 
 #[contract]
 #[derive(Clone)]
@@ -250,6 +251,20 @@ impl BattleshipContract {
         // Verify Merkle proof using privacy::stable primitives
         let coord = Self::coord_to_index(x, y);
         if proof.leaf_index != coord {
+            panic!("Invalid proof");
+        }
+
+        // cougr-core 1.1.0's `verify_inclusion` doesn't yet check that the
+        // proof's path actually walks to `leaf_index` (see cougr-core
+        // issue #433): a proof for a different real position can be
+        // relabelled to claim this one and still verify. Until the
+        // published crate carries the fix, pin the depth and recheck the
+        // path bits against `coord` ourselves before trusting the proof.
+        if proof.depth != BOARD_DEPTH {
+            panic!("Invalid proof");
+        }
+        let path_mask = (1u32 << BOARD_DEPTH) - 1;
+        if proof.path_bits & path_mask != coord {
             panic!("Invalid proof");
         }
 

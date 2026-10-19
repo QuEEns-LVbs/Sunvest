@@ -1,5 +1,3 @@
-#![cfg(test)]
-
 use crate::{BattleshipContract, BattleshipContractClient, Phase};
 use cougr_core::privacy::stable::{to_on_chain_proof, MerkleTree};
 use cougr_core::test::{GameHarness, PlayerSlot, Scenario};

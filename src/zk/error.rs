@@ -43,4 +43,6 @@ pub enum ZKError {
     InvalidVisibility = 27,
     /// A recursive composition descriptor is malformed or exceeds declared bounds.
     InvalidProofComposition = 28,
+    /// A Merkle proof's path does not lead to the leaf index it claims.
+    LeafIndexMismatch = 29,
 }

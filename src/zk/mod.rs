@@ -75,10 +75,11 @@ pub(crate) mod types;
 pub use error::ZKError;
 pub use stable::{
     commit_reveal_deadline_system, encode_commit_reveal, pedersen_commit, pedersen_verify,
-    verify_inclusion, Bytes32HiddenStateCodec, CommitReveal, CommitmentScheme, HiddenState,
-    HiddenStateCodec, MerkleProof, MerkleProofVerifier, MerkleTree, OnChainMerkleProof,
-    PedersenCommitment, PedersenCommitmentScheme, PedersenParams, ProofVerifier,
-    Sha256MerkleProofVerifier, SparseMerkleTree, COMMIT_REVEAL_TYPE, HIDDEN_STATE_TYPE,
+    verify_inclusion, verify_inclusion_at_depth, Bytes32HiddenStateCodec, CommitReveal,
+    CommitmentScheme, HiddenState, HiddenStateCodec, MerkleProof, MerkleProofVerifier, MerkleTree,
+    OnChainMerkleProof, PedersenCommitment, PedersenCommitmentScheme, PedersenParams,
+    ProofVerifier, Sha256MerkleProofVerifier, SparseMerkleTree, COMMIT_REVEAL_TYPE,
+    HIDDEN_STATE_TYPE,
 };
 pub use types::{
     Bls12381G1Point, Bls12381G2Point, Bls12381Scalar, G1Point, G2Point, Groth16Proof, Scalar,

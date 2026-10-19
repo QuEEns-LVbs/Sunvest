@@ -190,6 +190,25 @@ impl TreasureHuntContract {
             panic_with_error!(&env, TreasureHuntError::InvalidProof);
         }
 
+        // cougr-core 1.1.0's `verify_inclusion` doesn't yet check that the
+        // proof's path actually walks to `leaf_index` (see cougr-core
+        // issue #433): a proof for a different real position can be
+        // relabelled to claim this one and still verify. Until the
+        // published crate carries the fix, pin the depth and recheck the
+        // path bits against `idx` ourselves before trusting the proof.
+        let expected_depth = merkle_depth_for(map_root.width * map_root.height);
+        if proof.depth != expected_depth {
+            panic_with_error!(&env, TreasureHuntError::InvalidProof);
+        }
+        let path_mask = if expected_depth >= 32 {
+            u32::MAX
+        } else {
+            (1u32 << expected_depth) - 1
+        };
+        if proof.path_bits & path_mask != idx {
+            panic_with_error!(&env, TreasureHuntError::InvalidProof);
+        }
+
         let verifier = Sha256MerkleProofVerifier;
         let is_valid = verifier
             .verify(&env, &proof, &map_root.root)
@@ -290,6 +309,19 @@ fn validate_cell_value(env: &Env, cell_value: u32) {
     if cell_value > CELL_TRAP as u32 {
         panic_with_error!(env, TreasureHuntError::InvalidCellValue);
     }
+}
+
+/// Depth of the Merkle tree `MerkleTree::from_leaves` builds for
+/// `leaf_count` leaves: the smallest depth whose `2^depth` reaches
+/// `leaf_count`, matching the padding that construction applies.
+fn merkle_depth_for(leaf_count: u32) -> u32 {
+    let mut depth = 0u32;
+    let mut size = 1u32;
+    while size < leaf_count {
+        depth += 1;
+        size *= 2;
+    }
+    depth
 }
 
 fn validate_bounds(env: &Env, x: u32, y: u32, width: u32, height: u32) {

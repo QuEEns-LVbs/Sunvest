@@ -128,6 +128,46 @@ fn test_invalid_proof_rejected() {
 }
 
 #[test]
+#[should_panic(expected = "Error(Contract, #7)")]
+fn test_relabelled_proof_from_spare_slot_rejected() {
+    // The 3x3 map (9 real cells) pads to 16 leaves; slots 9-15 are spare.
+    // Real cell (0, 1) is a trap (value 2). Slot 9 is deliberately set to
+    // the leaf a genuine "(0, 1), value 0" (safe) cell would produce. The
+    // player then explores (0, 1) with the real proof for slot 9,
+    // relabelled with `leaf_index = idx(0, 1)`, to avoid trap damage. Before
+    // the local depth/path_bits check, this verified: the hash chain
+    // legitimately walks slot 9 up to the real root, and nothing checked
+    // that `leaf_index` agreed with the position `path_bits` actually walks.
+    let (env, client, player) = setup();
+    env.mock_all_auths();
+
+    let values: [u8; 9] = [0, 1, 2, 2, 0, 1, 0, 2, 0];
+    let mut leaves: StdVec<[u8; 32]> = StdVec::new();
+    for y in 0..MAP_H {
+        for x in 0..MAP_W {
+            let cell_idx = (y * MAP_W + x) as usize;
+            leaves.push(encode_cell_leaf(x, y, values[cell_idx]));
+        }
+    }
+    // Spare slot 9: deliberately the leaf a genuine (x=0, y=1, value=0)
+    // cell would produce, even though the real (0, 1) is a trap.
+    leaves.push(encode_cell_leaf(0, 1, 0));
+    for _ in 0..6 {
+        leaves.push([0u8; 32]);
+    }
+
+    let tree = MerkleTree::from_leaves(&env, &leaves).unwrap();
+    let root = tree.root_bytes(&env);
+    client.init_game(&player, &root, &MAP_W, &MAP_H, &2u32);
+
+    // Real proof for the spare slot, relabelled to claim (0, 1).
+    let mut forged_proof = to_on_chain_proof(&tree.proof(9).unwrap(), &env);
+    forged_proof.leaf_index = idx(0, 1);
+
+    client.explore(&player, &0, &1, &0, &forged_proof);
+}
+
+#[test]
 fn test_trap_damage_and_loss_condition() {
     let (env, client, player) = setup();
     env.mock_all_auths();

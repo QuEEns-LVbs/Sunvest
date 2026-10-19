@@ -1,5 +1,8 @@
 # Proof of Hunt (Stellar + Soroban)
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 A hidden-map treasure discovery game demonstrating **zero-knowledge proof-backed exploration** on Stellar Soroban. This example combines:
 
 - Hidden world state committed off-chain via Merkle roots

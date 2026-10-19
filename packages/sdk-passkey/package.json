@@ -13,7 +13,7 @@
     "README.md"
   ],
   "scripts": {
-    "test": "node --test test/bytes.test.ts test/der.test.ts test/cbor.test.ts test/mapper.test.ts test/registration.test.ts test/vectors.test.ts"
+    "test": "node --test test/*.test.ts"
   },
   "keywords": [
     "cougr",

@@ -1,5 +1,8 @@
 # Cross-Asset Racing League (Stellar + Soroban)
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 Cross-Asset Racing League is a multi-asset payment-driven racing game example for Soroban that combines:
 
 - payment-gated boost mechanics enabled by cross-asset payment flows

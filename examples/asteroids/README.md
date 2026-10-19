@@ -1,5 +1,8 @@
 # Asteroids (Soroban ECS Example)
 
+> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
+
 This example demonstrates a complete Asteroids game implementation using **Cougr ECS patterns** on Soroban.
 
 ## ECS Architecture
