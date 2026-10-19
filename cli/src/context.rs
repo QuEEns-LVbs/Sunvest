@@ -76,56 +76,6 @@ pub fn example_dir(repo_root: &Path, name: &str) -> PathBuf {
     repo_root.join("examples").join(name)
 }
 
-/// A single `[example.<key>]` table in `examples/catalog.toml`.
-#[derive(Debug, Deserialize)]
-struct CatalogEntry {
-    name: String,
-    maturity: String,
-}
-
-/// Top-level shape of `examples/catalog.toml`.
-#[derive(Debug, Deserialize)]
-struct Catalog {
-    #[serde(default)]
-    example: std::collections::BTreeMap<String, CatalogEntry>,
-}
-
-/// Return the canonical example names declared in `examples/catalog.toml`.
-///
-/// The catalog is the single source of truth for example metadata; any entry
-/// with `maturity = "canonical"` is returned (using its `name` field, which
-/// maps to the directory under `examples/`).
-pub fn canonical_example_names(repo_root: &Path) -> Result<Vec<String>> {
-    let catalog_path = repo_root.join("examples").join("catalog.toml");
-    let contents = fs::read_to_string(&catalog_path).context(format!(
-        "cannot read example catalog at {}",
-        catalog_path.display()
-    ))?;
-
-    let catalog: Catalog = toml::from_str(&contents).context(format!(
-        "malformed example catalog at {}",
-        catalog_path.display()
-    ))?;
-
-    let mut names: Vec<String> = catalog
-        .example
-        .into_values()
-        .filter(|entry| entry.maturity == "canonical")
-        .map(|entry| entry.name)
-        .collect();
-    names.sort();
-    names.dedup();
-
-    if names.is_empty() {
-        anyhow::bail!(
-            "no canonical examples found in {} (expected entries with maturity = \"canonical\")",
-            catalog_path.display()
-        );
-    }
-
-    Ok(names)
-}
-
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -188,4 +138,158 @@ fn discover_examples(repo_root: &Path) -> Result<Vec<Example>> {
     }
 
     Ok(examples)
+}
+
+// ---------------------------------------------------------------------------
+// Canonical examples (from examples/catalog.toml)
+// ---------------------------------------------------------------------------
+
+/// Minimal representation of `examples/catalog.toml`, mirroring the schema
+/// validated by `scripts/validate_catalog.py`.
+#[derive(Debug, Deserialize)]
+struct Catalog {
+    #[serde(default)]
+    example: std::collections::BTreeMap<String, CatalogEntry>,
+}
+
+#[derive(Debug, Deserialize)]
+struct CatalogEntry {
+    name: String,
+    #[serde(default)]
+    maturity: Option<String>,
+}
+
+/// Return the names of all examples marked `maturity = "canonical"` in
+/// `examples/catalog.toml`. The catalog is the single source of truth for
+/// example metadata; promoting an example is a one-line catalog change.
+///
+/// Returns an error if the catalog is missing, unreadable, or malformed.
+pub fn canonical_example_names(repo_root: &Path) -> Result<Vec<String>> {
+    let catalog_path = repo_root.join("examples").join("catalog.toml");
+    let contents = fs::read_to_string(&catalog_path).with_context(|| {
+        format!(
+            "cannot read example catalog at {} (expected examples/catalog.toml)",
+            catalog_path.display()
+        )
+    })?;
+
+    let catalog: Catalog = toml::from_str(&contents).with_context(|| {
+        format!(
+            "failed to parse example catalog at {}",
+            catalog_path.display()
+        )
+    })?;
+
+    let mut names: Vec<String> = catalog
+        .example
+        .into_iter()
+        .filter_map(|(_key, entry)| {
+            let is_canonical = entry
+                .maturity
+                .as_deref()
+                .map(|m| m.eq_ignore_ascii_case("canonical"))
+                .unwrap_or(false);
+            if is_canonical {
+                Some(entry.name)
+            } else {
+                None
+            }
+        })
+        .collect();
+
+    names.sort();
+    names.dedup();
+
+    if names.is_empty() {
+        anyhow::bail!(
+            "no examples with maturity = \"canonical\" found in {}",
+            catalog_path.display()
+        );
+    }
+
+    Ok(names)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::io::Write;
+
+    fn write_catalog(dir: &Path, body: &str) {
+        let examples = dir.join("examples");
+        fs::create_dir_all(&examples).unwrap();
+        let mut f = fs::File::create(examples.join("catalog.toml")).unwrap();
+        f.write_all(body.as_bytes()).unwrap();
+    }
+
+    #[test]
+    fn canonical_example_names_filters_by_maturity() {
+        let tmp = std::env::temp_dir().join(format!(
+            "cougr-catalog-test-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&tmp);
+        fs::create_dir_all(&tmp).unwrap();
+        write_catalog(
+            &tmp,
+            r#"
+[example.spawn_and_move]
+name = "spawn_and_move"
+category = "basics"
+maturity = "canonical"
+cougr_features = []
+
+[example.tic_tac_toe]
+name = "tic_tac_toe"
+category = "games"
+maturity = "canonical"
+cougr_features = []
+
+[example.wip_thing]
+name = "wip_thing"
+category = "games"
+maturity = "transitional"
+cougr_features = []
+"#,
+        );
+
+        let names = canonical_example_names(&tmp).unwrap();
+        assert_eq!(
+            names,
+            vec!["spawn_and_move".to_string(), "tic_tac_toe".to_string()]
+        );
+
+        let _ = fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
+    fn canonical_example_names_errors_on_missing_catalog() {
+        let tmp = std::env::temp_dir().join(format!(
+            "cougr-catalog-missing-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&tmp);
+        fs::create_dir_all(&tmp).unwrap();
+
+        let err = canonical_example_names(&tmp).unwrap_err();
+        assert!(format!("{err}").contains("catalog.toml"));
+
+        let _ = fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
+    fn canonical_example_names_errors_on_malformed_catalog() {
+        let tmp = std::env::temp_dir().join(format!(
+            "cougr-catalog-malformed-{}",
+            std::process::id()
+        ));
+        let _ = fs::remove_dir_all(&tmp);
+        fs::create_dir_all(&tmp).unwrap();
+        write_catalog(&tmp, "this is not valid toml [[[");
+
+        let err = canonical_example_names(&tmp).unwrap_err();
+        assert!(format!("{err}").contains("failed to parse"));
+
+        let _ = fs::remove_dir_all(&tmp);
+    }
 }
