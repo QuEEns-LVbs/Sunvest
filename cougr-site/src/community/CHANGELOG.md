@@ -4,6 +4,7 @@
 
 ### Added
 
+- **`cougr_core::accounts::AccountError::DuplicateDeviceKey`** - new error variant (code 45) returned when attempting to register a device key that is already active, distinguishing "device already registered" from "device limit reached"
 - **`cougr_core::accounts::derive_session_key_id`** - deterministic session-key identifier derivation, so the Rust core and the TypeScript session client agree on session identity instead of re-deriving it off-chain
 - **`cougr_core::cors`** - CORS configuration validation and dynamic origin
   allowlist for HTTP gateways in front of a game contract: `CorsConfig`
