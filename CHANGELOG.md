@@ -26,6 +26,11 @@
 
 ### Fixed
 
+- **`standards::DelayedExecutionPolicy`** - `schedule` now uses checked arithmetic for
+  `not_before`, `expires_at`, and the operation id counter, returning the new
+  `StandardsError::ScheduleOverflow` (code 80) instead of aborting the transaction.
+  `cancel` now returns `StandardsError::OperationAlreadyExecuted` for an executed
+  operation instead of removing it and reporting a cancellation that never happened
 - **`zk::merkle::proof::verify_inclusion`** - a proof's `leaf_index` was never checked
   against the position its `path_bits` actually walk, so a proof for one leaf could be
   relabelled to claim another leaf's position and still verify. `verify_inclusion` now

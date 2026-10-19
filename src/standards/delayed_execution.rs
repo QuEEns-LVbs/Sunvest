@@ -62,14 +62,20 @@ impl DelayedExecutionPolicy {
         ttl: u64,
     ) -> Result<DelayedExecutionScheduledEvent, StandardsError> {
         let now = env.ledger().timestamp();
-        let operation_id = self.next_operation_id(env);
+        let not_before = now
+            .checked_add(delay)
+            .ok_or(StandardsError::ScheduleOverflow)?;
+        let expires_at = not_before
+            .checked_add(ttl)
+            .ok_or(StandardsError::ScheduleOverflow)?;
+        let operation_id = self.next_operation_id(env)?;
         let operation = DelayedOperation {
             operation_id,
             action: action.clone(),
             payload,
             scheduled_at: now,
-            not_before: now + delay,
-            expires_at: now + delay + ttl,
+            not_before,
+            expires_at,
             executed: false,
         };
 
@@ -123,6 +129,10 @@ impl DelayedExecutionPolicy {
             .operation(env, operation_id)
             .ok_or(StandardsError::OperationNotFound)?;
 
+        if operation.executed {
+            return Err(StandardsError::OperationAlreadyExecuted);
+        }
+
         self.remove_operation(env, operation_id);
 
         Ok(DelayedExecutionCancelledEvent {
@@ -165,11 +175,17 @@ impl DelayedExecutionPolicy {
         })
     }
 
-    fn next_operation_id(&self, env: &Env) -> u64 {
+    fn next_operation_id(&self, env: &Env) -> Result<u64, StandardsError> {
         let key = self.nonce_key(env);
-        let next = env.storage().persistent().get::<_, u64>(&key).unwrap_or(0) + 1;
+        let next = env
+            .storage()
+            .persistent()
+            .get::<_, u64>(&key)
+            .unwrap_or(0)
+            .checked_add(1)
+            .ok_or(StandardsError::ScheduleOverflow)?;
         env.storage().persistent().set(&key, &next);
-        next
+        Ok(next)
     }
 
     fn remove_operation(&self, env: &Env, operation_id: u64) {
@@ -217,5 +233,111 @@ impl DelayedExecutionPolicy {
 
     fn nonce_key(&self, env: &Env) -> (Symbol, Symbol) {
         (Symbol::new(env, NONCE_PREFIX), self.id.clone())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use soroban_sdk::{contract, contractimpl, symbol_short, testutils::Ledger as _};
+
+    #[contract]
+    struct TestContract;
+
+    #[contractimpl]
+    impl TestContract {}
+
+    fn setup() -> (Env, soroban_sdk::Address, DelayedExecutionPolicy) {
+        let env = Env::default();
+        let contract_id = env.register(TestContract, ());
+        env.ledger().with_mut(|li| li.timestamp = 100);
+        (
+            env,
+            contract_id,
+            DelayedExecutionPolicy::new(symbol_short!("delay")),
+        )
+    }
+
+    fn payload(env: &Env) -> Bytes {
+        Bytes::from_array(env, &[1])
+    }
+
+    #[test]
+    fn schedule_rejects_delay_overflow() {
+        let (env, contract_id, module) = setup();
+        env.as_contract(&contract_id, || {
+            let result = module.schedule(&env, symbol_short!("OP"), payload(&env), u64::MAX, 0);
+            assert_eq!(result, Err(StandardsError::ScheduleOverflow));
+            assert_eq!(module.pending_operations(&env).len(), 0);
+        });
+    }
+
+    #[test]
+    fn schedule_rejects_ttl_overflow() {
+        let (env, contract_id, module) = setup();
+        env.as_contract(&contract_id, || {
+            let result = module.schedule(&env, symbol_short!("OP"), payload(&env), 10, u64::MAX);
+            assert_eq!(result, Err(StandardsError::ScheduleOverflow));
+            assert_eq!(module.pending_operations(&env).len(), 0);
+        });
+    }
+
+    #[test]
+    fn failed_schedule_does_not_consume_an_operation_id() {
+        let (env, contract_id, module) = setup();
+        env.as_contract(&contract_id, || {
+            assert!(module
+                .schedule(&env, symbol_short!("OP"), payload(&env), u64::MAX, 0)
+                .is_err());
+            let scheduled = module
+                .schedule(&env, symbol_short!("OP"), payload(&env), 1, 1)
+                .unwrap();
+            assert_eq!(scheduled.operation_id, 1);
+        });
+    }
+
+    #[test]
+    fn schedule_rejects_exhausted_id_counter() {
+        let (env, contract_id, module) = setup();
+        env.as_contract(&contract_id, || {
+            env.storage()
+                .persistent()
+                .set(&module.nonce_key(&env), &u64::MAX);
+            let result = module.schedule(&env, symbol_short!("OP"), payload(&env), 1, 1);
+            assert_eq!(result, Err(StandardsError::ScheduleOverflow));
+            assert_eq!(module.pending_operations(&env).len(), 0);
+        });
+    }
+
+    #[test]
+    fn cancel_rejects_executed_operation_and_keeps_storage() {
+        let (env, contract_id, module) = setup();
+        env.as_contract(&contract_id, || {
+            let scheduled = module
+                .schedule(&env, symbol_short!("OP"), payload(&env), 5, 5)
+                .unwrap();
+            env.ledger().with_mut(|li| li.timestamp = 105);
+            module.execute_ready(&env, scheduled.operation_id).unwrap();
+            let before = module.operation(&env, scheduled.operation_id);
+
+            let result = module.cancel(&env, scheduled.operation_id);
+
+            assert_eq!(result, Err(StandardsError::OperationAlreadyExecuted));
+            assert_eq!(module.operation(&env, scheduled.operation_id), before);
+            assert!(before.unwrap().executed);
+        });
+    }
+
+    #[test]
+    fn cancel_removes_pending_operation() {
+        let (env, contract_id, module) = setup();
+        env.as_contract(&contract_id, || {
+            let scheduled = module
+                .schedule(&env, symbol_short!("OP"), payload(&env), 5, 5)
+                .unwrap();
+            let event = module.cancel(&env, scheduled.operation_id).unwrap();
+            assert_eq!(event.operation_id, scheduled.operation_id);
+            assert_eq!(module.operation(&env, scheduled.operation_id), None);
+        });
     }
 }
