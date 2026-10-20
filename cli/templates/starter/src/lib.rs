@@ -12,6 +12,8 @@
 
 #![no_std]
 
+// CI: exercise generated template validation for PR #420.
+
 pub mod components;
 pub mod systems;
 #[cfg(test)]
