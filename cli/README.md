@@ -31,7 +31,10 @@ Scaffolds a Soroban contract crate wired to `cougr-core`, following the
 ### Templates
 
 Each template is derived from a canonical example, so the code you get is the
-same code the framework's own reference projects run.
+same code the framework's own reference projects run. The canonical example
+list is read from [`examples/catalog.toml`](../examples/catalog.toml) (entries
+with `maturity = "canonical"`), which is the single source of truth for example
+metadata.
 
 | Template | Based on | What you get |
 | --- | --- | --- |
