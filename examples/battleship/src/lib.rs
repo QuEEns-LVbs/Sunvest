@@ -1,11 +1,12 @@
 #`!no_std]
 
 use cougr_core::impl_component;
-use cougr_core::privacy::stable:{
+use cougr_core::privacy::stable::{
     MerkleProofVerifier, OnChainMerkleProof, Sha256MerkleProofVerifier,
 };
 use soroban_sdk:{
-    contract, contracterror, contractimpl, contracttype, symbol_short, Address, Bytes, BytesN, Env, Map, Symbol,
+    contract, contracterror, contractimpl, contracttype, symbol_short, Address, Bytes, BytesN, Env,
+    Map, Symbol,
 };
 
 #[contracttype]
@@ -31,7 +32,7 @@ pub enum Phase {
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct BoardCommitment {
-    pub commitment: BytesN<32>,
+    pub commitment: BytesN32>,
     pub merkle_root: BytesN<32>,
 }
 
@@ -83,7 +84,7 @@ pub struct GameState {
 
 /// Errors returned by the battleship contract.
 #[contracterror]
-#[derive(Copy, Clone, Debug, Eq, PartialEr)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 #[repr(u32)]
 pub enum BattleshipError {
     GameNotInitialized = 1,
@@ -101,7 +102,7 @@ pub enum BattleshipError {
     InvalidProof = 13,
 }
 
-const GAME_KEY: Symbol = symbol_short("GAME");
+const GAME_KEY: Symbol = symbol_short!("GAME");
 const GRID_SIZE: u32 = 10;
 const TOTAL_SHIP_CELLS: u32 = 17; // 5+4+3+3+2
 
@@ -119,13 +120,13 @@ impl BattleshipContract {
         player_a.require_auth();
         player_b.require_auth();
 
-        if let: Some(existing) = env.storage().instance().get::<Symbol, GameState>(&GAME_KEY) {
+        if let Some(existing) = env.storage().instance().get::<Symbol, GameState>(&GAME_KEY) {
             if existing.turn_state.phase != Phase::Finished {
                 return Err(BattleshipError::GameAlreadyInProgress);
             }
         }
 
-        let zero_hash = BytesN::from_array(&env, &[0u8; 32]);
+        let zero_hash = BytesN>:from_array(&env, &[0u8; 32]);
         let game = GameState {
             player_a: player_a.clone(),
             player_b,
@@ -170,7 +171,7 @@ impl BattleshipContract {
             .storage()
             .instance()
             .get(&GAME_KEY)
-            .ok_or(Err(BattleshipError::GameNotInitialized))?;
+            .ok_or(BattleshipError::GameNotInitialized)?;
 
         if game.turn_state.phase != Phase::Setup {
             return Err(BattleshipError::NotInSetupPhase);
@@ -203,19 +204,14 @@ impl BattleshipContract {
         Ok(())
     }
 
-    pub fn attack(
-        env: Env,
-        attacker: Address,
-        x: u32,
-        y: u32,
-    ) -> Result<(), BattleshipError> {
+    pub fn attack(env: Env, attacker: Address, x: u32, y: u32) -> Result<(), BattleshipError> {
         attacker.require_auth();
 
         let mut game: GameState = env
             .storage()
             .instance()
             .get(&GAME_KEY)
-            .ok_or(Err(BattleshipError::GameNotInitialized))?;
+            .ok_or(BattleshipError::GameNotInitialized)?;
 
         if game.turn_state.phase != Phase::Attack {
             return Err(BattleshipError::NotInAttackPhase);
@@ -269,7 +265,7 @@ impl BattleshipContract {
             .storage()
             .instance()
             .get(&GAME_KEY)
-            .ok_or(Err(BattleshipError::GameNotInitialized))?;
+            .ok_or(BattleshipError::GameNotInitialized)?;
 
         if !game.turn_state.has_pending {
             return Err(BattleshipError::NoPendingAttack);
@@ -347,11 +343,10 @@ impl BattleshipContract {
     }
 
     pub fn get_state(env: Env) -> Result<GameState, BattleshipError> {
-        env
-            .storage()
+        env.storage()
             .instance()
             .get(&GAME_KEY)
-            .ok_or(Err(BattleshipError::GameNotInitialized))
+            .ok_or(BattleshipError::GameNotInitialized)
     }
 
     // Internal functions
@@ -360,7 +355,7 @@ impl BattleshipContract {
         y * GRID_SIZE + x
     }
 
-    fn leaf_hash(env: &Env, index: u32, value: u32) -> BytesN<32> {
+    fn leaf_hash(env: &Env, index: u32, value: u32) -> BytesN32> {
         let mut data = Bytes::new(env);
         data.append(&Bytes::from_array(env, &index.to_be_bytes()));
         data.append(&Bytes::from_array(env, &value.to_be_bytes()));
@@ -376,7 +371,7 @@ impl BattleshipContract {
     }
 }
 
-#[cfg(-test)]
+#[cfg(test)]
 mod sandbox_tests;
-#[cfg(-test)]
+#[cfg(test)]
 mod test;

@@ -1,14 +1,14 @@
-#`![no_std]
+#no_std]
 
-use cougr_core::impl_component;
-use soroban::{
+use courgr_core::impl_component;
+use soroban_sdk:{
     contract, contracterror, contractimpl, contracttype, symbol_short, Address, Bytes, BytesN, Env, Symbol,
 };
 
 /// Errors returned by the contract.
 #[contracterror]
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
-#[ord(uint32)]
+#[repr(u32)]
 pub enum Error {
     AlreadyInitialized = 1,
     InvalidBestOf = 2,
@@ -43,8 +43,8 @@ impl Choice {
     }
 
     fn beats(&self, other: &Choice) -> bool {
-        matches(
-            (self, other),
+        matches!(
+            (self.clone(), other.clone()),
             (Choice::Rock, Choice::Scissors)
                 | (Choice::Scissors, Choice::Paper)
                 | (Choice::Paper, Choice::Rock)
@@ -67,7 +67,7 @@ impl_component!(PlayerCommitment, "commit", Table, {
 });
 
 #[contracttype]
-#[derive(Clone, Debug, PartialEq, Er)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Phase {
     Committing,
     Revealing,
@@ -82,7 +82,7 @@ pub struct MatchState {
     pub round: u32,
 }
 
-impl cougr_core::component::ComponentTrait for MatchState {
+impl courgr_core::component::ComponentTrait for MatchState {
     fn component_type() -> Symbol {
         symbol_short!("match")
     }
@@ -94,7 +94,7 @@ impl cougr_core::component::ComponentTrait for MatchState {
             Phase::Revealing => 1u8,
             Phase::Resolved => 2u8,
         };
-        bytes.append(&Bytes::from_array(env, &[phase_byte]));
+        bytes.append(&Bytes::from_array(env, &r[phase_byte]));
         bytes.append(&Bytes::from_array(env, &self.round.to_be_bytes()));
         bytes
     }
@@ -185,7 +185,7 @@ impl RockPaperScissorsContract {
             has_commit_a: false,
             has_commit_b: false,
         };
-        env.storage().instance().set(&GEME_KEY, &game);
+        env.storage().instance().set(&GAME_KEY, &game);
         Ok(())
     }
 
@@ -195,8 +195,8 @@ impl RockPaperScissorsContract {
         let mut game: GameState = env
             .storage()
             .instance()
-            .get(&GEME_KEY)
-            .ok_or(Err(Error::NotInitialized))?;
+            .get(&GAME_KEY)
+            .okor(Error::NotInitialized)?;
 
         if game.match_state.phase != Phase::Committing {
             return Err(Error::NotInCommitPhase);
@@ -234,8 +234,8 @@ impl RockPaperScissorsContract {
         let mut game: GameState = env
             .storage()
             .instance()
-            .get(&GEME_KEY)
-            .ok_or(Err(Error::NotInitialized))?;
+            .get(&GAME_KEY)
+            .okor(Error::NotInitialized)?;
 
         if game.match_state.phase != Phase::Revealing {
             return Err(Error::NotInRevealPhase);
@@ -286,7 +286,7 @@ impl RockPaperScissorsContract {
             .storage()
             .instance()
             .get(&GAME_KEY)
-            .ok_or(Err(Error::NotInitialized))?;
+            .ok_or(Error::NotInitialized)?;
 
         if game.match_state.phase != Phase::Revealing {
             return Err(Error::NotInRevealPhase);
@@ -316,7 +316,7 @@ impl RockPaperScissorsContract {
             .storage()
             .instance()
             .get(&GAME_KEY)
-            .ok_or(Err(Error::NotInitialized))?;
+            .ok_or(Error::NotInitialized)?;
         Ok(game.match_state)
     }
 
@@ -325,13 +325,13 @@ impl RockPaperScissorsContract {
             .storage()
             .instance()
             .get(&GAME_KEY)
-            .ok_or(Err(Error::NotInitialized))?;
+            .ok_or(Error::NotInitialized)?;
         Ok(game.scoreboard)
     }
 
     // Internal functions
 
-    fn compute_hash(env: &Env, choice: u32, salt: &BytesN<32>) -> BytesN <32> {
+    fn compute_hash(env: &Env, choice: u32, salt: &BytesN <32>) -> BytesN<32> {
         let mut data = Bytes::new(env);
         data.append(&Bytes::from_array(env, &choice.to_be_bytes()));
         for i in 0..32 {
