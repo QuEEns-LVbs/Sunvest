@@ -15,6 +15,11 @@ ignore = [
     { crate = "spin@0.9.8", reason = "transitive via soroban-wasmi, upgrade tracks soroban-sdk releases" },
     # Transitive through soroban-env-host's arkworks (BLS12-381 / BN254) dependency chain.
     { id = "RUSTSEC-2024-0388", reason = "unmaintained `derivative`, pulled in transitively by soroban-env-host via ark-ec/ark-ff" },
+    # Example lockfiles resolve the published cougr-core 1.1.0, which still depends on `wee_alloc`.
+    # The workspace source no longer declares it, so it disappears as examples move to a newer release.
+    { id = "RUSTSEC-2022-0054", reason = "unmaintained `wee_alloc`, pulled in transitively by published cougr-core 1.1.0 in example lockfiles" },
+    # Transitive through soroban-env-host's arkworks chain (ark-std); no fixed rand 0.8 release.
+    { id = "RUSTSEC-2026-0097", reason = "`rand` 0.8.5 unsound with a custom logger, pulled in transitively by soroban-env-host via ark-std" },
 ]
 
 [licenses]
