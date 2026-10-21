@@ -3,7 +3,7 @@ name = "dice_duel"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "Canonical Cougr ZK example: fair dice via cougr_core::circuits::fair_dice"
+description = "Canonical Sunvest ZK example: fair dice via Sunvest_core::circuits::fair_dice"
 license = "MIT"
 
 [lib]
@@ -11,11 +11,11 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 
 [dev-dependencies]
 soroban-sdk = { version = "25.1.0", features = ["testutils"] }
-cougr-core = { version = "1.1.0", features = ["testutils"] }
+Sunvest-core = { version = "1.1.0", features = ["testutils"] }
 
 [profile.release]
 opt-level = "z"

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This guide explains how to move existing Cougr integrations toward the curated `1.0` product surface.
+This guide explains how to move existing Sunvest integrations toward the curated `1.0` product surface.
 
 It is not a promise that every older pattern disappears immediately. It is the recommended direction for users who want to converge on the defended path.
 
@@ -29,7 +29,7 @@ let mut scheduler = SimpleScheduler::new();
 prefer:
 
 ```rust,ignore
-let mut app = cougr_core::app::GameApp::new(&env);
+let mut app = Sunvest_core::app::GameApp::new(&env);
 ```
 
 and register systems through `GameApp`.
@@ -37,7 +37,7 @@ and register systems through `GameApp`.
 When multiple systems belong to the same phase, prefer the declarative path:
 
 ```rust,ignore
-use cougr_core::app::{named_context_system, named_system, GameApp, ScheduleStage};
+use Sunvest_core::app::{named_context_system, named_system, GameApp, ScheduleStage};
 
 let mut app = GameApp::new(&env);
 app.add_systems((
@@ -101,13 +101,13 @@ These are the shared contracts between `SimpleWorld` and `ArchetypeWorld`.
 If you currently import from `accounts` directly in application code:
 
 ```rust,ignore
-use cougr_core::accounts::SessionBuilder;
+use Sunvest_core::accounts::SessionBuilder;
 ```
 
 prefer:
 
 ```rust,ignore
-use cougr_core::auth::SessionBuilder;
+use Sunvest_core::auth::SessionBuilder;
 ```
 
 The semantics are the same today. The change is about product clarity.
@@ -117,19 +117,19 @@ The semantics are the same today. The change is about product clarity.
 If you rely on stable privacy primitives, prefer:
 
 ```rust,ignore
-use cougr_core::privacy::stable::...
+use Sunvest_core::privacy::stable::...
 ```
 
 instead of:
 
 ```rust,ignore
-use cougr_core::zk::stable::...
+use Sunvest_core::zk::stable::...
 ```
 
 If you rely on advanced proof tooling, prefer:
 
 ```rust,ignore
-use cougr_core::privacy::experimental::...
+use Sunvest_core::privacy::experimental::...
 ```
 
 and treat it as an explicit opt-in to non-frozen APIs.
@@ -139,13 +139,13 @@ and treat it as an explicit opt-in to non-frozen APIs.
 If you currently import standards directly:
 
 ```rust,ignore
-use cougr_core::standards::Pausable;
+use Sunvest_core::standards::Pausable;
 ```
 
 prefer:
 
 ```rust,ignore
-use cougr_core::ops::Pausable;
+use Sunvest_core::ops::Pausable;
 ```
 
 Again, this is a namespace migration for clarity, not a semantic rewrite.

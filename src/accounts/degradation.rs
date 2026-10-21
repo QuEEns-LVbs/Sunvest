@@ -8,7 +8,7 @@ use soroban_sdk::{Env, Symbol};
 
 use super::batch::BatchBuilder;
 use super::error::AccountError;
-use super::traits::CougrAccount;
+use super::traits::SunvestAccount;
 use super::types::{AccountCapabilities, GameAction, SessionKey, SessionScope};
 
 /// Execute an action using a session key if available and valid,
@@ -16,7 +16,7 @@ use super::types::{AccountCapabilities, GameAction, SessionKey, SessionScope};
 ///
 /// Session validity is checked locally (expiry, operation count, allowed actions)
 /// without requiring `SessionKeyProvider` trait.
-pub fn authorize_with_fallback<A: CougrAccount>(
+pub fn authorize_with_fallback<A: SunvestAccount>(
     env: &Env,
     account: &A,
     action: &GameAction,
@@ -39,7 +39,7 @@ pub fn authorize_with_fallback<A: CougrAccount>(
 
 /// Batch-execute actions if the account supports batching,
 /// otherwise authorize each action sequentially.
-pub fn batch_or_sequential<A: CougrAccount>(
+pub fn batch_or_sequential<A: SunvestAccount>(
     env: &Env,
     account: &A,
     actions: &[GameAction],

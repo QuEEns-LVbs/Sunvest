@@ -1,5 +1,5 @@
-# Welcome to Cougr
+# Welcome to Sunvest
 
-Cougr is an on-chain game engine built for the Stellar network and Soroban smart contracts. It provides a full Entity-Component-System (ECS) runtime alongside account abstraction and zero-knowledge primitives in a single crate.
+Sunvest is an on-chain game engine built for the Stellar network and Soroban smart contracts. It provides a full Entity-Component-System (ECS) runtime alongside account abstraction and zero-knowledge primitives in a single crate.
 
-This documentation site is generated automatically from the [salazarsebas/Cougr](https://github.com/salazarsebas/Cougr) repository.
+This documentation site is generated automatically from the [salazarsebas/Sunvest](https://github.com/salazarsebas/Sunvest) repository.

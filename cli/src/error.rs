@@ -72,20 +72,20 @@ impl CliError {
             )),
             CliError::Io { .. } => None,
             CliError::MissingTemplateAsset { .. } => Some(
-                "this is a bug in cougr-cli - please report it at \
-                 https://github.com/salazarsebas/Cougr/issues"
+                "this is a bug in Sunvest-cli - please report it at \
+                 https://github.com/salazarsebas/Sunvest/issues"
                     .to_string(),
             ),
             CliError::UnknownPiece { .. } => {
-                Some("run `cougr add --list` to see available pieces".to_string())
+                Some("run `Sunvest add --list` to see available pieces".to_string())
             }
             CliError::InvalidProject { .. } => Some(
-                "run `cougr add` from inside a project created with `cougr new`"
+                "run `Sunvest add` from inside a project created with `Sunvest new`"
                     .to_string(),
             ),
             CliError::PieceConflict { .. } => None,
             CliError::MissingPieceAsset { .. } => Some(
-                "this is a bug in cougr-cli - please report it at https://github.com/salazarsebas/Cougr/issues"
+                "this is a bug in Sunvest-cli - please report it at https://github.com/salazarsebas/Sunvest/issues"
                     .to_string(),
             ),
         }
@@ -119,7 +119,7 @@ impl fmt::Display for CliError {
             }
             CliError::InvalidProject { path } => write!(
                 f,
-                "`{}` is not a Cougr project (expected Cargo.toml and src/lib.rs)",
+                "`{}` is not a Sunvest project (expected Cargo.toml and src/lib.rs)",
                 path.display()
             ),
             CliError::PieceConflict { piece, files } => {

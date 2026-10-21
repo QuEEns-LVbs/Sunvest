@@ -2,7 +2,7 @@
 
 **A composition example: `fair_dice` ZK verification authorized through a session key.**
 
-This example wires two existing Cougr subsystems together for the first time.
+This example wires two existing Sunvest subsystems together for the first time.
 It does not introduce a new circuit or a new account model – only the integration
 between them.
 
@@ -86,7 +86,7 @@ stellar contract build
 
 ---
 
-## Cougr features demonstrated
+## Sunvest features demonstrated
 
 - `zk-circuits` – `fair_dice` verifier, `Groth16Proof`, `CircuitId::FairDice`
 - `session-auth` – `SessionBuilder`, `SessionManager`, `SessionStorage`, `ActiveSession`

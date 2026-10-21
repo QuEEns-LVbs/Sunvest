@@ -1,7 +1,7 @@
 use crate::simple_world::SimpleWorld;
 use soroban_sdk::{Env, Symbol};
 
-/// Standard trait for Soroban contracts that use Cougr's ECS.
+/// Standard trait for Soroban contracts that use Sunvest's ECS.
 ///
 /// Provides a consistent pattern for loading and persisting the game world
 /// to Soroban instance storage - removing the need to repeat the storage key
@@ -11,8 +11,8 @@ use soroban_sdk::{Env, Symbol};
 ///
 /// # Example
 /// ```
-/// use cougr_core::game::SorobanGame;
-/// use cougr_core::impl_soroban_game;
+/// use Sunvest_core::game::SorobanGame;
+/// use Sunvest_core::impl_soroban_game;
 /// use soroban_sdk::{contract, Env};
 /// use soroban_sdk::testutils::Register as _;
 ///

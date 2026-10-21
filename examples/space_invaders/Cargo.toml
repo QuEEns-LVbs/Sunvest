@@ -3,14 +3,14 @@ name = "space_invaders"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "Space Invaders on-chain game example using cougr-core"
+description = "Space Invaders on-chain game example using Sunvest-core"
 license = "MIT OR Apache-2.0"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 soroban-sdk = "25.1.0"
 
 [dev-dependencies]

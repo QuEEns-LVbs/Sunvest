@@ -17,7 +17,7 @@ use systems::{
     win_condition_system,
 };
 
-use cougr_core::auth::{BatchBuilder, GameAction, SessionBuilder};
+use Sunvest_core::auth::{BatchBuilder, GameAction, SessionBuilder};
 use soroban_sdk::{
     contract, contractimpl, panic_with_error, symbol_short, Address, Bytes, Env, Vec,
 };

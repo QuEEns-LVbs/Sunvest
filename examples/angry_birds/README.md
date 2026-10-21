@@ -1,9 +1,9 @@
 # Angry Birds on Stellar Soroban
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-A turn-based physics puzzle implementation using the Cougr ECS framework on Stellar/Soroban. This contract demonstrates complex state transitions, entity relationships, and bounded on-chain computation suitable for blockchain gaming.
+A turn-based physics puzzle implementation using the Sunvest ECS framework on Stellar/Soroban. This contract demonstrates complex state transitions, entity relationships, and bounded on-chain computation suitable for blockchain gaming.
 
 ## Game Design
 
@@ -19,7 +19,7 @@ Angry Birds is a physics-based puzzle game where players launch projectiles (bir
 
 ## ECS Architecture
 
-This implementation showcases the Cougr-Core ECS framework with the following components and systems:
+This implementation showcases the Sunvest-Core ECS framework with the following components and systems:
 
 ### Components
 
@@ -93,9 +93,9 @@ Resets the current level to initial state:
 ### Setup
 
 ```bash
-# Clone the Cougr repository
-git clone https://github.com/salazarsebas/Cougr.git
-cd Cougr/examples/angry_birds
+# Clone the Sunvest repository
+git clone https://github.com/salazarsebas/Sunvest.git
+cd Sunvest/examples/angry_birds
 
 # Install Rust targets
 rustup target add wasm32v1-none
@@ -217,9 +217,9 @@ let state = AngryBirdsContract::get_state(env);
 - **Rationale**: Computationally efficient and easy to verify
 - **Tradeoff**: Less precise than continuous collision detection, but sufficient for puzzle gameplay
 
-## Integration with Cougr Framework
+## Integration with Sunvest Framework
 
-This example demonstrates several key benefits of the Cougr ECS framework:
+This example demonstrates several key benefits of the Sunvest ECS framework:
 
 1. **Component Modularity**: Each game aspect (position, health, material) is a separate, reusable component
 2. **System Separation**: Game logic is organized into discrete systems with clear responsibilities
@@ -229,7 +229,7 @@ This example demonstrates several key benefits of the Cougr ECS framework:
 
 ## Future Enhancements
 
-Potential extensions that showcase Cougr's flexibility:
+Potential extensions that showcase Sunvest's flexibility:
 
 - **Multiple bird types** with unique behaviors
 - **Power-up system** using additional components
@@ -250,4 +250,4 @@ When contributing to this example:
 
 ## License
 
-This example is licensed under MIT OR Apache-2.0, consistent with the main Cougr project.
+This example is licensed under MIT OR Apache-2.0, consistent with the main Sunvest project.

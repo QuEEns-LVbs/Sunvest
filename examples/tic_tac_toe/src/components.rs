@@ -1,4 +1,4 @@
-use cougr_core::{impl_component, impl_rich_component};
+use Sunvest_core::{impl_component, impl_rich_component};
 use soroban_sdk::{contracttype, Address, Env, Vec};
 
 /// Entity id under which the entire game state is stored. Tic-tac-toe has

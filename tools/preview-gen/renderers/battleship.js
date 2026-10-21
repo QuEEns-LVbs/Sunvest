@@ -218,7 +218,7 @@ export function render(state) {
 
   <!-- Watermark -->
   <text x="${SVG_W/2}" y="${statusBarY + STATUS_H - 8}" text-anchor="middle" font-size="9"
-        fill="${COLORS.text_muted}" letter-spacing="2">COUGR · BATTLESHIP · COMMIT-REVEAL</text>
+        fill="${COLORS.text_muted}" letter-spacing="2">Sunvest · BATTLESHIP · COMMIT-REVEAL</text>
 `;
 
   svg += `</svg>`;

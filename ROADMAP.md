@@ -1,6 +1,6 @@
 # Roadmap
 
-Cougr's roadmap is phased by evidence and dependency, not fixed calendar dates. The trigger to advance is the stated exit criteria for each phase, not a target date.
+Sunvest's roadmap is phased by evidence and dependency, not fixed calendar dates. The trigger to advance is the stated exit criteria for each phase, not a target date.
 
 This document is a living summary. The full planning rationale lives in [docs/strategy/13-roadmap.md](docs/strategy/13-roadmap.md) and is updated as assumptions are validated or invalidated.
 
@@ -24,13 +24,13 @@ Add the contributor-facing scaffolding a project with an active external contrib
 
 | Work item | Notes |
 |---|---|
-| `cougr-cli` (`new`, `add`, `check`, `doctor`) | New workspace member; four starter templates already exist |
-| Documentation site | mdBook or equivalent in a new `cougr-site` repo; migrates existing `docs/` content |
+| `Sunvest-cli` (`new`, `add`, `check`, `doctor`) | New workspace member; four starter templates already exist |
+| Documentation site | mdBook or equivalent in a new `Sunvest-site` repo; migrates existing `docs/` content |
 | Showcase / example gallery | Data-driven off the existing example catalog |
 | Design system | Palette, type, and tokens applied to docs site and showcase |
 | SCF / SDF grant application | Scoped to Phase 1 deliverables |
 
-**Exit criteria:** a developer with Rust installed can go from the docs site to a passing test in under two minutes; the showcase is live; GitHub star count and `cargo install cougr-cli` download counts are being tracked.
+**Exit criteria:** a developer with Rust installed can go from the docs site to a passing test in under two minutes; the showcase is live; GitHub star count and `cargo install Sunvest-cli` download counts are being tracked.
 
 ---
 
@@ -40,8 +40,8 @@ Add the contributor-facing scaffolding a project with an active external contrib
 
 | Work item | Notes |
 |---|---|
-| TypeScript client SDK (`cougr-sdk-js`) | Session, account, and event-subscription wrapper |
-| First-wave Skills | `cougr-init`, `cougr-component`, `cougr-check`, `cougr-example-audit` |
+| TypeScript client SDK (`Sunvest-sdk-js`) | Session, account, and event-subscription wrapper |
+| First-wave Skills | `Sunvest-init`, `Sunvest-component`, `Sunvest-check`, `Sunvest-example-audit` |
 | RFC process and first Governance doc | Decision-rights design deferred from Phase 0 by design |
 | RFG (Request for Games) board | Directs existing bounty and contributor energy at ecosystem-shaping gaps |
 | Resource-cost reporting in `GameHarness` | Addresses Soroban-specific friction identified in research |
@@ -57,10 +57,10 @@ Add the contributor-facing scaffolding a project with an active external contrib
 | Work item | Notes |
 |---|---|
 | ZK trusted-setup resolution | Run or credibly partner into a production ceremony for the four circuit builders |
-| "Cougr Verified" badge and checklist | Formalized verification process for production-grade games |
+| "Sunvest Verified" badge and checklist | Formalized verification process for production-grade games |
 | Hosted indexer service evaluation | Triggered by multiple teams independently rebuilding the same indexing glue, not a target date |
 
-**Exit criteria:** at least one team ships a real mainnet game with real players using Cougr, and the trusted-setup gap is resolved for any team that needs a production-grade ZK circuit.
+**Exit criteria:** at least one team ships a real mainnet game with real players using Sunvest, and the trusted-setup gap is resolved for any team that needs a production-grade ZK circuit.
 
 ---
 
@@ -83,7 +83,7 @@ These are read together as a funnel - visibility → trial → contribution → 
 | External contributors (historical) | 25+ |
 | `crates.io` downloads | tracked |
 | `docs.rs` coverage | 48% |
-| `cougr-cli` installs | tracking starts Phase 1 |
+| `Sunvest-cli` installs | tracking starts Phase 1 |
 | Time-to-first-passing-test | measured in Phase 1 user testing |
 
 The specific imbalance to watch: 51 forks to 8 stars is unusually high. Normalization toward parity is a signal the onboarding funnel is working.

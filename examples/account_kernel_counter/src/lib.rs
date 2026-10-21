@@ -5,7 +5,7 @@
 //!
 //! A single-cell counter that can only be incremented by a holder of a valid
 //! session key.  All authorization flows through the `account_kernel` module
-//! that was scaffolded by `cougr add account-kernel`.
+//! that was scaffolded by `Sunvest add account-kernel`.
 //!
 //! ## Public API
 //!
@@ -33,7 +33,7 @@
 
 pub mod account_kernel;
 
-use cougr_core::accounts::{AccountKernel, SessionStorage};
+use Sunvest_core::accounts::{AccountKernel, SessionStorage};
 use soroban_sdk::{contract, contractimpl, symbol_short, Address, BytesN, Env, Symbol};
 
 /// Storage key for the per-owner counter.
@@ -61,7 +61,7 @@ impl CounterGame {
         owner.require_auth();
 
         let scope = account_kernel::build_scope(&env, max_ops, expires_at);
-        let session_key = cougr_core::accounts::SessionKey {
+        let session_key = Sunvest_core::accounts::SessionKey {
             key_id,
             scope,
             created_at: env.ledger().timestamp(),

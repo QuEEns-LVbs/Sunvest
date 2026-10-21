@@ -5,7 +5,7 @@
 `season_ladder` runs a competitive season of head-to-head results: players
 register themselves, the season admin records each fixture, and an integer
 rating is updated after every result. It demonstrates the **standards layer
-of `cougr-core`** — `Ownable` for admin authority and `Pausable` for an
+of `Sunvest-core`** — `Ownable` for admin authority and `Pausable` for an
 emergency stop — instead of a private admin flag, and it shows integer-only
 rating math that stays deterministic inside a Soroban contract.
 
@@ -31,7 +31,7 @@ rating math that stays deterministic inside a Soroban contract.
 The contract is intentionally monolithic (it has three small systems, well
 under the threshold where the standard asks for a split):
 
-- **Standards layer** — `Ownable` and `Pausable` from `cougr_core::standards`
+- **Standards layer** — `Ownable` and `Pausable` from `Sunvest_core::standards`
   own the authorization of `report_result` / `pause` / `unpause` and the
   freeze of `register_player` / `report_result`.
 - **Ratings** — pure integer functions (`expected_score_ppm`,
@@ -50,7 +50,7 @@ There is no tick loop: every entrypoint is a direct call driven by players
 | `PairMatches(Address, Address)` | instance | Next fixture number per ordered pair; enforces the duplicate guard. |
 | `Fixture(Address, Address, u32)` | instance | Each reported result, round-trippable through the `fixture` view. |
 | `Roster` | instance | Registration order, feeds `standings`. |
-| `Ownable` / `Pausable` state | persistent (standards layer) | Written by `cougr_core::standards` under its own namespaced keys. |
+| `Ownable` / `Pausable` state | persistent (standards layer) | Written by `Sunvest_core::standards` under its own namespaced keys. |
 
 ## Rating rule (integer-only)
 
@@ -95,12 +95,12 @@ the pause never renumbers or discards fixtures.
    `unpause` resumes exactly where it left off.
 6. `standings` shows the ladder at any time.
 
-## Cougr APIs used
+## Sunvest APIs used
 
-- `cougr_core::standards::Ownable` — `initialize`, `require_owner`, `owner`.
-- `cougr_core::standards::Pausable` — `require_not_paused`, `pause`,
+- `Sunvest_core::standards::Ownable` — `initialize`, `require_owner`, `owner`.
+- `Sunvest_core::standards::Pausable` — `require_not_paused`, `pause`,
   `unpause`, `is_paused`.
-- `cougr_core::standards::StandardsError` — surfaced through the standards
+- `Sunvest_core::standards::StandardsError` — surfaced through the standards
   layer's `Result`s.
 
 No ECS, `GameApp`, ZK, or session APIs are used: the issue this example

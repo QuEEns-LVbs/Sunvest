@@ -3,7 +3,7 @@
 ## Purpose
 
 Deciding what belongs on-chain and what belongs off-chain is the first design decision a team
-makes when building on Cougr, and the one most likely to produce a design that cannot ship. The
+makes when building on Sunvest, and the one most likely to produce a design that cannot ship. The
 two failure modes are symmetric:
 
 - putting too much on-chain, producing a contract that is correct in a unit test and too expensive
@@ -15,7 +15,7 @@ This guide gives a repeatable way to make that call for each piece of state and 
 specific game, and then works through three shipped examples to show the call being made in
 practice.
 
-It does not restate Cougr's performance model or its privacy guarantees. Those live in
+It does not restate Sunvest's performance model or its privacy guarantees. Those live in
 [PERFORMANCE.md](./PERFORMANCE.md) and [PRIVACY_MODEL.md](./PRIVACY_MODEL.md), and this guide links
 into them rather than duplicating them.
 
@@ -57,7 +57,7 @@ chain often does not need the data, only a binding promise about it, so that a l
 checked against the promise.
 
 A hash commitment, a Merkle root, or a proof is a fixed-size on-chain stand-in for state that
-stays off-chain until it is needed. Cougr's `privacy::stable` surface (Stable) provides the
+stays off-chain until it is needed. Sunvest's `privacy::stable` surface (Stable) provides the
 commit-reveal and Merkle primitives for this; see [PRIVACY_MODEL.md](./PRIVACY_MODEL.md) for what
 each tier promises. When this substitution works, it is almost always the right answer: the
 verification property from question 1 is preserved while the storage cost collapses to 32 bytes.
@@ -74,7 +74,7 @@ The current limits and the fee model are documented upstream in
 Read them there rather than from a copy in this repository, because they change with protocol
 versions.
 
-Two Cougr-specific points affect the arithmetic:
+Two Sunvest-specific points affect the arithmetic:
 
 - The choice between `SimpleWorld` and `ArchetypeWorld`, and between table and sparse component
   storage, changes how much of the world a query touches per invocation. The decision heuristics
@@ -206,7 +206,7 @@ simplification, and it is one of the first things a real deployment would have t
 When a game genuinely needs sub-second simulation, the boundary moves rather than disappearing:
 simulate off-chain, and put on-chain only what question 1 demands. In practice that is the entry
 stake, periodic checkpoints, and a final score commitment, with the disputed cases resolved by
-replaying a committed input log against the same deterministic systems. Cougr's per-tick
+replaying a committed input log against the same deterministic systems. Sunvest's per-tick
 determinism is what makes that replay possible, but the architecture around it is multiplayer
 synchronization, which is a distinct topic from the boundary itself and is not covered here.
 
@@ -302,6 +302,6 @@ For each piece of state or rule in your game:
 |---|---|
 | [PERFORMANCE.md](./PERFORMANCE.md) | Backend and storage choice, query cost model, benchmark interpretation |
 | [PRIVACY_MODEL.md](./PRIVACY_MODEL.md) | What each privacy tier promises, and the Experimental boundary around Groth16 |
-| [PATTERNS.md](./PATTERNS.md) | Which Cougr module answers a given gameplay problem |
+| [PATTERNS.md](./PATTERNS.md) | Which Sunvest module answers a given gameplay problem |
 | [strategy/04-onchain-gaming-research.md](./strategy/04-onchain-gaming-research.md) | Why this decision ranks as the highest-impact friction point |
 | [strategy/13-roadmap.md](./strategy/13-roadmap.md) | Phase 2 resource-cost reporting in `GameHarness` |

@@ -73,7 +73,7 @@
   <text x="384" y="440" text-anchor="end" font-size="13"
         fill="#B7ABA0">Move 5</text>
 
-  <!-- Cougr watermark -->
+  <!-- Sunvest watermark -->
   <text x="200" y="468" text-anchor="middle" font-size="10"
-        fill="#B7ABA0" letter-spacing="2">COUGR · TIC-TAC-TOE</text>
+        fill="#B7ABA0" letter-spacing="2">Sunvest · TIC-TAC-TOE</text>
 </svg>

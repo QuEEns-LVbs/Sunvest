@@ -1,4 +1,4 @@
-// sokoban - canonical Cougr example demonstrating the ArchetypeWorld ECS
+// sokoban - canonical Sunvest example demonstrating the ArchetypeWorld ECS
 // backend and component-signature queries.
 //
 // A level is a grid of walls, crates and goals. The caller pushes their
@@ -12,12 +12,12 @@
 //     signature (Player, Wall, Crate, Goal, OnGoal each live in their own)
 //   - ArchetypeQueryBuilder - typed queries over those archetypes,
 //     including `without_component` for win detection
-//   - impl_marker_component! / impl_component! - the two Cougr component
+//   - impl_marker_component! / impl_component! - the two Sunvest component
 //     shapes this example needs
 
 #![no_std]
 
-use cougr_core::ArchetypeWorld;
+use Sunvest_core::ArchetypeWorld;
 use soroban_sdk::{contract, contractimpl, symbol_short, Address, Env, Symbol, Vec};
 
 mod components;

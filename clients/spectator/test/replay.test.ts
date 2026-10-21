@@ -78,7 +78,7 @@ test('replayFromEvents handles out-of-order events stably', async () => {
   assert.equal(timeline.frames[timeline.length - 1]?.ledger, 106);
 });
 
-test('replayFromPage decodes page using decodeCougrPage', async () => {
+test('replayFromPage decodes page using decodeSunvestPage', async () => {
   const page = {
     events: fixtureJson.events.slice(0, 3),
     latestLedger: 100,

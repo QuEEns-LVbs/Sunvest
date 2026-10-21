@@ -1,9 +1,9 @@
-//! dice_duel - canonical Cougr ZK circuits example for verifiable dice rolls.
+//! dice_duel - canonical Sunvest ZK circuits example for verifiable dice rolls.
 
 #![no_std]
 
-use cougr_core::circuits::fair_dice;
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::circuits::fair_dice;
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, Address, BytesN, Env, Symbol,
 };

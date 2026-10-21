@@ -1,12 +1,12 @@
-//! Integration tests for `cougr_core::session`.
+//! Integration tests for `Sunvest_core::session`.
 
 #![cfg(feature = "testutils")]
 
-use cougr_core::accounts::{
+use Sunvest_core::accounts::{
     AccountError, AuthMethod, GameAction, ReplayProtection, SessionStorage, SignedIntent,
 };
-use cougr_core::session::{SessionManager, RENEWAL_HINT_SECONDS};
-use cougr_core::test::MockSession;
+use Sunvest_core::session::{SessionManager, RENEWAL_HINT_SECONDS};
+use Sunvest_core::test::MockSession;
 use soroban_sdk::{
     contract, contractimpl, symbol_short,
     testutils::{Address as _, Ledger as _},
@@ -275,7 +275,7 @@ fn session_builder_expires_in_sets_relative_deadline() {
     env.ledger().with_mut(|li| {
         li.timestamp = 1_000;
     });
-    let scope = cougr_core::accounts::SessionBuilder::new(&env)
+    let scope = Sunvest_core::accounts::SessionBuilder::new(&env)
         .allow_action(symbol_short!("move"))
         .max_operations(10)
         .expires_in(500)
@@ -319,7 +319,7 @@ fn approve_with_builder_creates_active_session() {
     env.as_contract(&contract_id, || {
         // approve_with_builder is what MockSession::approve delegates to, so we
         // call it directly here to give it its own named test.
-        let builder = cougr_core::accounts::SessionBuilder::new(&env)
+        let builder = Sunvest_core::accounts::SessionBuilder::new(&env)
             .allow_action(symbol_short!("tap"))
             .max_operations(3)
             .expires_in(5_000);
@@ -540,7 +540,7 @@ fn fallback_execute_succeeds_via_session_when_session_is_valid() {
     });
     // Read the key_id back so we can pass it to the contract method.
     let key_id = env.as_contract(&contract_id, || {
-        cougr_core::accounts::SessionStorage::load_all(&env, &owner)
+        Sunvest_core::accounts::SessionStorage::load_all(&env, &owner)
             .get(0)
             .unwrap()
             .key_id
@@ -568,7 +568,7 @@ fn fallback_execute_falls_back_on_session_expired() {
     let key_id = env.as_contract(&contract_id, || {
         // Session expires 50 seconds from now (ledger timestamp 0).
         MockSession::approve(&env, &owner, &["tap"], 5, 50);
-        cougr_core::accounts::SessionStorage::load_all(&env, &owner)
+        Sunvest_core::accounts::SessionStorage::load_all(&env, &owner)
             .get(0)
             .unwrap()
             .key_id

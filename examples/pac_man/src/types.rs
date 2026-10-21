@@ -55,7 +55,7 @@ pub enum GameError {
 
 use crate::components::{Ghost, Position};
 /// Storage keys
-use cougr_core::event::Event;
+use Sunvest_core::event::Event;
 
 /// Complete game state stored on-chain
 #[contracttype]

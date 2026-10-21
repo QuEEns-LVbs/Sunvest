@@ -1,7 +1,7 @@
 {
-  "name": "cougr-tokens",
+  "name": "Sunvest-tokens",
   "version": "1.1.0",
-  "description": "Cougr design tokens: the single versioned source for color, type, spacing, radius, and logo values shared by the documentation site and the showcase.",
+  "description": "Sunvest design tokens: the single versioned source for color, type, spacing, radius, and logo values shared by the documentation site and the showcase.",
   "type": "module",
   "main": "./dist/tokens.js",
   "exports": {
@@ -22,7 +22,7 @@
     "prepare": "node build.js"
   },
   "keywords": [
-    "cougr",
+    "Sunvest",
     "design-tokens",
     "css-custom-properties"
   ],

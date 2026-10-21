@@ -1,6 +1,6 @@
 /**
  * The pure half of `sdk-passkey`: everything between what a WebAuthn call
- * returns and what `cougr_core::accounts::passkey` accepts.
+ * returns and what `Sunvest_core::accounts::passkey` accepts.
  *
  * Nothing in this file touches `navigator`, `window`, or a network. It takes
  * hex and JSON in and returns hex and bytes out, so the same mapping the browser
@@ -78,7 +78,7 @@ export type ClientDataExpectations = {
   type: 'webauthn.create' | 'webauthn.get';
   /** base64url challenge, no padding, issued by whoever owns the action. */
   challenge: string;
-  /** Exact origin the credential was created for, e.g. `https://cougr.test`. */
+  /** Exact origin the credential was created for, e.g. `https://Sunvest.test`. */
   origin: string;
   /** Relying party id, normally the origin hostname. */
   rpId?: string;
@@ -425,7 +425,7 @@ export interface SignedAssertion {
  * The smallest signer the SDK needs: something that holds the uncompressed key
  * and can endorse a caller-supplied challenge.
  *
- * `cougr-core` names the same seam `AccountSigner`; a chain to this interface is
+ * `Sunvest-core` names the same seam `AccountSigner`; a chain to this interface is
  * in `browser.ts` (`createPasskeySigner`).
  *
  * Note the contract-side contract: it verifies `sha256(message)` against the

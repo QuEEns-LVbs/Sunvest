@@ -1,10 +1,10 @@
 [package]
-name = "cougr-godot-checkpoint-vectors"
+name = "Sunvest-godot-checkpoint-vectors"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.91.0"
 publish = false
-description = "Internal XDR cross-check vectors for the Cougr checkpoint Godot addon - not published"
+description = "Internal XDR cross-check vectors for the Sunvest checkpoint Godot addon - not published"
 license = "MIT"
 
 [dependencies]

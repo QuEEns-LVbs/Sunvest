@@ -2,7 +2,7 @@
 //!
 //! # Example
 //! ```no_run
-//! use cougr_core::accounts::SessionBuilder;
+//! use Sunvest_core::accounts::SessionBuilder;
 //! use soroban_sdk::{symbol_short, Env};
 //!
 //! let env = Env::default();

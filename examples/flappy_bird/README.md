@@ -1,11 +1,11 @@
 # Flappy Bird On-Chain Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
 ## Purpose and pattern
 
-This example demonstrates a side-scroller gravity loop on Soroban with Cougr ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
+This example demonstrates a side-scroller gravity loop on Soroban with Sunvest ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
 
 ## Public contract API
 
@@ -45,7 +45,7 @@ Bird, pipe, position, velocity, and scoring markers are represented as ECS compo
 4. Query public getters for score, position, active state, or terminal status.
 5. Stop when the game-over/completed condition is reached, or reset/reinitialize where supported.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `ComponentTrait` and custom component modules document the ECS data boundary.
 - `SimpleWorld`, `SimpleQueryBuilder`, `GameApp`, `ScheduleStage`, or `SystemConfig` are used where this transitional example has already adopted the maintained runtime shape.
@@ -307,13 +307,13 @@ pub fn apply_gravity(world: &mut World, env: &Env) {
 
 ### Learning More
 
-- [Cougr-Core Documentation](../../README.md)
+- [Sunvest-Core Documentation](../../README.md)
 - [Soroban Documentation](https://developers.stellar.org/docs/smart-contracts)
 - [ECS Pattern](https://en.wikipedia.org/wiki/Entity_component_system)
 
 ## License
 
-This example is part of the Cougr project and follows the same license.
+This example is part of the Sunvest project and follows the same license.
 
 ## Contributing
 

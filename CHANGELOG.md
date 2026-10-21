@@ -8,24 +8,24 @@
 
 ### Added
 
-- **`cougr_core::accounts::AccountError::DuplicateDeviceKey`** - new error variant (code 45) returned when attempting to register a device key that is already active, distinguishing "device already registered" from "device limit reached"
-- **`cougr_core::accounts::derive_session_key_id`** - deterministic session-key identifier derivation, so the Rust core and the TypeScript session client agree on session identity instead of re-deriving it off-chain
-- **`cougr_core::cors`** - CORS configuration validation and dynamic origin
+- **`Sunvest_core::accounts::AccountError::DuplicateDeviceKey`** - new error variant (code 45) returned when attempting to register a device key that is already active, distinguishing "device already registered" from "device limit reached"
+- **`Sunvest_core::accounts::derive_session_key_id`** - deterministic session-key identifier derivation, so the Rust core and the TypeScript session client agree on session identity instead of re-deriving it off-chain
+- **`Sunvest_core::cors`** - CORS configuration validation and dynamic origin
   allowlist for HTTP gateways in front of a game contract: `CorsConfig`
   validates origins, methods, header names, and credential/wildcard
   combinations; `OriginAllowlist` supports runtime add/remove of exact,
   single-label wildcard subdomain (`https://*.example.com`), and global `*`
   entries with case/default-port-normalized matching; preflight evaluation
   returns ready-to-emit response headers
-- **`cougr-cli`** - new workspace member publishing the `cougr` binary
-- **`cougr new <name> [--template <name>]`** - scaffolds a Soroban game contract crate
+- **`Sunvest-cli`** - new workspace member publishing the `Sunvest` binary
+- **`Sunvest new <name> [--template <name>]`** - scaffolds a Soroban game contract crate
   following the canonical `lib.rs` / `components.rs` / `systems.rs` layout, with a
-  passing `test::GameHarness` suite and a dependency on the published `cougr-core`
+  passing `test::GameHarness` suite and a dependency on the published `Sunvest-core`
   release rather than a path dependency
 - **Four embedded templates**, each derived from a canonical example and compiled into
-  the binary so `cougr new` works offline: `starter` (`spawn_and_move`), `turn-based`
+  the binary so `Sunvest new` works offline: `starter` (`spawn_and_move`), `turn-based`
   (`tic_tac_toe`), `hidden-info` (`hidden_hand`), `session-auth` (`session_arena`)
-- **CLI CI workflow** - validates `cougr-cli` once, caches the root workspace target,
+- **CLI CI workflow** - validates `Sunvest-cli` once, caches the root workspace target,
   and compiles generated projects when template sources change
 
 ### Fixed
@@ -44,7 +44,7 @@
   otherwise be internally consistent
 - **`examples/battleship`**, **`examples/treasure_hunt`** - both pin the expected proof
   depth and recheck `path_bits` against the claimed cell locally, since they still
-  depend on the published `cougr-core = "1.1.0"` and won't pick up the core fix until a
+  depend on the published `Sunvest-core = "1.1.0"` and won't pick up the core fix until a
   release
 
 ## 1.1.0
@@ -61,19 +61,19 @@
   `RichComponentChangedEvent` for off-chain indexers
 - **`SimpleWorld::remove_rich_observed`** - remove a rich component and emit a `del` event
 - **`RichComponentChangedEvent`** - new Soroban event type with topics
-  `("COUGR", "rich", component_type)` for rich component change notifications
-- **`spawn_and_move` example** - canonical Cougr starter game demonstrating the complete
+  `("Sunvest", "rich", component_type)` for rich component change notifications
+- **`spawn_and_move` example** - canonical Sunvest starter game demonstrating the complete
   idiomatic pattern: `impl_component_observed!` + `SorobanGame` + typed ECS access
-- **`SorobanGame` re-exported from `prelude`** - import from `cougr_core::prelude::*`
-- **`cougr_core::circuits`** - four pre-built ZK game builders (hidden cards, fog of war,
+- **`SorobanGame` re-exported from `prelude`** - import from `Sunvest_core::prelude::*`
+- **`Sunvest_core::circuits`** - four pre-built ZK game builders (hidden cards, fog of war,
   fair dice, sealed bid) with pipeline-embedded verification keys
-- **`cougr_core::session`** - `SessionManager`, `SessionStatus`, and `ActiveSession` (Beta)
-- **`cougr_core::test`** - `GameHarness`, `Scenario`, and `ReplayLog` sandbox behind the
+- **`Sunvest_core::session`** - `SessionManager`, `SessionStatus`, and `ActiveSession` (Beta)
+- **`Sunvest_core::test`** - `GameHarness`, `Scenario`, and `ReplayLog` sandbox behind the
   `testutils` feature
-- **Circom pipeline** - `internal/cougr-core-circuits` with CI workflow and on-chain Groth16
+- **Circom pipeline** - `internal/Sunvest-core-circuits` with CI workflow and on-chain Groth16
   proof verification using real VKs
 - **ZK examples** - `hidden_hand`, `fog_explorer`, `dice_duel`, and `blind_auction`
-- **Workspace subcrates** - `internal/cougr-core-{circuits,session,test}` per ADR 0007
+- **Workspace subcrates** - `internal/Sunvest-core-{circuits,session,test}` per ADR 0007
 
 ### Changed
 
@@ -93,9 +93,9 @@
 - `SimpleWorld::load_from_instance` / `save_to_instance` are **Stable**
 - `set_rich_observed` / `remove_rich_observed` are **Stable**
 - `RichComponentChangedEvent` is **Stable**
-- `cougr_core::session` is **Beta**
-- `cougr_core::circuits` and embedded test VKs are **Experimental**
-- `cougr_core::test` is **Experimental** (`testutils` only)
+- `Sunvest_core::session` is **Beta**
+- `Sunvest_core::circuits` and embedded test VKs are **Experimental**
+- `Sunvest_core::test` is **Experimental** (`testutils` only)
 
 ---
 

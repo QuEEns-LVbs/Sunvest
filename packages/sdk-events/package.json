@@ -1,8 +1,8 @@
 {
-  "name": "cougr-sdk-events",
+  "name": "Sunvest-sdk-events",
   "version": "0.1.0",
   "private": false,
-  "description": "Typed decoder for Cougr COUGR component events (set, del, rich) returned by the Soroban RPC getEvents method.",
+  "description": "Typed decoder for Sunvest Sunvest component events (set, del, rich) returned by the Soroban RPC getEvents method.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -26,7 +26,7 @@
     "fixtures": "cargo run --quiet --manifest-path fixtures/Cargo.toml | node fixtures/build.mjs > fixtures/events.json"
   },
   "keywords": [
-    "cougr",
+    "Sunvest",
     "stellar",
     "soroban",
     "events",

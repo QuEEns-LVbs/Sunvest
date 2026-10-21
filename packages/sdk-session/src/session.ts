@@ -1,8 +1,8 @@
 /**
- * TypeScript session client for Cougr.
+ * TypeScript session client for Sunvest.
  *
  * This package mirrors the on-chain session model built by
- * `cougr_core::accounts::SessionBuilder` and enforced by `AccountKernel` /
+ * `Sunvest_core::accounts::SessionBuilder` and enforced by `AccountKernel` /
  * `SessionPolicy`:
  *
  * - `SessionScope` and `SessionKey` keep the Rust field meaning, byte order, and
@@ -17,7 +17,7 @@
  * transaction submitted, the caller passes a `SessionKeyProvider` (see README).
  */
 
-/** Scope of a session key, mirroring `cougr_core::accounts::SessionScope`. */
+/** Scope of a session key, mirroring `Sunvest_core::accounts::SessionScope`. */
 export interface SessionScope {
   /** Action symbols the session may authorize, in builder order. */
   readonly allowedActions: string[];
@@ -51,7 +51,7 @@ export interface SessionKeyProvider {
   createSession(scope: SessionScope): SessionKey | Promise<SessionKey>;
 }
 
-/** Contract error codes from `cougr_core::accounts::AccountError`. */
+/** Contract error codes from `Sunvest_core::accounts::AccountError`. */
 export const SESSION_ERROR = {
   SessionExpired: 21,
   InvalidSignature: 22,

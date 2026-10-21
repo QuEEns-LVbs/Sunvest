@@ -1,6 +1,6 @@
 use soroban_sdk::contracterror;
 
-/// Account-related errors for the Cougr framework.
+/// Account-related errors for the Sunvest framework.
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
 #[repr(u32)]

@@ -2,7 +2,7 @@
  * `TurnBasedConfig` — the studio's client-side view of a turn-based match's
  * shape.
  *
- * The on-chain side of a turn-based Cougr contract stores its shape in Rust
+ * The on-chain side of a turn-based Sunvest contract stores its shape in Rust
  * (`GameState.cells` is a flat `Vec<u32>` plus a status code and a turn flag;
  * see `cli/templates/turn-based/src/lib.rs`). Nothing in the contract fixes the
  * board at 3×3 — the examples range from 3×3 tic-tac-toe to 7-wide Connect
@@ -28,7 +28,7 @@
 
 /**
  * Upper bounds. These are not game rules — they keep a malformed fixture from
- * asking the DOM and the SVG renderer for millions of cells. Every legal Cougr
+ * asking the DOM and the SVG renderer for millions of cells. Every legal Sunvest
  * example is far below them.
  */
 export const LIMITS = Object.freeze({

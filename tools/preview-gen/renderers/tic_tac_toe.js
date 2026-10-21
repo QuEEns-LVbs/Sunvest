@@ -141,9 +141,9 @@ export function render(state) {
   <text x="${SIZE-16}" y="${SIZE+40}" text-anchor="end" font-size="13"
         fill="${COLORS.label}">${moveLabel}</text>
 
-  <!-- Cougr watermark -->
+  <!-- Sunvest watermark -->
   <text x="${SIZE/2}" y="${SIZE+68}" text-anchor="middle" font-size="10"
-        fill="${COLORS.label}" letter-spacing="2">COUGR · TIC-TAC-TOE</text>
+        fill="${COLORS.label}" letter-spacing="2">Sunvest · TIC-TAC-TOE</text>
 `;
 
   svg += `</svg>`;

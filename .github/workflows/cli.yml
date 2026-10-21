@@ -39,7 +39,7 @@ jobs:
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
-          shared-key: cougr-workspace
+          shared-key: Sunvest-workspace
 
       - name: Check formatting
         working-directory: ./cli
@@ -76,4 +76,4 @@ jobs:
 
       - name: Compile generated templates
         if: steps.changes.outputs.templates == 'true'
-        run: cargo test -p cougr-cli --test cougr_new -- --ignored --nocapture
+        run: cargo test -p Sunvest-cli --test Sunvest_new -- --ignored --nocapture

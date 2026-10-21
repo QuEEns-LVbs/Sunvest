@@ -1,10 +1,10 @@
 # Project Bootstrap
 
-Use this reference after scaffolding a project with `cougr new` (see [SKILL.md](../SKILL.md) Step 2). It covers what the CLI does not: extending the generated layout, and dependency strategy for the one case `cougr new` does not handle, local development against an unpublished `cougr-core`.
+Use this reference after scaffolding a project with `Sunvest new` (see [SKILL.md](../SKILL.md) Step 2). It covers what the CLI does not: extending the generated layout, and dependency strategy for the one case `Sunvest new` does not handle, local development against an unpublished `Sunvest-core`.
 
 ## Generated Shape
 
-`cougr new <name> --template <template>` produces a single crate:
+`Sunvest new <name> --template <template>` produces a single crate:
 
 ```text
 my-game/
@@ -21,12 +21,12 @@ Collapse files further only if the template already over-splits a genuinely tiny
 
 ## Dependency Strategy
 
-`cougr new` pins the generated project to the published `cougr-core` release from crates.io. Only override this when the user is working locally against an unreleased `cougr-core`, for example while developing a feature in this repository alongside a generated example:
+`Sunvest new` pins the generated project to the published `Sunvest-core` release from crates.io. Only override this when the user is working locally against an unreleased `Sunvest-core`, for example while developing a feature in this repository alongside a generated example:
 
 ```toml
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core = { path = "../path/to/cougr-core" }
+Sunvest-core = { path = "../path/to/Sunvest-core" }
 ```
 
 Revert to the published version before the project is meant to build standalone.

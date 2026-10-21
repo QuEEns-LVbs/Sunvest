@@ -1,4 +1,4 @@
-//! Account abstraction for Cougr game accounts.
+//! Account abstraction for Sunvest game accounts.
 //!
 //! This module provides a unified interface for both Classic (G-address)
 //! and Contract (C-address) Stellar accounts, enabling features like
@@ -13,7 +13,7 @@
 //! ## Usage
 //!
 //! ```no_run
-//! use cougr_core::accounts::{ClassicAccount, CougrAccount, GameAction};
+//! use Sunvest_core::accounts::{ClassicAccount, SunvestAccount, GameAction};
 //! use soroban_sdk::{symbol_short, testutils::Address as _, Address, Bytes, Env};
 //!
 //! let env = Env::default();
@@ -21,7 +21,7 @@
 //! let account = ClassicAccount::new(player_address);
 //! let action = GameAction { system_name: symbol_short!("move"), data: Bytes::new(&env) };
 //! account.authorize(&env, &action)?;
-//! # Ok::<(), cougr_core::accounts::AccountError>(())
+//! # Ok::<(), Sunvest_core::accounts::AccountError>(())
 //! ```
 
 pub(crate) mod batch;
@@ -66,7 +66,7 @@ pub use replay::ReplayProtection;
 pub use secp256r1_auth::{verify_secp256r1, Secp256r1Key, Secp256r1Storage};
 pub use session_builder::{derive_session_key_id, SessionBuilder};
 pub use storage::SessionStorage;
-pub use traits::{CougrAccount, IntentAccount, SessionKeyProvider};
+pub use traits::{SunvestAccount, IntentAccount, SessionKeyProvider};
 pub use types::{AccountCapabilities, GameAction, SessionKey, SessionScope};
 
 // Lower-level support exports for advanced integrations.

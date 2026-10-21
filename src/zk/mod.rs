@@ -1,4 +1,4 @@
-//! Zero-knowledge proof support for Cougr.
+//! Zero-knowledge proof support for Sunvest.
 //!
 //! This module provides ergonomic wrappers around Stellar Protocol 25 (X-Ray)
 //! cryptographic host functions for use in on-chain game verification.
@@ -33,8 +33,8 @@
 //! ## Usage
 //!
 //! ```no_run
-//! use cougr_core::zk::experimental::{verify_groth16, Groth16Proof, VerificationKey};
-//! use cougr_core::zk::{G1Point, G2Point, Scalar};
+//! use Sunvest_core::zk::experimental::{verify_groth16, Groth16Proof, VerificationKey};
+//! use Sunvest_core::zk::{G1Point, G2Point, Scalar};
 //! use soroban_sdk::{BytesN, Env, Vec};
 //!
 //! let env = Env::default();

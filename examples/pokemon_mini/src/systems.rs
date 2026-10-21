@@ -10,7 +10,7 @@ use crate::components::{
     BattleAction, BattlePhase, BattleResult, BattleState, ComponentTrait, Creature, Direction,
     DirectionComponent, Position, TileType, ENCOUNTER_MODULO, MAP_HEIGHT, MAP_WIDTH,
 };
-use cougr_core::simple_world::{EntityId, SimpleWorld};
+use Sunvest_core::simple_world::{EntityId, SimpleWorld};
 use soroban_sdk::{symbol_short, Env};
 
 // ============================================================================

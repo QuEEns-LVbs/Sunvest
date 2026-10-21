@@ -1,21 +1,21 @@
 # Arkanoid On-Chain Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-A practical example demonstrating how to use the `cougr-core` package to implement Arkanoid game logic on the Stellar blockchain via Soroban smart contracts.
+A practical example demonstrating how to use the `Sunvest-core` package to implement Arkanoid game logic on the Stellar blockchain via Soroban smart contracts.
 
 ## Overview
 
 This example showcases:
-- **ECS Architecture**: Component-based design using Cougr-Core patterns
+- **ECS Architecture**: Component-based design using Sunvest-Core patterns
 - **On-Chain Game Logic**: Complete Arkanoid implementation without graphical interface
 - **Soroban Integration**: Smart contract deployment on Stellar blockchain
 - **Comprehensive Testing**: Full test coverage of game mechanics
 
 ## Game Components
 
-Following the Cougr-Core ECS pattern:
+Following the Sunvest-Core ECS pattern:
 
 - **PaddleComponent**: Horizontal paddle position
 - **BallComponent**: Ball position and velocity
@@ -57,8 +57,8 @@ stellar --version
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/salazarsebas/Cougr.git
-cd Cougr/examples/arkanoid
+git clone https://github.com/salazarsebas/Sunvest.git
+cd Sunvest/examples/arkanoid
 ```
 
 ### 2. Install Dependencies
@@ -293,9 +293,9 @@ stellar contract invoke --id <CONTRACT_ID> --simulate -- init_game
 
 ## Architecture
 
-### Cougr-Core Benefits
+### Sunvest-Core Benefits
 
-This example demonstrates how Cougr-Core simplifies on-chain game development:
+This example demonstrates how Sunvest-Core simplifies on-chain game development:
 
 1. **Component Pattern**: Modular game data (Paddle, Ball, Bricks, Score)
 2. **System Pattern**: Organized logic (Physics, Collision, Scoring systems)
@@ -347,6 +347,6 @@ MIT OR Apache-2.0
 
 - [Soroban Documentation](https://developers.stellar.org/docs/build/smart-contracts)
 - [Stellar CLI Guide](https://developers.stellar.org/docs/tools/cli)
-- [Cougr Repository](https://github.com/salazarsebas/Cougr)
+- [Sunvest Repository](https://github.com/salazarsebas/Sunvest)
 - [Rust Book](https://doc.rust-lang.org/book/)
 - [Cargo Documentation](https://doc.rust-lang.org/cargo/)

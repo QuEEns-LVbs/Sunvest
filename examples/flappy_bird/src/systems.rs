@@ -1,8 +1,8 @@
 use crate::components::{BirdState, ComponentTrait, PipeConfig, PipeMarker};
-use cougr_core::{SimpleQueryBuilder, SimpleWorld};
+use Sunvest_core::{SimpleQueryBuilder, SimpleWorld};
 use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 
-// Define our own Position and Velocity types that match cougr-core's but with ComponentTrait
+// Define our own Position and Velocity types that match Sunvest-core's but with ComponentTrait
 #[derive(Clone, Debug)]
 pub struct Position {
     pub x: i32,

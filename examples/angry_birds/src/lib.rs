@@ -1,6 +1,6 @@
 #![no_std]
 
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Address, Env, Symbol, Vec};
 
 // Game constants for fixed-point math (scale by 1000)

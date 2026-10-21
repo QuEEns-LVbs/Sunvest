@@ -1,7 +1,7 @@
 #![cfg(test)]
 
 use super::*;
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::Env;
 
 fn get_world(env: &Env, contract_id: &soroban_sdk::Address) -> ECSWorldState {

@@ -12,7 +12,7 @@ use components::{
 use systems::{apply_move, check_endgame, compute_state_hash, init_board};
 use zk::{build_move_circuit, decode_proof};
 
-use cougr_core::privacy::VerificationKey;
+use Sunvest_core::privacy::VerificationKey;
 use soroban_sdk::{contract, contractimpl, Address, Bytes, Env};
 
 #[contract]

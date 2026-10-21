@@ -3,16 +3,16 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
-  COUGR_NAMESPACE,
-  buildCougrTopicFilters,
-  decodeCougrEvent,
-  decodeCougrEvents,
-  decodeCougrTopics,
-  eventMatchesCougrTopics,
-  isCougrEvent,
+  Sunvest_NAMESPACE,
+  buildSunvestTopicFilters,
+  decodeSunvestEvent,
+  decodeSunvestEvents,
+  decodeSunvestTopics,
+  eventMatchesSunvestTopics,
+  isSunvestEvent,
   isRichComponentChanged,
-  type CougrEventFamily,
-  type CougrEventUpdate,
+  type SunvestEventFamily,
+  type SunvestEventUpdate,
   type RichComponentChangedUpdate,
   type SorobanRpcContractEvent,
   serializeCursor,
@@ -21,7 +21,7 @@ import {
 } from '../src/index.ts';
 
 interface FixtureEvent {
-  kind: CougrEventFamily;
+  kind: SunvestEventFamily;
   event: SorobanRpcContractEvent;
 }
 
@@ -34,14 +34,14 @@ const fixtures = JSON.parse(
   readFileSync(new URL('../fixtures/events.json', import.meta.url), 'utf8'),
 ) as FixtureFile;
 
-function fixture(kind: CougrEventFamily): FixtureEvent {
+function fixture(kind: SunvestEventFamily): FixtureEvent {
   const found = fixtures.events.find((entry) => entry.kind === kind);
   assert.ok(found, `fixture for ${kind} is missing`);
   return found;
 }
 
-function decodeFixture(kind: CougrEventFamily): CougrEventUpdate {
-  const update = decodeCougrEvent(fixture(kind).event);
+function decodeFixture(kind: SunvestEventFamily): SunvestEventUpdate {
+  const update = decodeSunvestEvent(fixture(kind).event);
   assert.ok(update, `fixture ${kind} did not decode`);
   return update;
 }
@@ -49,7 +49,7 @@ function decodeFixture(kind: CougrEventFamily): CougrEventUpdate {
 test('fixtures cover set, del, and rich', () => {
   const kinds = new Set(fixtures.events.map((entry) => entry.kind));
   assert.deepEqual([...kinds].sort(), ['del', 'rich', 'set']);
-  assert.match(fixtures.generatedBy, /cougr-core/);
+  assert.match(fixtures.generatedBy, /Sunvest-core/);
 });
 
 test('set fixture decodes to typed bytes plus entity id', () => {
@@ -89,23 +89,23 @@ test('rich fixture forces a follow-up read and carries no value', () => {
   assert.equal(read, true);
 });
 
-test('decodeCougrEvents drops non-Cougr events', () => {
-  const updates = decodeCougrEvents(fixtures.events.map((entry) => entry.event));
+test('decodeSunvestEvents drops non-Sunvest events', () => {
+  const updates = decodeSunvestEvents(fixtures.events.map((entry) => entry.event));
   assert.equal(updates.length, fixtures.events.length);
 });
 
-test('isCougrEvent rejects unrelated topics', () => {
+test('isSunvestEvent rejects unrelated topics', () => {
   const unrelated: SorobanRpcContractEvent = {
     ...fixture('del').event,
     topic: [fixture('del').event.topic[0] as string, 'AAAAAA=='],
   };
-  assert.equal(isCougrEvent(unrelated), false);
-  assert.equal(decodeCougrEvent(unrelated), null);
-  assert.equal(decodeCougrTopics(unrelated), null);
+  assert.equal(isSunvestEvent(unrelated), false);
+  assert.equal(decodeSunvestEvent(unrelated), null);
+  assert.equal(decodeSunvestTopics(unrelated), null);
 });
 
 test('topic filters ask for exactly the three families', () => {
-  const filters = buildCougrTopicFilters();
+  const filters = buildSunvestTopicFilters();
   assert.equal(filters.length, 3);
   const families = filters.map((filter) => filter[1]);
   assert.deepEqual(families, [
@@ -114,23 +114,23 @@ test('topic filters ask for exactly the three families', () => {
     fixtures.events[2]?.event.topic[1],
   ]);
   assert.ok(filters.every((filter) => filter[0] === filters[0]?.[0]));
-  assert.equal(COUGR_NAMESPACE, 'COUGR');
+  assert.equal(Sunvest_NAMESPACE, 'Sunvest');
 });
 
 test('component-scoped filter adds a third ANDed topic', () => {
-  const [filter] = buildCougrTopicFilters({ componentType: 'position', families: ['set'] });
+  const [filter] = buildSunvestTopicFilters({ componentType: 'position', families: ['set'] });
   assert.ok(filter);
   assert.equal(filter.length, 3);
-  const decoded = decodeCougrTopics({ ...fixture('set').event, topic: filter });
+  const decoded = decodeSunvestTopics({ ...fixture('set').event, topic: filter });
   assert.equal(decoded?.componentType, 'position');
 });
 
 test('client-side matcher mirrors the RPC filter', () => {
   const setEvent = fixture('set').event;
-  assert.equal(eventMatchesCougrTopics(setEvent), true);
-  assert.equal(eventMatchesCougrTopics(setEvent, { families: ['del'] }), false);
-  assert.equal(eventMatchesCougrTopics(setEvent, { componentType: 'position' }), true);
-  assert.equal(eventMatchesCougrTopics(setEvent, { componentType: 'health' }), false);
+  assert.equal(eventMatchesSunvestTopics(setEvent), true);
+  assert.equal(eventMatchesSunvestTopics(setEvent, { families: ['del'] }), false);
+  assert.equal(eventMatchesSunvestTopics(setEvent, { componentType: 'position' }), true);
+  assert.equal(eventMatchesSunvestTopics(setEvent, { componentType: 'health' }), false);
 });
 
 test('cursor JSON round-trips', () => {

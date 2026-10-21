@@ -44,7 +44,7 @@ Auction configuration records and active bid listings are stored in **Instance S
 2. **Commit Phase**: Bidders record hash commitments of their bids (handled off-chain or via standard storage).
 3. **Reveal Phase**: Bidders call `reveal_bid` with their bids and ZK proofs to unlock and register their bid weights.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `circuits::sealed_bid`: Handles verify calculations for sealed on-chain bidding logic.
 - `zk::Groth16Proof`: Contains the proof struct representation.

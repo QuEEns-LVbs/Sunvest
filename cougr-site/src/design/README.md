@@ -4,7 +4,7 @@
 
 ---
 
-The **Design** section contains guidelines for anyone building a client application against Cougr, contributing visual work, or working on the docs site itself.
+The **Design** section contains guidelines for anyone building a client application against Sunvest, contributing visual work, or working on the docs site itself.
 
 | Guide | Status |
 |---|---|

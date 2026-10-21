@@ -1,9 +1,9 @@
 [package]
-name = "cougr-core-test"
+name = "Sunvest-core-test"
 version = "1.1.0"
 edition = "2021"
 publish = false
-description = "Internal on-chain game testing sandbox - compiled into cougr-core via include"
+description = "Internal on-chain game testing sandbox - compiled into Sunvest-core via include"
 license = "MIT"
 rust-version = "1.91.0"
 

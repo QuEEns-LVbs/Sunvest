@@ -3,14 +3,14 @@ name = "checkers"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-description = "On-chain Checkers game example using Cougr ECS on Soroban"
+description = "On-chain Checkers game example using Sunvest ECS on Soroban"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 
 [dev-dependencies]
 soroban-sdk = { version = "25.1.0", features = ["testutils"] }

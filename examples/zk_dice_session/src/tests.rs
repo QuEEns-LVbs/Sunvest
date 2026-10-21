@@ -1,6 +1,6 @@
 use super::*;
-use cougr_core::circuits::{fair_dice, test_fixtures, CircuitId};
-use cougr_core::test::GameHarness;
+use Sunvest_core::circuits::{fair_dice, test_fixtures, CircuitId};
+use Sunvest_core::test::GameHarness;
 use soroban_sdk::{
     testutils::{Address as _, Ledger as _},
     Address, Env,
@@ -14,7 +14,7 @@ fn setup(
 ) -> (
     ZkDiceSessionClient<'_>,
     soroban_sdk::BytesN<32>,      // seed_commitment
-    cougr_core::zk::Groth16Proof, // pipeline proof
+    Sunvest_core::zk::Groth16Proof, // pipeline proof
 ) {
     let client = ZkDiceSessionClient::new(harness.env(), harness.contract_id());
     let seed = test_fixtures::pipeline_public_bytes32(harness.env(), CircuitId::FairDice);

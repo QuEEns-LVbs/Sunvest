@@ -3,7 +3,7 @@ name = "tic_tac_toe"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "Tic Tac Toe on-chain game using Cougr-Core ECS framework on Stellar Soroban"
+description = "Tic Tac Toe on-chain game using Sunvest-Core ECS framework on Stellar Soroban"
 license = "MIT OR Apache-2.0"
 
 [lib]
@@ -11,11 +11,11 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 
 [dev-dependencies]
 soroban-sdk = { version = "25.1.0", features = ["testutils"] }
-cougr-core = { version = "1.1.0", features = ["testutils"] }
+Sunvest-core = { version = "1.1.0", features = ["testutils"] }
 
 [profile.release]
 opt-level = "z"

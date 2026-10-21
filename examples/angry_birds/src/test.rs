@@ -1,5 +1,5 @@
 use crate::{BirdType, Material};
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::Env;
 
 #[test]

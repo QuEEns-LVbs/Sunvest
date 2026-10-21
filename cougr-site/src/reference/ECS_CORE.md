@@ -1,8 +1,8 @@
-# Cougr ECS Core
+# Sunvest ECS Core
 
 ## Purpose
 
-This document defines the defended conceptual model for Cougr's ECS runtime.
+This document defines the defended conceptual model for Sunvest's ECS runtime.
 
 It is the answer to "what are the actual core primitives?" and "which path is the one new users should learn first?"
 
@@ -64,7 +64,7 @@ Cost profile:
 
 ## Learnability Rule
 
-A new user should be able to learn the main Cougr runtime from:
+A new user should be able to learn the main Sunvest runtime from:
 
 1. `README.md`
 2. `GameApp`

@@ -3,7 +3,7 @@ name = "spawn_and_move"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "Canonical Cougr starter: spawn a player entity and move it around a 2D world on Stellar Soroban"
+description = "Canonical Sunvest starter: spawn a player entity and move it around a 2D world on Stellar Soroban"
 license = "MIT OR Apache-2.0"
 
 [lib]
@@ -11,11 +11,11 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 
 [dev-dependencies]
 soroban-sdk = { version = "25.1.0", features = ["testutils"] }
-cougr-core = { version = "1.1.0", features = ["testutils"] }
+Sunvest-core = { version = "1.1.0", features = ["testutils"] }
 
 [profile.release]
 opt-level = "z"

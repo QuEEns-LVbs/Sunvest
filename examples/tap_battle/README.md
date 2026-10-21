@@ -1,13 +1,13 @@
 # Tap Battle - Mobile-First Competitive Tapping Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/salazarsebas/Cougr)
-[![Tests](https://img.shields.io/badge/tests-17%20passing-brightgreen)](https://github.com/salazarsebas/Cougr)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/salazarsebas/Sunvest)
+[![Tests](https://img.shields.io/badge/tests-17%20passing-brightgreen)](https://github.com/salazarsebas/Sunvest)
 [![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)](https://stellar.org)
 
-A competitive tapping game implemented as a **Soroban smart contract** using `cougr-core`'s ECS framework with **passkey authentication** (secp256r1/WebAuthn) on the Stellar blockchain.
+A competitive tapping game implemented as a **Soroban smart contract** using `Sunvest-core`'s ECS framework with **passkey authentication** (secp256r1/WebAuthn) on the Stellar blockchain.
 
  feat/session-manager-fresh
 > **Related example:** For the minimal session-only flow without passkeys or game mechanics, see [`session_arena`](../session_arena/README.md).
@@ -64,14 +64,14 @@ Passkeys use the **secp256r1** curve (the same as WebAuthn/FIDO2), enabling biom
 
 ---
 
-## Cougr-Core Integration
+## Sunvest-Core Integration
 
-This example showcases two key cougr-core features:
+This example showcases two key Sunvest-core features:
 
 ### Passkey Authentication (`secp256r1_auth`)
 
 ```rust
-use cougr_core::auth::{Secp256r1Key, Secp256r1Storage, verify_secp256r1};
+use Sunvest_core::auth::{Secp256r1Key, Secp256r1Storage, verify_secp256r1};
 
 // Register: store public key on-chain
 Secp256r1Storage::store(&env, &player, &key);
@@ -83,8 +83,8 @@ verify_secp256r1(&env, &pubkey, &message, &signature)?;
 ### SessionManager Lifecycle
 
 ```rust
-use cougr_core::accounts::SessionBuilder;
-use cougr_core::session::SessionManager;
+use Sunvest_core::accounts::SessionBuilder;
+use Sunvest_core::session::SessionManager;
 
 // 1. Approve once (after passkey auth)
 let scope = SessionBuilder::new(&env)
@@ -108,7 +108,7 @@ SessionManager::renew(&env, &owner, &key_id, new_expires_at)?;
 SessionManager::fallback_execute(&env, &session_intent, &direct_intent)?;
 ```
 
-Sessions are managed by `cougr_core::session::SessionManager` - the same pattern as [`session_arena`](../session_arena/README.md).
+Sessions are managed by `Sunvest_core::session::SessionManager` - the same pattern as [`session_arena`](../session_arena/README.md).
 
 > **Duration semantics:** Session `expires_in` / `expires_at` use **ledger timestamps** (seconds), not ledger sequence numbers. Round duration (`start_round`) still uses ledger sequences for combo timing.
 
@@ -244,7 +244,7 @@ cargo test
 
 ```
 examples/tap_battle/
-├── Cargo.toml          # Dependencies: cougr-core 1.1.0 + soroban-sdk
+├── Cargo.toml          # Dependencies: Sunvest-core 1.1.0 + soroban-sdk
 ├── README.md           # This documentation
 └── src/
     ├── lib.rs          # Contract entry points

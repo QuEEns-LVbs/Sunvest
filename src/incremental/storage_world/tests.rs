@@ -1,5 +1,5 @@
 use super::StorageWorld;
-use crate::error::CougrError;
+use crate::error::SunvestError;
 use crate::simple_world::SimpleWorld;
 use soroban_sdk::{contract, contractimpl, symbol_short, Bytes, Env};
 
@@ -147,7 +147,7 @@ fn test_flush_despawn_removes_storage() {
             let mut world = StorageWorld::load_metadata(&env);
             assert_eq!(world.entity_count(), 0);
             let result = world.load_entity(&env, 1);
-            assert_eq!(result, Err(CougrError::EntityNotFound));
+            assert_eq!(result, Err(SunvestError::EntityNotFound));
         }
     });
 }

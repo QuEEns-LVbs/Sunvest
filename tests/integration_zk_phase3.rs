@@ -3,12 +3,12 @@
 //! These cover orchestration contracts for the advanced experimental surface:
 //! fog-of-war transitions, multiplayer state channels, and recursive layouts.
 
-use cougr_core::zk::experimental::{
+use Sunvest_core::zk::experimental::{
     apply_fog_of_war_transition, apply_state_channel_transition, close_state_channel,
     compose_statement_roots, open_state_channel, FogOfWarSnapshot, FogOfWarTransition,
     RecursiveProofLayout, StateChannelTransition,
 };
-use cougr_core::zk::ZKError;
+use Sunvest_core::zk::ZKError;
 use soroban_sdk::{BytesN, Env};
 
 #[test]

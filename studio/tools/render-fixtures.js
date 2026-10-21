@@ -23,7 +23,7 @@ const PAGE = (title, fragment) => `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${title} · Cougr studio fixtures</title>
+<title>${title} · Sunvest studio fixtures</title>
 <style>body { margin: 0; padding: 24px; background: #0b0907; }</style>
 </head>
 <body>

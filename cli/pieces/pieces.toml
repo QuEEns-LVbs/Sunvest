@@ -18,7 +18,7 @@ target = "src/hidden_hand.rs"
 
 [[piece]]
 name = "standards/pausable"
-description = "Emergency pause state backed by Cougr's standards layer."
+description = "Emergency pause state backed by Sunvest's standards layer."
 wiring = ["pub mod pausable;"]
 
 [[piece.file]]
@@ -27,7 +27,7 @@ target = "src/pausable.rs"
 
 [[piece]]
 name = "fair-dice"
-description = "Fair dice roll verification using Cougr's ZK circuit suite."
+description = "Fair dice roll verification using Sunvest's ZK circuit suite."
 wiring = ["pub mod fair_dice;"]
 
 [[piece.file]]
@@ -40,7 +40,7 @@ target = "README-fair-dice.md"
 
 [[piece]]
 name = "account-kernel"
-description = "Account-kernel session glue over cougr-core: scoped sessions, expiry and replay tests."
+description = "Account-kernel session glue over Sunvest-core: scoped sessions, expiry and replay tests."
 wiring = ["pub mod account_kernel;"]
 
 [[piece.file]]

@@ -1,4 +1,4 @@
-class_name CougrCheckpointClient
+class_name SunvestCheckpointClient
 extends Node
 
 # Soroban RPC client for a deployed checkpoint contract.
@@ -13,21 +13,21 @@ extends Node
 # Configuration is read from the environment in _ready() so a scene can be
 # pointed at a contract without editing it:
 #
-#     COUGR_RPC_URL            Soroban RPC endpoint (defaults to testnet)
-#     COUGR_CONTRACT_ID        the deployed contract, in `C...` form
-#     COUGR_SOURCE_ACCOUNT     the account that signs, in `G...` form
-#     COUGR_SIGNING_KEY        consumed by the signer, never by this client
-#     COUGR_NETWORK_PASSPHRASE overrides the passphrase the payload is bound to
+#     Sunvest_RPC_URL            Soroban RPC endpoint (defaults to testnet)
+#     Sunvest_CONTRACT_ID        the deployed contract, in `C...` form
+#     Sunvest_SOURCE_ACCOUNT     the account that signs, in `G...` form
+#     Sunvest_SIGNING_KEY        consumed by the signer, never by this client
+#     Sunvest_NETWORK_PASSPHRASE overrides the passphrase the payload is bound to
 #
 # The exported properties win over the environment when they are set, so a scene
 # can hold its own contract id while the key still comes from outside the repo.
 
-const Payload := preload("res://addons/cougr_checkpoint/checkpoint_payload.gd")
-const State := preload("res://addons/cougr_checkpoint/checkpoint_state.gd")
-const Xdr := preload("res://addons/cougr_checkpoint/soroban_xdr.gd")
-const CliSigner := preload("res://addons/cougr_checkpoint/stellar_cli_signer.gd")
+const Payload := preload("res://addons/Sunvest_checkpoint/checkpoint_payload.gd")
+const State := preload("res://addons/Sunvest_checkpoint/checkpoint_state.gd")
+const Xdr := preload("res://addons/Sunvest_checkpoint/soroban_xdr.gd")
+const CliSigner := preload("res://addons/Sunvest_checkpoint/stellar_cli_signer.gd")
 
-## Soroban RPC endpoint used when COUGR_RPC_URL is unset.
+## Soroban RPC endpoint used when Sunvest_RPC_URL is unset.
 const DEFAULT_RPC_URL := "https://soroban-testnet.stellar.org"
 
 ## Passphrase of the testnet network the addon targets by default.
@@ -39,7 +39,7 @@ const CONFIRMATION_ATTEMPTS := 10
 ## Seconds between confirmation polls.
 const CONFIRMATION_DELAY := 1.0
 
-## Contract id in `C...` form. Empty means "read COUGR_CONTRACT_ID".
+## Contract id in `C...` form. Empty means "read Sunvest_CONTRACT_ID".
 @export var contract_id := ""
 
 ## Address that signs checkpoints, in `G...` form. It is the transaction source,
@@ -67,13 +67,13 @@ var _busy := false
 
 func _ready() -> void:
 	if rpc_url.is_empty():
-		rpc_url = _environment("COUGR_RPC_URL", DEFAULT_RPC_URL)
+		rpc_url = _environment("Sunvest_RPC_URL", DEFAULT_RPC_URL)
 	if contract_id.is_empty():
-		contract_id = OS.get_environment("COUGR_CONTRACT_ID")
+		contract_id = OS.get_environment("Sunvest_CONTRACT_ID")
 	if source_account.is_empty():
-		source_account = OS.get_environment("COUGR_SOURCE_ACCOUNT")
+		source_account = OS.get_environment("Sunvest_SOURCE_ACCOUNT")
 	if network_passphrase.is_empty():
-		network_passphrase = _environment("COUGR_NETWORK_PASSPHRASE", TESTNET_PASSPHRASE)
+		network_passphrase = _environment("Sunvest_NETWORK_PASSPHRASE", TESTNET_PASSPHRASE)
 	if signer == null:
 		signer = CliSigner.new()
 	_http = HTTPRequest.new()
@@ -334,13 +334,13 @@ func _rpc(method: String, params: Dictionary) -> Dictionary:
 
 func _contract_problem() -> String:
 	if contract_id.is_empty():
-		return "set COUGR_CONTRACT_ID, or CougrCheckpointClient.contract_id, to the deployed checkpoint contract"
+		return "set Sunvest_CONTRACT_ID, or SunvestCheckpointClient.contract_id, to the deployed checkpoint contract"
 	return ""
 
 
 func _signing_problem() -> String:
 	if source_account.is_empty():
-		return "set COUGR_SOURCE_ACCOUNT, or CougrCheckpointClient.source_account, to the account that signs checkpoints"
+		return "set Sunvest_SOURCE_ACCOUNT, or SunvestCheckpointClient.source_account, to the account that signs checkpoints"
 	if signer == null:
 		return "no signer is configured"
 	return ""

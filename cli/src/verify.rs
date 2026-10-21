@@ -1,4 +1,4 @@
-//! Canonical-quality verification for the "Cougr Verified" badge.
+//! Canonical-quality verification for the "Sunvest Verified" badge.
 //!
 //! Evaluates an example against every criterion in EXAMPLE_STANDARD.md's
 //! canonical-vs-transitional quality checklist (§Quality Checklist).
@@ -176,7 +176,7 @@ impl Criterion {
 // ---------------------------------------------------------------------------
 
 fn print_human_summary(results: &[ExampleResult]) {
-    println!("=== Cougr Verified Check ===");
+    println!("=== Sunvest Verified Check ===");
     println!();
 
     for r in results {
@@ -379,7 +379,7 @@ fn check_dependencies(dir: &Path, criteria: &mut Vec<Criterion>) {
         Err(e) => {
             criteria.push(Criterion::new(
                 "deps_no_path",
-                "Dependencies: no unannotated path dependency on cougr-core",
+                "Dependencies: no unannotated path dependency on Sunvest-core",
                 false,
                 Some(format!("cannot read Cargo.toml: {}", e)),
             ));
@@ -387,12 +387,12 @@ fn check_dependencies(dir: &Path, criteria: &mut Vec<Criterion>) {
         }
     };
 
-    // Check for path dependency on cougr-core
-    let path_re = Regex::new(r#"cougr-core\s*=\s*\{[^}]*path\s*="#).expect("valid regex");
+    // Check for path dependency on Sunvest-core
+    let path_re = Regex::new(r#"Sunvest-core\s*=\s*\{[^}]*path\s*="#).expect("valid regex");
     if !path_re.is_match(&contents) {
         criteria.push(Criterion::new(
             "deps_no_path",
-            "Dependencies: uses published cougr-core version (not path dep)",
+            "Dependencies: uses published Sunvest-core version (not path dep)",
             true,
             None,
         ));
@@ -405,7 +405,7 @@ fn check_dependencies(dir: &Path, criteria: &mut Vec<Criterion>) {
             if annotated {
                 None
             } else {
-                Some("path dependency on cougr-core without annotation comment".into())
+                Some("path dependency on Sunvest-core without annotation comment".into())
             },
         ));
     }
@@ -427,7 +427,7 @@ fn check_dependencies(dir: &Path, criteria: &mut Vec<Criterion>) {
 
 fn has_path_dep_annotation(contents: &str) -> bool {
     let annotation_re =
-        Regex::new(r"(?m)^#\s*path dep\s*[ - \-]\s*pending cougr-core").expect("valid regex");
+        Regex::new(r"(?m)^#\s*path dep\s*[ - \-]\s*pending Sunvest-core").expect("valid regex");
     annotation_re.is_match(contents)
 }
 
@@ -537,7 +537,7 @@ fn check_readme_sections(dir: &Path, criteria: &mut Vec<Criterion>) {
             "gameplay",
             &["## Main gameplay flow", "## Gameplay", "## Gameplay flow"],
         ),
-        ("cougr_apis", &["## Cougr APIs", "## Cougr APIs used"]),
+        ("Sunvest_apis", &["## Sunvest APIs", "## Sunvest APIs used"]),
         (
             "build",
             &[

@@ -1,6 +1,6 @@
 use crate::components::{BallComponent, ECSWorldState, GameState};
 #[cfg(test)]
-use cougr_core::{GameApp, ScheduleStage, SimpleWorld, SystemConfig};
+use Sunvest_core::{GameApp, ScheduleStage, SimpleWorld, SystemConfig};
 #[cfg(test)]
 use soroban_sdk::Env;
 

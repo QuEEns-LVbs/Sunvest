@@ -1,6 +1,6 @@
 //! Session policy helpers copied from the `session_arena` example.
 
-use cougr_core::accounts::{GameAction, SessionBuilder, SessionScope};
+use Sunvest_core::accounts::{GameAction, SessionBuilder, SessionScope};
 use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 
 /// The only action a session key may authorize by default.

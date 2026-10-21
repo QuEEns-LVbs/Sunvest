@@ -1,6 +1,6 @@
 //! Integration tests for {{crate_name}}.
 //!
-//! These run through `cougr_core::test::GameHarness`, the sandbox the canonical
+//! These run through `Sunvest_core::test::GameHarness`, the sandbox the canonical
 //! examples use: it registers the contract in a fresh `Env`, mints player
 //! addresses, and pairs with `Scenario` to drive alternating turns.
 
@@ -8,7 +8,7 @@ use crate::components::{BOARD_HEIGHT, BOARD_WIDTH, CELL_COUNT, DRAW, IN_PROGRESS
 use crate::systems::{detect_status, validate_move, MoveError};
 use crate::{{ContractName}};
 use crate::{{ContractName}}Client;
-use cougr_core::test::{GameHarness, PlayerSlot, Scenario};
+use Sunvest_core::test::{GameHarness, PlayerSlot, Scenario};
 use soroban_sdk::testutils::Address as _;
 use soroban_sdk::{symbol_short, Address, Env};
 

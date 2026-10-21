@@ -1,10 +1,10 @@
 # Snake On-Chain Game
 
-**Classification: Canonical example.** This is the maintained arcade reference for Cougr examples. New arcade contracts should copy its `GameApp` wiring, `components.rs` / `systems.rs` split, README shape, and test coverage.
+**Classification: Canonical example.** This is the maintained arcade reference for Sunvest examples. New arcade contracts should copy its `GameApp` wiring, `components.rs` / `systems.rs` split, README shape, and test coverage.
 
 ## Purpose and pattern
 
-Snake demonstrates a deterministic arcade loop on Soroban using `cougr-core`'s basic ECS and `GameApp` tick model. The contract keeps persistent game state on chain, stores ECS entities in a `SimpleWorld`, and runs ordered systems for movement, collision, growth, and food spawning.
+Snake demonstrates a deterministic arcade loop on Soroban using `Sunvest-core`'s basic ECS and `GameApp` tick model. The contract keeps persistent game state on chain, stores ECS entities in a `SimpleWorld`, and runs ordered systems for movement, collision, growth, and food spawning.
 
 ## Public contract API
 
@@ -58,7 +58,7 @@ Within the `SimpleWorld`, dense components such as positions and directions use 
 6. A wall/self collision sets `game_over`; eating food grows the snake, increments score, and spawns new food.
 7. Query functions expose score, positions, grid size, and terminal state.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 | API | Why it is used |
 |---|---|
@@ -68,7 +68,7 @@ Within the `SimpleWorld`, dense components such as positions and directions use 
 | `SimpleQueryBuilder` | Scans entities by component type for food, head, and segment queries. |
 | `ComponentTrait` | Gives each custom component deterministic serialization and a stable component type. |
 
-This example does not use Cougr auth, privacy, ZK, or standards modules because Snake is intentionally a single-player arcade-loop reference.
+This example does not use Sunvest auth, privacy, ZK, or standards modules because Snake is intentionally a single-player arcade-loop reference.
 
 ## Build and test commands
 
@@ -81,7 +81,7 @@ stellar contract build
 ## Known limitations
 
 **Recommended Testing Approach:**
-For comprehensive testing, use the `GameHarness` and `Scenario` APIs provided by `cougr-core`'s `testutils` feature (see [sandbox_tests.rs](src/sandbox_tests.rs)). This allows writing replayable multi-turn scenarios to verify movement trajectories, direction change validation, and tick updates.
+For comprehensive testing, use the `GameHarness` and `Scenario` APIs provided by `Sunvest-core`'s `testutils` feature (see [sandbox_tests.rs](src/sandbox_tests.rs)). This allows writing replayable multi-turn scenarios to verify movement trajectories, direction change validation, and tick updates.
 
 **Expected Output:**
 ```
@@ -187,12 +187,12 @@ stellar contract invoke --id $CONTRACT_ID --source alice --network <NETWORK> -- 
 
 ```
 examples/snake/
-├── Cargo.toml              # Dependencies (cougr-core, soroban-sdk)
+├── Cargo.toml              # Dependencies (Sunvest-core, soroban-sdk)
 ├── README.md               # This documentation
 ├── .gitignore              # Ignore rules (test_snapshots/, target/)
 └── src/
     ├── lib.rs              # Contract entry points (11 functions)
-    ├── components.rs       # Components using cougr-core::ComponentTrait
+    ├── components.rs       # Components using Sunvest-core::ComponentTrait
     ├── systems.rs          # Game logic systems
     └── simple_world.rs     # Entity-component storage
 ```
@@ -208,10 +208,10 @@ examples/snake/
 
 ## Creating Components
 
-### Using cougr-core's ComponentTrait
+### Using Sunvest-core's ComponentTrait
 
 ```rust
-use cougr_core::component::{Component, ComponentStorage, ComponentTrait};
+use Sunvest_core::component::{Component, ComponentStorage, ComponentTrait};
 use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 
 pub struct MyComponent {
@@ -284,7 +284,7 @@ cargo fmt --check && cargo clippy -- -D warnings && cargo test && stellar contra
 |----------|------|
 | Soroban Docs | [developers.stellar.org](https://developers.stellar.org/docs/build/smart-contracts) |
 | Stellar CLI | [CLI Documentation](https://developers.stellar.org/docs/tools/cli) |
-| Cougr Repository | [github.com/salazarsebas/Cougr](https://github.com/salazarsebas/Cougr) |
+| Sunvest Repository | [github.com/salazarsebas/Sunvest](https://github.com/salazarsebas/Sunvest) |
 | Rust Testing | [Rust Book Ch. 11](https://doc.rust-lang.org/book/ch11-00-testing.html) |
 
 ---

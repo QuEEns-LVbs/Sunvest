@@ -1,6 +1,6 @@
 # Proof of Hunt (Stellar + Soroban)
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 A hidden-map treasure discovery game demonstrating **zero-knowledge proof-backed exploration** on Stellar Soroban. This example combines:
@@ -12,7 +12,7 @@ A hidden-map treasure discovery game demonstrating **zero-knowledge proof-backed
 
 ## Status
 
-**Transitional** - uses `cougr-core = "1.1.0"` and Stellar-zk style Groth16 verification. See [battleship](../battleship/) for the canonical commit-reveal reference, and [hidden_hand](../hidden_hand/) for the canonical ZK circuits reference.
+**Transitional** - uses `Sunvest-core = "1.1.0"` and Stellar-zk style Groth16 verification. See [battleship](../battleship/) for the canonical commit-reveal reference, and [hidden_hand](../hidden_hand/) for the canonical ZK circuits reference.
 
 ## Why This Is Stellar-Specific
 
@@ -197,7 +197,7 @@ stellar contract deploy \
 
 ## Resources
 
-- [Cougr Repository](https://github.com/salazarsebas/Cougr)
+- [Sunvest Repository](https://github.com/salazarsebas/Sunvest)
 - [stellar-zk](https://github.com/salazarsebas/stellar-zk)
 - [battleship - canonical commit-reveal example](../battleship/)
 - [hidden_hand - canonical ZK circuit example](../hidden_hand/)

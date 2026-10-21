@@ -1,6 +1,6 @@
-# Cougr turn-based web client
+# Sunvest turn-based web client
 
-Small browser reference client for the `cougr new --template turn-based` contract.
+Small browser reference client for the `Sunvest new --template turn-based` contract.
 
 It connects to Freighter, refuses non-Testnet wallets, reads `get_state` directly from Soroban RPC, starts a match with `init_game`, and signs `make_move` with the connected wallet. It does not use custodial keys or `packages/sdk-core`.
 
@@ -16,7 +16,7 @@ Use the contract instance ID returned by the Stellar CLI after deploying the gen
 
 From the generated project:
 
-    cougr new my-game --template turn-based
+    Sunvest new my-game --template turn-based
     cd my-game
     cargo test
     stellar contract build

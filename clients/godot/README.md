@@ -1,6 +1,6 @@
-# Cougr checkpoint Godot client
+# Sunvest checkpoint Godot client
 
-Godot 4 addon for the Cougr `checkpoint` contract template. Real-time games
+Godot 4 addon for the Sunvest `checkpoint` contract template. Real-time games
 cannot put every frame on chain, so the template has a client simulate off chain
 and commit a state hash and score at periodic checkpoints, with a dispute window
 before a result is finalised. This addon is the Godot half of that: it reads the
@@ -14,25 +14,25 @@ not hold a key.
 
 | Path | What it is |
 |---|---|
-| `addons/cougr_checkpoint/checkpoint_client.gd` | RPC client: `read_state`, `commit_checkpoint`, `raise_dispute` |
-| `addons/cougr_checkpoint/checkpoint_payload.gd` | Invocation and envelope byte layout |
-| `addons/cougr_checkpoint/checkpoint_state.gd` | Decodes the `MatchState` a `get_state` returns |
-| `addons/cougr_checkpoint/soroban_xdr.gd` | XDR, strkey, and hashing primitives |
-| `addons/cougr_checkpoint/stellar_cli_signer.gd` | Signs through `stellar tx sign` |
-| `addons/cougr_checkpoint/tests/run_tests.gd` | Headless vector check |
+| `addons/Sunvest_checkpoint/checkpoint_client.gd` | RPC client: `read_state`, `commit_checkpoint`, `raise_dispute` |
+| `addons/Sunvest_checkpoint/checkpoint_payload.gd` | Invocation and envelope byte layout |
+| `addons/Sunvest_checkpoint/checkpoint_state.gd` | Decodes the `MatchState` a `get_state` returns |
+| `addons/Sunvest_checkpoint/soroban_xdr.gd` | XDR, strkey, and hashing primitives |
+| `addons/Sunvest_checkpoint/stellar_cli_signer.gd` | Signs through `stellar tx sign` |
+| `addons/Sunvest_checkpoint/tests/run_tests.gd` | Headless vector check |
 | `checkpoint_vectors/` | Rust `soroban_sdk` rebuild of the same payloads |
 | `sample_checkpoint_scene.tscn` | Sample scene: commit a checkpoint, then dispute it |
 
 ## Import the addon
 
-Copy `addons/cougr_checkpoint` into your project's `addons` directory, then enable
-**Cougr Checkpoint** in Project Settings > Plugins. The addon adds no editor UI.
+Copy `addons/Sunvest_checkpoint` into your project's `addons` directory, then enable
+**Sunvest Checkpoint** in Project Settings > Plugins. The addon adds no editor UI.
 
 The client is a `Node`, because it owns an `HTTPRequest`. Add it to the scene that
 drives the match:
 
 ```gdscript
-const Client := preload("res://addons/cougr_checkpoint/checkpoint_client.gd")
+const Client := preload("res://addons/Sunvest_checkpoint/checkpoint_client.gd")
 
 func _ready() -> void:
     var client := Client.new()
@@ -52,21 +52,21 @@ environment when they are set.
 
 | Variable | Meaning |
 |---|---|
-| `COUGR_RPC_URL` | Soroban RPC endpoint. Defaults to `https://soroban-testnet.stellar.org` |
-| `COUGR_CONTRACT_ID` | The deployed contract, in `C...` form |
-| `COUGR_SOURCE_ACCOUNT` | The account that signs, in `G...` form |
-| `COUGR_SIGNING_KEY` | Stellar CLI identity or testnet secret key. Read by the signer, never by the client |
-| `COUGR_NETWORK_PASSPHRASE` | Overrides the passphrase the signing payload is bound to |
+| `Sunvest_RPC_URL` | Soroban RPC endpoint. Defaults to `https://soroban-testnet.stellar.org` |
+| `Sunvest_CONTRACT_ID` | The deployed contract, in `C...` form |
+| `Sunvest_SOURCE_ACCOUNT` | The account that signs, in `G...` form |
+| `Sunvest_SIGNING_KEY` | Stellar CLI identity or testnet secret key. Read by the signer, never by the client |
+| `Sunvest_NETWORK_PASSPHRASE` | Overrides the passphrase the signing payload is bound to |
 
-`read_state` needs only `COUGR_RPC_URL` and `COUGR_CONTRACT_ID`. It simulates
+`read_state` needs only `Sunvest_RPC_URL` and `Sunvest_CONTRACT_ID`. It simulates
 `get_state`, which needs no signature, so it works before any wallet is set up.
 A write needs all four of the first four.
 
 ```sh
-export COUGR_RPC_URL=https://soroban-testnet.stellar.org
-export COUGR_CONTRACT_ID=C...
-export COUGR_SOURCE_ACCOUNT=G...
-export COUGR_SIGNING_KEY=cougr-testnet
+export Sunvest_RPC_URL=https://soroban-testnet.stellar.org
+export Sunvest_CONTRACT_ID=C...
+export Sunvest_SOURCE_ACCOUNT=G...
+export Sunvest_SIGNING_KEY=Sunvest-testnet
 ```
 
 ## Provide a key without committing it
@@ -77,12 +77,12 @@ signer hands the unsigned envelope to `stellar tx sign`, which already has the
 identity used to deploy the contract:
 
 ```sh
-stellar keys generate cougr-testnet --network testnet
-stellar keys fund cougr-testnet --network testnet
-export COUGR_SIGNING_KEY=cougr-testnet
+stellar keys generate Sunvest-testnet --network testnet
+stellar keys fund Sunvest-testnet --network testnet
+export Sunvest_SIGNING_KEY=Sunvest-testnet
 ```
 
-`COUGR_SIGNING_KEY` may name an identity, as above, or hold a testnet secret key
+`Sunvest_SIGNING_KEY` may name an identity, as above, or hold a testnet secret key
 starting with `S`. The value is expanded by the shell inside the signing command,
 and `clients/godot/.gitignore` ignores `env.sh` and `*.key`, so the key never
 enters a file that Godot reads. The Stellar CLI has to be installed and on
@@ -115,27 +115,27 @@ Generate and deploy a checkpoint contract, then open a match with the account th
 addon will sign as:
 
 ```sh
-cougr new my-game --template checkpoint
+Sunvest new my-game --template checkpoint
 cd my-game
 cargo test
 stellar contract build
 stellar contract deploy \
   --wasm target/wasm32v1-none/release/my_game.wasm \
-  --source-account cougr-testnet \
+  --source-account Sunvest-testnet \
   --network testnet
 ```
 
-The deploy prints the contract id. Use it for `COUGR_CONTRACT_ID`, and set
-`COUGR_SOURCE_ACCOUNT` to the address of `cougr-testnet`. Then open the match
+The deploy prints the contract id. Use it for `Sunvest_CONTRACT_ID`, and set
+`Sunvest_SOURCE_ACCOUNT` to the address of `Sunvest-testnet`. Then open the match
 from that same account, because `commit_checkpoint` requires the configured
 player and rejects anyone else:
 
 ```sh
 stellar contract invoke \
-  --id "$COUGR_CONTRACT_ID" \
-  --source-account cougr-testnet \
+  --id "$Sunvest_CONTRACT_ID" \
+  --source-account Sunvest-testnet \
   --network testnet \
-  -- start_match --player "$COUGR_SOURCE_ACCOUNT"
+  -- start_match --player "$Sunvest_SOURCE_ACCOUNT"
 ```
 
 ## Contract methods used
@@ -149,7 +149,7 @@ The client calls exactly these methods:
 `commit_checkpoint` requires a tick strictly greater than the last committed one.
 `dispute_checkpoint` requires the tick of the last committed checkpoint, a hash
 different from the committed one, and a ledger inside the dispute window. The
-client always sends the transaction from `COUGR_SOURCE_ACCOUNT`, so that account
+client always sends the transaction from `Sunvest_SOURCE_ACCOUNT`, so that account
 is the `player` on a commit and the `challenger` on a dispute.
 
 `ActionResult.message` is not decoded yet: rejections surface as the RPC's
@@ -171,7 +171,7 @@ cargo test -- --nocapture
 
 ```sh
 cd clients/godot
-godot --headless --path . --script res://addons/cougr_checkpoint/tests/run_tests.gd
+godot --headless --path . --script res://addons/Sunvest_checkpoint/tests/run_tests.gd
 ```
 
 Both cover, for `commit_checkpoint` and for the dispute: the argument list, the

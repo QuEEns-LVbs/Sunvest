@@ -1,6 +1,6 @@
-# Cougr Patterns
+# Sunvest Patterns
 
-Use this reference when deciding how to map a game into `cougr-core` concepts.
+Use this reference when deciding how to map a game into `Sunvest-core` concepts.
 
 ## Modeling Heuristics
 
@@ -106,7 +106,7 @@ Write tests as short game stories:
 
 This style catches behavior regressions and doubles as executable documentation.
 
-## When To Use Advanced Cougr Features
+## When To Use Advanced Sunvest Features
 
 Use them because the design needs them, not because they exist.
 

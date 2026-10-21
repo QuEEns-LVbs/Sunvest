@@ -1,4 +1,4 @@
-// spawn_and_move - canonical Cougr "hello world" game.
+// spawn_and_move - canonical Sunvest "hello world" game.
 //
 // A player calls `spawn` to enter the world and receives an entity ID.
 // They then call `move_entity` to walk in one of four directions.
@@ -13,8 +13,8 @@
 
 #![no_std]
 
-use cougr_core::game::SorobanGame;
-use cougr_core::{impl_component, impl_component_observed, impl_soroban_game};
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::{impl_component, impl_component_observed, impl_soroban_game};
 use soroban_sdk::{contract, contractimpl, contracttype, Env};
 
 // ─── Error ────────────────────────────────────────────────────────────────────
@@ -74,7 +74,7 @@ impl SpawnAndMove {
     /// Spawn a new player entity at the world origin.
     ///
     /// Returns the entity ID that the caller must pass to subsequent calls.
-    /// Emits a `(COUGR, set, position)` event so indexers register the spawn.
+    /// Emits a `(Sunvest, set, position)` event so indexers register the spawn.
     pub fn spawn(env: Env) -> u32 {
         let mut world = SpawnAndMove::load_world(&env);
 
@@ -98,7 +98,7 @@ impl SpawnAndMove {
     /// Directions: `0` = North (+y), `1` = East (+x), `2` = South (−y),
     /// `3` = West (−x).
     ///
-    /// Emits a `(COUGR, set, position)` event on success.
+    /// Emits a `(Sunvest, set, position)` event on success.
     /// Panics if the entity does not exist, has no moves remaining, or if
     /// an invalid direction is supplied.
     pub fn move_entity(env: Env, entity_id: u32, direction: u32) {

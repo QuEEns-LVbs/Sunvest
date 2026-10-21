@@ -28,7 +28,7 @@ pub enum GameError {
     InvalidAction = 4,
 }
 
-// ECS Components following Cougr-Core patterns
+// ECS Components following Sunvest-Core patterns
 
 #[contracttype]
 #[derive(Clone, Debug)]
@@ -40,7 +40,7 @@ pub struct ShipComponent {
     pub angle: u32,
 }
 
-cougr_core::impl_component!(ShipComponent, "ship", Table, { x: i128, y: i128, vx: i128, vy: i128, angle: u32 });
+Sunvest_core::impl_component!(ShipComponent, "ship", Table, { x: i128, y: i128, vx: i128, vy: i128, angle: u32 });
 
 #[contracttype]
 #[derive(Clone, Debug)]
@@ -52,7 +52,7 @@ pub struct AsteroidComponent {
     pub size: u32,
 }
 
-cougr_core::impl_component!(AsteroidComponent, "asteroid", Table, { x: i128, y: i128, vx: i128, vy: i128, size: u32 });
+Sunvest_core::impl_component!(AsteroidComponent, "asteroid", Table, { x: i128, y: i128, vx: i128, vy: i128, size: u32 });
 
 #[contracttype]
 #[derive(Clone, Debug)]
@@ -64,7 +64,7 @@ pub struct BulletComponent {
     pub lifetime: u32,
 }
 
-cougr_core::impl_component!(BulletComponent, "bullet", Table, { x: i128, y: i128, vx: i128, vy: i128, lifetime: u32 });
+Sunvest_core::impl_component!(BulletComponent, "bullet", Table, { x: i128, y: i128, vx: i128, vy: i128, lifetime: u32 });
 
 #[contracttype]
 #[derive(Clone, Debug)]
@@ -73,7 +73,7 @@ pub struct ScoreComponent {
     pub lives: u32,
 }
 
-cougr_core::impl_component!(ScoreComponent, "score", Table, { points: u32, lives: u32 });
+Sunvest_core::impl_component!(ScoreComponent, "score", Table, { points: u32, lives: u32 });
 
 // ECS World State
 #[contracttype]

@@ -1,10 +1,10 @@
 # Guild Arena
 
-PvP arena game on Soroban demonstrating **guild-based social recovery** and **multi-device play** using Cougr-Core.
+PvP arena game on Soroban demonstrating **guild-based social recovery** and **multi-device play** using Sunvest-Core.
 
 ## Overview
 
-On-chain gaming has a key risk: players losing access to accounts holding progress, items, and currency. Guild Arena solves this with two Cougr-Core account patterns:
+On-chain gaming has a key risk: players losing access to accounts holding progress, items, and currency. Guild Arena solves this with two Sunvest-Core account patterns:
 
 1. **Social Recovery** - guild members act as guardians who can collectively restore account access after a timelock period
 2. **Multi-Device** - players register multiple device keys (desktop, mobile) with per-device permission policies
@@ -90,17 +90,17 @@ Tests cover:
 
 ## Architecture
 
-Uses Cougr-Core ECS patterns:
+Uses Sunvest-Core ECS patterns:
 
 **Components**: `Fighter`, `MatchRecord`, `GuildMembership`, `ArenaState`
 
 **Systems**: Matchmaking, Combat, Rating, Recovery, Device authorization
 
-**Storage**: Soroban persistent storage keyed by player/device addresses. Recovery and device state managed through `RecoverableAccount` and `DeviceManager` from cougr-core.
+**Storage**: Soroban persistent storage keyed by player/device addresses. Recovery and device state managed through `RecoverableAccount` and `DeviceManager` from Sunvest-core.
 
 ## Reference Role
 
-This example is the canonical reference for Cougr's account-oriented flows:
+This example is the canonical reference for Sunvest's account-oriented flows:
 
 - social recovery
 - multi-device authorization

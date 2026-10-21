@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Compile Cougr game circuits. Requires circom on PATH (or CIRCOM_PATH).
+# Compile Sunvest game circuits. Requires circom on PATH (or CIRCOM_PATH).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"

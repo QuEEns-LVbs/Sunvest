@@ -2,11 +2,11 @@
 
 A two-player Battleship game demonstrating **hidden information** using commit-reveal pattern and Merkle proofs on Stellar Soroban. Players commit their board layouts cryptographically, then prove hit/miss results without revealing unattacked positions.
 
-This example is Cougr's **canonical** hidden-information reference. It intentionally leans on the stable privacy surface in `cougr_core::privacy::stable` instead of re-defining Merkle verification inside the example.
+This example is Sunvest's **canonical** hidden-information reference. It intentionally leans on the stable privacy surface in `Sunvest_core::privacy::stable` instead of re-defining Merkle verification inside the example.
 
 ## Status
 
-**Canonical** - maintained reference implementation for commit-reveal + selective disclosure on Soroban. Uses `cougr-core = "1.1.0"`, `privacy::stable` Merkle primitives, and `impl_component!` macros for standardized serialization.
+**Canonical** - maintained reference implementation for commit-reveal + selective disclosure on Soroban. Uses `Sunvest-core = "1.1.0"`, `privacy::stable` Merkle primitives, and `impl_component!` macros for standardized serialization.
 
 ## The Hidden Information Problem
 
@@ -127,16 +127,16 @@ struct BoardCommitment {
 
 ## Stable Merkle Verification
 
-The contract uses Cougr's stable SHA256 Merkle proof contract:
+The contract uses Sunvest's stable SHA256 Merkle proof contract:
 
 ```rust
-use cougr_core::privacy::stable::{MerkleProofVerifier, Sha256MerkleProofVerifier};
+use Sunvest_core::privacy::stable::{MerkleProofVerifier, Sha256MerkleProofVerifier};
 
 let verifier = Sha256MerkleProofVerifier;
 assert!(verifier.verify(&env, &proof, &merkle_root)?);
 ```
 
-The leaf payload still binds `index || value`, but the inclusion proof format and verification rules come from Cougr's stable privacy API.
+The leaf payload still binds `index || value`, but the inclusion proof format and verification rules come from Sunvest's stable privacy API.
 
 ## When to Use Commit-Reveal vs ZK Circuits
 
@@ -325,7 +325,7 @@ stellar contract deploy \
 
 ## Resources
 
-- [Cougr Repository](https://github.com/salazarsebas/Cougr)
+- [Sunvest Repository](https://github.com/salazarsebas/Sunvest)
 - [Merkle Trees](https://en.wikipedia.org/wiki/Merkle_tree)
 - [Commitment Schemes](https://en.wikipedia.org/wiki/Commitment_scheme)
 - [hidden_hand - ZK circuit example](../hidden_hand/)

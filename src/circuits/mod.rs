@@ -1,7 +1,7 @@
 //! Pre-built ZK game circuit builders (`hidden_cards`, `fog_of_war`, etc.).
 //!
 //! Each builder returns a [`GameCircuitSpec`] with a frozen public-input layout and
-//! the pipeline test verification key embedded from `internal/cougr-core-circuits`.
+//! the pipeline test verification key embedded from `internal/Sunvest-core-circuits`.
 //! Production deploys replace the VK via [`GameCircuitSpec::with_verification_key`].
 //!
 //! Maturity: Experimental.

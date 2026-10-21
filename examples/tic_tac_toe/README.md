@@ -1,18 +1,18 @@
 # Tic Tac Toe
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
-An on-chain Tic Tac Toe game built with the [Cougr](../../README.md) ECS framework on
-Stellar Soroban. Note: although this example already uses cougr-core's newest macro-based
+An on-chain Tic Tac Toe game built with the [Sunvest](../../README.md) ECS framework on
+Stellar Soroban. Note: although this example already uses Sunvest-core's newest macro-based
 component pattern (`impl_rich_component!` / `impl_component!` / `impl_soroban_game!`), it is
-not on the canonical examples list, so it is marked transitional per the project standard - see "Cougr APIs used" below for why these specific macros were chosen over the manual
+not on the canonical examples list, so it is marked transitional per the project standard - see "Sunvest APIs used" below for why these specific macros were chosen over the manual
 `ComponentTrait` implementations used in other transitional examples like `reversi`.
 
 ## Purpose and pattern
 
 This example demonstrates a two-player, perfect-information board game with a single shared
-entity for all game state. It showcases Cougr's `SimpleWorld` entity/component storage driven
+entity for all game state. It showcases Sunvest's `SimpleWorld` entity/component storage driven
 through the macro-generated `RichComponentTrait`/`ComponentTrait` implementations
 (`impl_rich_component!`, `impl_component!`) and the `SorobanGame` trait
 (`impl_soroban_game!`), which together remove the need to hand-write `serialize`/`deserialize`
@@ -90,22 +90,22 @@ TTL management.
    `2`) or a draw (status `3`), after which further moves return `gameover`.
 5. Either player can call `get_state` or `get_winner` to read the outcome. Either registered player can call `reset_game(player)` with authorization to start over.
 
-## Cougr APIs used
+## Sunvest APIs used
 
-- `cougr_core::{impl_rich_component!}` - used for `Board` (holds a `Vec<u32>`) and `Players`
+- `Sunvest_core::{impl_rich_component!}` - used for `Board` (holds a `Vec<u32>`) and `Players`
   (holds two `Address` values). Both fields require Soroban's XDR codec rather than fixed-size
   byte packing, so `impl_rich_component!` was chosen to get `RichComponentTrait` for free from
   the `#[contracttype]` derive, avoiding a hand-written `serialize`/`deserialize` pair for
   `Vec<u32>` and `Address` like the one `reversi`'s `components.rs` still carries.
-- `cougr_core::{impl_component!}` - used for `TurnState`, which is three fixed-size plain
+- `Sunvest_core::{impl_component!}` - used for `TurnState`, which is three fixed-size plain
   fields (`bool`, `u32`, `u32`). `impl_component!` generates a compact, fully typed
   `ComponentTrait` implementation (byte-packed, not XDR) since there are no `Address`/`Vec`
   fields needing the heavier rich-component codec.
-- `cougr_core::game::SorobanGame` / `impl_soroban_game!` - generates `load_world`/
+- `Sunvest_core::game::SorobanGame` / `impl_soroban_game!` - generates `load_world`/
   `save_world` for the `#[contract]` struct so every entrypoint can read and persist the
   `SimpleWorld` without repeating the instance-storage key (`"ttt_world"`) or its
   get/set boilerplate.
-- `cougr_core::simple_world::SimpleWorld` - used as the single source of truth for the game's
+- `Sunvest_core::simple_world::SimpleWorld` - used as the single source of truth for the game's
   three components, attached to one fixed entity rather than a dynamic population, since
   tic-tac-toe has exactly one game per contract instance.
 

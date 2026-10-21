@@ -1,6 +1,6 @@
 use super::*;
-use cougr_core::circuits::{fog_of_war, test_fixtures, CircuitId};
-use cougr_core::test::GameHarness;
+use Sunvest_core::circuits::{fog_of_war, test_fixtures, CircuitId};
+use Sunvest_core::test::GameHarness;
 use soroban_sdk::{testutils::Address as _, Address, BytesN, Env};
 
 #[test]

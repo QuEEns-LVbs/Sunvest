@@ -9,7 +9,7 @@ all-features = true
 db-urls = ["https://github.com/rustsec/advisory-db"]
 ignore = [
     # Transitive through soroban-sdk's own dependency tree (ark-ff, wasmi_core).
-    # Not a direct Cougr dependency; no safe upgrade until soroban-sdk moves off it.
+    # Not a direct Sunvest dependency; no safe upgrade until soroban-sdk moves off it.
     { id = "RUSTSEC-2024-0436", reason = "unmaintained `paste`, pulled in transitively by soroban-sdk via ark-ff and wasmi_core" },
     # Yanked `spin` version pulled in transitively by soroban-sdk via soroban-wasmi.
     { crate = "spin@0.9.8", reason = "transitive via soroban-wasmi, upgrade tracks soroban-sdk releases" },
@@ -34,7 +34,7 @@ confidence-threshold = 0.8
 
 [bans]
 multiple-versions = "warn"
-# "allow": cougr-core's own dev-dependency on itself (to enable `testutils` in
+# "allow": Sunvest-core's own dev-dependency on itself (to enable `testutils` in
 # doctests/integration tests) is a legitimate path self-dependency, not a
 # supply-chain risk.
 wildcards = "allow"

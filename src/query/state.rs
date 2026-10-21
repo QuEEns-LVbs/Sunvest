@@ -48,8 +48,8 @@ impl SimpleQueryState {
 ///
 /// # Example
 /// ```
-/// use cougr_core::query::SimpleQueryCache;
-/// use cougr_core::simple_world::SimpleWorld;
+/// use Sunvest_core::query::SimpleQueryCache;
+/// use Sunvest_core::simple_world::SimpleWorld;
 /// use soroban_sdk::{symbol_short, Bytes, Env};
 ///
 /// let env = Env::default();

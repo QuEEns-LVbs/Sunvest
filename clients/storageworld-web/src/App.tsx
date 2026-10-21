@@ -114,7 +114,7 @@ export default function App() {
   return (
     <main className="shell">
       <section className="card">
-        <p className="eyebrow">Cougr · storageworld reference client</p>
+        <p className="eyebrow">Sunvest · storageworld reference client</p>
         <h1>StorageWorld match</h1>
         <p className="muted">
           Direct RPC client for the storageworld template. Freighter signs

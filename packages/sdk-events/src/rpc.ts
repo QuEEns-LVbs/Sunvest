@@ -44,7 +44,7 @@ interface JsonRpcResponse {
  *
  * ```ts
  * const getEvents = createGetEvents({ url: 'https://soroban-testnet.stellar.org' });
- * const page = await getEvents({ startLedger: 1000, filters: [cougrEventFilter()] });
+ * const page = await getEvents({ startLedger: 1000, filters: [SunvestEventFilter()] });
  * ```
  */
 export function createGetEvents(options: SorobanRpcClientOptions): GetEventsFn {

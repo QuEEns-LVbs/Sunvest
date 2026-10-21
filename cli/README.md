@@ -1,27 +1,27 @@
-# cougr-cli
+# Sunvest-cli
 
-Command-line tooling for [Cougr](https://github.com/salazarsebas/Cougr), the ECS
+Command-line tooling for [Sunvest](https://github.com/salazarsebas/Sunvest), the ECS
 framework for on-chain games on Stellar/Soroban.
 
 ```bash
-cargo install cougr-cli
+cargo install Sunvest-cli
 
-cougr new my-game --template starter
+Sunvest new my-game --template starter
 cd my-game
 cargo test
 ```
 
-## `cougr new`
+## `Sunvest new`
 
 ```
-cougr new <NAME> [--template <TEMPLATE>] [--path <DIR>]
+Sunvest new <NAME> [--template <TEMPLATE>] [--path <DIR>]
 ```
 
-Scaffolds a Soroban contract crate wired to `cougr-core`, following the
+Scaffolds a Soroban contract crate wired to `Sunvest-core`, following the
 `lib.rs` / `components.rs` / `systems.rs` layout defined by
 [`EXAMPLE_STANDARD.md`](../examples/EXAMPLE_STANDARD.md), with a passing
 `GameHarness` test suite. The generated crate depends on the published
-`cougr-core` release, so it builds outside this repository.
+`Sunvest-core` release, so it builds outside this repository.
 
 | Flag | Default | Description |
 | --- | --- | --- |
@@ -40,15 +40,15 @@ same code the framework's own reference projects run.
 | `hidden-info` | `examples/hidden_hand` | Hidden hands verified with Groth16 proofs via `circuits::hidden_cards` |
 | `session-auth` | `examples/session_arena` | Approve a session once, play without wallet prompts, fall back to owner auth on expiry |
 
-Templates are embedded in the binary at compile time, so `cougr new` works
+Templates are embedded in the binary at compile time, so `Sunvest new` works
 offline.
 
-## `cougr export`
+## `Sunvest export`
 
 ```bash
-cougr export my-game --config turn-based.json --path ./projects
+Sunvest export my-game --config turn-based.json --path ./projects
 cd projects/my-game
-cougr check
+Sunvest check
 cargo test
 stellar contract build
 ```
@@ -62,16 +62,16 @@ stellar contract build
 Width and height must be 3 through 8; win length must be 3 through the
 smaller dimension. Invalid configurations fail before the project directory is
 created. Export uses the same embedded `turn-based` template, rendering and
-writer as `cougr new`, and refuses to overwrite an existing directory. The
+writer as `Sunvest new`, and refuses to overwrite an existing directory. The
 generated README and CLI output retain the same build and test next steps.
 
-## `cougr add`
+## `Sunvest add`
 
 ```bash
-cougr add --list
-cougr add session-auth
-cougr add hidden-hand
-cougr add standards/pausable
+Sunvest add --list
+Sunvest add session-auth
+Sunvest add hidden-hand
+Sunvest add standards/pausable
 ```
 
 Adds an embedded capability as editable source to the current project and
@@ -83,8 +83,8 @@ embedded in the CLI binary for offline use.
 ## Development
 
 ```bash
-cargo test -p cougr-cli                 # unit and CLI tests
-cargo test -p cougr-cli -- --ignored    # generate all 4 templates and cargo test each
+cargo test -p Sunvest-cli                 # unit and CLI tests
+cargo test -p Sunvest-cli -- --ignored    # generate all 4 templates and cargo test each
 ```
 
 Template sources live in [`templates/`](templates/). Files there use two naming
@@ -98,7 +98,7 @@ conventions that the CLI undoes when writing a project:
 
 Inside a template, `{{crate_name}}`, `{{module_name}}`, `{{ContractName}}`,
 `{{description}}`, `{{template_id}}`, `{{source_example}}`,
-`{{cougr_core_version}}`, and `{{soroban_sdk_version}}` are substituted at
-generation time. `cargo test -p cougr-cli` fails if a placeholder survives, if a
+`{{Sunvest_core_version}}`, and `{{soroban_sdk_version}}` are substituted at
+generation time. `cargo test -p Sunvest-cli` fails if a placeholder survives, if a
 template drops a file from the canonical layout, if a manifest reaches for a
 path dependency, or if a test module stops using `GameHarness`.

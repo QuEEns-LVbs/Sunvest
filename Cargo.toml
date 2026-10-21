@@ -3,21 +3,21 @@ members = [
     ".",
     "cli",
     "clients/godot/checkpoint_vectors",
-    "internal/cougr-core-circuits",
-    "internal/cougr-core-session",
-    "internal/cougr-core-test",
+    "internal/Sunvest-core-circuits",
+    "internal/Sunvest-core-session",
+    "internal/Sunvest-core-test",
 ]
 resolver = "2"
 
 [package]
-name = "cougr-core"
+name = "Sunvest-core"
 version = "1.1.0"
 edition = "2021"
-description = "Cougr - A Soroban-compatible ECS framework for on-chain gaming on Stellar"
+description = "Sunvest - A Soroban-compatible ECS framework for on-chain gaming on Stellar"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/salazarsebas/Cougr"
-homepage = "https://github.com/salazarsebas/Cougr"
+repository = "https://github.com/salazarsebas/Sunvest"
+homepage = "https://github.com/salazarsebas/Sunvest"
 keywords = ["ecs", "game", "soroban", "blockchain", "stellar"]
 categories = ["game-engines", "data-structures", "wasm"]
 rust-version = "1.91.0"
@@ -44,7 +44,7 @@ testutils = ["soroban-sdk/testutils"]
 soroban-sdk = { version = "29.0.1", features = ["alloc"] }
 
 [dev-dependencies]
-cougr-core = { path = ".", features = ["testutils"] }
+Sunvest-core = { path = ".", features = ["testutils"] }
 soroban-sdk = { version = "29.0.1", features = ["testutils"] }
 
 [[bench]]

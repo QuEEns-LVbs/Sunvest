@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-Architecture Decision Records (ADRs) document significant technical decisions made in Cougr's design. They are kept in the main [`salazarsebas/Cougr`](https://github.com/salazarsebas/Cougr) repository under `docs/adr/` and synced here automatically.
+Architecture Decision Records (ADRs) document significant technical decisions made in Sunvest's design. They are kept in the main [`salazarsebas/Sunvest`](https://github.com/salazarsebas/Sunvest) repository under `docs/adr/` and synced here automatically.
 
 Each ADR follows the format: context → decision → consequences.
 

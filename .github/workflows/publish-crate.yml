@@ -86,7 +86,7 @@ jobs:
           # crates.io rejects requests with no descriptive User-Agent (403);
           # see https://crates.io/data-access
           response="$(curl -fsSL \
-            -H "User-Agent: cougr-core-publish-workflow (+https://github.com/salazarsebas/Cougr)" \
+            -H "User-Agent: Sunvest-core-publish-workflow (+https://github.com/salazarsebas/Sunvest)" \
             "https://crates.io/api/v1/crates/${{ steps.crate.outputs.name }}")"
           published=false
 

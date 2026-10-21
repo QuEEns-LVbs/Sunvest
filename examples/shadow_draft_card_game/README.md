@@ -1,6 +1,6 @@
 # Shadow Draft Card Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 A Soroban smart-contract example demonstrating:
@@ -56,7 +56,7 @@ init_match(p1, p2)
 
 ## stellar-zk Integration
 
-The contract uses `cougr-core::zk::groth16::verify_groth16` (compatible with
+The contract uses `Sunvest-core::zk::groth16::verify_groth16` (compatible with
 [stellar-zk](https://crates.io/crates/stellar-zk) /
 [salazarsebas/stellar-zk](https://github.com/salazarsebas/stellar-zk)) for
 on-chain proof verification.

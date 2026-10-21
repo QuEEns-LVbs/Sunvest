@@ -1,6 +1,6 @@
-# cougr-tokens
+# Sunvest-tokens
 
-The single, versioned source for Cougr's design tokens. Every surface that renders Cougr's visual
+The single, versioned source for Sunvest's design tokens. Every surface that renders Sunvest's visual
 identity imports these values instead of copying them, so the documentation site and the showcase
 cannot drift apart.
 
@@ -49,7 +49,7 @@ Both outputs come from the same source in the same build, so they cannot disagre
 ## Using the CSS
 
 ```html
-<link rel="stylesheet" href="node_modules/cougr-tokens/dist/tokens.css">
+<link rel="stylesheet" href="node_modules/Sunvest-tokens/dist/tokens.css">
 ```
 
 ```css
@@ -77,7 +77,7 @@ Theming works in two layers:
 ## Using the JavaScript
 
 ```js
-import { dark, light, theme, version } from 'cougr-tokens';
+import { dark, light, theme, version } from 'Sunvest-tokens';
 
 dark.colorBg;        // '#14100D'
 light.colorPrimary;  // '#8A5A22'
@@ -94,7 +94,7 @@ A separate repository depends on the package normally and pins a version, and `p
 `dist/` during install:
 
 ```json
-{ "dependencies": { "cougr-tokens": "^1.0.0" } }
+{ "dependencies": { "Sunvest-tokens": "^1.0.0" } }
 ```
 
 This repository has no npm workspace, so an in-repo consumer runs this package's build and then

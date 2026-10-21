@@ -47,11 +47,11 @@ All game components and entity metadata are stored in Soroban **Instance Storage
 
 ## Main gameplay flow
 
-1. **Initialization / Spawn**: The user calls `spawn`. An entity is spawned at `(0,0)` with 10 moves remaining. A `("COUGR", "set", "position")` event is emitted.
+1. **Initialization / Spawn**: The user calls `spawn`. An entity is spawned at `(0,0)` with 10 moves remaining. A `("Sunvest", "set", "position")` event is emitted.
 2. **Action / Movement**: The user calls `move_entity` with `direction` (0=North, 1=East, 2=South, 3=West). The remaining moves decrement, the position updates, and a position set event is emitted.
 3. **Query**: The user reads the entity's position or moves remaining.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `SorobanGame` and `impl_soroban_game!`: Wires up standard boilerplate for loading/saving world state from instance storage.
 - `impl_component_observed!`: Implements component layout with automated indexer events on set.
@@ -60,7 +60,7 @@ All game components and entity metadata are stored in Soroban **Instance Storage
 
 ## Recommended testing approach
 
-Tests in this project should utilize the `cougr-core` `testutils` feature, specifically `GameHarness` and `Scenario`. The `GameHarness` registers the contract, while the `Scenario` allows executing multi-step and multi-turn movement verification with intermediate assertions.
+Tests in this project should utilize the `Sunvest-core` `testutils` feature, specifically `GameHarness` and `Scenario`. The `GameHarness` registers the contract, while the `Scenario` allows executing multi-step and multi-turn movement verification with intermediate assertions.
 
 ## Build and test commands
 

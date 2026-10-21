@@ -40,7 +40,7 @@ fn spawn_places_entity_at_origin() {
 fn spawn_emits_position_set_event() {
     let (env, client) = setup();
     client.spawn();
-    // impl_component_observed! emits a (COUGR, set, position) event on every
+    // impl_component_observed! emits a (Sunvest, set, position) event on every
     // set_typed_observed call. Contract invocations via the client populate events.
     let count = env.events().all().events().len();
     assert!(count > 0);
@@ -142,7 +142,7 @@ fn move_emits_position_event() {
     let (env, client) = setup();
     let id = client.spawn();
     // After a move, the most recent invocation should have emitted at least
-    // one (COUGR, set, position) event.
+    // one (Sunvest, set, position) event.
     client.move_entity(&id, &NORTH);
     let count = env.events().all().events().len();
     assert!(count > 0);

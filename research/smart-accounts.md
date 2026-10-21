@@ -11,7 +11,7 @@
 3. [Stellar/Soroban: Native Account Abstraction](#3-stellarsoroban-native-account-abstraction)
 4. [Gaming-Specific Smart Account Patterns](#4-gaming-specific-smart-account-patterns)
 5. [Dual Wallet Support Architecture](#5-dual-wallet-support-architecture)
-6. [Integration Proposal for Cougr](#6-integration-proposal-for-cougr)
+6. [Integration Proposal for Sunvest](#6-integration-proposal-for-Sunvest)
 7. [References](#7-references)
 
 ---
@@ -347,7 +347,7 @@ The core challenge is supporting both Classic Stellar accounts (G addresses) and
                │
 ┌──────────────▼───────────────┐
 │   Account Abstraction Layer   │
-│   (Unified CougrAccount API)  │
+│   (Unified SunvestAccount API)  │
 └──────┬───────────────┬───────┘
        │               │
 ┌──────▼──────┐ ┌──────▼──────┐
@@ -409,16 +409,16 @@ When a feature isn't available for the connected account type, degrade gracefull
 
 ---
 
-## 6. Integration Proposal for Cougr
+## 6. Integration Proposal for Sunvest
 
-All account abstraction functionality lives as an internal module (`src/accounts/`) within the single `cougr-core` crate. This is a **major expansion** of the crate - adding a full account layer with session management, authorization policies, capability detection, social recovery, and multi-device support. The developer experience stays simple: one dependency (`cougr-core`), one import path (`cougr_core::accounts::*`), no workspace or multi-crate complexity.
+All account abstraction functionality lives as an internal module (`src/accounts/`) within the single `Sunvest-core` crate. This is a **major expansion** of the crate - adding a full account layer with session management, authorization policies, capability detection, social recovery, and multi-device support. The developer experience stays simple: one dependency (`Sunvest-core`), one import path (`Sunvest_core::accounts::*`), no workspace or multi-crate complexity.
 
 ### Module Architecture: `src/accounts/`
 
 ```
 src/accounts/
 ├── mod.rs                  // Module entry point, re-exports all public API
-├── traits.rs               // CougrAccount, SessionKeyProvider, RecoveryProvider traits
+├── traits.rs               // SunvestAccount, SessionKeyProvider, RecoveryProvider traits
 ├── types.rs                // AccountCapabilities, AuthMethod, GameAction, PlayerId
 ├── error.rs                // AccountError variants (Unauthorized, SessionExpired, etc.)
 ├── classic_account.rs      // ClassicStellarAccount - G address implementation
@@ -447,14 +447,14 @@ src/accounts/
 └── testing.rs              // MockAccount, MockSession for unit testing without blockchain
 ```
 
-This adds **~20 new source files** to `cougr-core`, representing a complete account abstraction layer purpose-built for on-chain gaming.
+This adds **~20 new source files** to `Sunvest-core`, representing a complete account abstraction layer purpose-built for on-chain gaming.
 
 ### Core Traits
 
 ```rust
 /// Core account trait that abstracts over Classic and Contract accounts.
 /// This is the primary interface that game code interacts with.
-pub trait CougrAccount {
+pub trait SunvestAccount {
     /// Get the account address
     fn address(&self) -> Address;
 
@@ -470,7 +470,7 @@ pub trait CougrAccount {
 
 /// Session key management for contract accounts.
 /// Classic accounts gracefully degrade to per-action signing.
-pub trait SessionKeyProvider: CougrAccount {
+pub trait SessionKeyProvider: SunvestAccount {
     /// Create a new session key scoped to specific systems, time, and gas
     fn create_session(&self, env: &Env, scope: SessionScope) -> Result<SessionKey, AccountError>;
 
@@ -485,7 +485,7 @@ pub trait SessionKeyProvider: CougrAccount {
 }
 
 /// Social recovery for contract accounts.
-pub trait RecoveryProvider: CougrAccount {
+pub trait RecoveryProvider: SunvestAccount {
     /// Register a guardian for account recovery
     fn add_guardian(&self, env: &Env, guardian: Address) -> Result<(), AccountError>;
 
@@ -535,7 +535,7 @@ impl SessionBuilder {
     pub fn max_ops(mut self, count: u32) -> Self;
     pub fn expires_in(mut self, seconds: u64) -> Self;
     pub fn max_gas(mut self, gas: u64) -> Self;
-    pub fn build(self, env: &Env, account: &impl CougrAccount) -> Result<SessionKey, AccountError>;
+    pub fn build(self, env: &Env, account: &impl SunvestAccount) -> Result<SessionKey, AccountError>;
 }
 ```
 
@@ -555,7 +555,7 @@ impl BatchBuilder {
 
     /// Execute all actions atomically - all succeed or all revert
     pub fn execute(
-        self, world: &mut World, account: &impl CougrAccount,
+        self, world: &mut World, account: &impl SunvestAccount,
     ) -> Result<Vec<SystemResult>, AccountError>;
 }
 
@@ -574,7 +574,7 @@ BatchBuilder::new()
 /// These methods extend the existing World - no separate type needed.
 impl World {
     /// Register a player account and create their player entity
-    pub fn register_player(&mut self, account: impl CougrAccount) -> PlayerId;
+    pub fn register_player(&mut self, account: impl SunvestAccount) -> PlayerId;
 
     /// Get a registered player's account capabilities
     pub fn player_capabilities(&self, player: PlayerId) -> AccountCapabilities;
@@ -583,14 +583,14 @@ impl World {
     pub fn execute_authorized<S: System>(
         &mut self,
         system: &mut S,
-        account: &impl CougrAccount,
+        account: &impl SunvestAccount,
         input: S::In,
     ) -> Result<S::Out, AccountError>;
 
     /// Batch execute multiple system calls atomically
     pub fn batch_execute(
         &mut self,
-        account: &impl CougrAccount,
+        account: &impl SunvestAccount,
         actions: Vec<SystemCall>,
     ) -> Result<Vec<SystemResult>, AccountError>;
 
@@ -619,7 +619,7 @@ pub struct ClassicStellarAccount {
     address: Address,
 }
 
-impl CougrAccount for ClassicStellarAccount {
+impl SunvestAccount for ClassicStellarAccount {
     fn capabilities(&self) -> AccountCapabilities {
         AccountCapabilities {
             can_batch: false,           // Limited to single tx
@@ -639,7 +639,7 @@ pub struct ContractStellarAccount {
     // Internal state for session keys, guardians, device keys
 }
 
-impl CougrAccount for ContractStellarAccount { /* full capabilities */ }
+impl SunvestAccount for ContractStellarAccount { /* full capabilities */ }
 impl SessionKeyProvider for ContractStellarAccount { /* session management */ }
 impl RecoveryProvider for ContractStellarAccount { /* social recovery */ }
 ```
@@ -671,7 +671,7 @@ fn test_game_with_session() {
 
 ### Developer Experience Goals
 
-1. **Single crate, single dependency**: `cougr-core` includes everything - no extra crates to add
+1. **Single crate, single dependency**: `Sunvest-core` includes everything - no extra crates to add
 2. **Zero-config for basic usage**: Classic accounts work out of the box with zero account code
 3. **Opt-in smart features**: Session keys, batching, recovery available when using contract accounts
 4. **Single API**: Developers write game logic once, works with all account types

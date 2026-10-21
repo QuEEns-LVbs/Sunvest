@@ -2,9 +2,9 @@
 //! `#[contractimpl]` entrypoints per this repo's "entrypoints stay thin"
 //! guidance (see CLAUDE.md § Soroban and contract code).
 
-use cougr_core::component::ComponentTrait;
-use cougr_core::prelude::EntityId;
-use cougr_core::{ArchetypeQueryBuilder, ArchetypeWorld};
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::prelude::EntityId;
+use Sunvest_core::{ArchetypeQueryBuilder, ArchetypeWorld};
 use soroban_sdk::Env;
 
 use crate::components::{Crate, Goal, LevelMeta, OnGoal, Position, Wall};
@@ -20,7 +20,7 @@ fn position_of(world: &ArchetypeWorld, env: &Env, entity: EntityId) -> Position 
 }
 
 /// Finds the entity carrying component `T` whose `Position` is `(x, y)`,
-/// if any. Cougr does not index positions spatially, so a tile lookup is a
+/// if any. Sunvest does not index positions spatially, so a tile lookup is a
 /// query over that component's archetypes followed by a linear scan.
 fn entity_at<T: ComponentTrait>(
     world: &ArchetypeWorld,

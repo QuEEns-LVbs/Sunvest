@@ -1,7 +1,7 @@
 /**
  * Turn-based game domain helpers and decoders.
  *
- * Models the components emitted by Cougr's `turn-based` template and
+ * Models the components emitted by Sunvest's `turn-based` template and
  * `examples/tic_tac_toe`:
  * - `TurnState` (`"turnst"`): fixed-size 9-byte component (`is_x_turn: bool`, `move_count: u32`, `status: u32`)
  * - `Board` (`"board"`): rich or typed component containing cell markers (0=empty, 1=X, 2=O)

@@ -1,9 +1,9 @@
 # Bomberman On-Chain Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-This example demonstrates how to implement a Bomberman game as a smart contract on the Stellar blockchain using Soroban and cougr-core.
+This example demonstrates how to implement a Bomberman game as a smart contract on the Stellar blockchain using Soroban and Sunvest-core.
 
 ## Overview
 
@@ -115,9 +115,9 @@ The **ChainReactionSystem** runs inside `update_tick`:
 - `get_score(player_id)`: Returns the current score for a player
 - `check_game_over()`: Checks if the game has ended
 
-## Integration with Cougr-Core
+## Integration with Sunvest-Core
 
-This example demonstrates how cougr-core simplifies on-chain game development by providing:
+This example demonstrates how Sunvest-core simplifies on-chain game development by providing:
 
 - Persistent storage management for game state
 - Transaction validation
@@ -255,7 +255,7 @@ stellar contract deploy --wasm target/wasm32v1-none/release/bomberman.wasm --sim
 
 ## Architecture
 
-The contract uses the **cougr-core ECS (Entity–Component–System)** pattern for all game state:
+The contract uses the **Sunvest-core ECS (Entity–Component–System)** pattern for all game state:
 
 - **Entities**: Numeric IDs created by `world.spawn_entity()` / removed by `world.despawn_entity()`
 - **Components**: Plain structs implementing `ComponentTrait` (typed `serialize` / `deserialize`)

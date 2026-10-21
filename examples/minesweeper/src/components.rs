@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::{contracttype, symbol_short, Bytes, Env, Symbol, Vec};
 
 /// Board dimensions: 9×9 (compact for on-chain)

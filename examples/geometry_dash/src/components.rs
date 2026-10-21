@@ -1,4 +1,4 @@
-use cougr_core::ComponentTrait;
+use Sunvest_core::ComponentTrait;
 use soroban_sdk::{contracttype, symbol_short, Bytes, Env, Symbol};
 
 #[derive(Clone, Debug, Copy, PartialEq, Eq)]

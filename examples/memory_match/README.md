@@ -1,15 +1,15 @@
 # Memory Match
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
-An on-chain Memory Match card game built with the [Cougr](../../README.md) ECS framework on Stellar Soroban.
+An on-chain Memory Match card game built with the [Sunvest](../../README.md) ECS framework on Stellar Soroban.
 
 ## Purpose and pattern
 
 This example demonstrates a single-player, turn-based reveal-and-match game where pairs of
 cards are flipped and compared against each other rather than against fixed rules. It
-showcases Cougr's `ComponentTrait` pattern for typed, byte-serializable game state: cards,
+showcases Sunvest's `ComponentTrait` pattern for typed, byte-serializable game state: cards,
 the board, and game progress are each modeled as a `#[contracttype]` struct with manual
 `serialize`/`deserialize`, rather than being scanned through `SimpleWorld`/`SimpleQueryBuilder`.
 This is a lighter-weight integration suited to a single fixed-shape game state (16 cards, one
@@ -67,11 +67,11 @@ of that instance with no per-entry TTL management.
 5. Player (or anyone reading state) calls `get_game_state` at any point to read the board,
    or calls `reset_game` to rehide all cards and start over on the same layout.
 
-## Cougr APIs used
+## Sunvest APIs used
 
-- `cougr_core::component::ComponentTrait` - gives each component (`CardComponent`,
+- `Sunvest_core::component::ComponentTrait` - gives each component (`CardComponent`,
   `BoardComponent`, `GameStateComponent`) a `component_type()` symbol and explicit byte-level
-  `serialize`/`deserialize`. This is the only Cougr API the example uses: the game has one
+  `serialize`/`deserialize`. This is the only Sunvest API the example uses: the game has one
   fixed-shape `ECSWorldState` per contract instance (16 cards, one board, one player) rather
   than a dynamic entity population, so `SimpleWorld`/`SimpleQueryBuilder` scanning would add
   overhead with no benefit. There is a single decision point per call (reveal or reset), so

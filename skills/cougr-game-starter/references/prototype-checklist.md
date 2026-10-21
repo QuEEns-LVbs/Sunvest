@@ -10,7 +10,7 @@ Use this checklist before considering the first prototype complete.
 
 ## Structure
 
-- `cougr-core` is used to shape the state and logic, not only listed as a dependency.
+- `Sunvest-core` is used to shape the state and logic, not only listed as a dependency.
 - Components and systems are named by gameplay responsibility.
 - Contract entrypoints are narrow and readable.
 - The directory structure is understandable without tribal knowledge.

@@ -9,8 +9,8 @@ use soroban_sdk::Bytes;
 use soroban_sdk::{Address, BytesN, Env, Symbol};
 
 #[cfg(not(feature = "zk"))]
-use cougr_core::auth::{authorize_with_fallback, ContractAccount, GameAction};
-use cougr_core::auth::{SessionBuilder, SessionKey as CougrSessionKey};
+use Sunvest_core::auth::{authorize_with_fallback, ContractAccount, GameAction};
+use Sunvest_core::auth::{SessionBuilder, SessionKey as SunvestSessionKey};
 
 /// Maximum ledger offset for session expiry (~24 hours at 5s/ledger)
 const MAX_LEDGER_OFFSET: u32 = 17_280;
@@ -43,9 +43,9 @@ pub fn authorize_session(
         .expires_at(expires_at)
         .build_scope();
 
-    // Construct a Cougr session key compatible with account/session helpers.
-    // Keep minimal tracking fields required by the Cougr types.
-    let session = CougrSessionKey {
+    // Construct a Sunvest session key compatible with account/session helpers.
+    // Keep minimal tracking fields required by the Sunvest types.
+    let session = SunvestSessionKey {
         key_id: session_key.clone(),
         scope: _scope,
         created_at: env.ledger().timestamp(),
@@ -67,7 +67,7 @@ pub fn require_player_auth(env: &Env, player: &Address, puzzle_id: u32, action: 
     let storage_key = (Symbol::new(env, "SESSION"), puzzle_id, player.clone());
 
     // Note: `instance().get` returns `Option<T>` when T: ContractType
-    let maybe_session: Option<CougrSessionKey> = env.storage().instance().get(&storage_key);
+    let maybe_session: Option<SunvestSessionKey> = env.storage().instance().get(&storage_key);
 
     // Build the GameAction for authorization checks
     let action_obj = GameAction {

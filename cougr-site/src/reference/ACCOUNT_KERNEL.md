@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The goal is to make authorization explicit, modular, and replay-safe while keeping the `accounts` namespace outside Cougr's frozen `1.0` stable contract.
+The goal is to make authorization explicit, modular, and replay-safe while keeping the `accounts` namespace outside Sunvest's frozen `1.0` stable contract.
 
 ## Core Model
 
@@ -43,7 +43,7 @@ The deterministic hash is derived from:
 
 ## Replay Protection
 
-Cougr uses two replay domains:
+Sunvest uses two replay domains:
 
 - per-account nonce tracking for direct owner auth and passkey auth
 - per-session nonce tracking for session intents

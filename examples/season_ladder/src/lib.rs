@@ -1,15 +1,15 @@
-//! season_ladder - a competitive season driven by the Cougr standards layer.
+//! season_ladder - a competitive season driven by the Sunvest standards layer.
 //!
 //! Players register themselves, the season admin records head-to-head
 //! results, and an integer-only rating is updated after every result.
 //! Administration (who may report results, who may pause) comes from
-//! `cougr_core::standards::{Ownable, Pausable}` instead of a private admin
+//! `Sunvest_core::standards::{Ownable, Pausable}` instead of a private admin
 //! flag: while the season is paused, registration and result reporting are
 //! frozen until the owner unpauses.
 
 #![no_std]
 
-use cougr_core::standards::{Ownable, Pausable};
+use Sunvest_core::standards::{Ownable, Pausable};
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Address, Env, Vec};
 
 /// Rating every player starts the season with.

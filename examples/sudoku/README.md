@@ -1,15 +1,15 @@
 # Sudoku
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
-An on-chain Sudoku puzzle built with the [Cougr](../../README.md) ECS framework on Stellar Soroban.
+An on-chain Sudoku puzzle built with the [Sunvest](../../README.md) ECS framework on Stellar Soroban.
 
 ## Purpose and pattern
 
 This example demonstrates a single-player constraint-validation puzzle where moves are
 checked against row/column/3×3-block rules rather than against an opponent. It showcases
-Cougr's `ComponentTrait` pattern for typed, byte-serializable game state: each piece of
+Sunvest's `ComponentTrait` pattern for typed, byte-serializable game state: each piece of
 state (board, fixed-cell mask, status, move counter) is its own component with manual
 `serialize`/`deserialize`, demonstrating explicit byte-layout control for a fixed-size grid.
 
@@ -63,9 +63,9 @@ add TTL bookkeeping this single-instance puzzle doesn't need.
 5. Caller reads `is_solved` or `get_state` to check completion; `get_cell` reads individual
    cells (e.g., to render the board off-chain).
 
-## Cougr APIs used
+## Sunvest APIs used
 
-- `cougr_core::component::ComponentTrait` - gives each component
+- `Sunvest_core::component::ComponentTrait` - gives each component
   (`BoardComponent`, `FixedCellsComponent`, `GameStatusComponent`, `MoveCountComponent`) a
   `component_type()` symbol and explicit byte `serialize`/`deserialize`, chosen because the
   puzzle has one fixed-shape 81-cell grid rather than a dynamic entity population that would

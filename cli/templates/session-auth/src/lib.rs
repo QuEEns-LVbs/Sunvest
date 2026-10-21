@@ -1,4 +1,4 @@
-//! {{crate_name}} - a Cougr game contract generated from the `{{template_id}}` template.
+//! {{crate_name}} - a Sunvest game contract generated from the `{{template_id}}` template.
 //!
 //! Approve once, then play. The owner signs a single wallet prompt to create a
 //! scoped session key; every move after that is authorized by the session
@@ -23,10 +23,10 @@ mod test;
 use components::{player_key, Score};
 use systems::{intent_deadline, tap_action, tap_scope, validate_request, SessionPolicyError};
 
-use cougr_core::accounts::{ReplayProtection, SessionStorage, SignedIntent};
-use cougr_core::game::SorobanGame;
-use cougr_core::impl_soroban_game;
-use cougr_core::session::{ActiveSession, SessionManager};
+use Sunvest_core::accounts::{ReplayProtection, SessionStorage, SignedIntent};
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::impl_soroban_game;
+use Sunvest_core::session::{ActiveSession, SessionManager};
 use soroban_sdk::{contract, contractimpl, Address, BytesN, Env};
 
 #[contract]

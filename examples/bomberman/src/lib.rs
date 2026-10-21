@@ -1,6 +1,6 @@
 #![no_std]
-use cougr_core::component::ComponentTrait;
-use cougr_core::*;
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::*;
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, Symbol};
 
 mod components;

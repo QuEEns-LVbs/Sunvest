@@ -9,7 +9,7 @@ on:
       - 'examples/dice_duel/**'
       - 'examples/blind_auction/**'
       - 'src/circuits/**'
-      - 'internal/cougr-core-circuits/**'
+      - 'internal/Sunvest-core-circuits/**'
       - '.github/workflows/circuit_examples.yml'
   pull_request:
     branches: [main, develop]
@@ -19,7 +19,7 @@ on:
       - 'examples/dice_duel/**'
       - 'examples/blind_auction/**'
       - 'src/circuits/**'
-      - 'internal/cougr-core-circuits/**'
+      - 'internal/Sunvest-core-circuits/**'
       - '.github/workflows/circuit_examples.yml'
 
 env:
@@ -79,7 +79,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Run circuits tests
-        run: cargo test -p cougr-core --features testutils -- circuits integration_circuits
+        run: cargo test -p Sunvest-core --features testutils -- circuits integration_circuits
 
       - name: Validate Circom layout scaffolds
-        run: bash internal/cougr-core-circuits/scripts/validate-layouts.sh
+        run: bash internal/Sunvest-core-circuits/scripts/validate-layouts.sh

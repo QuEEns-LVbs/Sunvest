@@ -542,7 +542,7 @@ fn test_multiple_direction_changes() {
 }
 
 // =============================================================================
-// Cougr-Core Integration Tests
+// Sunvest-Core Integration Tests
 // =============================================================================
 
 #[test]
@@ -561,7 +561,7 @@ fn test_core_position_conversion() {
 
     client.init_game();
 
-    // Get Pac-Man's position as a cougr_core Position
+    // Get Pac-Man's position as a Sunvest_core Position
     let core_pos = client.get_pacman_core_position();
     assert_eq!(core_pos.x, 1);
     assert_eq!(core_pos.y, 1);

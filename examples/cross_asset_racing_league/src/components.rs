@@ -1,7 +1,7 @@
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 
-/// RaceComponent - wraps Race data for Cougr ECS integration
+/// RaceComponent - wraps Race data for Sunvest ECS integration
 #[derive(Clone, Debug)]
 pub struct RaceComponent {
     pub race_id: u32,
@@ -58,7 +58,7 @@ impl ComponentTrait for RaceComponent {
     }
 }
 
-/// VehicleComponent - wraps VehicleState for Cougr ECS
+/// VehicleComponent - wraps VehicleState for Sunvest ECS
 #[derive(Clone, Debug)]
 pub struct VehicleComponent {
     pub speed: u32,
@@ -108,7 +108,7 @@ impl ComponentTrait for VehicleComponent {
     }
 }
 
-/// BoostComponent - wraps BoostState for Cougr ECS
+/// BoostComponent - wraps BoostState for Sunvest ECS
 #[derive(Clone, Debug)]
 pub struct BoostComponent {
     pub boost_type: u32,

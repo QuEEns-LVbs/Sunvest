@@ -421,7 +421,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
-name = "cougr-cli"
+name = "Sunvest-cli"
 version = "1.1.0"
 dependencies = [
  "anyhow",
@@ -434,36 +434,36 @@ dependencies = [
 ]
 
 [[package]]
-name = "cougr-core"
+name = "Sunvest-core"
 version = "1.1.0"
 dependencies = [
- "cougr-core",
+ "Sunvest-core",
  "soroban-sdk",
 ]
 
 [[package]]
-name = "cougr-core-circuits"
-version = "1.1.0"
-dependencies = [
- "soroban-sdk",
-]
-
-[[package]]
-name = "cougr-core-session"
+name = "Sunvest-core-circuits"
 version = "1.1.0"
 dependencies = [
  "soroban-sdk",
 ]
 
 [[package]]
-name = "cougr-core-test"
+name = "Sunvest-core-session"
 version = "1.1.0"
 dependencies = [
  "soroban-sdk",
 ]
 
 [[package]]
-name = "cougr-godot-checkpoint-vectors"
+name = "Sunvest-core-test"
+version = "1.1.0"
+dependencies = [
+ "soroban-sdk",
+]
+
+[[package]]
+name = "Sunvest-godot-checkpoint-vectors"
 version = "0.1.0"
 dependencies = [
  "soroban-sdk",

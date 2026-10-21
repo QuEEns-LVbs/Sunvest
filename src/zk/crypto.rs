@@ -73,7 +73,7 @@ pub fn bn254_pairing_check(
 // ─── Poseidon Wrappers ───────────────────────────────────────────
 //
 // Poseidon permutations require the `hazmat-crypto` feature.
-// Enable it in Cargo.toml: `cougr-core = { features = ["hazmat-crypto"] }`
+// Enable it in Cargo.toml: `Sunvest-core = { features = ["hazmat-crypto"] }`
 
 /// Compute a Poseidon permutation over field elements.
 ///

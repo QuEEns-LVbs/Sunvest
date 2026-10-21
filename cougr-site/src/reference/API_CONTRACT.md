@@ -1,8 +1,8 @@
-# Cougr Public API Contract
+# Sunvest Public API Contract
 
 ## Purpose
 
-This document defines how Cougr presents its public Rust API for `1.0`.
+This document defines how Sunvest presents its public Rust API for `1.0`.
 
 It answers four practical questions:
 
@@ -13,11 +13,11 @@ It answers four practical questions:
 
 ## API Positioning
 
-Cougr exposes a broad crate surface, but only a scoped subset is part of the defended `1.0` contract.
+Sunvest exposes a broad crate surface, but only a scoped subset is part of the defended `1.0` contract.
 
 The current product story is:
 
-- `cougr-core` is primarily an ECS framework for Soroban-compatible applications
+- `Sunvest-core` is primarily an ECS framework for Soroban-compatible applications
 - `app` is the default gameplay runtime surface for new projects
 - `auth`, `privacy`, and `ops` are the clearest product-level domain namespaces
 - accounts remain Beta, while privacy is split between a stable primitive subset and experimental proof systems
@@ -26,7 +26,7 @@ The current product story is:
 
 ## Recommended Public Contract
 
-This file now serves as the explicit `1.0` stable API list for `cougr-core`.
+This file now serves as the explicit `1.0` stable API list for `Sunvest-core`.
 
 ### Core entrypoints
 

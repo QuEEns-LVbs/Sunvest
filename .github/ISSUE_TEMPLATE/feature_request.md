@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Propose a new capability or improvement for Cougr
+about: Propose a new capability or improvement for Sunvest
 title: "feat(scope): <short description>"
 labels: ["enhancement"]
 assignees: ""

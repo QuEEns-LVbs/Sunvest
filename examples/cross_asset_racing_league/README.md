@@ -1,6 +1,6 @@
 # Cross-Asset Racing League (Stellar + Soroban)
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 Cross-Asset Racing League is a multi-asset payment-driven racing game example for Soroban that combines:
@@ -100,7 +100,7 @@ The example follows a modular architecture, separating data structures, ECS comp
 
 - `lib.rs`: Contract entrypoints and orchestration.
 - `types.rs`: Shared domain models, enums, and storage keys.
-- `components.rs`: Cougr ECS component definitions.
+- `components.rs`: Sunvest ECS component definitions.
 - `systems.rs`: Core gameplay transitions and logic.
 - `helpers.rs`: Validation and verification utilities.
 

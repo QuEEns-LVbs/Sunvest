@@ -5,8 +5,8 @@
 //! SimpleQueryCache + TrackedWorld, etc.
 
 use core::sync::atomic::{AtomicU32, Ordering};
-use cougr_core::scheduler::SimpleScheduler;
-use cougr_core::{
+use Sunvest_core::scheduler::SimpleScheduler;
+use Sunvest_core::{
     query::SimpleQueryCache,
     runtime::{ComponentEvent, ObservedWorld, TrackedWorld},
     CommandQueue, GameApp, Plugin, SimpleWorld,

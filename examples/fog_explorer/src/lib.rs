@@ -1,10 +1,10 @@
-//! fog_explorer - canonical Cougr ZK circuits example for fog-of-war exploration.
+//! fog_explorer - canonical Sunvest ZK circuits example for fog-of-war exploration.
 
 #![no_std]
 
-use cougr_core::circuits::fog_of_war;
-use cougr_core::zk::experimental::{FogOfWarSnapshot, FogOfWarTransition};
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::circuits::fog_of_war;
+use Sunvest_core::zk::experimental::{FogOfWarSnapshot, FogOfWarTransition};
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, Address, BytesN, Env, Symbol,
 };

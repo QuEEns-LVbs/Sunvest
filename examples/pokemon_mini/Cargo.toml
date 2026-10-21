@@ -3,14 +3,14 @@ name = "pokemon_mini"
 version = "0.0.1"
 edition = "2021"
 publish = false
-authors = ["Cougr Contributors"]
-description = "Pokémon Mini on-chain game example using cougr-core ECS framework"
+authors = ["Sunvest Contributors"]
+description = "Pokémon Mini on-chain game example using Sunvest-core ECS framework"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 soroban-sdk = "25.1.0"
 
 [dev-dependencies]

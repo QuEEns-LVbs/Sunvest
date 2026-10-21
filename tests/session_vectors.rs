@@ -6,7 +6,7 @@
 
 #![cfg(feature = "testutils")]
 
-use cougr_core::accounts::{
+use Sunvest_core::accounts::{
     derive_session_key_id, AccountError, GameAction, Policy, SessionBuilder, SessionContext,
     SessionKey, SessionPolicy, SessionScope, SessionStorage, SignedIntent,
 };
@@ -75,7 +75,7 @@ fn key_id_vector_matches_the_typescript_client() {
     };
 
     let emitted = hex(&derive_session_key_id(1_735_689_600, 42, 1, &scope));
-    println!("cougr sdk-session keyId vector: {emitted}");
+    println!("Sunvest sdk-session keyId vector: {emitted}");
 
     assert_eq!(emitted, KEY_ID_HEX);
     assert!(

@@ -1,4 +1,4 @@
-//! {{crate_name}} - a Cougr game contract generated from the `{{template_id}}` template.
+//! {{crate_name}} - a Sunvest game contract generated from the `{{template_id}}` template.
 //!
 //! A player calls `spawn` to enter the world and receives an entity ID, then
 //! calls `move_entity` to walk one step in one of four directions. Every
@@ -20,8 +20,8 @@ mod test;
 use components::{Moves, Position, DEFAULT_MOVE_BUDGET, NORTH};
 use systems::{step, MoveError};
 
-use cougr_core::game::SorobanGame;
-use cougr_core::impl_soroban_game;
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::impl_soroban_game;
 use soroban_sdk::{contract, contractimpl, Env};
 
 #[contract]
@@ -36,7 +36,7 @@ impl {{ContractName}} {
     /// Spawn a new player entity at the world origin.
     ///
     /// Returns the entity ID the caller passes to every subsequent call, and
-    /// emits a `(COUGR, set, position)` event so indexers register the spawn.
+    /// emits a `(Sunvest, set, position)` event so indexers register the spawn.
     pub fn spawn(env: Env) -> u32 {
         let mut world = {{ContractName}}::load_world(&env);
 

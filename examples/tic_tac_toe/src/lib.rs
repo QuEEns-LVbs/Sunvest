@@ -16,8 +16,8 @@ mod test;
 use components::{Board, Players, TurnState, GAME_ENTITY};
 use systems::detect_winner;
 
-use cougr_core::game::SorobanGame;
-use cougr_core::impl_soroban_game;
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::impl_soroban_game;
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Address, Env, Symbol, Vec};
 
 // ─── API return types ─────────────────────────────────────────────────────────
@@ -60,7 +60,7 @@ impl TicTacToeContract {
             }
         }
 
-        let mut world = cougr_core::simple_world::SimpleWorld::new(&env);
+        let mut world = Sunvest_core::simple_world::SimpleWorld::new(&env);
         let entity = world.spawn_entity(); // always 1
         debug_assert_eq!(entity, GAME_ENTITY);
 
@@ -219,7 +219,7 @@ impl TicTacToeContract {
 
     // ─── Internal helpers ─────────────────────────────────────────────────────
 
-    fn read_game_state(env: &Env, world: &cougr_core::simple_world::SimpleWorld) -> GameState {
+    fn read_game_state(env: &Env, world: &Sunvest_core::simple_world::SimpleWorld) -> GameState {
         let board: Board = world
             .get_rich::<Board>(env, GAME_ENTITY)
             .unwrap_or_else(|| Board::new(env));
@@ -246,7 +246,7 @@ impl TicTacToeContract {
 
     fn failure(
         env: &Env,
-        world: &cougr_core::simple_world::SimpleWorld,
+        world: &Sunvest_core::simple_world::SimpleWorld,
         msg: Symbol,
     ) -> MoveResult {
         MoveResult {

@@ -1,7 +1,7 @@
 //! Data types for Guild Treasury Wars
 //!
 //! This module defines all ECS components, storage keys, and constants
-//! for the guild governance game. Components follow the cougr-core ECS
+//! for the guild governance game. Components follow the Sunvest-core ECS
 //! pattern with Soroban-compatible contracttype annotations.
 //!
 //! **stellar-zk Integration**: `StrategyCommitment` stores SHA256-based
@@ -229,7 +229,7 @@ pub enum DataKey {
     Nullifier(BytesN<32>),
     /// Global game state
     State,
-    /// Count of cougr-core entities (ECS integration)
+    /// Count of Sunvest-core entities (ECS integration)
     EntityCount,
 }
 

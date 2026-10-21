@@ -1,6 +1,6 @@
 //! Game logic systems for Tap Battle.
 //!
-//! Implements the core gameplay systems following cougr-core's ECS pattern:
+//! Implements the core gameplay systems following Sunvest-core's ECS pattern:
 //! - **TapSystem**: Increments tap counter, calculates combos
 //! - **ComboSystem**: Applies multiplier based on combo streak
 //! - **PowerUpSystem**: Charges and activates power-ups

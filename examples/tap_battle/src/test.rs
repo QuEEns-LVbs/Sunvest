@@ -46,13 +46,13 @@ fn setup_player(env: &Env, contract_id: &Address) -> Address {
 /// Helper: Set up a session for a player (bypassing crypto for testing).
 fn setup_session(env: &Env, contract_id: &Address, player: &Address) {
     env.as_contract(contract_id, || {
-        let session_scope = cougr_core::accounts::SessionBuilder::new(env)
+        let session_scope = Sunvest_core::accounts::SessionBuilder::new(env)
             .allow_action(soroban_sdk::symbol_short!("tap"))
             .allow_action(soroban_sdk::Symbol::new(env, "use_power_up"))
             .max_operations(100)
             .expires_in(1000)
             .build_scope();
-        cougr_core::session::SessionManager::approve(env, player, session_scope)
+        Sunvest_core::session::SessionManager::approve(env, player, session_scope)
             .expect("session approval failed");
 
         env.storage()
@@ -158,10 +158,10 @@ fn test_session_ops_decrement() {
         // Initial ops: 100
         auth::validate_session(&env, &player, soroban_sdk::symbol_short!("tap"));
 
-        let keys = cougr_core::accounts::SessionStorage::load_all(&env, &player);
+        let keys = Sunvest_core::accounts::SessionStorage::load_all(&env, &player);
         let session = keys.last().expect("session missing");
         let status =
-            cougr_core::session::SessionManager::status(&env, &player, &session.key_id).unwrap();
+            Sunvest_core::session::SessionManager::status(&env, &player, &session.key_id).unwrap();
         assert_eq!(status.remaining_operations, 99);
     });
 }
@@ -177,13 +177,13 @@ fn test_session_ops_exhausted() {
 
     // Create session with only 1 operation
     env.as_contract(&contract_id, || {
-        let session_scope = cougr_core::accounts::SessionBuilder::new(&env)
+        let session_scope = Sunvest_core::accounts::SessionBuilder::new(&env)
             .allow_action(soroban_sdk::symbol_short!("tap"))
             .allow_action(soroban_sdk::Symbol::new(&env, "use_power_up"))
             .max_operations(1)
             .expires_in(1000)
             .build_scope();
-        cougr_core::session::SessionManager::approve(&env, &player, session_scope)
+        Sunvest_core::session::SessionManager::approve(&env, &player, session_scope)
             .expect("session approval failed");
     });
 
@@ -456,13 +456,13 @@ fn test_session_expiry_during_round() {
 
     // Create a session that expires at timestamp 10
     env.as_contract(&contract_id, || {
-        let session_scope = cougr_core::accounts::SessionBuilder::new(&env)
+        let session_scope = Sunvest_core::accounts::SessionBuilder::new(&env)
             .allow_action(soroban_sdk::symbol_short!("tap"))
             .allow_action(soroban_sdk::Symbol::new(&env, "use_power_up"))
             .max_operations(100)
             .expires_at(10)
             .build_scope();
-        cougr_core::session::SessionManager::approve(&env, &player_a, session_scope)
+        Sunvest_core::session::SessionManager::approve(&env, &player_a, session_scope)
             .expect("session approval failed");
 
         env.storage()
@@ -537,7 +537,7 @@ fn test_renew_session_extends_play_window() {
 
     let key_id = client.get_latest_session_key(&player);
     let expires_at_before = env.as_contract(&contract_id, || {
-        cougr_core::accounts::SessionStorage::load(&env, &player, &key_id)
+        Sunvest_core::accounts::SessionStorage::load(&env, &player, &key_id)
             .expect("session missing")
             .scope
             .expires_at

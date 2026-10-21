@@ -1,4 +1,4 @@
-//! `cougr new <name> [--template <name>]`.
+//! `Sunvest new <name> [--template <name>]`.
 //!
 //! Renders one embedded template into a fresh directory and prints the two
 //! commands that take the developer from generated source to a green test run
@@ -15,7 +15,7 @@ pub fn run(raw_name: &str, template: Template, parent: Option<&Path>) -> Result<
     run_with_config(raw_name, template, None, parent)
 }
 
-/// Export a studio config through the same renderer and writer as `cougr new`.
+/// Export a studio config through the same renderer and writer as `Sunvest new`.
 pub fn export(raw_name: &str, config_path: &Path, parent: Option<&Path>) -> Result<(), CliError> {
     let source = fs::read_to_string(config_path)
         .map_err(|err| CliError::io("read the config", config_path, err))?;
@@ -282,8 +282,8 @@ mod tests {
 
             let manifest = fs::read_to_string(project.join("Cargo.toml")).unwrap();
             assert!(
-                manifest.contains("cougr-core = \""),
-                "{} manifest must depend on cougr-core",
+                manifest.contains("Sunvest-core = \""),
+                "{} manifest must depend on Sunvest-core",
                 template.id()
             );
             assert!(

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document lists public-facing behaviors and constraints that remain intentionally outside Cougr's stable promise after the `1.0` release gate.
+This document lists public-facing behaviors and constraints that remain intentionally outside Sunvest's stable promise after the `1.0` release gate.
 
 The goal is to keep the stable story honest. If a behavior is still evolving, security-sensitive, or not yet defensible as a long-term contract, it belongs here instead of being implied as stable.
 
@@ -64,7 +64,7 @@ Remaining gaps:
 
 Treat this document as the current boundary between:
 
-- what Cougr can present as intentionally supported today
+- what Sunvest can present as intentionally supported today
 - what is still usable but evolving
 - what must not be interpreted as part of a stable production contract
 

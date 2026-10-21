@@ -1,5 +1,5 @@
 use super::*;
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::{testutils::Address as _, Address, BytesN, Env};
 
 fn setup_game() -> (

@@ -1,12 +1,12 @@
-# Cougr Unsafe Invariants
+# Sunvest Unsafe Invariants
 
 ## Purpose
 
-This document records Cougr's current unsafe posture for the published crate.
+This document records Sunvest's current unsafe posture for the published crate.
 
 ## Current State
 
-The shipped `cougr-core` crate currently contains no internal `unsafe` code paths.
+The shipped `Sunvest-core` crate currently contains no internal `unsafe` code paths.
 
 The previous repository carried lower-level ECS internals with explicit unsafe boundaries, but those paths are not part of the current published implementation and are no longer part of the maintained source tree.
 
@@ -18,11 +18,11 @@ As a result, the main invariant for the current crate is simple:
 
 ## Host-Crypto Boundary
 
-Cougr still depends on Soroban host functionality for BN254 and related cryptographic operations exposed by `soroban-sdk`.
+Sunvest still depends on Soroban host functionality for BN254 and related cryptographic operations exposed by `soroban-sdk`.
 
-That is a trust boundary, but it is not an internal `unsafe` boundary inside Cougr itself.
+That is a trust boundary, but it is not an internal `unsafe` boundary inside Sunvest itself.
 
-The invariants Cougr must preserve around that boundary are:
+The invariants Sunvest must preserve around that boundary are:
 
 - validate shape constraints before calling host cryptographic helpers
 - keep stable and experimental maturity boundaries explicit in the public API

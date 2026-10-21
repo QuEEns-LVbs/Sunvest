@@ -54,32 +54,32 @@ export const PHASE_COPY = Object.freeze({
   },
 });
 
-/** CSS for the fragment. Scoped under `.cougr-studio` so it cannot leak. */
+/** CSS for the fragment. Scoped under `.Sunvest-studio` so it cannot leak. */
 export function studioStyles() {
   return `
-.cougr-studio { box-sizing: border-box; display: flex; flex-direction: column; gap: ${px(BRAND.space4)}px; max-width: ${renderBoardMaxWidth()}px; padding: ${px(BRAND.space4)}px; background: ${BRAND.colorBg}; color: ${BRAND.colorText}; font-family: ${BRAND.fontSans}; border: 1px solid ${withAlpha(LINE.stroke, LINE.borderOpacity)}; border-radius: ${px(BRAND.radiusLg)}px; }
-.cougr-studio *, .cougr-studio *::before, .cougr-studio *::after { box-sizing: border-box; }
-.cougr-studio__sandbox { margin: 0; padding: ${px(BRAND.space3)}px ${px(BRAND.space4)}px; background: ${STUDIO.waiting}${TINT}; color: ${BRAND.colorText}; border-left: 3px solid ${STUDIO.waiting}; border-radius: ${px(BRAND.radiusSm)}px; font-size: 13px; line-height: 1.5; }
-.cougr-studio__header { display: flex; flex-wrap: wrap; align-items: baseline; gap: ${px(BRAND.space2)}px ${px(BRAND.space4)}px; }
-.cougr-studio__title { margin: 0; font-size: 18px; font-weight: 700; }
-.cougr-studio__caption { margin: 0; color: ${BRAND.colorTextSecondary}; font-size: 13px; }
-.cougr-studio__board { display: block; line-height: 0; }
-.cougr-studio__board svg { max-width: 100%; height: auto; }
-.cougr-studio__status { display: flex; flex-wrap: wrap; align-items: center; gap: ${px(BRAND.space2)}px ${px(BRAND.space4)}px; margin: 0; }
-.cougr-studio__status-badge { padding: ${px(BRAND.space1)}px ${px(BRAND.space3)}px; border-radius: ${px(BRAND.radiusFull)}px; font-size: 13px; font-weight: 700; }
-.cougr-studio__status-meta { color: ${BRAND.colorTextSecondary}; font-size: 12px; }
-.cougr-studio__run { padding: ${px(BRAND.space3)}px ${px(BRAND.space4)}px; background: ${BRAND.colorSurface}; border: 1px solid ${LINE.stroke}; border-radius: ${px(BRAND.radiusMd)}px; font-size: 13px; line-height: 1.55; }
-.cougr-studio__run[data-run-phase='finalizing'] { border-color: ${STUDIO.waiting}; }
-.cougr-studio__run[data-run-phase='error'] { border-color: ${STUDIO.danger}; }
-.cougr-studio__run-title { display: flex; align-items: center; gap: ${px(BRAND.space2)}px; margin: 0 0 ${px(BRAND.space2)}px; font-size: 14px; font-weight: 700; }
-.cougr-studio__run-detail { margin: 0; color: ${BRAND.colorTextSecondary}; }
-.cougr-studio__run-meta { margin: ${px(BRAND.space2)}px 0 0; color: ${BRAND.colorTextSecondary}; font-size: 12px; font-family: ${BRAND.fontMono}; word-break: break-all; }
-.cougr-studio__spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid ${STUDIO.waiting}; border-right-color: transparent; border-radius: ${px(BRAND.radiusFull)}px; animation: cougr-studio-spin 900ms linear infinite; }
-@keyframes cougr-studio-spin { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .cougr-studio__spinner { animation: none; border-right-color: ${STUDIO.waiting}; opacity: 0.5; } }
-.cougr-studio__error-title { color: ${STUDIO.danger}; }
-.cougr-studio__retry { margin-top: ${px(BRAND.space3)}px; padding: ${px(BRAND.space2)}px ${px(BRAND.space4)}px; background: ${BRAND.colorAccent}; color: ${BRAND.colorBg}; border: 0; border-radius: ${px(BRAND.radiusMd)}px; font: inherit; font-weight: 700; cursor: pointer; }
-.cougr-studio__retry:focus-visible { outline: 2px solid ${BRAND.colorAccent}; outline-offset: 2px; }
+.Sunvest-studio { box-sizing: border-box; display: flex; flex-direction: column; gap: ${px(BRAND.space4)}px; max-width: ${renderBoardMaxWidth()}px; padding: ${px(BRAND.space4)}px; background: ${BRAND.colorBg}; color: ${BRAND.colorText}; font-family: ${BRAND.fontSans}; border: 1px solid ${withAlpha(LINE.stroke, LINE.borderOpacity)}; border-radius: ${px(BRAND.radiusLg)}px; }
+.Sunvest-studio *, .Sunvest-studio *::before, .Sunvest-studio *::after { box-sizing: border-box; }
+.Sunvest-studio__sandbox { margin: 0; padding: ${px(BRAND.space3)}px ${px(BRAND.space4)}px; background: ${STUDIO.waiting}${TINT}; color: ${BRAND.colorText}; border-left: 3px solid ${STUDIO.waiting}; border-radius: ${px(BRAND.radiusSm)}px; font-size: 13px; line-height: 1.5; }
+.Sunvest-studio__header { display: flex; flex-wrap: wrap; align-items: baseline; gap: ${px(BRAND.space2)}px ${px(BRAND.space4)}px; }
+.Sunvest-studio__title { margin: 0; font-size: 18px; font-weight: 700; }
+.Sunvest-studio__caption { margin: 0; color: ${BRAND.colorTextSecondary}; font-size: 13px; }
+.Sunvest-studio__board { display: block; line-height: 0; }
+.Sunvest-studio__board svg { max-width: 100%; height: auto; }
+.Sunvest-studio__status { display: flex; flex-wrap: wrap; align-items: center; gap: ${px(BRAND.space2)}px ${px(BRAND.space4)}px; margin: 0; }
+.Sunvest-studio__status-badge { padding: ${px(BRAND.space1)}px ${px(BRAND.space3)}px; border-radius: ${px(BRAND.radiusFull)}px; font-size: 13px; font-weight: 700; }
+.Sunvest-studio__status-meta { color: ${BRAND.colorTextSecondary}; font-size: 12px; }
+.Sunvest-studio__run { padding: ${px(BRAND.space3)}px ${px(BRAND.space4)}px; background: ${BRAND.colorSurface}; border: 1px solid ${LINE.stroke}; border-radius: ${px(BRAND.radiusMd)}px; font-size: 13px; line-height: 1.55; }
+.Sunvest-studio__run[data-run-phase='finalizing'] { border-color: ${STUDIO.waiting}; }
+.Sunvest-studio__run[data-run-phase='error'] { border-color: ${STUDIO.danger}; }
+.Sunvest-studio__run-title { display: flex; align-items: center; gap: ${px(BRAND.space2)}px; margin: 0 0 ${px(BRAND.space2)}px; font-size: 14px; font-weight: 700; }
+.Sunvest-studio__run-detail { margin: 0; color: ${BRAND.colorTextSecondary}; }
+.Sunvest-studio__run-meta { margin: ${px(BRAND.space2)}px 0 0; color: ${BRAND.colorTextSecondary}; font-size: 12px; font-family: ${BRAND.fontMono}; word-break: break-all; }
+.Sunvest-studio__spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid ${STUDIO.waiting}; border-right-color: transparent; border-radius: ${px(BRAND.radiusFull)}px; animation: Sunvest-studio-spin 900ms linear infinite; }
+@keyframes Sunvest-studio-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .Sunvest-studio__spinner { animation: none; border-right-color: ${STUDIO.waiting}; opacity: 0.5; } }
+.Sunvest-studio__error-title { color: ${STUDIO.danger}; }
+.Sunvest-studio__retry { margin-top: ${px(BRAND.space3)}px; padding: ${px(BRAND.space2)}px ${px(BRAND.space4)}px; background: ${BRAND.colorAccent}; color: ${BRAND.colorBg}; border: 0; border-radius: ${px(BRAND.radiusMd)}px; font: inherit; font-weight: 700; cursor: pointer; }
+.Sunvest-studio__retry:focus-visible { outline: 2px solid ${BRAND.colorAccent}; outline-offset: 2px; }
 `.trim();
 }
 
@@ -102,18 +102,18 @@ export function renderStudioView(model, options = {}) {
   if (!config) throw new TypeError('renderStudioView requires a model with a config');
 
   const parts = [];
-  parts.push(`<section class="cougr-studio" data-phase="${escapeAttribute(phase)}" data-testid="cougr-studio">`);
+  parts.push(`<section class="Sunvest-studio" data-phase="${escapeAttribute(phase)}" data-testid="Sunvest-studio">`);
 
   if (options.inlineStyles !== false) parts.push(`<style>${studioStyles()}</style>`);
 
-  parts.push(`<p class="cougr-studio__sandbox" role="note" data-testid="sandbox-warning">${escapeText(SANDBOX_WARNING)}</p>`);
+  parts.push(`<p class="Sunvest-studio__sandbox" role="note" data-testid="sandbox-warning">${escapeText(SANDBOX_WARNING)}</p>`);
 
-  parts.push('<header class="cougr-studio__header">');
-  parts.push(`<h2 class="cougr-studio__title">${escapeText(config.label)}</h2>`);
-  parts.push(`<p class="cougr-studio__caption" data-testid="board-caption">${escapeText(boardCaption(model))}</p>`);
+  parts.push('<header class="Sunvest-studio__header">');
+  parts.push(`<h2 class="Sunvest-studio__title">${escapeText(config.label)}</h2>`);
+  parts.push(`<p class="Sunvest-studio__caption" data-testid="board-caption">${escapeText(boardCaption(model))}</p>`);
   parts.push('</header>');
 
-  parts.push(`<div class="cougr-studio__board" data-testid="board">${renderBoard(config, state, options.boardOptions)}</div>`);
+  parts.push(`<div class="Sunvest-studio__board" data-testid="board">${renderBoard(config, state, options.boardOptions)}</div>`);
 
   parts.push(renderStatusLine(model));
   parts.push(renderRunPanel(model));
@@ -132,9 +132,9 @@ export function renderStatusLine(model) {
     : `0/${cellCount(config)} cells`;
 
   return [
-    '<p class="cougr-studio__status" data-testid="status-line">',
-    `<span class="cougr-studio__status-badge" style="background:${color}${TINT};color:${color}">${escapeText(label)}</span>`,
-    `<span class="cougr-studio__status-meta" data-testid="status-meta">${escapeText(meta)}</span>`,
+    '<p class="Sunvest-studio__status" data-testid="status-line">',
+    `<span class="Sunvest-studio__status-badge" style="background:${color}${TINT};color:${color}">${escapeText(label)}</span>`,
+    `<span class="Sunvest-studio__status-meta" data-testid="status-meta">${escapeText(meta)}</span>`,
     '</p>',
   ].join('');
 }
@@ -157,12 +157,12 @@ export function renderRunPanel(model) {
     : 'role="status"';
 
   return [
-    `<div class="cougr-studio__run" data-run-phase="${escapeAttribute(phase)}" ${attributes}>`,
-    '<h3 class="cougr-studio__run-title">',
-    busy ? '<span class="cougr-studio__spinner" aria-hidden="true"></span>' : '',
+    `<div class="Sunvest-studio__run" data-run-phase="${escapeAttribute(phase)}" ${attributes}>`,
+    '<h3 class="Sunvest-studio__run-title">',
+    busy ? '<span class="Sunvest-studio__spinner" aria-hidden="true"></span>' : '',
     escapeText(copy.title),
     '</h3>',
-    `<p class="cougr-studio__run-detail">${escapeText(copy.detail)}</p>`,
+    `<p class="Sunvest-studio__run-detail">${escapeText(copy.detail)}</p>`,
     renderRunMeta(model),
     '</div>',
   ].join('');
@@ -175,10 +175,10 @@ function renderFinalizingPanel(model) {
   const budget = model.maxPolls ? `${model.maxPolls} reads max` : 'bounded';
 
   return [
-    '<div class="cougr-studio__run" data-run-phase="finalizing" data-testid="finality-wait" role="status" aria-live="polite">',
-    `<h3 class="cougr-studio__run-title"><span class="cougr-studio__spinner" aria-hidden="true"></span>${escapeText(copy.title)}</h3>`,
-    `<p class="cougr-studio__run-detail" data-testid="finality-explanation">${escapeText(copy.detail)}</p>`,
-    `<p class="cougr-studio__run-meta" data-testid="finality-meta">waiting ${escapeText(elapsed)} · ${escapeText(String(model.polls))} reads · ${escapeText(budget)}${model.txHash ? ` · tx ${escapeText(model.txHash)}` : ''}</p>`,
+    '<div class="Sunvest-studio__run" data-run-phase="finalizing" data-testid="finality-wait" role="status" aria-live="polite">',
+    `<h3 class="Sunvest-studio__run-title"><span class="Sunvest-studio__spinner" aria-hidden="true"></span>${escapeText(copy.title)}</h3>`,
+    `<p class="Sunvest-studio__run-detail" data-testid="finality-explanation">${escapeText(copy.detail)}</p>`,
+    `<p class="Sunvest-studio__run-meta" data-testid="finality-meta">waiting ${escapeText(elapsed)} · ${escapeText(String(model.polls))} reads · ${escapeText(budget)}${model.txHash ? ` · tx ${escapeText(model.txHash)}` : ''}</p>`,
     '</div>',
   ].join('');
 }
@@ -188,13 +188,13 @@ function renderErrorPanel(model) {
   const error = model.error ?? { title: 'The run failed', message: '', recovery: '', detail: null };
 
   return [
-    `<div class="cougr-studio__run" data-run-phase="error" data-error-kind="${escapeAttribute(error.kind ?? 'unknown')}" data-testid="run-error" role="alert">`,
-    `<h3 class="cougr-studio__run-title cougr-studio__error-title">${escapeText(error.title)}</h3>`,
-    `<p class="cougr-studio__run-detail" data-testid="error-message">${escapeText(error.message)}</p>`,
-    error.recovery ? `<p class="cougr-studio__run-detail">${escapeText(error.recovery)}</p>` : '',
-    '<p class="cougr-studio__run-detail">The run stopped and released the wait — it does not retry in the background.</p>',
-    error.detail ? `<p class="cougr-studio__run-meta" data-testid="error-detail">${escapeText(error.detail)}</p>` : '',
-    '<button type="button" class="cougr-studio__retry" data-action="retry">Retry move</button>',
+    `<div class="Sunvest-studio__run" data-run-phase="error" data-error-kind="${escapeAttribute(error.kind ?? 'unknown')}" data-testid="run-error" role="alert">`,
+    `<h3 class="Sunvest-studio__run-title Sunvest-studio__error-title">${escapeText(error.title)}</h3>`,
+    `<p class="Sunvest-studio__run-detail" data-testid="error-message">${escapeText(error.message)}</p>`,
+    error.recovery ? `<p class="Sunvest-studio__run-detail">${escapeText(error.recovery)}</p>` : '',
+    '<p class="Sunvest-studio__run-detail">The run stopped and released the wait — it does not retry in the background.</p>',
+    error.detail ? `<p class="Sunvest-studio__run-meta" data-testid="error-detail">${escapeText(error.detail)}</p>` : '',
+    '<button type="button" class="Sunvest-studio__retry" data-action="retry">Retry move</button>',
     '</div>',
   ].join('');
 }
@@ -204,11 +204,11 @@ function renderRunMeta(model) {
   if (TERMINAL_PHASES.includes(model.phase) && model.phase !== PHASES.ERROR) {
     const elapsed = `${(model.elapsedMs / 1000).toFixed(1)}s`;
     const tx = model.txHash ? ` · tx ${model.txHash}` : '';
-    return `<p class="cougr-studio__run-meta" data-testid="run-meta">settled in ${escapeText(elapsed)} after ${escapeText(String(model.polls))} reads${escapeText(tx)}</p>`;
+    return `<p class="Sunvest-studio__run-meta" data-testid="run-meta">settled in ${escapeText(elapsed)} after ${escapeText(String(model.polls))} reads${escapeText(tx)}</p>`;
   }
 
   if (model.txHash) {
-    return `<p class="cougr-studio__run-meta" data-testid="run-meta">tx ${escapeText(model.txHash)}</p>`;
+    return `<p class="Sunvest-studio__run-meta" data-testid="run-meta">tx ${escapeText(model.txHash)}</p>`;
   }
 
   return '';

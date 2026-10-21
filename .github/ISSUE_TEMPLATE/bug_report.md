@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a reproducible defect in Cougr
+about: Report a reproducible defect in Sunvest
 title: "fix(scope): <short description>"
 labels: ["bug"]
 assignees: ""
@@ -30,7 +30,7 @@ assignees: ""
 
 | Field | Value |
 |---|---|
-| Cougr version / commit | |
+| Sunvest version / commit | |
 | Rust toolchain | |
 | `soroban-sdk` version | |
 | Operating system | |

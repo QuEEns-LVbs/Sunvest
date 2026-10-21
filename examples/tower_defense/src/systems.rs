@@ -11,7 +11,7 @@ use crate::components::{
     BaseComponent, ComponentTrait, EnemyComponent, GameStatusComponent, Position, TowerComponent,
     TowerKind, WaveComponent, PATH, PATH_LENGTH,
 };
-use cougr_core::simple_world::{EntityId, SimpleWorld};
+use Sunvest_core::simple_world::{EntityId, SimpleWorld};
 use soroban_sdk::{symbol_short, Env, Vec};
 
 // ============================================================================

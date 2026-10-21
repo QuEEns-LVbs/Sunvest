@@ -2,14 +2,14 @@
 
 {{description}}
 
-Generated with `cougr new --template {{template_id}}`, based on the canonical
-[`{{source_example}}`](https://github.com/salazarsebas/Cougr/tree/main/examples/{{source_example}})
+Generated with `Sunvest new --template {{template_id}}`, based on the canonical
+[`{{source_example}}`](https://github.com/salazarsebas/Sunvest/tree/main/examples/{{source_example}})
 example.
 
 ## Purpose and pattern
 
 Two players alternate placing marks on a {{board_width}}×{{board_height}} board until one lines up {{win_length}} or
-the board fills. It is the reference shape for any turn-based game on Cougr:
+the board fills. It is the reference shape for any turn-based game on Sunvest:
 exactly one match per contract instance, an explicit turn owner, and every move
 validated before it is written to storage.
 
@@ -62,7 +62,7 @@ cheaper `impl_component!`.
    wins or the board fills, further moves are rejected with `gameover`.
 5. `reset_game` clears the board and keeps both players for a rematch.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 | API | Why |
 | --- | --- |
@@ -74,10 +74,10 @@ cheaper `impl_component!`.
 
 ## Build and test
 
-This project uses width {{board_width}}, height {{board_height}}, and win length {{win_length}}. The default `cougr new --template turn-based` project uses 3×3 and a win length of 3.
+This project uses width {{board_width}}, height {{board_height}}, and win length {{win_length}}. The default `Sunvest new --template turn-based` project uses 3×3 and a win length of 3.
 
 ```bash
-cougr check
+Sunvest check
 cargo test
 stellar contract build
 ```

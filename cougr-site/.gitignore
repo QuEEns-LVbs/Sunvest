@@ -1,7 +1,7 @@
 # mdBook build output - never commit
 book/
 
-# Generated showcase files (run: python3 cougr-site/generate-showcase.py)
+# Generated showcase files (run: python3 Sunvest-site/generate-showcase.py)
 # Everything in src/showcase/ except README.md and the gallery placeholder
 # is auto-generated. gallery.md is tracked as a placeholder; the generator
 # overwrites it during the build.

@@ -7,9 +7,9 @@
 ///
 /// # Example
 /// ```
-/// use cougr_core::game::SorobanGame;
-/// use cougr_core::impl_soroban_game;
-/// use cougr_core::impl_component_observed;
+/// use Sunvest_core::game::SorobanGame;
+/// use Sunvest_core::impl_soroban_game;
+/// use Sunvest_core::impl_component_observed;
 /// use soroban_sdk::{contract, contracttype, Env};
 /// use soroban_sdk::testutils::Register as _;
 ///
@@ -49,7 +49,7 @@ macro_rules! impl_soroban_game {
 /// Helper macro to serialize a single field to big-endian bytes.
 #[macro_export]
 #[doc(hidden)]
-macro_rules! __cougr_serialize_field {
+macro_rules! __Sunvest_serialize_field {
     ($bytes:ident, $env:ident, $value:expr, i32) => {
         $bytes.append(&soroban_sdk::Bytes::from_array($env, &$value.to_be_bytes()));
     };
@@ -85,7 +85,7 @@ macro_rules! __cougr_serialize_field {
 /// Helper macro to get the byte size of a field type.
 #[macro_export]
 #[doc(hidden)]
-macro_rules! __cougr_field_size {
+macro_rules! __Sunvest_field_size {
     (i32) => {
         4u32
     };
@@ -118,7 +118,7 @@ macro_rules! __cougr_field_size {
 /// Helper macro to deserialize a single field from big-endian bytes.
 #[macro_export]
 #[doc(hidden)]
-macro_rules! __cougr_deserialize_field {
+macro_rules! __Sunvest_deserialize_field {
     ($env:ident, $data:ident, $offset:expr, i32) => {{
         let val = i32::from_be_bytes([
             $data.get($offset)?,
@@ -238,7 +238,7 @@ macro_rules! __cougr_deserialize_field {
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::impl_component;
+/// use Sunvest_core::impl_component;
 /// use soroban_sdk::contracttype;
 ///
 /// #[contracttype]
@@ -261,20 +261,20 @@ macro_rules! impl_component {
             fn serialize(&self, env: &soroban_sdk::Env) -> soroban_sdk::Bytes {
                 let mut bytes = soroban_sdk::Bytes::new(env);
                 $(
-                    $crate::__cougr_serialize_field!(bytes, env, self.$field, $ftype);
+                    $crate::__Sunvest_serialize_field!(bytes, env, self.$field, $ftype);
                 )*
                 bytes
             }
 
             fn deserialize(_env: &soroban_sdk::Env, data: &soroban_sdk::Bytes) -> Option<Self> {
-                let expected_len: u32 = 0 $( + $crate::__cougr_field_size!($ftype) )*;
+                let expected_len: u32 = 0 $( + $crate::__Sunvest_field_size!($ftype) )*;
                 if data.len() != expected_len {
                     return None;
                 }
                 let mut _offset: u32 = 0;
                 $(
-                    let $field = $crate::__cougr_deserialize_field!(_env, data, _offset, $ftype);
-                    _offset += $crate::__cougr_field_size!($ftype);
+                    let $field = $crate::__Sunvest_deserialize_field!(_env, data, _offset, $ftype);
+                    _offset += $crate::__Sunvest_field_size!($ftype);
                 )*
                 Some(Self { $( $field ),* })
             }
@@ -292,7 +292,7 @@ macro_rules! impl_component {
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::impl_marker_component;
+/// use Sunvest_core::impl_marker_component;
 ///
 /// pub struct SnakeHead;
 ///
@@ -334,7 +334,7 @@ macro_rules! impl_marker_component {
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::impl_rich_component;
+/// use Sunvest_core::impl_rich_component;
 /// use soroban_sdk::{contracttype, String, Vec};
 ///
 /// #[contracttype]
@@ -368,12 +368,12 @@ macro_rules! impl_rich_component {
 ///
 /// Events are published with topics:
 /// ```text
-/// (COUGR, set|del, <component_symbol>)
+/// (Sunvest, set|del, <component_symbol>)
 /// ```
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::impl_component_observed;
+/// use Sunvest_core::impl_component_observed;
 /// use soroban_sdk::contracttype;
 ///
 /// #[contracttype]
@@ -427,7 +427,7 @@ macro_rules! impl_component_observed {
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::impl_resource;
+/// use Sunvest_core::impl_resource;
 /// use soroban_sdk::contracttype;
 ///
 /// #[contracttype]
@@ -451,20 +451,20 @@ macro_rules! impl_resource {
             fn serialize(&self, env: &soroban_sdk::Env) -> soroban_sdk::Bytes {
                 let mut bytes = soroban_sdk::Bytes::new(env);
                 $(
-                    $crate::__cougr_serialize_field!(bytes, env, self.$field, $ftype);
+                    $crate::__Sunvest_serialize_field!(bytes, env, self.$field, $ftype);
                 )*
                 bytes
             }
 
             fn deserialize(_env: &soroban_sdk::Env, data: &soroban_sdk::Bytes) -> Option<Self> {
-                let expected_len: u32 = 0 $( + $crate::__cougr_field_size!($ftype) )*;
+                let expected_len: u32 = 0 $( + $crate::__Sunvest_field_size!($ftype) )*;
                 if data.len() != expected_len {
                     return None;
                 }
                 let mut _offset: u32 = 0;
                 $(
-                    let $field = $crate::__cougr_deserialize_field!(_env, data, _offset, $ftype);
-                    _offset += $crate::__cougr_field_size!($ftype);
+                    let $field = $crate::__Sunvest_deserialize_field!(_env, data, _offset, $ftype);
+                    _offset += $crate::__Sunvest_field_size!($ftype);
                 )*
                 Some(Self { $( $field ),* })
             }

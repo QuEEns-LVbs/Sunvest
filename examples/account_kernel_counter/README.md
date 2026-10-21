@@ -1,11 +1,11 @@
 # account_kernel_counter
 
-**Canonical** example proving that `cougr add account-kernel` produces a
+**Canonical** example proving that `Sunvest add account-kernel` produces a
 module that is usable in a real Soroban game, not just importable.
 
 The game is a simple per-owner counter.  Every increment must be authorized
 through the `account_kernel` module that was scaffolded by
-`cougr add account-kernel`.
+`Sunvest add account-kernel`.
 
 ---
 
@@ -13,12 +13,12 @@ through the `account_kernel` module that was scaffolded by
 
 ```bash
 # 1. Scaffold the project from the session-auth template.
-cougr new account_kernel_counter --template session-auth
+Sunvest new account_kernel_counter --template session-auth
 cd account_kernel_counter
 
 # 2. Drop in the account-kernel piece (writes src/account_kernel.rs
 #    and adds `pub mod account_kernel;` to lib.rs).
-cougr add account-kernel
+Sunvest add account-kernel
 
 # 3. Build and test.
 cargo test
@@ -83,7 +83,7 @@ increment(owner, key_id, nonce, intent_expires_at)
 
 ---
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `account_kernel::build_scope` – piece helper that calls `SessionBuilder`
 - `account_kernel::counter_action` – piece helper that constructs the `tap` `GameAction`
@@ -125,7 +125,7 @@ stellar contract build
 
 | Use `account_kernel_counter` when… | Use `session_arena` when… |
 |---|---|
-| Proving `cougr add account-kernel` works end-to-end | Learning `SessionManager` lifecycle |
+| Proving `Sunvest add account-kernel` works end-to-end | Learning `SessionManager` lifecycle |
 | Understanding the raw `AccountKernel` / `authorize_action` path | Need `approve` / `renew` / `fallback` patterns |
 | Writing tests that exercise the piece's own helpers | Need `MockSession` testutils |
 

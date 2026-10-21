@@ -2,9 +2,9 @@
 
 > ⏳ **This page is being written.**
 >
-> Will consolidate Soroban-specific patterns from `PATTERNS.md` and `STANDARDS_LAYER.md` into one place, distinguishing "Cougr patterns" from "general Soroban patterns."
+> Will consolidate Soroban-specific patterns from `PATTERNS.md` and `STANDARDS_LAYER.md` into one place, distinguishing "Sunvest patterns" from "general Soroban patterns."
 >
-> **Tracked in:** [`salazarsebas/Cougr` issues](https://github.com/salazarsebas/Cougr/issues)
+> **Tracked in:** [`salazarsebas/Sunvest` issues](https://github.com/salazarsebas/Sunvest/issues)
 
 ---
 
@@ -16,4 +16,4 @@
 - Batch operations with `BatchExecutor`
 - How these standards compose with the ECS world
 
-Check back soon - or [watch the repository](https://github.com/salazarsebas/Cougr).
+Check back soon - or [watch the repository](https://github.com/salazarsebas/Sunvest).

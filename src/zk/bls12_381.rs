@@ -1,4 +1,4 @@
-//! BLS12-381 curve operation wrappers for Cougr.
+//! BLS12-381 curve operation wrappers for Sunvest.
 //!
 //! Provides ergonomic wrappers around Stellar Protocol 22+ BLS12-381
 //! host functions. These complement the BN254 wrappers in `crypto.rs`.

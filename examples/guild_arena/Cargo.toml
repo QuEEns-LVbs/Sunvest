@@ -3,7 +3,7 @@ name = "guild-arena"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "PvP arena game with guild-based social recovery and multi-device support using Cougr-Core"
+description = "PvP arena game with guild-based social recovery and multi-device support using Sunvest-Core"
 license = "MIT OR Apache-2.0"
 
 [lib]
@@ -11,7 +11,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 
 [dev-dependencies]
 soroban-sdk = { version = "25.1.0", features = ["testutils"] }

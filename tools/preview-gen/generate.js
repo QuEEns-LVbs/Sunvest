@@ -1,5 +1,5 @@
 /**
- * Cougr Preview Generator - main CLI entry point.
+ * Sunvest Preview Generator - main CLI entry point.
  *
  * Usage:
  *   node generate.js <game>

@@ -1,13 +1,13 @@
 # session_arena
 
  feat/session-manager-fresh
-**Canonical** Cougr example for the `SessionManager` gameplay lifecycle: approve once, play frictionlessly, renew on expiry, fallback when stale.
+**Canonical** Sunvest example for the `SessionManager` gameplay lifecycle: approve once, play frictionlessly, renew on expiry, fallback when stale.
 
 > **Related example:** For the full mobile-first flow with passkey auth, combos, and rounds, see [`tap_battle`](../tap_battle/README.md).
 
 ## Purpose and pattern
 
-`session_arena` is the minimal reference implementation of cougr-core session UX. It strips away game mechanics so you can focus on:
+`session_arena` is the minimal reference implementation of Sunvest-core session UX. It strips away game mechanics so you can focus on:
 
 1. **Approve** - owner signs once to create a scoped session key
 2. **Play** - many `tap` calls without wallet prompts
@@ -37,7 +37,7 @@
 | `fallback_tap` | `owner`, `key_id` | `u32` | Tap via session first, fall back to direct owner auth |
 | `score` | `owner` | `u32` | Current tap count for the owner |
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `SessionBuilder` - declare allowed actions, max operations, and expiry
 - `SessionManager::approve` - create scoped session after owner auth
@@ -89,7 +89,7 @@ This example showcases the onboarding pattern for friction-free session keys on 
                      └───────────────────────┘
 ```
 
-The game utilizes Cougr's session authentication module. The owner delegates authority for a specified duration and subset of actions to a local keypair. The contract verifies each transaction signature against the delegated session key metadata.
+The game utilizes Sunvest's session authentication module. The owner delegates authority for a specified duration and subset of actions to a local keypair. The contract verifies each transaction signature against the delegated session key metadata.
 
 ## Storage model
 
@@ -101,7 +101,7 @@ Session parameters and player score components are stored in **Instance Storage*
 2. **Gameplay**: Client signs and executes calls to `tap` using the session key, bypassing any ledger signature popups.
 3. **Renewal / Fallback**: If the session expires, the client calls `renew_session` (wallet-prompted) or calls `fallback_tap` (which handles direct-auth fallback).
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `SessionManager`: Manages approval, status, execution verification, and direct-auth fallbacks.
 - `SessionBuilder`: Scopes maximum operations and timestamps for the generated key.

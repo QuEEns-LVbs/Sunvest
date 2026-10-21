@@ -1,10 +1,10 @@
 # Business Strategy
 
-*Part 8 of 17. A sustainability model appropriate to Cougr's actual stage (pre-traction, 8 GitHub stars, no revenue, MIT-licensed), not an aspirational model borrowed from platforms that are years and significant funding ahead.*
+*Part 8 of 17. A sustainability model appropriate to Sunvest's actual stage (pre-traction, 8 GitHub stars, no revenue, MIT-licensed), not an aspirational model borrowed from platforms that are years and significant funding ahead.*
 
 ## The honest starting point
 
-Every "sustainable business model" section in a platform strategy document is tempting to write as if the platform already has users to monetize. Cougr does not yet. The correct business strategy for this stage is not "which revenue model," it is "how does the project fund the Tier 1 work in [05-ecosystem-vision.md](./05-ecosystem-vision.md) without compromising the openness that is core to the project's stated values, and without building monetization surfaces that signal extraction before the ecosystem has proven it creates value." Recommending a marketplace or enterprise tier right now would fail the project's own stated principle of long-term maintainability over short-term appearance of ambition.
+Every "sustainable business model" section in a platform strategy document is tempting to write as if the platform already has users to monetize. Sunvest does not yet. The correct business strategy for this stage is not "which revenue model," it is "how does the project fund the Tier 1 work in [05-ecosystem-vision.md](./05-ecosystem-vision.md) without compromising the openness that is core to the project's stated values, and without building monetization surfaces that signal extraction before the ecosystem has proven it creates value." Recommending a marketplace or enterprise tier right now would fail the project's own stated principle of long-term maintainability over short-term appearance of ambition.
 
 ## Near-term (0 to 12 months): grants and sponsorship, not products
 
@@ -20,7 +20,7 @@ None of these require compromising the MIT license or building a paid product. A
 
 ## Medium-term (12 to 24 months): optional hosted services, gated on real usage
 
-Once Tier 1/Tier 2 components are live and there is a real base of teams building on Cougr (measured by the traction metrics in [13-roadmap.md](./13-roadmap.md), not by launch dates), a **Supabase-style split** becomes appropriate: the core (`cougr-core`, the CLI, the client SDK, all examples) stays MIT-licensed and fully usable with zero payment, forever. A hosted, optional layer, most plausibly the hosted indexer described in [04-onchain-gaming-research.md](./04-onchain-gaming-research.md), or hosted CI/testnet-provisioning for teams who want it managed, is the first legitimate revenue surface, priced modestly and explicitly framed as a convenience, not a gate. This is the same tradeoff Vercel and Supabase made, and it works because the free, self-hosted path never degrades; the paid layer only removes operational toil for teams who would rather not run their own.
+Once Tier 1/Tier 2 components are live and there is a real base of teams building on Sunvest (measured by the traction metrics in [13-roadmap.md](./13-roadmap.md), not by launch dates), a **Supabase-style split** becomes appropriate: the core (`Sunvest-core`, the CLI, the client SDK, all examples) stays MIT-licensed and fully usable with zero payment, forever. A hosted, optional layer, most plausibly the hosted indexer described in [04-onchain-gaming-research.md](./04-onchain-gaming-research.md), or hosted CI/testnet-provisioning for teams who want it managed, is the first legitimate revenue surface, priced modestly and explicitly framed as a convenience, not a gate. This is the same tradeoff Vercel and Supabase made, and it works because the free, self-hosted path never degrades; the paid layer only removes operational toil for teams who would rather not run their own.
 
 ## Long-term (24+ months): the pieces to defer, not the pieces to plan now
 
@@ -28,7 +28,7 @@ Enterprise offerings (custom SLAs, audits-as-a-service using the standards layer
 
 ## What a marketplace requires before it makes sense
 
-A marketplace (of components, circuits, or games) is the most frequently over-prioritized item in platform strategies of this kind, and it is explicitly sequenced to Tier 3 in the ecosystem vision for a specific reason: a marketplace requires supply (multiple independent teams producing sellable assets) and demand (buyers who trust the platform enough to pay) simultaneously, and Cougr currently has neither, the core team produces nearly all existing content. Building marketplace infrastructure now would be building a store with no vendors and no customers. The correct trigger to revisit this is evidence, not a calendar date: multiple external teams independently building and wanting to distribute Cougr-compatible components.
+A marketplace (of components, circuits, or games) is the most frequently over-prioritized item in platform strategies of this kind, and it is explicitly sequenced to Tier 3 in the ecosystem vision for a specific reason: a marketplace requires supply (multiple independent teams producing sellable assets) and demand (buyers who trust the platform enough to pay) simultaneously, and Sunvest currently has neither, the core team produces nearly all existing content. Building marketplace infrastructure now would be building a store with no vendors and no customers. The correct trigger to revisit this is evidence, not a calendar date: multiple external teams independently building and wanting to distribute Sunvest-compatible components.
 
 ## Tradeoffs explicitly acknowledged
 

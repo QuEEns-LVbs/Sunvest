@@ -43,5 +43,5 @@ test('sha256 matches the published digest of an empty input', async () => {
 });
 
 test('utf8 encodes challenge text as bytes', () => {
-  assert.equal(toHex(utf8('cougr.test')), '636f7567722e74657374');
+  assert.equal(toHex(utf8('Sunvest.test')), '636f7567722e74657374');
 });

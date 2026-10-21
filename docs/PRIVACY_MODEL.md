@@ -1,8 +1,8 @@
-# Cougr Privacy Model
+# Sunvest Privacy Model
 
 ## Purpose
 
-This document defines Cougr's privacy and proof-verification contract after the `1.0` release gate.
+This document defines Sunvest's privacy and proof-verification contract after the `1.0` release gate.
 
 Its job is to separate the stable privacy subset from experimental proof systems so
 that the repository can make a smaller, stronger claim about what is safe to depend
@@ -10,7 +10,7 @@ on in the stable contract.
 
 ## Stable Privacy Surface
 
-The stable privacy subset in Cougr is:
+The stable privacy subset in Sunvest is:
 
 - commitments
 - commit-reveal flows
@@ -25,8 +25,8 @@ The stable privacy subset in Cougr is:
 
 These are exposed through:
 
-- `cougr_core::privacy::stable`
-- `cougr_core::zk::stable` as the compatibility alias
+- `Sunvest_core::privacy::stable`
+- `Sunvest_core::zk::stable` as the compatibility alias
 
 ## Experimental Privacy Surface
 
@@ -44,14 +44,14 @@ The following remain Experimental:
 
 These are exposed through:
 
-- `cougr_core::privacy::experimental`
-- `cougr_core::zk::experimental` as the compatibility alias
+- `Sunvest_core::privacy::experimental`
+- `Sunvest_core::zk::experimental` as the compatibility alias
 
 Compatibility note:
 
-Experimental modules may still be re-exported from `cougr_core::zk` for transition
-convenience, but they are not part of Cougr's stable privacy promise. New application
-code should prefer `cougr_core::privacy::experimental` so the product-level intent is
+Experimental modules may still be re-exported from `Sunvest_core::zk` for transition
+convenience, but they are not part of Sunvest's stable privacy promise. New application
+code should prefer `Sunvest_core::privacy::experimental` so the product-level intent is
 obvious at the import site.
 
 ## `1.0` Privacy Freeze
@@ -63,7 +63,7 @@ The frozen `1.0` privacy contract is exactly:
 - hidden-state codec interfaces
 - Merkle inclusion verification
 - sparse Merkle utilities
-- the interface contracts re-exported from `cougr_core::privacy::stable`
+- the interface contracts re-exported from `Sunvest_core::privacy::stable`
 
 The following are explicitly excluded from the `1.0` stable privacy contract:
 
@@ -86,14 +86,14 @@ The following are explicitly excluded from the `1.0` stable privacy contract:
 
 ## Proof Verification Contract
 
-Cougr's experimental Groth16 verifier makes these explicit guarantees:
+Sunvest's experimental Groth16 verifier makes these explicit guarantees:
 
 - verification keys must satisfy `vk.ic.len() == public_inputs.len() + 1`
 - malformed verification-key shape returns `ZKError::InvalidVerificationKey`
 - malformed pairing inputs return `ZKError::InvalidInput`
 - a well-formed but invalid proof returns `Ok(false)` only when the pairing check fails
 
-Cougr does not currently claim stronger guarantees for Groth16 around:
+Sunvest does not currently claim stronger guarantees for Groth16 around:
 
 - subgroup validation beyond Soroban host-type decoding
 - normalization guarantees beyond fixed-width typed wrappers
@@ -104,7 +104,7 @@ interface is explicit.
 
 ## Merkle Verification Contract
 
-Cougr's stable Merkle verification guarantees:
+Sunvest's stable Merkle verification guarantees:
 
 - malformed proofs with `siblings.len() != depth` return `ZKError::InvalidProofLength`
 - well-formed but non-matching proofs return `Ok(false)`

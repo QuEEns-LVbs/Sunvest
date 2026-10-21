@@ -3,11 +3,11 @@
 
 Checks:
   1. catalog.toml is valid TOML
-  2. Every entry has all required fields (name, category, maturity, cougr_features)
+  2. Every entry has all required fields (name, category, maturity, Sunvest_features)
   3. category is one of the allowed values
   4. maturity is canonical or transitional
   5. Every entry's name matches a directory under examples/
-  6. cougr_features is a non-empty list
+  6. Sunvest_features is a non-empty list
   7. If screenshot is set, the file exists
   8. All 10 canonical examples from the standard are present
   9. Every example directory with a Cargo.toml has a catalog entry
@@ -104,7 +104,7 @@ for key, entry in entries.items():
     name = entry.get("name")
 
     # Check required fields
-    for field in ["name", "category", "maturity", "cougr_features"]:
+    for field in ["name", "category", "maturity", "Sunvest_features"]:
         if field not in entry:
             fail(f"{key}: missing required field \"{field}\"")
 
@@ -125,12 +125,12 @@ for key, entry in entries.items():
     if maturity and maturity not in VALID_MATURITIES:
         fail(f'{key}: invalid maturity "{maturity}" (must be canonical or transitional)')
 
-    cougr_features = entry.get("cougr_features")
-    if cougr_features is not None:
-        if not isinstance(cougr_features, list):
-            fail(f"{key}: cougr_features must be a list")
-        elif len(cougr_features) == 0:
-            fail(f"{key}: cougr_features must be a non-empty list")
+    Sunvest_features = entry.get("Sunvest_features")
+    if Sunvest_features is not None:
+        if not isinstance(Sunvest_features, list):
+            fail(f"{key}: Sunvest_features must be a list")
+        elif len(Sunvest_features) == 0:
+            fail(f"{key}: Sunvest_features must be a non-empty list")
 
     screenshot = entry.get("screenshot")
     if screenshot:

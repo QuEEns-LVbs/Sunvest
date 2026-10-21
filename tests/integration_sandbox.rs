@@ -1,10 +1,10 @@
-//! Integration tests for `cougr_core::test` sandbox helpers.
+//! Integration tests for `Sunvest_core::test` sandbox helpers.
 
 #![cfg(feature = "testutils")]
 
-use cougr_core::game::SorobanGame;
-use cougr_core::impl_soroban_game;
-use cougr_core::test::{GameHarness, ReplayLog, Scenario, SnapshotAssert, TurnIndex, WorldFixture};
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::impl_soroban_game;
+use Sunvest_core::test::{GameHarness, ReplayLog, Scenario, SnapshotAssert, TurnIndex, WorldFixture};
 use soroban_sdk::{contract, contractimpl, Env};
 
 #[contract]

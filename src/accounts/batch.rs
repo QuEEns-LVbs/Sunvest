@@ -2,7 +2,7 @@ use alloc::vec::Vec;
 use soroban_sdk::Env;
 
 use super::error::AccountError;
-use super::traits::CougrAccount;
+use super::traits::SunvestAccount;
 use super::types::GameAction;
 
 /// Builder for composing multiple game actions into one atomic batch.
@@ -12,9 +12,9 @@ use super::types::GameAction;
 ///
 /// # Example
 /// ```no_run
-/// # use cougr_core::accounts::{BatchBuilder, CougrAccount, GameAction};
+/// # use Sunvest_core::accounts::{BatchBuilder, SunvestAccount, GameAction};
 /// # use soroban_sdk::{symbol_short, Bytes, Env};
-/// # fn run<A: CougrAccount>(env: &Env, account: &A) -> Result<(), cougr_core::accounts::AccountError> {
+/// # fn run<A: SunvestAccount>(env: &Env, account: &A) -> Result<(), Sunvest_core::accounts::AccountError> {
 /// let mut batch = BatchBuilder::new();
 /// batch.add(GameAction { system_name: symbol_short!("move"), data: Bytes::new(env) });
 /// batch.add(GameAction { system_name: symbol_short!("attack"), data: Bytes::new(env) });
@@ -58,7 +58,7 @@ impl BatchBuilder {
     /// If any authorization fails, the entire batch is rejected.
     ///
     /// Returns the list of authorized actions for the caller to apply.
-    pub fn execute<A: CougrAccount>(
+    pub fn execute<A: SunvestAccount>(
         self,
         env: &Env,
         account: &A,

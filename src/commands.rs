@@ -27,8 +27,8 @@ struct CommandEntry {
 ///
 /// # Example
 /// ```
-/// use cougr_core::commands::CommandQueue;
-/// use cougr_core::simple_world::SimpleWorld;
+/// use Sunvest_core::commands::CommandQueue;
+/// use Sunvest_core::simple_world::SimpleWorld;
 /// use soroban_sdk::{symbol_short, Bytes, Env};
 ///
 /// let env = Env::default();

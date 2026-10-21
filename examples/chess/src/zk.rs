@@ -1,5 +1,5 @@
-use cougr_core::privacy::experimental::CustomCircuit;
-use cougr_core::privacy::{Groth16Proof, VerificationKey};
+use Sunvest_core::privacy::experimental::CustomCircuit;
+use Sunvest_core::privacy::{Groth16Proof, VerificationKey};
 use soroban_sdk::{Bytes, BytesN, Env};
 
 pub(crate) fn build_move_circuit(

@@ -34,7 +34,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       # The Rust half rebuilds both invocations through soroban_sdk and asserts
-      # the hex that clients/godot/addons/cougr_checkpoint pins. Deliberately no
+      # the hex that clients/godot/addons/Sunvest_checkpoint pins. Deliberately no
       # clippy gate here: this crate is an internal cross-check for the addon,
       # not part of the published workspace surface, so this workflow runs only
       # the tests that decide whether the two encoders still agree.
@@ -56,4 +56,4 @@ jobs:
 
       - name: GDScript vectors
         working-directory: clients/godot
-        run: godot --headless --path . --script res://addons/cougr_checkpoint/tests/run_tests.gd
+        run: godot --headless --path . --script res://addons/Sunvest_checkpoint/tests/run_tests.gd

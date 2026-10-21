@@ -1,6 +1,6 @@
 # Architecture
 
-High-level overview of how Cougr is organized. For usage, see [README.md](README.md).
+High-level overview of how Sunvest is organized. For usage, see [README.md](README.md).
 
 ## Layers
 
@@ -81,7 +81,7 @@ All ZK operations use Stellar Protocol 25 (X-Ray) host functions - the heavy cry
 Account abstraction layer with pluggable implementations:
 
 ```text
-CougrAccount (trait)
+SunvestAccount (trait)
 ├── ClassicAccount - standard Stellar keypair
 └── ContractAccount - smart contract wallet
      ├── SessionStorage - persistent session keys
@@ -90,7 +90,7 @@ CougrAccount (trait)
      └── Secp256r1Storage - WebAuthn/Passkey keys
 ```
 
-Key traits: `CougrAccount`, `SessionKeyProvider`, `RecoveryProvider`, `MultiDeviceProvider`.
+Key traits: `SunvestAccount`, `SessionKeyProvider`, `RecoveryProvider`, `MultiDeviceProvider`.
 
 `SessionBuilder` provides a fluent API for constructing scoped session keys. `authorize_with_fallback` handles graceful degradation from session keys to direct authorization. See [ADR 0005](docs/adr/0005-session-ux.md).
 
@@ -110,22 +110,22 @@ Each standard instance is keyed by a caller-supplied `Symbol`, which keeps stora
 
 ## Competitive Layers (workspace subcrates)
 
-Three layers ship inside the single `cougr-core` crate. Implementation lives in
-`src/{circuits,session,test}/`; `internal/cougr-core-*` workspace members use
+Three layers ship inside the single `Sunvest-core` crate. Implementation lives in
+`src/{circuits,session,test}/`; `internal/Sunvest-core-*` workspace members use
 stubs for isolated `cargo check -p` runs.
 
 | Public module | Source | Maturity | Feature |
 |---|---|---|---|
-| `cougr_core::circuits` | `src/circuits/` | Experimental | always |
-| `cougr_core::session` | `src/session/` | Beta | always |
-| `cougr_core::test` | `src/test/` | Beta | `testutils` |
+| `Sunvest_core::circuits` | `src/circuits/` | Experimental | always |
+| `Sunvest_core::session` | `src/session/` | Beta | always |
+| `Sunvest_core::test` | `src/test/` | Beta | `testutils` |
 
 Circuit builders: `hidden_cards`, `fog_of_war`, `fair_dice`, `sealed_bid` →
 `GameCircuitSpec`. Examples: `hidden_hand`, `fog_explorer`, `dice_duel`,
 `blind_auction`. See [ADR 0006](docs/adr/0006-game-circuit-suite.md).
 
 The test sandbox uses `no_std` + `alloc` with Soroban `testutils` - not `std`.
-Enable with `cougr-core` feature `testutils`. Modules: `GameHarness`, `Scenario`,
+Enable with `Sunvest-core` feature `testutils`. Modules: `GameHarness`, `Scenario`,
 `WorldFixture`, `ReplayLog`, `SnapshotAssert`. See [ADR 0004](docs/adr/0004-sandbox-design.md) and [ADR 0007](docs/adr/0007-workspace-subcrates.md).
 
 ## Feature Flags
@@ -133,7 +133,7 @@ Enable with `cougr-core` feature `testutils`. Modules: `GameHarness`, `Scenario`
 | Flag | Enables |
 |---|---|
 | `hazmat-crypto` | Poseidon2 hash, BN254 curve ops (via `soroban-sdk/hazmat-crypto`) |
-| `testutils` | `cougr_core::test` sandbox, `MockAccount`, Soroban test helpers |
+| `testutils` | `Sunvest_core::test` sandbox, `MockAccount`, Soroban test helpers |
 | `debug` | Runtime introspection, metrics, state snapshots (`src/debug/`) |
 
 ## Build

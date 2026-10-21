@@ -1,6 +1,6 @@
-# cougr-sdk-passkey
+# Sunvest-sdk-passkey
 
-WebAuthn registration and assertion mapping for the secp256r1 passkeys Cougr already
+WebAuthn registration and assertion mapping for the secp256r1 passkeys Sunvest already
 verifies on chain. This package adds the off-chain half — `navigator.credentials` and the byte
 mapping a browser needs — against the contract that already exists
 ([`src/accounts/secp256r1_auth.rs`](../../src/accounts/secp256r1_auth.rs),
@@ -65,11 +65,11 @@ characters instead of letting `symbol_short!` panic later. `registered_at` is a 
 seconds, supplied by the caller.
 
 ```ts
-import { mapRegistration, toContractKey } from 'cougr-sdk-passkey';
+import { mapRegistration, toContractKey } from 'Sunvest-sdk-passkey';
 
 const registration = await mapRegistration(
   { attestationObjectHex, clientDataJSON },
-  { challenge, origin: 'https://cougr.test', rpId: 'cougr.test' },
+  { challenge, origin: 'https://Sunvest.test', rpId: 'Sunvest.test' },
 );
 
 const key = toContractKey(registration, { label: 'passkey1', registeredAt: ledgerTimestamp });
@@ -78,15 +78,15 @@ const key = toContractKey(registration, { label: 'passkey1', registeredAt: ledge
 
 ## rpId, origin, and challenge assumptions
 
-WebAuthn binds a credential to a relying party and an origin, and Cougr does not get to relax that.
+WebAuthn binds a credential to a relying party and an origin, and Sunvest does not get to relax that.
 The package makes those assumptions explicit and checks them before producing bytes:
 
-- **`rpId`** is normally the origin hostname (`cougr.test` for `https://cougr.test`). The
+- **`rpId`** is normally the origin hostname (`Sunvest.test` for `https://Sunvest.test`). The
   `authenticatorData` `rpIdHash` must equal `sha256(rpId)`, and the origin the credential was made
   for must be the `rpId` itself or one of its subdomains. A credential minted for another relying
   party is rejected with `RP_ID_HASH_MISMATCH` or `RP_ID_MISMATCH`.
 - **`origin`** is compared to `clientDataJSON.origin` byte for byte, including scheme. No suffix
-  matching, so `https://cougr.test.evil.example` is not `https://cougr.test`.
+  matching, so `https://Sunvest.test.evil.example` is not `https://Sunvest.test`.
 - **`challenge`** must equal `clientDataJSON.challenge` exactly, and is compared base64url with no
   padding. The caller owns challenge generation and single-use storage; this package does not
   invent a challenge source.
@@ -99,9 +99,9 @@ The package does not fork the RPC stack, and it does not pretend a passkey can s
 digest. `PasskeySigner` is the seam:
 
 ```ts
-import { createPasskeySigner } from 'cougr-sdk-passkey';
+import { createPasskeySigner } from 'Sunvest-sdk-passkey';
 
-const signer = createPasskeySigner({ publicKey, credentialId, rpId: 'cougr.test', origin: 'https://cougr.test' });
+const signer = createPasskeySigner({ publicKey, credentialId, rpId: 'Sunvest.test', origin: 'https://Sunvest.test' });
 const signed = await signer.signChallenge(challenge);
 // signed.message = authenticatorData || sha256(clientDataJSON)
 // signed.signature = 64 raw bytes r || s
@@ -110,7 +110,7 @@ const signed = await signer.signChallenge(challenge);
 A WebAuthn authenticator only signs `authenticatorData || sha256(clientDataJSON)`, with the
 challenge embedded in `clientDataJSON`. So a caller wiring a passkey into a signed intent submits
 `signed.message` as the `message` for `verify_secp256r1` — not the raw action hash, because the
-authenticator data is part of what was signed. `cougr_core::accounts::Secp256r1PasskeySigner`
+authenticator data is part of what was signed. `Sunvest_core::accounts::Secp256r1PasskeySigner`
 currently passes `intent.action_hash.to_bytes()`; a caller using that path has to set the action
 hash to the mapped message above, because the contract's check is the one that counts. This package
 does not loosen the contract check to hide that difference.

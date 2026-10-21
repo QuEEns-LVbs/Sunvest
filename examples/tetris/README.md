@@ -1,6 +1,6 @@
 # Tetris On-Chain Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
 
@@ -9,7 +9,7 @@
 ## Overview
 
 
-This example demonstrates a falling-block board simulation on Soroban with Cougr ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
+This example demonstrates a falling-block board simulation on Soroban with Sunvest ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
 
 
 ## Public contract API
@@ -42,7 +42,7 @@ contract entrypoint
 ```
 
 
-Board and active piece state are contract types. `components.rs` documents the piece components used for Cougr-facing structure; `systems.rs` owns movement, collision, locking, scoring, and tick helpers.
+Board and active piece state are contract types. `components.rs` documents the piece components used for Sunvest-facing structure; `systems.rs` owns movement, collision, locking, scoring, and tick helpers.
 
 ## Storage model
 
@@ -60,7 +60,7 @@ Board and active piece state are contract types. `components.rs` documents the p
 4. Query public getters for score, position, active state, or terminal status.
 5. Stop when the game-over/completed condition is reached, or reset/reinitialize where supported.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 ## Deployment
 
@@ -101,11 +101,11 @@ stellar contract invoke \
   -- update_tick
 ```
 
-## Benefits of Using Cougr-Core
+## Benefits of Using Sunvest-Core
 
-### Traditional Soroban vs. Cougr-Core
+### Traditional Soroban vs. Sunvest-Core
 
-| Aspect | Traditional Soroban | With Cougr-Core ECS |
+| Aspect | Traditional Soroban | With Sunvest-Core ECS |
 |--------|-------------------|-------------------|
 | **Code Organization** | Monolithic contract logic | Modular components & systems |
 | **State Management** | Manual storage handling | Automatic entity-component management |
@@ -114,7 +114,7 @@ stellar contract invoke \
 | **Code Reuse** | Limited | High - components are portable |
 | **Testing** | Complex integration tests | Unit testable components |
 
-### Cougr-Core Advantages
+### Sunvest-Core Advantages
 
 1. **Entity-Component-System Pattern**
    - Separates data (components) from logic (systems)
@@ -126,7 +126,7 @@ stellar contract invoke \
    // Traditional Soroban
    env.storage().instance().set(&DataKey::GameState, &state);
    
-   // With Cougr-Core
+   // With Sunvest-Core
    world.spawn_empty()
        .insert(Position { x: 5, y: 0 })
        .insert(Tetromino { shape: Shape::I });
@@ -187,19 +187,19 @@ examples/tetris/
 ```toml
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 ```
 
 ## Resources
 
 - [Soroban Documentation](https://developers.stellar.org/docs/build/smart-contracts)
 - [Stellar Documentation](https://developers.stellar.org/)
-- [Cougr Repository](https://github.com/salazarsebas/Cougr)
+- [Sunvest Repository](https://github.com/salazarsebas/Sunvest)
 - [Rust Book](https://doc.rust-lang.org/book/)
 
 ## Contributing
 
-This example is part of the Cougr framework. Contributions are welcome!
+This example is part of the Sunvest framework. Contributions are welcome!
 
 ## License
 

@@ -1,6 +1,6 @@
 //! CORS configuration validation and dynamic origin allowlist.
 //!
-//! Cougr games commonly ship HTTP surfaces in front of on-chain state:
+//! Sunvest games commonly ship HTTP surfaces in front of on-chain state:
 //! indexer gateways, session servers, and leaderboard APIs. Those endpoints
 //! need a Cross-Origin Resource Sharing (CORS) policy that is validated
 //! before it goes live and that can change at runtime as partner frontends
@@ -19,7 +19,7 @@
 //! # Example
 //!
 //! ```
-//! use cougr_core::cors::{CorsConfig, OriginAllowlist};
+//! use Sunvest_core::cors::{CorsConfig, OriginAllowlist};
 //!
 //! let mut config = CorsConfig::new();
 //! config.origins.add("https://dashboard.example.com").unwrap();

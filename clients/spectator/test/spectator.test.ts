@@ -7,7 +7,7 @@ import type {
   GetEventsRequest,
   GetEventsResponse,
   SorobanRpcContractEvent,
-} from 'cougr-sdk-events';
+} from 'Sunvest-sdk-events';
 
 import {
   SpectatorClient,
@@ -40,7 +40,7 @@ function createMockGetEvents(
   return { getEvents, requests };
 }
 
-test('SpectatorClient pages through match events using pageCougrEvents', async () => {
+test('SpectatorClient pages through match events using pageSunvestEvents', async () => {
   const page1 = {
     events: fixtureJson.events.slice(0, 3), // Ledger 100
     cursor: 'page-1',
@@ -74,7 +74,7 @@ test('SpectatorClient pages through match events using pageCougrEvents', async (
   assert.deepEqual(seenPages, ['page-1', 'page-2', 'page-3']);
   assert.equal(requests.length, 4); // 3 pages with events + 1 empty terminal page
 
-  // Filters were constructed with cougrEventFilter
+  // Filters were constructed with SunvestEventFilter
   assert.equal(requests[0]?.filters?.[0]?.type, 'contract');
   assert.deepEqual(requests[0]?.filters?.[0]?.contractIds, [fixtureJson.metadata?.contractId]);
 

@@ -2,12 +2,12 @@
 
 {{description}}
 
-Generated with `cougr new --template {{template_id}}`, based on the canonical
-[`{{source_example}}`](https://github.com/salazarsebas/Cougr/tree/main/examples/{{source_example}})
+Generated with `Sunvest new --template {{template_id}}`, based on the canonical
+[`{{source_example}}`](https://github.com/salazarsebas/Sunvest/tree/main/examples/{{source_example}})
 example.
 
-> **Experimental**: `cougr_core::circuits` is an experimental API. The circuit
-> spec ships with the Cougr development verification key - replace it with your
+> **Experimental**: `Sunvest_core::circuits` is an experimental API. The circuit
+> spec ships with the Sunvest development verification key - replace it with your
 > own trusted-setup key via `GameCircuitSpec::with_verification_key` before any
 > real deployment.
 
@@ -64,7 +64,7 @@ hand commitment appear on chain, and only as arguments to a verification call.
 5. On success the seat's `DealsVerified` counter increases; on failure the call
    returns `false` and nothing is written.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 | API | Why |
 | --- | --- |
@@ -93,7 +93,7 @@ what you deploy with `stellar contract deploy`.
 
 ## Known limitations
 
-* Ships the Cougr development verification key. Anyone who holds that proving
+* Ships the Sunvest development verification key. Anyone who holds that proving
   key can forge a proof - swap in your own before deploying.
 * Nobody is bound to committing the deck: `verify_deal` trusts whatever
   `deck_root` the caller passes. A real game stores the root at deal time.

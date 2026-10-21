@@ -1,18 +1,18 @@
 extends Control
 
-# Sample scene for the Cougr checkpoint addon. It commits a checkpoint and,
+# Sample scene for the Sunvest checkpoint addon. It commits a checkpoint and,
 # separately, raises a dispute against it on Stellar testnet.
 #
 # Point it at your contract before running. Nothing here is a secret except the
 # signing key, which stays outside the project:
 #
-#   export COUGR_RPC_URL=https://soroban-testnet.stellar.org
-#   export COUGR_CONTRACT_ID=C...         # printed by `stellar contract deploy`
-#   export COUGR_SOURCE_ACCOUNT=G...      # the player that commits checkpoints
-#   export COUGR_SIGNING_KEY=cougr-testnet
+#   export Sunvest_RPC_URL=https://soroban-testnet.stellar.org
+#   export Sunvest_CONTRACT_ID=C...         # printed by `stellar contract deploy`
+#   export Sunvest_SOURCE_ACCOUNT=G...      # the player that commits checkpoints
+#   export Sunvest_SIGNING_KEY=Sunvest-testnet
 #   godot --path clients/godot
 #
-# COUGR_SIGNING_KEY names a `stellar keys generate cougr-testnet` identity, or a
+# Sunvest_SIGNING_KEY names a `stellar keys generate Sunvest-testnet` identity, or a
 # testnet secret key starting with S. With it unset, Read state still works: a
 # state read simulates the contract and needs no signature.
 #
@@ -20,7 +20,7 @@ extends Control
 # the player that opened the match with `start_match`, or `commit_checkpoint`
 # comes back rejected with `notplay`.
 
-const Client := preload("res://addons/cougr_checkpoint/checkpoint_client.gd")
+const Client := preload("res://addons/Sunvest_checkpoint/checkpoint_client.gd")
 
 ## Tick index of the first checkpoint this scene commits. The contract requires
 ## every commit to be strictly greater than the last one.
@@ -45,7 +45,7 @@ var _last_committed_tick := -1
 
 func _ready() -> void:
 	_client = Client.new()
-	_client.name = "CougrCheckpointClient"
+	_client.name = "SunvestCheckpointClient"
 	add_child(_client)
 	_build_ui()
 	_report_configuration()
@@ -65,14 +65,14 @@ func _build_ui() -> void:
 	margin.add_child(column)
 
 	var title := Label.new()
-	title.text = "Cougr checkpoint client"
+	title.text = "Sunvest checkpoint client"
 	title.add_theme_font_size_override("font_size", 20)
 	column.add_child(title)
 
 	var hint := Label.new()
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint.text = (
-		"Set COUGR_CONTRACT_ID, COUGR_SOURCE_ACCOUNT and COUGR_SIGNING_KEY before running. "
+		"Set Sunvest_CONTRACT_ID, Sunvest_SOURCE_ACCOUNT and Sunvest_SIGNING_KEY before running. "
 		+ "Commit a checkpoint, then raise a dispute against the same tick with a different hash."
 	)
 	column.add_child(hint)
@@ -100,9 +100,9 @@ func _add_button(parent: Node, node_name: String, text: String, handler: Callabl
 
 func _report_configuration() -> void:
 	_log_line("RPC            %s" % _client.rpc_url)
-	_log_line("contract       %s" % _or_unset(_client.contract_id, "COUGR_CONTRACT_ID"))
-	_log_line("source account %s" % _or_unset(_client.source_account, "COUGR_SOURCE_ACCOUNT"))
-	_log_line("signing key    %s" % _or_unset(OS.get_environment("COUGR_SIGNING_KEY"), "COUGR_SIGNING_KEY"))
+	_log_line("contract       %s" % _or_unset(_client.contract_id, "Sunvest_CONTRACT_ID"))
+	_log_line("source account %s" % _or_unset(_client.source_account, "Sunvest_SOURCE_ACCOUNT"))
+	_log_line("signing key    %s" % _or_unset(OS.get_environment("Sunvest_SIGNING_KEY"), "Sunvest_SIGNING_KEY"))
 	_log_line("")
 
 

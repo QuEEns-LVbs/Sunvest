@@ -298,7 +298,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
-name = "cougr-core"
+name = "Sunvest-core"
 version = "1.1.0"
 dependencies = [
  "soroban-sdk",
@@ -808,7 +808,7 @@ checksum = "6fe2267d4ed49bc07b63801559be28c718ea06c4738b7a03c94df7386d2cde46"
 name = "hidden_hand"
 version = "0.1.0"
 dependencies = [
- "cougr-core",
+ "Sunvest-core",
  "soroban-sdk",
 ]
 

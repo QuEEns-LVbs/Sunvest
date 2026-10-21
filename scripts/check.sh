@@ -54,12 +54,12 @@ need() {
 # ---------------------------------------------------------------------------
 # What changed
 
-UPSTREAM_URL="https://github.com/salazarsebas/Cougr.git"
+UPSTREAM_URL="https://github.com/salazarsebas/Sunvest.git"
 base_ref() {
   local remote
   for remote in $(git remote); do
     case "$(git remote get-url "$remote" 2>/dev/null)" in
-      *salazarsebas/Cougr*|*salazarsebas/cougr*)
+      *salazarsebas/Sunvest*|*salazarsebas/Sunvest*)
         if git rev-parse -q --verify "$remote/main" >/dev/null; then
           echo "$remote/main"
           return
@@ -115,7 +115,7 @@ if [ "$MODE" = "fix" ]; then
     dir="${dir%/}"
     [ -f "$dir/Cargo.toml" ] && run "$dir" "cargo fmt ($dir)" cargo fmt
   done
-  run . "sync cougr-site/src" python3 cougr-site/sync.py
+  run . "sync Sunvest-site/src" python3 Sunvest-site/sync.py
   echo
   echo "Done. Review the changes with 'git diff', commit them, then run 'make check'."
   [ "${#FAILED[@]}" -eq 0 ]
@@ -144,7 +144,7 @@ if touched '^(src|internal|tests|benches|cli)/|^Cargo\.(toml|lock)$|^\.github/wo
   run . "core: clippy" cargo clippy --all-targets --all-features -- -D warnings
   run . "core: tests" cargo test --workspace --features testutils
   run . "core: build" cargo build
-  run . "core: hygiene check (cougr-cli)" cargo run -q -p cougr-cli -- check --path .
+  run . "core: hygiene check (Sunvest-cli)" cargo run -q -p Sunvest-cli -- check --path .
 
   MSRV="$(grep -oE 'rust-toolchain@[0-9]+\.[0-9]+(\.[0-9]+)?' .github/workflows/core.yml | head -1 | cut -d@ -f2)"
   if [ -n "$MSRV" ]; then
@@ -196,7 +196,7 @@ for dir in examples/*/; do
   [ -f "$dir/Cargo.toml" ] || continue
 
   if is_circuit_example "$name"; then
-    touched "^$dir/|^src/circuits/|^internal/cougr-core-circuits/|^\.github/workflows/circuit_examples\.yml$" || continue
+    touched "^$dir/|^src/circuits/|^internal/Sunvest-core-circuits/|^\.github/workflows/circuit_examples\.yml$" || continue
     run "$dir" "$name: cargo test" cargo test
     stellar_build "$dir" "$name"
     continue
@@ -216,57 +216,57 @@ for dir in examples/*/; do
 done
 
 # Circuit Examples (circuit_examples.yml): circuits module
-if touched '^(src/circuits|internal/cougr-core-circuits)/|^examples/(hidden_hand|fog_explorer|dice_duel|blind_auction)/|^\.github/workflows/circuit_examples\.yml$'; then
-  run . "circuits: module tests" cargo test -p cougr-core --features testutils -- circuits integration_circuits
-  run . "circuits: validate layouts" bash internal/cougr-core-circuits/scripts/validate-layouts.sh
+if touched '^(src/circuits|internal/Sunvest-core-circuits)/|^examples/(hidden_hand|fog_explorer|dice_duel|blind_auction)/|^\.github/workflows/circuit_examples\.yml$'; then
+  run . "circuits: module tests" cargo test -p Sunvest-core --features testutils -- circuits integration_circuits
+  run . "circuits: validate layouts" bash internal/Sunvest-core-circuits/scripts/validate-layouts.sh
 fi
 
 # Circom Pipeline (circom.yml): heavy, needs circom and bun.
-if touched '^internal/cougr-core-circuits/|^src/circuits/generated\.rs$|^\.github/workflows/circom\.yml$'; then
+if touched '^internal/Sunvest-core-circuits/|^src/circuits/generated\.rs$|^\.github/workflows/circom\.yml$'; then
   if need circom "https://docs.circom.io/getting-started/installation/" "circom pipeline" \
     && need bun "https://bun.sh" "circom pipeline"; then
-    run internal/cougr-core-circuits "circom: install" bun install --frozen-lockfile
-    run internal/cougr-core-circuits "circom: pipeline" bun run pipeline
+    run internal/Sunvest-core-circuits "circom: install" bun install --frozen-lockfile
+    run internal/Sunvest-core-circuits "circom: pipeline" bun run pipeline
     run . "circom: integration tests" cargo test --test integration_circuits --features testutils
   fi
 fi
 
 # ---------------------------------------------------------------------------
-# Docs and site (cougr-site.yml, docs-site.yml)
+# Docs and site (Sunvest-site.yml, docs-site.yml)
 
-SITE_PATHS='^(cougr-site|docs)/|^examples/catalog\.toml$|^examples/.*/(README\.md|preview\.svg)$|^packages/tokens/tokens\.json$|^(ARCHITECTURE|CONTRIBUTING|CHANGELOG|SECURITY)\.md$|^\.github/workflows/(cougr-site|docs-site)\.yml$'
+SITE_PATHS='^(Sunvest-site|docs)/|^examples/catalog\.toml$|^examples/.*/(README\.md|preview\.svg)$|^packages/tokens/tokens\.json$|^(ARCHITECTURE|CONTRIBUTING|CHANGELOG|SECURITY)\.md$|^\.github/workflows/(Sunvest-site|docs-site)\.yml$'
 if touched "$SITE_PATHS"; then
-  run . "site: sync cougr-site/src" python3 cougr-site/sync.py
-  run . "site: cougr-site/src is committed" bash -c '
-    if [ -n "$(git status --porcelain -- cougr-site/src)" ]; then
-      git status --short -- cougr-site/src
-      echo "cougr-site/src differs from its source docs. Commit the files above (make fix regenerates them)."
+  run . "site: sync Sunvest-site/src" python3 Sunvest-site/sync.py
+  run . "site: Sunvest-site/src is committed" bash -c '
+    if [ -n "$(git status --porcelain -- Sunvest-site/src)" ]; then
+      git status --short -- Sunvest-site/src
+      echo "Sunvest-site/src differs from its source docs. Commit the files above (make fix regenerates them)."
       exit 1
     fi'
   if need mdbook "cargo install mdbook --version 0.4.43" "site: mdbook"; then
-    if touched '^(cougr-site|docs)/|^\.github/workflows/docs-site\.yml$'; then
-      run cougr-site "site: mdbook test" mdbook test
+    if touched '^(Sunvest-site|docs)/|^\.github/workflows/docs-site\.yml$'; then
+      run Sunvest-site "site: mdbook test" mdbook test
     fi
     # generate-showcase.py rewrites two tracked files. Keep the contributor's copies.
     keep="$(mktemp -d)"
-    cp cougr-site/src/SUMMARY.md "$keep/SUMMARY.md" 2>/dev/null
-    cp cougr-site/src/showcase/gallery.md "$keep/gallery.md" 2>/dev/null
-    run . "site: generate showcase" python3 cougr-site/generate-showcase.py
-    # cougr-site.yml builds without mdbook-linkcheck (it is optional in book.toml).
+    cp Sunvest-site/src/SUMMARY.md "$keep/SUMMARY.md" 2>/dev/null
+    cp Sunvest-site/src/showcase/gallery.md "$keep/gallery.md" 2>/dev/null
+    run . "site: generate showcase" python3 Sunvest-site/generate-showcase.py
+    # Sunvest-site.yml builds without mdbook-linkcheck (it is optional in book.toml).
     # A local linkcheck built for another mdbook version would fail the build, so stub it out.
     printf '#!/bin/sh\ncat >/dev/null\n' >"$keep/mdbook-linkcheck"
     chmod +x "$keep/mdbook-linkcheck"
-    run cougr-site "site: mdbook build" env PATH="$keep:$PATH" mdbook build
+    run Sunvest-site "site: mdbook build" env PATH="$keep:$PATH" mdbook build
     # docs-site.yml builds with mdbook 0.4.43 and mdbook-linkcheck 0.7.7, which rejects broken links.
-    if touched '^(cougr-site|docs)/|^\.github/workflows/docs-site\.yml$'; then
+    if touched '^(Sunvest-site|docs)/|^\.github/workflows/docs-site\.yml$'; then
       if mdbook --version 2>/dev/null | grep -q 'v0\.4\.' && command -v mdbook-linkcheck >/dev/null 2>&1; then
-        run cougr-site "site: link check" mdbook build
+        run Sunvest-site "site: link check" mdbook build
       else
         SKIPPED+=("site: link check (needs mdbook 0.4.43 and mdbook-linkcheck 0.7.7: cargo install mdbook --version 0.4.43 --locked && cargo install mdbook-linkcheck --version 0.7.7 --locked)")
       fi
     fi
-    [ -f "$keep/SUMMARY.md" ] && cp "$keep/SUMMARY.md" cougr-site/src/SUMMARY.md
-    [ -f "$keep/gallery.md" ] && cp "$keep/gallery.md" cougr-site/src/showcase/gallery.md
+    [ -f "$keep/SUMMARY.md" ] && cp "$keep/SUMMARY.md" Sunvest-site/src/SUMMARY.md
+    [ -f "$keep/gallery.md" ] && cp "$keep/gallery.md" Sunvest-site/src/showcase/gallery.md
     rm -rf "$keep"
   fi
 fi
@@ -332,11 +332,11 @@ fi
 if touched '^clients/godot/|^\.github/workflows/godot-checkpoint-client\.yml$'; then
   run clients/godot/checkpoint_vectors "godot: rust vectors" cargo test -- --nocapture
   if need godot "https://godotengine.org/download (4.4.1)" "godot: GDScript vectors"; then
-    run clients/godot "godot: GDScript vectors" godot --headless --path . --script res://addons/cougr_checkpoint/tests/run_tests.gd
+    run clients/godot "godot: GDScript vectors" godot --headless --path . --script res://addons/Sunvest_checkpoint/tests/run_tests.gd
   fi
 fi
 
-if touched '^studio/|^packages/tokens/tokens\.json$|^\.github/workflows/(studio|cougr-studio)\.yml$' && need npm "https://nodejs.org" "studio"; then
+if touched '^studio/|^packages/tokens/tokens\.json$|^\.github/workflows/(studio|Sunvest-studio)\.yml$' && need npm "https://nodejs.org" "studio"; then
   npm_ci studio
   run studio "studio: npm test" npm test
   run packages/tokens "studio: build design tokens" node build.js

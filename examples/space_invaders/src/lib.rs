@@ -1,25 +1,25 @@
-//! Space Invaders - On-Chain Game Using Cougr-Core
+//! Space Invaders - On-Chain Game Using Sunvest-Core
 //!
 //! This smart contract implements Space Invaders game logic on the Stellar blockchain
-//! using the cougr-core ECS framework. It demonstrates how to build on-chain games
+//! using the Sunvest-core ECS framework. It demonstrates how to build on-chain games
 //! with efficient state management using Entity-Component-System architecture.
 //!
-//! # Cougr-Core Integration
-//! This example showcases the use of cougr-core's ECS pattern:
+//! # Sunvest-Core Integration
+//! This example showcases the use of Sunvest-core's ECS pattern:
 //! - **World**: Central container for all game entities and components
 //! - **Entity**: Game objects (ship, invaders, bullets) with unique IDs
 //! - **Component**: Data attached to entities (Position, Velocity, Health)
-//! - **Position**: cougr-core's Position component for entity location
+//! - **Position**: Sunvest-core's Position component for entity location
 //! - **Event**: Game events (Collision, Damage, Score)
 //!
-//! # Benefits of Using Cougr-Core
+//! # Benefits of Using Sunvest-Core
 //! - **Modular Design**: Components can be reused across different entity types
 //! - **Efficient Data Layout**: ECS optimizes memory access patterns for WASM
 //! - **Scalability**: Easy to add new components and systems without refactoring
 //! - **Type Safety**: Rust's type system prevents component misuse
 //!
 //! # Contract Functions
-//! - `init_game`: Initialize a new game using cougr-core World
+//! - `init_game`: Initialize a new game using Sunvest-core World
 //! - `move_ship`: Move the player's ship left or right
 //! - `shoot`: Fire a bullet from the player's ship
 //! - `update_tick`: Advance the game by one tick (main game loop)
@@ -40,9 +40,9 @@ mod test;
 use crate::game_state::{INVADER_MOVE_INTERVAL, INVADER_WIN_Y, SHIP_Y, SHOOT_COOLDOWN};
 use soroban_sdk::{contract, contractimpl, Env, Vec};
 
-// Import cougr-core ECS framework components
+// Import Sunvest-core ECS framework components
 // These are actively used for entity management and position tracking
-use cougr_core::{Position as CougrPosition, SimpleWorld};
+use Sunvest_core::{Position as SunvestPosition, SimpleWorld};
 
 // Re-export game state types for external use
 pub use components::{
@@ -55,17 +55,17 @@ pub struct SpaceInvadersContract;
 
 #[contractimpl]
 impl SpaceInvadersContract {
-    /// Initialize a new game with cougr-core ECS World
+    /// Initialize a new game with Sunvest-core ECS World
     ///
-    /// This function demonstrates full cougr-core integration by:
+    /// This function demonstrates full Sunvest-core integration by:
     /// 1. Creating a new ECS World for entity management
-    /// 2. Spawning entities for ship, invaders with cougr-core
-    /// 3. Using cougr-core's Position component for location tracking
+    /// 2. Spawning entities for ship, invaders with Sunvest-core
+    /// 3. Using Sunvest-core's Position component for location tracking
     ///
     /// The ECS World manages all game entities while Soroban storage
     /// persists the game state on-chain.
     pub fn init_game(env: Env) {
-        // Create cougr-core ECS World for entity management
+        // Create Sunvest-core ECS World for entity management
         let mut world = SimpleWorld::new(&env);
 
         // Spawn player ship entity in ECS World
@@ -74,12 +74,12 @@ impl SpaceInvadersContract {
         // Create initial game state with Ship component
         let state = GameState::new();
 
-        // Convert ship position to cougr-core Position for ECS tracking
-        let _ship_cougr_pos: CougrPosition = state.ship.position.to_cougr_position();
+        // Convert ship position to Sunvest-core Position for ECS tracking
+        let _ship_Sunvest_pos: SunvestPosition = state.ship.position.to_Sunvest_position();
 
         env.storage().instance().set(&DataKey::State, &state);
 
-        // Create invader grid using cougr-core entity system
+        // Create invader grid using Sunvest-core entity system
         let mut invaders = Vec::new(&env);
         for row in 0..INVADER_ROWS {
             let invader_type = match row {
@@ -89,15 +89,15 @@ impl SpaceInvadersContract {
             };
 
             for col in 0..INVADER_COLS {
-                // Spawn invader entity in cougr-core World
+                // Spawn invader entity in Sunvest-core World
                 let _invader_entity = world.spawn_entity();
 
                 let x = (col as i32 * 4) + 4;
                 let y = (row as i32 * 3) + 2;
                 let invader = Invader::new(x, y, invader_type);
 
-                // Each invader's position can be converted to cougr-core Position
-                let _invader_cougr_pos: CougrPosition = invader.position.to_cougr_position();
+                // Each invader's position can be converted to Sunvest-core Position
+                let _invader_Sunvest_pos: SunvestPosition = invader.position.to_Sunvest_position();
 
                 invaders.push_back(invader);
             }
@@ -126,7 +126,7 @@ impl SpaceInvadersContract {
     /// Move the player's ship left or right
     ///
     /// Uses EntityPosition component for tracking ship location,
-    /// following cougr-core's component-based design.
+    /// following Sunvest-core's component-based design.
     ///
     /// # Arguments
     /// * `direction` - -1 for left, 1 for right
@@ -153,7 +153,7 @@ impl SpaceInvadersContract {
     /// Fire a bullet from the player's ship
     ///
     /// Creates a new Bullet entity with Position and Velocity components,
-    /// demonstrating cougr-core's entity spawning pattern.
+    /// demonstrating Sunvest-core's entity spawning pattern.
     ///
     /// # Returns
     /// `true` if bullet was fired, `false` if on cooldown or game over
@@ -165,7 +165,7 @@ impl SpaceInvadersContract {
         }
 
         // Create new bullet with Position and Velocity components
-        // Following cougr-core ECS pattern for entity creation
+        // Following Sunvest-core ECS pattern for entity creation
         let bullet = Bullet::player_bullet(state.ship_x(), SHIP_Y - 1);
 
         let mut player_bullets: Vec<Bullet> = env
@@ -187,7 +187,7 @@ impl SpaceInvadersContract {
 
     /// Advance the game by one tick - main game loop using ECS systems
     ///
-    /// This function demonstrates cougr-core system patterns:
+    /// This function demonstrates Sunvest-core system patterns:
     /// - Movement System: Updates entity positions using Velocity components
     /// - Collision System: Detects overlapping entities using Position
     /// - Health System: Manages damage using Health components
@@ -209,7 +209,7 @@ impl SpaceInvadersContract {
         }
 
         // === MOVEMENT SYSTEM ===
-        // Update entity positions using Velocity components (cougr-core pattern)
+        // Update entity positions using Velocity components (Sunvest-core pattern)
 
         // Move player bullets using their Velocity component
         let player_bullets: Vec<Bullet> = env
@@ -253,7 +253,7 @@ impl SpaceInvadersContract {
         let mut invaders: Vec<Invader> = env.storage().instance().get(&DataKey::Invaders).unwrap();
 
         // === COLLISION SYSTEM ===
-        // Detect entity overlaps using Position components (cougr-core pattern)
+        // Detect entity overlaps using Position components (Sunvest-core pattern)
 
         // Check player bullet collisions with invaders
         let mut updated_player_bullets = Vec::new(&env);
@@ -416,7 +416,7 @@ impl SpaceInvadersContract {
         count
     }
 
-    /// Get the cougr-core entity count (demonstrates ECS integration)
+    /// Get the Sunvest-core entity count (demonstrates ECS integration)
     pub fn get_entity_count(env: Env) -> u32 {
         env.storage()
             .instance()

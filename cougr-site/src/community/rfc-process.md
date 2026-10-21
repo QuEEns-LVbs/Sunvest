@@ -14,4 +14,4 @@ When the RFC process is established it will cover:
 - The RFC template (based on the existing ADR format)
 - How to submit, how long the comment period is, and who has final say
 
-**Tracked in:** [`salazarsebas/Cougr` issues](https://github.com/salazarsebas/Cougr/issues)
+**Tracked in:** [`salazarsebas/Sunvest` issues](https://github.com/salazarsebas/Sunvest/issues)

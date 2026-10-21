@@ -1,4 +1,4 @@
-class_name CougrSorobanXdr
+class_name SunvestSorobanXdr
 
 # Encoding and decoding primitives for Stellar and Soroban XDR.
 #
@@ -53,7 +53,7 @@ static func u32(value: int) -> PackedByteArray:
 ## checkpoint_payload.gd when a value has the top bit set.
 static func u64(value: int) -> PackedByteArray:
 	if value < 0:
-		push_error("Cougr: u64 value must not be negative, got %d" % value)
+		push_error("Sunvest: u64 value must not be negative, got %d" % value)
 		return PackedByteArray()
 	var out := PackedByteArray()
 	for shift in [56, 48, 40, 32, 24, 16, 8, 0]:
@@ -122,14 +122,14 @@ static func encode_contract(hash: PackedByteArray) -> String:
 static func decode_hex(value: String, byte_count: int) -> PackedByteArray:
 	if value.length() != byte_count * 2:
 		push_error(
-			"Cougr: expected %d hex characters, got %d" % [byte_count * 2, value.length()]
+			"Sunvest: expected %d hex characters, got %d" % [byte_count * 2, value.length()]
 		)
 		return PackedByteArray()
 	var out := PackedByteArray()
 	for index in range(0, value.length(), 2):
 		var pair := value.substr(index, 2)
 		if not _is_hex(pair):
-			push_error("Cougr: %s is not hexadecimal" % pair)
+			push_error("Sunvest: %s is not hexadecimal" % pair)
 			return PackedByteArray()
 		out.append(pair.hex_to_int())
 	return out
@@ -152,7 +152,7 @@ static func sha256(bytes: PackedByteArray) -> PackedByteArray:
 ## read an account's sequence number.
 static func account_ledger_key(key: PackedByteArray) -> PackedByteArray:
 	if key.size() != 32:
-		push_error("Cougr: an ed25519 key must be 32 bytes, got %d" % key.size())
+		push_error("Sunvest: an ed25519 key must be 32 bytes, got %d" % key.size())
 		return PackedByteArray()
 	var out := u32(LEDGER_ENTRY_TYPE_ACCOUNT)
 	out.append_array(u32(KEY_TYPE_ED25519))
@@ -166,12 +166,12 @@ static func account_ledger_key(key: PackedByteArray) -> PackedByteArray:
 static func account_sequence(ledger_entry_xdr: PackedByteArray) -> int:
 	if ledger_entry_xdr.size() < ACCOUNT_SEQUENCE_OFFSET + 8:
 		push_error(
-			"Cougr: an account ledger entry must be at least %d bytes, got %d"
+			"Sunvest: an account ledger entry must be at least %d bytes, got %d"
 			% [ACCOUNT_SEQUENCE_OFFSET + 8, ledger_entry_xdr.size()]
 		)
 		return -1
 	if u32_at(ledger_entry_xdr, 0) != LEDGER_ENTRY_TYPE_ACCOUNT:
-		push_error("Cougr: ledger entry is not an account entry")
+		push_error("Sunvest: ledger entry is not an account entry")
 		return -1
 	return u64_at(ledger_entry_xdr, ACCOUNT_SEQUENCE_OFFSET)
 
@@ -181,7 +181,7 @@ static func account_sequence(ledger_entry_xdr: PackedByteArray) -> int:
 
 static func _encode_strkey(payload: PackedByteArray, version: int, kind: String) -> String:
 	if payload.size() != 32:
-		push_error("Cougr: a %s payload must be 32 bytes, got %d" % [kind, payload.size()])
+		push_error("Sunvest: a %s payload must be 32 bytes, got %d" % [kind, payload.size()])
 		return ""
 	var bytes := PackedByteArray([version])
 	bytes.append_array(payload)
@@ -195,19 +195,19 @@ static func _decode_strkey(address: String, version: int, kind: String) -> Packe
 	var payload := _base32_decode(address)
 	if payload.size() != _STRKEY_LENGTH:
 		push_error(
-			"Cougr: %s address %s must decode to %d bytes, got %d"
+			"Sunvest: %s address %s must decode to %d bytes, got %d"
 			% [kind, address, _STRKEY_LENGTH, payload.size()]
 		)
 		return PackedByteArray()
 	if payload[0] != version:
 		push_error(
-			"Cougr: %s address %s has version byte %d, expected %d"
+			"Sunvest: %s address %s has version byte %d, expected %d"
 			% [kind, address, payload[0], version]
 		)
 		return PackedByteArray()
 	var checksum := _crc16_xmodem(payload.slice(0, 33))
 	if payload[33] != (checksum & 0xff) or payload[34] != ((checksum >> 8) & 0xff):
-		push_error("Cougr: %s address %s failed its checksum" % [kind, address])
+		push_error("Sunvest: %s address %s failed its checksum" % [kind, address])
 		return PackedByteArray()
 	return payload.slice(1, 33)
 

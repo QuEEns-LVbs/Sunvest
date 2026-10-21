@@ -24,8 +24,8 @@ struct SimpleSystemEntry {
 ///
 /// # Example
 /// ```
-/// use cougr_core::scheduler::{ScheduleStage, SimpleScheduler, SystemConfig};
-/// use cougr_core::simple_world::SimpleWorld;
+/// use Sunvest_core::scheduler::{ScheduleStage, SimpleScheduler, SystemConfig};
+/// use Sunvest_core::simple_world::SimpleWorld;
 /// use soroban_sdk::{symbol_short, Bytes, Env};
 ///
 /// fn physics_system(world: &mut SimpleWorld, env: &Env) {

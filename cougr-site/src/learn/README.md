@@ -1,6 +1,6 @@
 # Learn
 
-The **Learn** section takes you from a working first game to understanding the design decisions that make Cougr work the way it does.
+The **Learn** section takes you from a working first game to understanding the design decisions that make Sunvest work the way it does.
 
 | Guide | Status |
 |---|---|

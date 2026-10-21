@@ -1,4 +1,4 @@
-# ADR 0006: Game Circuit Suite (`cougr_core::circuits`)
+# ADR 0006: Game Circuit Suite (`Sunvest_core::circuits`)
 
 ## Status
 
@@ -7,13 +7,13 @@ Accepted
 ## Context
 
 Game developers need fog-of-war, hidden cards, fair dice, and sealed-bid mechanics
-without authoring Circom circuits and wiring Groth16 verification by hand. Cougr
+without authoring Circom circuits and wiring Groth16 verification by hand. Sunvest
 already exposes low-level verifiers under `zk::experimental`, but the onboarding
 path requires weeks of ZK specialization.
 
 ## Decision
 
-1. Ship four pre-built circuit builders under `cougr_core::circuits` (always
+1. Ship four pre-built circuit builders under `Sunvest_core::circuits` (always
    available, Experimental maturity):
 
    | Builder | Public inputs |
@@ -32,7 +32,7 @@ path requires weeks of ZK specialization.
    verification logic.
 
 4. Circom scaffolds and off-chain scripts live in
-   `internal/cougr-core-circuits/` (`publish = false`). Rust implementation lives
+   `internal/Sunvest-core-circuits/` (`publish = false`). Rust implementation lives
    in `src/circuits/`.
 
 5. Canonical examples demonstrate each builder:
@@ -48,7 +48,7 @@ path requires weeks of ZK specialization.
 - Public-input layouts are versioned by `CircuitId` and must not change without a
   new ADR.
 - On-chain builders ship an unbound VK; load test/production keys from
-  `internal/cougr-core-circuits` (`bun run pipeline` → `exported/*_vk.json`).
+  `internal/Sunvest-core-circuits` (`bun run pipeline` → `exported/*_vk.json`).
 - Circuits use Poseidon + game constraints (~325–13.6k R1CS); pot14 trusted setup.
 - `zk::stable` remains unchanged; all new surface stays Experimental until external
   audit.

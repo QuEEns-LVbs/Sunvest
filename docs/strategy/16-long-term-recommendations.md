@@ -4,7 +4,7 @@
 
 ## The one-sentence version of this entire package
 
-Cougr's engineering is ahead of its perception; fix the funnel (CLI, docs site, showcase, governance hygiene) before building anything speculative, and let evidence of real usage, not ambition, decide when to build the bigger, slower-to-reverse pieces (marketplace, hosted infrastructure, certifications, a visual editor).
+Sunvest's engineering is ahead of its perception; fix the funnel (CLI, docs site, showcase, governance hygiene) before building anything speculative, and let evidence of real usage, not ambition, decide when to build the bigger, slower-to-reverse pieces (marketplace, hosted infrastructure, certifications, a visual editor).
 
 ## What should never change, regardless of how the ecosystem grows
 

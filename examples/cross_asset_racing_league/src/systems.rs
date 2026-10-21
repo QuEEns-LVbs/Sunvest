@@ -6,8 +6,8 @@ use crate::types::{
     BOOST_STANDARD_COST, MAX_RACERS_PER_RACE, RACE_STATE_ACTIVE, RACE_STATE_COMPLETED,
     RACE_STATE_REGISTRATION,
 };
-use cougr_core::component::ComponentTrait;
-use cougr_core::simple_world::SimpleWorld;
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::simple_world::SimpleWorld;
 use soroban_sdk::{panic_with_error, symbol_short, Address, BytesN, Env, Vec};
 
 pub struct RaceSystem;
@@ -87,7 +87,7 @@ impl RaceSystem {
         entrants.push_back(player.clone());
         env.storage().instance().set(&entrants_key, &entrants);
 
-        // Cougr ECS Integration
+        // Sunvest ECS Integration
         let mut world = SimpleWorld::new(env);
         let player_entity_id = world.spawn_entity();
 
@@ -219,7 +219,7 @@ impl RaceSystem {
             .persistent()
             .set(&credit_key, &(current_credits - boost_cost));
 
-        // Cougr ECS Integration
+        // Sunvest ECS Integration
         let mut boost_world = SimpleWorld::new(env);
         let boost_entity = boost_world.spawn_entity();
         let boost_comp = BoostComponent {

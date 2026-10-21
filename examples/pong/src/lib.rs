@@ -17,11 +17,11 @@ pub struct PongContract;
 
 #[contractimpl]
 impl PongContract {
-    /// Initialize a new game using Cougr-Core ECS component pattern
+    /// Initialize a new game using Sunvest-Core ECS component pattern
     /// Demonstrates: Entity creation with components
     pub fn init_game(env: Env) -> GameState {
         // Create ECS world with entities and components
-        // Following Cougr-Core pattern: each game object is an entity with components
+        // Following Sunvest-Core pattern: each game object is an entity with components
         let world_state = ECSWorldState {
             // Entity 0: Player 1 Paddle
             player1_paddle: PaddleComponent {
@@ -53,7 +53,7 @@ impl PongContract {
     }
 
     /// Move a player's paddle
-    /// Demonstrates: Component query and update pattern from Cougr-Core
+    /// Demonstrates: Component query and update pattern from Sunvest-Core
     pub fn move_paddle(env: Env, player: u32, direction: i32) -> GameState {
         let mut world_state: ECSWorldState = env
             .storage()
@@ -66,7 +66,7 @@ impl PongContract {
         }
 
         // Query pattern: Find paddle component by player_id
-        // This demonstrates Cougr-Core's component query approach
+        // This demonstrates Sunvest-Core's component query approach
         let movement = direction * systems::PADDLE_SPEED;
 
         if world_state.player1_paddle.player_id == player {
@@ -83,7 +83,7 @@ impl PongContract {
         systems::world_to_game_state(&world_state)
     }
 
-    /// Update game tick - demonstrates Cougr-Core System pattern
+    /// Update game tick - demonstrates Sunvest-Core System pattern
     /// Systems: PhysicsSystem, CollisionSystem, ScoringSystem
     pub fn update_tick(env: Env) -> GameState {
         let mut world_state: ECSWorldState = env

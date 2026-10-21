@@ -1,13 +1,13 @@
 # ️ Guild Treasury Wars - DAO-Governed Factions with stellar-zk Commitments
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/salazarsebas/Cougr)
-[![Tests](https://img.shields.io/badge/tests-14%20passing-brightgreen)](https://github.com/salazarsebas/Cougr)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/salazarsebas/Sunvest)
+[![Tests](https://img.shields.io/badge/tests-14%20passing-brightgreen)](https://github.com/salazarsebas/Sunvest)
 [![Stellar](https://img.shields.io/badge/Stellar-Testnet-blue)](https://stellar.org)
 
-A guild-based strategy game implemented as a **Soroban smart contract** using `cougr-core`'s ECS framework. Guilds manage shared treasuries, vote on strategic actions through DAO mechanics, and compete through hidden strategic commitments powered by **stellar-zk**.
+A guild-based strategy game implemented as a **Soroban smart contract** using `Sunvest-core`'s ECS framework. Guilds manage shared treasuries, vote on strategic actions through DAO mechanics, and compete through hidden strategic commitments powered by **stellar-zk**.
 
 ## Why stellar-zk?
 
@@ -29,7 +29,7 @@ In strategy games, revealing your plans to the enemy is a losing move. **stellar
 │ 1. GUILD CREATION                                        │
 │    Admin creates a guild with INITIAL_TREASURY (1000)     │
 │    → Members join the guild (up to 10)                    │
-│    → cougr-core ECS World tracks entities                 │
+│    → Sunvest-core ECS World tracks entities                 │
 ├─────────────────────────────────────────────────────────┤
 │ 2. GOVERNANCE (DAO-style proposals)                       │
 │    Members submit proposals: Defend, Attack, Upgrade,     │
@@ -95,7 +95,7 @@ Each commitment hash acts as a **nullifier** (following stellar-zk's verifier co
 
 ---
 
-## Cougr-Core Integration
+## Sunvest-Core Integration
 
 ### ECS Components
 
@@ -110,8 +110,8 @@ Each commitment hash acts as a **nullifier** (following stellar-zk's verifier co
 ### ECS World
 
 ```rust
-// cougr-core ECS entity management
-let mut world = cougr_core::SimpleWorld::new(&env);
+// Sunvest-core ECS entity management
+let mut world = Sunvest_core::SimpleWorld::new(&env);
 let _guild_entity = world.spawn_entity();
 ```
 
@@ -213,7 +213,7 @@ stellar contract build
 
 ```
 examples/guild_treasury_wars/
-├── Cargo.toml          # Dependencies: cougr-core + soroban-sdk
+├── Cargo.toml          # Dependencies: Sunvest-core + soroban-sdk
 ├── README.md           # This documentation
 └── src/
     ├── lib.rs          # Contract entry points

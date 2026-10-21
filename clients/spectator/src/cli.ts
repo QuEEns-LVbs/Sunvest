@@ -20,7 +20,7 @@ async function main(): Promise<void> {
     } else if (args[i] === '--step-by-step') {
       stepByStep = true;
     } else if (args[i] === '--help' || args[i] === '-h') {
-      console.log('Usage: cougr-spectator [options]');
+      console.log('Usage: Sunvest-spectator [options]');
       console.log('');
       console.log('Options:');
       console.log('  --fixture <path>   Path to match events fixture JSON (default: fixtures/turn_based_match.json)');

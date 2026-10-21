@@ -10,7 +10,7 @@ The standards layer is documented, integration-tested, and intentionally designe
 
 ## Decision
 
-Cougr includes `standards` in the stable `1.0` contract.
+Sunvest includes `standards` in the stable `1.0` contract.
 
 ## Consequences
 

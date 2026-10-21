@@ -1,7 +1,7 @@
 use crate::components::{GameState, Piece, TetrominoShape};
-use cougr_core::SimpleWorld;
+use Sunvest_core::SimpleWorld;
 #[cfg(test)]
-use cougr_core::{GameApp, ScheduleStage, SystemConfig};
+use Sunvest_core::{GameApp, ScheduleStage, SystemConfig};
 use soroban_sdk::{symbol_short, Env, Vec};
 
 pub(crate) const BOARD_WIDTH: i32 = 10;
@@ -34,7 +34,7 @@ pub(crate) fn generate_piece(env: &Env) -> Piece {
 
 // ECS Integration:
 // We use a ephemeral World to calculate the move validity.
-// This demonstrates usage of cougr-core even if we store state in a simplified struct.
+// This demonstrates usage of Sunvest-core even if we store state in a simplified struct.
 pub(crate) fn try_move(env: &Env, state: &mut GameState, dx: i32, dy: i32, d_rot: i32) -> bool {
     // 1. Create ECS World
     let _world = SimpleWorld::new(env);
@@ -233,7 +233,7 @@ pub(crate) fn get_piece_coords(shape: TetrominoShape, rot: u32) -> [(i32, i32); 
     }
 }
 
-/// Runs a no-op Cougr `GameApp` tick to keep the transitional Tetris example
+/// Runs a no-op Sunvest `GameApp` tick to keep the transitional Tetris example
 /// covered by the same scheduler integration path as the canonical arcade loop.
 #[cfg(test)]
 pub(crate) fn run_gameapp_tick(env: &Env) {

@@ -13,8 +13,8 @@ use super::types::{Groth16Proof, Scalar, VerificationKey};
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::zk::{G1Point, G2Point, Scalar};
-/// use cougr_core::zk::experimental::{GameCircuit, Groth16Proof, MovementCircuit, VerificationKey};
+/// use Sunvest_core::zk::{G1Point, G2Point, Scalar};
+/// use Sunvest_core::zk::experimental::{GameCircuit, Groth16Proof, MovementCircuit, VerificationKey};
 /// use soroban_sdk::{BytesN, Env, Vec};
 ///
 /// let env = Env::default();
@@ -31,7 +31,7 @@ use super::types::{Groth16Proof, Scalar, VerificationKey};
 /// let public_inputs: [Scalar; 0] = [];
 /// let circuit = MovementCircuit::new(vk, 10);
 /// let _result = circuit.verify_with_inputs(&env, &proof, &public_inputs)?;
-/// # Ok::<(), cougr_core::zk::ZKError>(())
+/// # Ok::<(), Sunvest_core::zk::ZKError>(())
 /// ```
 pub trait GameCircuit {
     /// Get the verification key for this circuit.

@@ -1,7 +1,7 @@
 //! Guild Treasury Wars - DAO-Governed Factions with stellar-zk Commitments
 //!
 //! This smart contract implements a guild-based strategy game on the Stellar
-//! blockchain using cougr-core's ECS framework. Guilds manage shared treasuries,
+//! blockchain using Sunvest-core's ECS framework. Guilds manage shared treasuries,
 //! vote on strategic actions through DAO mechanics, and compete through
 //! resource-driven campaigns with hidden strategic commitments.
 //!
@@ -22,7 +22,7 @@
 //! 7. **Reveal**: Commitments are revealed and verified on-chain
 //! 8. **Resolution**: Battle outcomes determined deterministically
 //!
-//! # Cougr-Core Integration
+//! # Sunvest-Core Integration
 //! - ECS World: Entity management for game objects
 //! - Components: Guild, Proposal, StrategyCommitment, GameState
 
@@ -35,7 +35,7 @@ mod types;
 #[cfg(test)]
 mod test;
 
-use cougr_core::SimpleWorld;
+use Sunvest_core::SimpleWorld;
 use soroban_sdk::{contract, contractimpl, Address, Env};
 
 pub use types::*;
@@ -48,7 +48,7 @@ impl GuildTreasuryWarsContract {
     /// Initialize a new guild with treasury resources.
     ///
     /// Creates the guild with the given admin as the first member and
-    /// allocates `INITIAL_TREASURY` (1000) resources. Uses cougr-core's
+    /// allocates `INITIAL_TREASURY` (1000) resources. Uses Sunvest-core's
     /// ECS World for entity tracking.
     ///
     /// # Arguments
@@ -57,7 +57,7 @@ impl GuildTreasuryWarsContract {
     /// # Returns
     /// The guild ID assigned to the new guild
     pub fn init_guild(env: Env, guild_admin: Address) -> u32 {
-        // Create cougr-core ECS World for entity management
+        // Create Sunvest-core ECS World for entity management
         let mut world = SimpleWorld::new(&env);
         let _guild_entity = world.spawn_entity();
 
@@ -194,7 +194,7 @@ impl GuildTreasuryWarsContract {
         governance::get_proposal(&env, proposal_id)
     }
 
-    /// Get the cougr-core entity count (demonstrates ECS integration).
+    /// Get the Sunvest-core entity count (demonstrates ECS integration).
     pub fn get_entity_count(env: Env) -> u32 {
         env.storage()
             .instance()

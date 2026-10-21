@@ -1,11 +1,11 @@
-//! hidden_hand - canonical Cougr ZK circuits example.
+//! hidden_hand - canonical Sunvest ZK circuits example.
 //!
-//! Demonstrates `cougr_core::circuits::hidden_cards` for private card deals.
+//! Demonstrates `Sunvest_core::circuits::hidden_cards` for private card deals.
 
 #![no_std]
 
-use cougr_core::circuits::hidden_cards;
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::circuits::hidden_cards;
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, Address, BytesN, Env, Symbol,
 };

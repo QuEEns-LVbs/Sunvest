@@ -1,13 +1,13 @@
 {
-  "name": "cougr-spectator-client",
+  "name": "Sunvest-spectator-client",
   "version": "0.1.0",
   "private": true,
-  "description": "Spectator and replay viewer client for Cougr turn-based games, consuming cougr-sdk-events",
+  "description": "Spectator and replay viewer client for Sunvest turn-based games, consuming Sunvest-sdk-events",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "cougr-spectator": "./dist/cli.js"
+    "Sunvest-spectator": "./dist/cli.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
@@ -17,7 +17,7 @@
     "replay": "node src/cli.ts"
   },
   "dependencies": {
-    "cougr-sdk-events": "file:../../packages/sdk-events"
+    "Sunvest-sdk-events": "file:../../packages/sdk-events"
   },
   "devDependencies": {
     "@types/node": "^24.7.0",

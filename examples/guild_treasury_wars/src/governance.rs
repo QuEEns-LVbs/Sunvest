@@ -1,6 +1,6 @@
 //! Governance systems for Guild Treasury Wars.
 //!
-//! Implements the DAO-style governance mechanics following cougr-core's ECS
+//! Implements the DAO-style governance mechanics following Sunvest-core's ECS
 //! pattern, inspired by Stellar governance patterns (governance.script3.io):
 //! - **ProposalSystem**: Guild members submit proposals for strategic actions
 //! - **VotingSystem**: Members cast votes, threshold determines approval
@@ -18,7 +18,7 @@ use crate::types::*;
 /// Initialize a new guild with a shared treasury.
 ///
 /// Creates the guild with the given admin as the first member and
-/// allocates `INITIAL_TREASURY` resources. Uses cougr-core's ECS World
+/// allocates `INITIAL_TREASURY` resources. Uses Sunvest-core's ECS World
 /// for entity tracking.
 ///
 /// # Panics

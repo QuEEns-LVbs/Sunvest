@@ -3,7 +3,7 @@
  * that Soroban events use.
  *
  * Soroban RPC returns `topic` entries and `value` as base64-encoded
- * {@link https://github.com/stellar/stellar-xdr XDR} `ScVal` unions. Cougr
+ * {@link https://github.com/stellar/stellar-xdr XDR} `ScVal` unions. Sunvest
  * only needs symbols, unsigned/signed integers, bytes, vectors and maps, but
  * this reader covers the whole `ScVal` union so unknown component payloads
  * never crash a consumer.

@@ -1,9 +1,9 @@
-//! Tower Defense game components using cougr-core's ComponentTrait
+//! Tower Defense game components using Sunvest-core's ComponentTrait
 //!
 //! This module defines all the ECS components needed for a tower defense game
 //! on the Stellar blockchain via Soroban.
 
-pub use cougr_core::component::{ComponentStorage, ComponentTrait};
+pub use Sunvest_core::component::{ComponentStorage, ComponentTrait};
 use soroban_sdk::{contracttype, symbol_short, Bytes, Env, Symbol};
 
 // ============================================================================

@@ -1,6 +1,6 @@
 # Examples
 
-This directory contains standalone game projects built on top of `cougr-core`. The examples are intended to serve two purposes:
+This directory contains standalone game projects built on top of `Sunvest-core`. The examples are intended to serve two purposes:
 
 - demonstrate how the framework can be applied to different gameplay models
 - provide reference implementations for architecture, storage, authorization, and verification patterns
@@ -27,7 +27,7 @@ stellar contract build
 
 New contributors and external developers should read the examples in the following order to build understanding incrementally:
 
-1. **`spawn_and_move`** - Start here. Demonstrates the complete idiomatic Cougr pattern: `SorobanGame` + `impl_component_observed!` + typed ECS.
+1. **`spawn_and_move`** - Start here. Demonstrates the complete idiomatic Sunvest pattern: `SorobanGame` + `impl_component_observed!` + typed ECS.
 2. **`tic_tac_toe`** - Turn-based game with `impl_rich_component!` for `Address` and `Vec` fields. Shows how to structure a small-state game.
 3. **`snake`** - Arcade loop, `GameApp` tick model, and basic ECS. Introduces the stage-scheduling model for continuous gameplay.
 4. **`battleship`** - Hidden-information / commit-reveal flow using `privacy::stable` Merkle primitives. Entry point for privacy-aware games.
@@ -45,11 +45,11 @@ After reading the canonical examples, explore transitional examples for addition
 
 ### Canonical examples
 
-These are the maintained reference architectures. They are held to the full standard in [EXAMPLE_STANDARD.md](./EXAMPLE_STANDARD.md) and stay current as `cougr-core` evolves.
+These are the maintained reference architectures. They are held to the full standard in [EXAMPLE_STANDARD.md](./EXAMPLE_STANDARD.md) and stay current as `Sunvest-core` evolves.
 
 | Example | Category | Focus | Preview |
 |---|---|---|---|
-| `spawn_and_move` | **Starter / canonical** | Complete idiomatic Cougr pattern: `SorobanGame` + `impl_component_observed!` + typed ECS | - |
+| `spawn_and_move` | **Starter / canonical** | Complete idiomatic Sunvest pattern: `SorobanGame` + `impl_component_observed!` + typed ECS | - |
 | `tic_tac_toe` | **Rich components / canonical** | Turn-based game with `impl_rich_component!` for `Address` and `Vec` fields | [preview.svg](./tic_tac_toe/preview.svg) |
 | `session_arena` | **Session UX / canonical** | `session::SessionManager` lifecycle and multi-round state (Beta) | - |
 | `hidden_hand` | **ZK circuits / canonical** | `circuits::HiddenHandBuilder` - hidden-card ZK proof flow (Experimental) | - |
@@ -121,7 +121,7 @@ Use examples by pattern, not only by genre:
 
 ## Preferred Runtime Shape
 
-For new examples and new production contracts, prefer the modern Cougr runtime path:
+For new examples and new production contracts, prefer the modern Sunvest runtime path:
 
 - `SorobanGame` + `impl_soroban_game!` for load/save boilerplate
 - `GameApp` as the entrypoint for multi-system contracts
@@ -137,7 +137,7 @@ For examples that intentionally preserve older patterns, keep them explicitly do
 
 Some canonical examples use `path = "../../"` dependencies because they exercise APIs (`circuits`, `session`, `SorobanGame`) not yet published to crates.io. These path dependencies are permitted during monorepo development but must be replaced with published crate versions before any release tag is cut. See [EXAMPLE_STANDARD.md §1.1](./EXAMPLE_STANDARD.md#11-path-dependencies-in-monorepo-development) for the full policy.
 
-- `spawn_and_move`: **start here** - canonical onboarding example showing the full modern Cougr pattern (`SorobanGame`, `impl_component_observed!`, typed ECS)
+- `spawn_and_move`: **start here** - canonical onboarding example showing the full modern Sunvest pattern (`SorobanGame`, `impl_component_observed!`, typed ECS)
 - `tic_tac_toe`: turn-based game showing rich components (`impl_rich_component!`, `impl_soroban_game!`) for `Address` and `Vec` fields
 - `session_arena`: session lifecycle, authorization scopes, and fallback direct-auth flows (`SessionManager`)
 - `snake`: canonical arcade loop and `GameApp` tick model

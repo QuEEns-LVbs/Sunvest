@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Instructions for AI coding agents (Codex, Cursor, Copilot, Claude Code, Gemini, and others) working on Cougr. If you are a person, this is also the shortest path to a pull request that gets merged.
+Instructions for AI coding agents (Codex, Cursor, Copilot, Claude Code, Gemini, and others) working on Sunvest. If you are a person, this is also the shortest path to a pull request that gets merged.
 
 ## The one rule
 
@@ -9,7 +9,7 @@ Run `make check` from the repository root before every commit you push. Fix ever
 - `make fix` applies the automatic fixes (formatting, docs site sync).
 - `make check-all` runs every check.
 - If a tool is missing, `make check` says how to install it. A skipped check still runs in CI.
-- CI tests your branch merged into `main`, so keep it current: `git fetch upstream && git rebase upstream/main`. Add the remote once with `git remote add upstream https://github.com/salazarsebas/Cougr.git`.
+- CI tests your branch merged into `main`, so keep it current: `git fetch upstream && git rebase upstream/main`. Add the remote once with `git remote add upstream https://github.com/salazarsebas/Sunvest.git`.
 
 Do not report a task as done, and do not open a pull request, while `make check` fails.
 
@@ -34,7 +34,7 @@ Write files with normal editor or file tools. Never paste an API response or enc
 
 ## Project conventions
 
-[CLAUDE.md](CLAUDE.md) has the Cougr rules for Soroban code, `no_std`, the standards layer, and examples. [CONTRIBUTING.md](CONTRIBUTING.md) has the full contributor guide. Read the doc for the area you touch before writing code.
+[CLAUDE.md](CLAUDE.md) has the Sunvest rules for Soroban code, `no_std`, the standards layer, and examples. [CONTRIBUTING.md](CONTRIBUTING.md) has the full contributor guide. Read the doc for the area you touch before writing code.
 
 ## When CI fails on your pull request
 

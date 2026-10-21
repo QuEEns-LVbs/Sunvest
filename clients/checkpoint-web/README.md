@@ -1,6 +1,6 @@
-# Cougr checkpoint web client
+# Sunvest checkpoint web client
 
-Small browser reference client for the `cougr new --template checkpoint` contract.
+Small browser reference client for the `Sunvest new --template checkpoint` contract.
 
 It connects to Freighter, refuses non-Testnet wallets, reads `get_state` directly from Soroban RPC, and signs `commit_checkpoint`, `dispute_checkpoint`, and `finalize_match` with the connected wallet. It does not use custodial keys or `packages/sdk-core`.
 
@@ -18,7 +18,7 @@ Use the contract instance ID returned by the Stellar CLI after deploying the gen
 
 From the generated project:
 
-    cougr new my-game --template checkpoint
+    Sunvest new my-game --template checkpoint
     cd my-game
     cargo test
     stellar contract build

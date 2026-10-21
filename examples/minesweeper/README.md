@@ -1,15 +1,15 @@
 # Minesweeper
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
-An on-chain Minesweeper game built with the [Cougr](../../README.md) ECS framework on Stellar Soroban.
+An on-chain Minesweeper game built with the [Sunvest](../../README.md) ECS framework on Stellar Soroban.
 
 ## Purpose and pattern
 
 This example demonstrates a single-player reveal-and-deduce puzzle over a fixed, deterministic
 mine layout - no player input or randomness influences where mines are placed, which keeps the
-board auditable and reproducible across deployments. It showcases Cougr's `ComponentTrait`
+board auditable and reproducible across deployments. It showcases Sunvest's `ComponentTrait`
 pattern for typed, byte-serializable game state: the board, the (hidden) mine layout, and the
 game status are each their own component with manual `serialize`/`deserialize`, demonstrating
 explicit byte-layout control for a fixed-size 9×9 grid.
@@ -71,14 +71,14 @@ per-entry TTL management.
 6. Caller reads `get_state`, `get_visible_cell`, or `is_finished` to check progress or
    terminal state; `reset_game` starts over with the same deterministic layout.
 
-## Cougr APIs used
+## Sunvest APIs used
 
-- `cougr_core::component::ComponentTrait` - gives each component (`BoardComponent`,
+- `Sunvest_core::component::ComponentTrait` - gives each component (`BoardComponent`,
   `MineLayoutComponent`, `GameStateComponent`) a `component_type()` symbol and explicit byte
   `serialize`/`deserialize`, chosen because the game has one fixed-shape 81-cell grid rather
   than a dynamic entity population that would benefit from `SimpleWorld`/`SimpleQueryBuilder`
   scanning.
-- No other `cougr-core` APIs are used. `GameApp`/`ScheduleStage` are unnecessary because
+- No other `Sunvest-core` APIs are used. `GameApp`/`ScheduleStage` are unnecessary because
   `reveal_cell` has a single decision point per call with no multi-stage ordering; `SimpleWorld`/
   `SimpleQueryBuilder` are unnecessary because the game has exactly three fixed components and
   never scans entities by type; `auth`, `privacy::stable`/`experimental`, and `ops` standards

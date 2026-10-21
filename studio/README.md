@@ -1,6 +1,6 @@
-# Cougr Studio
+# Sunvest Studio
 
-The studio sandbox view for a turn-based Cougr match: a 2D board that draws any
+The studio sandbox view for a turn-based Sunvest match: a 2D board that draws any
 legal `TurnBasedConfig`, the deliberate wait while a Soroban transaction
 finalizes, and real error states when the RPC or friendbot fails. It is a
 testnet sandbox, and the screen says so.
@@ -130,9 +130,9 @@ studio/
 
 ## CI
 
-`.github/workflows/cougr-studio.yml` is path-scoped to `studio/**`,
+`.github/workflows/Sunvest-studio.yml` is path-scoped to `studio/**`,
 `packages/tokens/tokens.json` and the workflow file itself, mirroring
-`.github/workflows/cougr-site.yml`. It builds the tokens, validates the
+`.github/workflows/Sunvest-site.yml`. It builds the tokens, validates the
 fixtures and runs `node --test`. It does not run the Rust `clippy -D warnings`
 gate, and Rust-only changes do not trigger it.
 

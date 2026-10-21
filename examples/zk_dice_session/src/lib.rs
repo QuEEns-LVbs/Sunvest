@@ -1,6 +1,6 @@
 //! zk_dice_session - session-scoped ZK dice example.
 //!
-//! This example composes two existing Cougr subsystems that have never been
+//! This example composes two existing Sunvest subsystems that have never been
 //! used together before:
 //!
 //! * **ZK proof verification** – the `fair_dice` circuit from `examples/dice_duel`
@@ -25,10 +25,10 @@
 
 #![no_std]
 
-use cougr_core::accounts::{GameAction, SessionBuilder, SessionStorage};
-use cougr_core::circuits::fair_dice;
-use cougr_core::session::{ActiveSession, SessionManager};
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::accounts::{GameAction, SessionBuilder, SessionStorage};
+use Sunvest_core::circuits::fair_dice;
+use Sunvest_core::session::{ActiveSession, SessionManager};
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, Address, BytesN, Env, Symbol,
 };

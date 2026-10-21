@@ -1,5 +1,5 @@
 use super::*;
-use cougr_core::zk::{G1Point, G2Point, Groth16Proof, Scalar, VerificationKey};
+use Sunvest_core::zk::{G1Point, G2Point, Groth16Proof, Scalar, VerificationKey};
 use soroban_sdk::{testutils::Address as _, Address, BytesN, Env, Vec};
 
 // ─── Test helpers ─────────────────────────────────────────────────────────────

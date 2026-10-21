@@ -3,8 +3,8 @@ use crate::types::{
     CellType, Direction, GameState, GhostMode, GHOST_POINTS, MAZE_HEIGHT, MAZE_WIDTH,
     PELLET_POINTS, POWER_MODE_DURATION, POWER_PELLET_POINTS,
 };
-use cougr_core::event::EventTrait;
-use cougr_core::event::{CollisionEvent, Event};
+use Sunvest_core::event::EventTrait;
+use Sunvest_core::event::{CollisionEvent, Event};
 use soroban_sdk::{Env, Vec};
 
 pub struct GameSystem;

@@ -7,8 +7,8 @@ use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, Address, BytesN, Env, Symbol, Vec,
 };
 
-// Use cougr_core for component traits and ZK types (which align with stellar-zk)
-use cougr_core::zk::{experimental, Groth16Proof, Scalar, VerificationKey};
+// Use Sunvest_core for component traits and ZK types (which align with stellar-zk)
+use Sunvest_core::zk::{experimental, Groth16Proof, Scalar, VerificationKey};
 
 // --- Components ---
 
@@ -220,7 +220,7 @@ impl AIDungeonMasterArenaContract {
             rust_inputs.push(proof_input.public_inputs.get_unchecked(i as u32));
         }
 
-        // Use stellar-zk compatible verification logic from cougr-core
+        // Use stellar-zk compatible verification logic from Sunvest-core
         let is_valid = experimental::verify_groth16(&env, &vk, &proof_input.proof, &rust_inputs)
             .unwrap_or(false);
 

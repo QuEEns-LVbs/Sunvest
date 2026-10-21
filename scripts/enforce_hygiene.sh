@@ -12,7 +12,7 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 EXAMPLES_DIR="$REPO_ROOT/examples"
 FAILED=0
 
-echo "=== Cougr Examples Hygiene Enforcement (#225) ==="
+echo "=== Sunvest Examples Hygiene Enforcement (#225) ==="
 echo "Repository root: $REPO_ROOT"
 echo ""
 
@@ -98,11 +98,11 @@ echo "[3/5] Correcting Cargo.toml descriptions..."
 
 # Description mapping: directory_name -> correct_description
 declare -A DESCRIPTIONS=(
-    ["spawn_and_move"]="Canonical Cougr starter: ECS spawn and movement with observed events"
+    ["spawn_and_move"]="Canonical Sunvest starter: ECS spawn and movement with observed events"
     ["tic_tac_toe"]="Turn-based tic-tac-toe with rich components and Address ownership"
     ["trading_card_game"]="Two-player trading card game with atomic batch turns and session keys"
     ["battleship"]="Battleship with commit-reveal hidden state using Merkle proofs"
-    ["chess"]="Chess with on-chain move validation using Cougr ECS"
+    ["chess"]="Chess with on-chain move validation using Sunvest ECS"
     ["asteroids"]="Arcade asteroid shooter with entity-heavy movement and collisions"
     ["snake"]="Snake arcade game with growth mechanics and collision rules"
     ["pong"]="Minimal competitive Pong loop demonstrating ECS fundamentals"

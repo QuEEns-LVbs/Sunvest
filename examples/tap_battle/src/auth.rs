@@ -1,6 +1,6 @@
 //! Authentication and session management for Tap Battle.
 //!
-//! This module wraps cougr-core's secp256r1 authentication and SessionManager
+//! This module wraps Sunvest-core's secp256r1 authentication and SessionManager
 //! to provide the mobile-first auth flow:
 //! 1. Player registers a passkey (secp256r1 public key)
 //! 2. Player authenticates with biometrics → signature verified on-chain
@@ -8,9 +8,9 @@
 
 use soroban_sdk::{symbol_short, Address, Bytes, BytesN, Env, Symbol};
 
-use cougr_core::accounts::{GameAction, SessionBuilder, SessionStorage};
-use cougr_core::auth::{verify_secp256r1, Secp256r1Key, Secp256r1Storage};
-use cougr_core::session::SessionManager;
+use Sunvest_core::accounts::{GameAction, SessionBuilder, SessionStorage};
+use Sunvest_core::auth::{verify_secp256r1, Secp256r1Key, Secp256r1Storage};
+use Sunvest_core::session::SessionManager;
 
 use crate::types::*;
 
@@ -26,7 +26,7 @@ pub fn register_passkey(env: &Env, player: &Address, pubkey: &BytesN<65>) {
     // Require player authorization
     player.require_auth();
 
-    // Store key via cougr-core's Secp256r1Storage
+    // Store key via Sunvest-core's Secp256r1Storage
     let key = Secp256r1Key {
         public_key: pubkey.clone(),
         label: symbol_short!("passkey"),
@@ -126,8 +126,8 @@ pub fn validate_session(env: &Env, session_key: &Address, action_name: Symbol) -
         env.ledger().timestamp().saturating_add(60),
     ) {
         Ok(_) => session_key.clone(),
-        Err(cougr_core::accounts::AccountError::SessionExpired) => panic!("session expired"),
-        Err(cougr_core::accounts::AccountError::SessionBudgetExceeded) => {
+        Err(Sunvest_core::accounts::AccountError::SessionExpired) => panic!("session expired"),
+        Err(Sunvest_core::accounts::AccountError::SessionBudgetExceeded) => {
             panic!("session operations exhausted")
         }
         Err(e) => panic!("session validation failed: {:?}", e),

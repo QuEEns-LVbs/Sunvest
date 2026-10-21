@@ -1,8 +1,8 @@
 # Build Your First Game
 
-Welcome to Cougr! This tutorial will take you from an empty directory to a fully tested, testnet-deployed game. 
+Welcome to Sunvest! This tutorial will take you from an empty directory to a fully tested, testnet-deployed game. 
 
-This guide is designed for developers who already know **Rust** but have no prior experience with **Cougr**, **Soroban**, or **Stellar**. By the end, you'll understand how Cougr's Entity-Component-System (ECS) architecture translates into safe, efficient smart contracts.
+This guide is designed for developers who already know **Rust** but have no prior experience with **Sunvest**, **Soroban**, or **Stellar**. By the end, you'll understand how Sunvest's Entity-Component-System (ECS) architecture translates into safe, efficient smart contracts.
 
 We are going to build a simple 2D grid game where a player can spawn into the world and walk in four directions.
 
@@ -17,7 +17,7 @@ cargo new --lib my_first_game
 cd my_first_game
 ```
 
-Add `cougr-core` and the `soroban-sdk` to your `Cargo.toml`. We enable the `testutils` feature to get access to Cougr's built-in testing harness later.
+Add `Sunvest-core` and the `soroban-sdk` to your `Cargo.toml`. We enable the `testutils` feature to get access to Sunvest's built-in testing harness later.
 
 ```toml
 [package]
@@ -30,10 +30,10 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 soroban-sdk = "25.3.2"
-cougr-core = "1.1.0" # or the latest version from crates.io
+Sunvest-core = "1.1.0" # or the latest version from crates.io
 
 [features]
-testutils = ["soroban-sdk/testutils", "cougr-core/testutils"]
+testutils = ["soroban-sdk/testutils", "Sunvest-core/testutils"]
 ```
 
 ---
@@ -49,9 +49,9 @@ However, building for a blockchain introduces new constraints you must consider:
 > 
 > 1. **Storage is not a normal database:** You cannot freely iterate over millions of rows. State must be loaded into memory, modified, and saved back efficiently.
 > 2. **Execution costs money:** Every instruction, memory allocation, and storage write costs "gas". Infinite loops or massive arrays will cause your transaction to exceed resource limits and fail.
-> 3. **Instance Storage vs Persistent Storage:** Cougr uses Soroban's "Instance Storage" by default for your hot-loop game state. This means all active gameplay components are loaded in a single read, making operations extremely cheap and fast, but it requires you to be mindful of total state size.
+> 3. **Instance Storage vs Persistent Storage:** Sunvest uses Soroban's "Instance Storage" by default for your hot-loop game state. This means all active gameplay components are loaded in a single read, making operations extremely cheap and fast, but it requires you to be mindful of total state size.
 
-Cougr abstracts the heavy lifting of storage management, but you still need to write code with these constraints in mind.
+Sunvest abstracts the heavy lifting of storage management, but you still need to write code with these constraints in mind.
 
 ---
 
@@ -64,8 +64,8 @@ We need two components: a `Position` to track where the player is, and `Moves` t
 ```rust,ignore
 #![no_std]
 
-use cougr_core::game::SorobanGame;
-use cougr_core::{impl_component, impl_component_observed, impl_soroban_game};
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::{impl_component, impl_component_observed, impl_soroban_game};
 use soroban_sdk::{contract, contractimpl, contracttype, Env};
 
 // `Position` emits an indexed event on every change (so a UI can watch it)
@@ -87,14 +87,14 @@ impl_component!(Moves, "moves", Table, { remaining: u32 });
 ```
 
 Notice the two different macros:
-- `impl_component_observed!` tells Cougr to emit a Soroban event every time this component is modified. This is crucial for off-chain clients (like your web frontend) to track movement in real-time without polling the blockchain.
+- `impl_component_observed!` tells Sunvest to emit a Soroban event every time this component is modified. This is crucial for off-chain clients (like your web frontend) to track movement in real-time without polling the blockchain.
 - `impl_component!` is for standard data that doesn't need to be broadcasted to indexers, saving you gas on event emissions.
 
 ---
 
 ## 4. Writing the Game Contract (Systems)
 
-Next, we define our contract. In Cougr, the contract acts as the outer shell that loads the ECS world, runs your system logic (the functions), and saves the world back.
+Next, we define our contract. In Sunvest, the contract acts as the outer shell that loads the ECS world, runs your system logic (the functions), and saves the world back.
 
 Add this to the bottom of `src/lib.rs`:
 
@@ -161,13 +161,13 @@ impl MyFirstGame {
 }
 ```
 
-This pattern - **Load World -> Query/Modify -> Save World** - is the backbone of every Cougr contract entry point.
+This pattern - **Load World -> Query/Modify -> Save World** - is the backbone of every Sunvest contract entry point.
 
 ---
 
 ## 5. Local Testing
 
-Testing smart contracts on an actual network is slow. Cougr provides a powerful local `GameHarness` to run tests instantly in memory.
+Testing smart contracts on an actual network is slow. Sunvest provides a powerful local `GameHarness` to run tests instantly in memory.
 
 Create a new file `src/test.rs` and add it to your module tree by adding `#[cfg(test)] mod test;` to the very bottom of `src/lib.rs`.
 
@@ -177,14 +177,14 @@ In `src/test.rs`:
 #![cfg(test)]
 
 use super::*;
-use cougr_core::test::{GameHarness, Scenario};
+use Sunvest_core::test::{GameHarness, Scenario};
 use soroban_sdk::Env;
 
 #[test]
 fn test_spawn_and_move() {
     let env = Env::default();
     
-    // Register our contract using Cougr's test harness
+    // Register our contract using Sunvest's test harness
     let harness = GameHarness::new(env, MyFirstGame);
 
     // The macro generated a "MyFirstGameClient" for us automatically
@@ -197,7 +197,7 @@ fn test_spawn_and_move() {
     assert_eq!(pos.x, 0);
     assert_eq!(pos.y, 0);
 
-    // 2. Use Cougr's Scenario builder to simulate turns/moves
+    // 2. Use Sunvest's Scenario builder to simulate turns/moves
     Scenario::new("move north")
         .turns(1)
         .run(&harness, |_player, _turn, h| {
@@ -257,5 +257,5 @@ If successful, the CLI will return a `C...` contract address. **Congratulations!
 
 You've built and deployed a basic ECS contract. However, real games require more advanced mechanics like access control, hidden information (Fog of War), or multi-contract plugin architectures.
 
-- **Learn the architecture:** Read [Cougr Patterns](../learn/PATTERNS.md) to understand how to structure larger, production-ready games.
+- **Learn the architecture:** Read [Sunvest Patterns](../learn/PATTERNS.md) to understand how to structure larger, production-ready games.
 - **Get inspired:** Browse the **Showcase** (like `murdoku` or `battleship`) in the `examples/` directory to see full-stack implementations.

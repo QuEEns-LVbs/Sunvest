@@ -1,20 +1,20 @@
 [package]
-name = "cougr-cli"
+name = "Sunvest-cli"
 version = "1.1.0"
 edition = "2021"
 publish = true
-description = "Command-line tooling for Cougr - scaffold Soroban game contracts wired to cougr-core"
+description = "Command-line tooling for Sunvest - scaffold Soroban game contracts wired to Sunvest-core"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/salazarsebas/Cougr"
-homepage = "https://github.com/salazarsebas/Cougr"
+repository = "https://github.com/salazarsebas/Sunvest"
+homepage = "https://github.com/salazarsebas/Sunvest"
 keywords = ["cli", "soroban", "stellar", "game", "scaffold"]
 categories = ["command-line-utilities", "development-tools", "game-development"]
 rust-version = "1.91.0"
 include = ["src/**", "templates/**", "pieces/**", "tests/**", "build.rs", "README.md"]
 
 [[bin]]
-name = "cougr"
+name = "Sunvest"
 path = "src/main.rs"
 
 [dependencies]
@@ -24,7 +24,7 @@ anyhow = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 # `debug-embed` keeps the templates compiled into the binary in debug builds
-# too, so `cougr new` behaves identically for contributors and end users.
+# too, so `Sunvest new` behaves identically for contributors and end users.
 rust-embed = { version = "8.12", features = ["debug-embed"] }
 
 [dev-dependencies]

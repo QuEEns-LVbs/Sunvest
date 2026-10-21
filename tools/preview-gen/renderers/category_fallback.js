@@ -80,8 +80,8 @@ export function render({ game, category, icon }) {
     Real-time game - no static board state
   </text>
 
-  <!-- Cougr watermark -->
+  <!-- Sunvest watermark -->
   <text x="${W/2}" y="${H - 26}" text-anchor="middle" font-size="10"
-        fill="${textMuted}" letter-spacing="2">COUGR EXAMPLE</text>
+        fill="${textMuted}" letter-spacing="2">Sunvest EXAMPLE</text>
 </svg>`;
 }

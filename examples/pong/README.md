@@ -1,11 +1,11 @@
 # Pong On-Chain Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
 ## Purpose and pattern
 
-This example demonstrates a two-player paddle physics loop on Soroban with Cougr ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
+This example demonstrates a two-player paddle physics loop on Soroban with Sunvest ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
 
 ## Public contract API
 
@@ -45,7 +45,7 @@ Paddle, ball, and score components are in `components.rs`; paddle and ball syste
 5. Stop when the game-over/completed condition is reached, or reset/reinitialize where supported.
 
 
-## Cougr APIs used
+## Sunvest APIs used
 
 2. **Deploy the contract**:
    ```bash
@@ -151,11 +151,11 @@ stellar contract invoke \
 
 ## Architecture
 
-This contract demonstrates the **Cougr-Core ECS (Entity Component System) pattern** adapted for Soroban smart contracts:
+This contract demonstrates the **Sunvest-Core ECS (Entity Component System) pattern** adapted for Soroban smart contracts:
 
 ### ECS Components
 
-The game state is organized using Cougr-Core's component pattern:
+The game state is organized using Sunvest-Core's component pattern:
 
 - **PaddleComponent**: Represents paddle entities with player ID and Y position
 - **BallComponent**: Represents the ball entity with position (x, y) and velocity (vx, vy)
@@ -186,7 +186,7 @@ pub struct ScoreComponent {
 
 ### ECS Systems
 
-Game logic is organized into systems following Cougr-Core's system pattern:
+Game logic is organized into systems following Sunvest-Core's system pattern:
 
 1. **PhysicsSystem**: Updates ball position based on velocity
    ```rust
@@ -215,14 +215,14 @@ Game logic is organized into systems following Cougr-Core's system pattern:
 
 ### Why This Approach?
 
-This implementation demonstrates how Cougr-Core's ECS architecture can be adapted for blockchain constraints:
+This implementation demonstrates how Sunvest-Core's ECS architecture can be adapted for blockchain constraints:
 
 1. **Component Organization**: Clear separation of data (components) from logic (systems)
 2. **Scalability**: Easy to add new components or systems for game features
 3. **Testability**: Systems can be tested independently
 4. **Soroban Compatibility**: ECS patterns adapted to work with Soroban's storage model
 
-For more complex games with many entities, the full Cougr-Core ECS framework provides additional features like entity queries, component archetypes, and parallel system execution.
+For more complex games with many entities, the full Sunvest-Core ECS framework provides additional features like entity queries, component archetypes, and parallel system execution.
 
 ## Code Structure
 

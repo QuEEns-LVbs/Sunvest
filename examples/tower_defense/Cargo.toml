@@ -2,14 +2,14 @@
 name = "tower_defense"
 version = "0.0.1"
 edition = "2021"
-authors = ["Cougr Contributors"]
-description = "Tower defense on-chain game example using cougr-core ECS framework"
+authors = ["Sunvest Contributors"]
+description = "Tower defense on-chain game example using Sunvest-core ECS framework"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 soroban-sdk = "25.1.0"
 
 [dev-dependencies]

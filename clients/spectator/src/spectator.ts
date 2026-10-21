@@ -1,14 +1,14 @@
 import {
   advanceCursor,
-  cougrEventFilter,
+  SunvestEventFilter,
   newEventCursor,
-  pageCougrEvents,
+  pageSunvestEvents,
   parseCursor,
   serializeCursor,
-  type CougrEventPage,
+  type SunvestEventPage,
   type EventCursor,
   type GetEventsFn,
-} from 'cougr-sdk-events';
+} from 'Sunvest-sdk-events';
 
 import {
   buildMatchTimeline,
@@ -26,10 +26,10 @@ export interface SpectatorClientOptions {
 }
 
 /**
- * Spectator client that tracks an active or completed match using `pageCougrEvents`.
+ * Spectator client that tracks an active or completed match using `pageSunvestEvents`.
  *
  * Exercises the pagination, topic filtering, cursor tracking, and decoding
- * features of `cougr-sdk-events`.
+ * features of `Sunvest-sdk-events`.
  */
 export class SpectatorClient {
   readonly #contractId?: string;
@@ -65,18 +65,18 @@ export class SpectatorClient {
   /**
    * Fetch and process new pages from the RPC event stream.
    *
-   * Yields each processed `CougrEventPage` as it arrives so consumers can
+   * Yields each processed `SunvestEventPage` as it arrives so consumers can
    * persist cursors or observe frame increments.
    */
   async *spectate(
     getEvents: GetEventsFn,
     options: { maxPages?: number; limit?: number } = {},
-  ): AsyncGenerator<CougrEventPage, void, void> {
+  ): AsyncGenerator<SunvestEventPage, void, void> {
     const filters = this.#contractId
-      ? [cougrEventFilter({ contractIds: [this.#contractId] })]
-      : [cougrEventFilter()];
+      ? [SunvestEventFilter({ contractIds: [this.#contractId] })]
+      : [SunvestEventFilter()];
 
-    const iterator = pageCougrEvents(getEvents, {
+    const iterator = pageSunvestEvents(getEvents, {
       filters,
       cursor: this.#cursor,
       limit: options.limit,

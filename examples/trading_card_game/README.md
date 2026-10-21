@@ -1,9 +1,9 @@
 # Trading Card Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-A two-player on-chain trading card game built with the [Cougr](https://github.com/salazarsebas/Cougr) ECS framework on Stellar Soroban. This example demonstrates **atomic multi-action turns** via `BatchBuilder` and **match-scoped sessions** via `SessionBuilder`.
+A two-player on-chain trading card game built with the [Sunvest](https://github.com/salazarsebas/Sunvest) ECS framework on Stellar Soroban. This example demonstrates **atomic multi-action turns** via `BatchBuilder` and **match-scoped sessions** via `SessionBuilder`.
 
 ## Why Atomic Turns Matter
 
@@ -150,7 +150,7 @@ stellar contract build
 ```toml
 [dependencies]
 soroban-sdk = "25.1.0"
-cougr-core  = { branch = "main", git = "https://github.com/salazarsebas/Cougr.git" }
+Sunvest-core  = { branch = "main", git = "https://github.com/salazarsebas/Sunvest.git" }
 ```
 
 ## Resources

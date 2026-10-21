@@ -4,23 +4,23 @@ This document defines the minimum quality bar that every project under `examples
 
 ## Purpose
 
-Examples are the primary onboarding surface for external developers building games with `cougr-core` on Stellar/Soroban. They must be self-contained, buildable without access to the internal monorepo, and explicit about which Cougr pattern they demonstrate. A reader should be able to clone the repo, `cd` into any example, follow its README, and have a working Soroban contract in minutes.
+Examples are the primary onboarding surface for external developers building games with `Sunvest-core` on Stellar/Soroban. They must be self-contained, buildable without access to the internal monorepo, and explicit about which Sunvest pattern they demonstrate. A reader should be able to clone the repo, `cd` into any example, follow its README, and have a working Soroban contract in minutes.
 
 ---
 
 ## 1. Dependency Requirements
 
-Every example must declare `cougr-core` using the published crate on crates.io, **not** a local path dependency.
+Every example must declare `Sunvest-core` using the published crate on crates.io, **not** a local path dependency.
 
 ```toml
 # Correct - external release
 [dependencies]
-cougr-core = "1.1"
+Sunvest-core = "1.1"
 soroban-sdk = "25.1.0"
 
 # Wrong for published examples - breaks for external users
 [dependencies]
-cougr-core = { path = "../../" }
+Sunvest-core = { path = "../../" }
 
 ```
 
@@ -32,7 +32,7 @@ Some canonical examples depend on APIs that have not yet been published to crate
 
 **When path dependencies are permitted:**
 
-* The example exercises an API that exists only in the workspace copy of `cougr-core` (e.g. `cougr_core::circuits::*`, `cougr_core::session::*`, `cougr_core::test::*`).
+* The example exercises an API that exists only in the workspace copy of `Sunvest-core` (e.g. `Sunvest_core::circuits::*`, `Sunvest_core::session::*`, `Sunvest_core::test::*`).
 * The example is under active development inside the monorepo and no crate version on crates.io yet includes the required API.
 
 **When path dependencies must be replaced:**
@@ -45,8 +45,8 @@ Some canonical examples depend on APIs that have not yet been published to crate
 Add a comment above the dependency line explaining the exception:
 
 ```toml
-# path dep - pending cougr-core 1.x publication of circuits::*
-cougr-core = { path = "../../" }
+# path dep - pending Sunvest-core 1.x publication of circuits::*
+Sunvest-core = { path = "../../" }
 
 ```
 
@@ -84,7 +84,7 @@ CI workflows for each example should run both commands on every push to `main` a
 
 ## 3. Module Structure
 
-The source layout of every example should reflect the separation of concerns that Cougr encourages. Monolithic `lib.rs` files are acceptable only for the simplest two- or three-system examples; anything more complex must be split.
+The source layout of every example should reflect the separation of concerns that Sunvest encourages. Monolithic `lib.rs` files are acceptable only for the simplest two- or three-system examples; anything more complex must be split.
 
 ### Minimum layout
 
@@ -94,7 +94,7 @@ examples/<name>/
 ├── README.md
 └── src/
     ├── lib.rs          # Contract entrypoints, #[contract] impl, GameApp wiring
-    ├── components.rs   # Cougr components (impl_component! types)
+    ├── components.rs   # Sunvest components (impl_component! types)
     └── systems.rs      # Game systems registered with GameApp
 
 ```
@@ -103,8 +103,8 @@ examples/<name>/
 
 | File | When to add |
 | --- | --- |
-| `types.rs` | Domain enums or structs shared across modules but not Cougr components |
-| `auth.rs` | Session key setup, `CougrAccount` wiring, multi-device logic |
+| `types.rs` | Domain enums or structs shared across modules but not Sunvest components |
+| `auth.rs` | Session key setup, `SunvestAccount` wiring, multi-device logic |
 | `privacy.rs` | Commit-reveal flows, Merkle proof helpers, hidden-state management |
 | `zk.rs` | Groth16 / BLS proof submission and verification wrappers |
 
@@ -118,12 +118,12 @@ Every example must have a `README.md` that covers all of the following sections.
 
 | Section | Required content |
 | --- | --- |
-| **Purpose and pattern** | One paragraph: what game mechanic does this demonstrate and which Cougr pattern does it showcase? |
+| **Purpose and pattern** | One paragraph: what game mechanic does this demonstrate and which Sunvest pattern does it showcase? |
 | **Public contract API** | A table or list of every `#[contractimpl]` function: name, parameters, return type, one-line description |
 | **Architecture overview** | How systems, components, and the `GameApp` tick interact. A short prose description or ASCII diagram |
 | **Storage model** | What is stored in instance storage vs persistent storage vs temporary storage, and why |
 | **Main gameplay flow** | Step-by-step description of one complete game round, from initialization to terminal state |
-| **Cougr APIs used** | Which modules from `cougr-core` are imported and why (ECS, scheduler, ZK, auth, standards) |
+| **Sunvest APIs used** | Which modules from `Sunvest-core` are imported and why (ECS, scheduler, ZK, auth, standards) |
 | **Build and test commands** | The exact commands: `cargo test` and `stellar contract build` |
 | **Known limitations** | Anything intentionally simplified or out of scope for this example |
 
@@ -141,7 +141,7 @@ Each example must have a test module (typically `src/lib.rs` inline tests or `sr
 | **Happy-path gameplay** | One full game round proceeds without errors |
 | **Invalid actions** | Illegal moves, out-of-turn actions, or bad input return the expected error |
 | **Rule and invariant tests** | Game-specific invariants hold after any sequence of valid moves |
-| **Cougr integration** | If the example uses `GameApp`, `SimpleQueryBuilder`, auth, or ZK APIs, at least one test exercises that integration path |
+| **Sunvest integration** | If the example uses `GameApp`, `SimpleQueryBuilder`, auth, or ZK APIs, at least one test exercises that integration path |
 
 Tests must use the `soroban-sdk` `testutils` feature and `Env::default()`. Do not mock the Soroban environment at the Rust level; use the SDK test harness.
 
@@ -160,13 +160,13 @@ Tests must use the `soroban-sdk` `testutils` feature and `Env::default()`. Do no
 
 ### Canonical examples
 
-A canonical example is a maintained reference architecture. It is held to the full standard in this document and is expected to stay current as `cougr-core` evolves. Canonical examples are the ones new contributors should read first.
+A canonical example is a maintained reference architecture. It is held to the full standard in this document and is expected to stay current as `Sunvest-core` evolves. Canonical examples are the ones new contributors should read first.
 
 Current canonical examples (aligned with the 1.1.0 release):
 
 | Example | Category | Pattern demonstrated |
 | --- | --- | --- |
-| `spawn_and_move` | Starter | Complete idiomatic Cougr pattern: `SorobanGame` + `impl_component_observed!` + typed ECS |
+| `spawn_and_move` | Starter | Complete idiomatic Sunvest pattern: `SorobanGame` + `impl_component_observed!` + typed ECS |
 | `tic_tac_toe` | Rich components | Turn-based game with `impl_rich_component!` for `Address` and `Vec` fields |
 | `session_arena` | Session UX | `session::SessionManager`, session lifecycle, and multi-round state (Beta) |
 | `hidden_hand` | ZK circuits | `circuits::hidden_cards` - hidden-card ZK proof flow (Experimental) |
@@ -182,7 +182,7 @@ Current canonical examples (aligned with the 1.1.0 release):
 A transitional example is one that was written before the current standard or that intentionally preserves an older pattern for compatibility reference. It must be clearly marked as such in its own README:
 
 ```markdown
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
 ```
@@ -191,9 +191,9 @@ Transitional examples are still expected to pass `cargo test` and `stellar contr
 
 ---
 
-## 8. Cougr API Usage Guidance
+## 8. Sunvest API Usage Guidance
 
-Use the following table to decide which Cougr APIs an example should use and document.
+Use the following table to decide which Sunvest APIs an example should use and document.
 
 | API | Use when | Stability |
 | --- | --- | --- |
@@ -221,7 +221,7 @@ When an API is used, the README must explain **why** that API was chosen, not ju
 
 ### API–Example Cross Reference
 
-The following table maps each canonical example to its primary Cougr APIs:
+The following table maps each canonical example to its primary Sunvest APIs:
 
 | Example | Primary APIs |
 | --- | --- |
@@ -282,7 +282,7 @@ Copy this checklist into a follow-up cleanup issue for each example:
 ## Example quality checklist - `<example-name>`
 
 ### Dependencies
-- [ ] Uses published `cougr-core` version, not a path dependency - **or** carries an annotated path dependency exception per §1.1
+- [ ] Uses published `Sunvest-core` version, not a path dependency - **or** carries an annotated path dependency exception per §1.1
 
 ### Build validation
 - [ ] `cargo test` passes
@@ -300,7 +300,7 @@ Copy this checklist into a follow-up cleanup issue for each example:
 - [ ] Architecture overview present
 - [ ] Storage model described
 - [ ] Main gameplay flow documented
-- [ ] Cougr APIs used section present with rationale
+- [ ] Sunvest APIs used section present with rationale
 - [ ] Build and test commands shown
 - [ ] Known limitations noted
 - [ ] No hardcoded testnet contract IDs or deployment results
@@ -310,7 +310,7 @@ Copy this checklist into a follow-up cleanup issue for each example:
 - [ ] Happy-path gameplay test present
 - [ ] Invalid action test present
 - [ ] Rule/invariant test present
-- [ ] Cougr integration test present (if applicable)
+- [ ] Sunvest integration test present (if applicable)
 - [ ] Tests use `soroban-sdk` testutils and `Env::default()`
 
 ### Repository hygiene

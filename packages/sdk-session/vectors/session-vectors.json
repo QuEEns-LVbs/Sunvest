@@ -1,6 +1,6 @@
 {
-  "$comment": "Cross-language session vectors. The Rust side is pinned by tests/session_vectors.rs of salazarsebas/Cougr; the TypeScript side is asserted by packages/sdk-session/test/vectors.test.ts. Do not edit one side without the other.",
-  "source": "cougr_core::accounts::{SessionBuilder, SessionPolicy, SessionStorage, derive_session_key_id}",
+  "$comment": "Cross-language session vectors. The Rust side is pinned by tests/session_vectors.rs of salazarsebas/Sunvest; the TypeScript side is asserted by packages/sdk-session/test/vectors.test.ts. Do not edit one side without the other.",
+  "source": "Sunvest_core::accounts::{SessionBuilder, SessionPolicy, SessionStorage, derive_session_key_id}",
   "keyId": {
     "inputs": {
       "timestamp": 1735689600,

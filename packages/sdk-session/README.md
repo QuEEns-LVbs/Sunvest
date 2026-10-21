@@ -1,7 +1,7 @@
-# cougr-sdk-session
+# Sunvest-sdk-session
 
 A zero-dependency TypeScript session client that rebuilds the session authorization
-[`cougr_core::accounts::SessionBuilder`](../../src/accounts/session_builder.rs) builds, so a web or
+[`Sunvest_core::accounts::SessionBuilder`](../../src/accounts/session_builder.rs) builds, so a web or
 Node client can prepare a session, reject expired or replayed actions before submit, and agree with
 the on-chain engine on every byte that matters.
 
@@ -42,7 +42,7 @@ contract's order — expiry, budget, nonce, allowed action — and returns the s
 `SessionBudgetExceeded = 39`, `SessionRevoked = 43`).
 
 ```ts
-import { SessionBuilder, SessionClient } from 'cougr-sdk-session';
+import { SessionBuilder, SessionClient } from 'Sunvest-sdk-session';
 
 const clock = { timestamp: () => 1_735_689_700n, sequence: () => 42 };
 
@@ -60,7 +60,7 @@ const scope = new SessionBuilder(clock)
 a chain call takes a function argument instead:
 
 ```ts
-import type { SessionKeyProvider, SessionScope } from 'cougr-sdk-session';
+import type { SessionKeyProvider, SessionScope } from 'Sunvest-sdk-session';
 
 const provider: SessionKeyProvider = {
   createSession: (scope: SessionScope) => myRpcClient.createSession(scope),
@@ -78,7 +78,7 @@ bindings, a REST wrapper, or a test double — can implement it. `SessionClient`
 `vectors/session-vectors.json` is the shared artifact:
 
 - `tests/session_vectors.rs` in the Rust crate derives the key id from
-  `cougr_core::accounts::derive_session_key_id` and evaluates the real `SessionPolicy`, then asserts
+  `Sunvest_core::accounts::derive_session_key_id` and evaluates the real `SessionPolicy`, then asserts
   the committed vector is current.
 - `test/vectors.test.ts` derives the same 32-byte id and runs the same accept/reject cases from the
   JSON.

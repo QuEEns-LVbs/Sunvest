@@ -3,13 +3,13 @@
  *
  * Previews are standalone SVG files consumed as images, so CSS custom
  * properties from a host page never reach them. That is why this module reads
- * literal values from `cougr-tokens` at generation time rather than emitting
+ * literal values from `Sunvest-tokens` at generation time rather than emitting
  * `var(--color-bg)` into the markup.
  *
  * The package is imported by relative path because this repository has no npm
  * workspace and `tools/preview-gen` is intentionally install-free. A consumer
  * in a separate repository (the documentation site, per
- * docs/strategy/10-repository-strategy.md) pins `cougr-tokens` as a normal
+ * docs/strategy/10-repository-strategy.md) pins `Sunvest-tokens` as a normal
  * dependency instead.
  *
  * To change any color here, edit `packages/tokens/tokens.json`, run

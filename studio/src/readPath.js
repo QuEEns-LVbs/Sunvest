@@ -3,7 +3,7 @@
  *
  * Decision: poll `get_state`.
  *
- * The alternative the issue names is subscribing to the `COUGR` events in
+ * The alternative the issue names is subscribing to the `Sunvest` events in
  * `src/ecs_events.rs` (`set`, `del`, `rich`). That path is viable, but it puts
  * more work on the client for strictly less information:
  *
@@ -33,7 +33,7 @@
  * one code path that cannot silently miss a move.
  *
  * If this is ever revisited, the honest version is a hybrid: subscribe to
- * `COUGR`/`set` only as a nudge to read sooner, and keep `get_state` as the
+ * `Sunvest`/`set` only as a nudge to read sooner, and keep `get_state` as the
  * source of truth. That is exactly what this module's loop does with a timer
  * instead of an event source.
  */
@@ -42,13 +42,13 @@
 export const READ_PATH = Object.freeze({
   kind: 'poll',
   contractCall: 'get_state',
-  eventPrefix: ['COUGR'],
+  eventPrefix: ['Sunvest'],
   eventTopics: ['set', 'del', 'rich'],
   richEventCarriesValue: false,
 });
 
 /**
- * Why polling `get_state` was chosen over subscribing to `COUGR` events.
+ * Why polling `get_state` was chosen over subscribing to `Sunvest` events.
  * Kept as data so the PR body, the README and any future UI can quote the same
  * reasoning instead of paraphrasing it.
  */
@@ -57,7 +57,7 @@ export function readPathJustification() {
     choice: 'poll get_state',
     summary:
       'Poll the contract\'s get_state until the match changes, with a bounded number of attempts. '
-      + 'The COUGR rich event does not carry the component value, so an event subscription would still need a follow-up read.',
+      + 'The Sunvest rich event does not carry the component value, so an event subscription would still need a follow-up read.',
     reasons: [
       'RichComponentChangedEvent carries only { component_type, entity_id }; its doc comment says off-chain indexers must query the contract for the updated value.',
       'ComponentSetEvent carries raw component bytes, so an event-only board would have to reimplement the contract\'s serialization to rebuild GameState.',

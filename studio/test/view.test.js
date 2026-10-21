@@ -58,7 +58,7 @@ test('the wait state is visible and explains why the board is not moving', () =>
   assert.match(html, /data-testid="finality-wait"/);
   assert.match(html, /role="status"/);
   assert.match(html, /aria-live="polite"/);
-  assert.match(html, /cougr-studio__spinner/);
+  assert.match(html, /Sunvest-studio__spinner/);
   assert.ok(html.includes(PHASE_COPY[PHASES.FINALIZING].title));
   assert.ok(html.includes(PHASE_COPY[PHASES.FINALIZING].detail));
   assert.match(html, /deliberate/);
@@ -147,17 +147,17 @@ test('the component accepts a live state object of the same shape, not only fixt
 test('the view is a single scoped fragment that a host can mount', () => {
   const html = renderStudioView(modelFromFixture(loadFixture('3x3-win')));
 
-  assert.match(html, /^<section class="cougr-studio"/);
+  assert.match(html, /^<section class="Sunvest-studio"/);
   assert.match(html, /<\/section>$/);
   assert.equal(count(html, '<section'), 1);
 
   const styles = studioStyles();
-  assert.match(styles, /^\.cougr-studio/);
+  assert.match(styles, /^\.Sunvest-studio/);
   assert.equal(styles.includes('<'), false, 'styles must not contain stray markup');
   assert.match(styles, /prefers-reduced-motion/);
 
   const withoutStyles = renderStudioView(modelFromFixture(loadFixture('3x3-win')), { inlineStyles: false });
-  assert.equal(withoutStyles.includes('@keyframes cougr-studio-spin'), false);
+  assert.equal(withoutStyles.includes('@keyframes Sunvest-studio-spin'), false);
   // The only <style> left is the board's font declaration.
   assert.equal(count(withoutStyles, '<style>'), 1);
 });

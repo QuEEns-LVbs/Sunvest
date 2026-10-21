@@ -1,7 +1,7 @@
 use super::*;
 use crate::components::{Color, Piece, PieceKind};
-use cougr_core::component::ComponentTrait;
-use cougr_core::zk::{G1Point, G2Point};
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::zk::{G1Point, G2Point};
 use soroban_sdk::{symbol_short, testutils::Address as _, Address, BytesN, Env, Map, Vec};
 
 fn setup_game() -> (Env, ChessContractClient<'static>, Address, Address) {

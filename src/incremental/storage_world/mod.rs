@@ -10,7 +10,7 @@ use self::model::{
 };
 use super::dirty_tracker::DirtyTracker;
 use super::keys;
-use crate::error::CougrError;
+use crate::error::SunvestError;
 use crate::simple_world::{EntityId, SimpleWorld};
 use alloc::vec::Vec;
 use soroban_sdk::{Bytes, Env, Symbol};
@@ -52,7 +52,7 @@ impl StorageWorld {
     }
 
     /// Load a single entity's component list and component data from storage.
-    pub fn load_entity(&mut self, env: &Env, entity_id: EntityId) -> Result<(), CougrError> {
+    pub fn load_entity(&mut self, env: &Env, entity_id: EntityId) -> Result<(), SunvestError> {
         if loaded_entity_index(&self.loaded_entities, entity_id).is_some() {
             return Ok(());
         }
@@ -62,7 +62,7 @@ impl StorageWorld {
             .storage()
             .persistent()
             .get(&key)
-            .ok_or(CougrError::EntityNotFound)?;
+            .ok_or(SunvestError::EntityNotFound)?;
 
         for i in 0..component_types.len() {
             if let Some(component_type) = component_types.get(i) {
@@ -86,7 +86,7 @@ impl StorageWorld {
     }
 
     /// Load multiple entities from storage.
-    pub fn load_entities(&mut self, env: &Env, entity_ids: &[EntityId]) -> Result<(), CougrError> {
+    pub fn load_entities(&mut self, env: &Env, entity_ids: &[EntityId]) -> Result<(), SunvestError> {
         for &entity_id in entity_ids {
             self.load_entity(env, entity_id)?;
         }

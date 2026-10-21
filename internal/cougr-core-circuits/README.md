@@ -1,6 +1,6 @@
-# cougr-core-circuits (internal)
+# Sunvest-core-circuits (internal)
 
-Off-chain Circom toolchain for `cougr_core::circuits`. Not published to crates.io.
+Off-chain Circom toolchain for `Sunvest_core::circuits`. Not published to crates.io.
 
 ## Package manager
 
@@ -16,7 +16,7 @@ Off-chain Circom toolchain for `cougr_core::circuits`. Not published to crates.i
 ## Quick start
 
 ```bash
-cd internal/cougr-core-circuits
+cd internal/Sunvest-core-circuits
 bun install
 export CIRCOM=/path/to/circom   # if not on PATH
 bun run pipeline

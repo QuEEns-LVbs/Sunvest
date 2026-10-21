@@ -1,10 +1,10 @@
-//! Murdoku game systems using cougr-core
+//! Murdoku game systems using Sunvest-core
 
 use crate::components::{Clues, GridSize, Solution, Suspects};
 use crate::PuzzleError;
-use cougr_core::component::ComponentTrait;
-use cougr_core::simple_world::SimpleWorld;
-use cougr_core::SimpleQueryBuilder;
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::simple_world::SimpleWorld;
+use Sunvest_core::SimpleQueryBuilder;
 use soroban_sdk::{panic_with_error, Env, Vec};
 
 /// Ephemeral system to validate a submitted puzzle definition.

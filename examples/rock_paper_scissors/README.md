@@ -1,13 +1,13 @@
 # Rock Paper Scissors with Commit-Reveal
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-A two-player Rock Paper Scissors game demonstrating the **commit-reveal pattern** using cryptographic hashing on Stellar Soroban. This is the simplest example of hidden information in the Cougr framework.
+A two-player Rock Paper Scissors game demonstrating the **commit-reveal pattern** using cryptographic hashing on Stellar Soroban. This is the simplest example of hidden information in the Sunvest framework.
 
 ## Status
 
-**Transitional** - uses `cougr-core = "1.1.0"` with partial migration to `impl_component!` macros. See [battleship](../battleship/) for the canonical hidden-information reference.
+**Transitional** - uses `Sunvest-core = "1.1.0"` with partial migration to `impl_component!` macros. See [battleship](../battleship/) for the canonical hidden-information reference.
 
 ## What is Commit-Reveal?
 
@@ -229,7 +229,7 @@ let salt = player_address.to_bytes();
 | `MatchState` | `phase: Phase`<br>`winner: Option<Address>`<br>`round: u32` | Game phase tracking |
 | `ScoreBoard` | `wins_a: u32`<br>`wins_b: u32`<br>`draws: u32`<br>`best_of: u32` | Match scoring |
 
-All components implement `cougr_core::component::ComponentTrait` for type-safe serialization.
+All components implement `Sunvest_core::component::ComponentTrait` for type-safe serialization.
 
 ### Systems
 
@@ -323,7 +323,7 @@ stellar contract invoke \
 
 ## Learning Path
 
-This example is the **entry point** for understanding Cougr's cryptographic primitives:
+This example is the **entry point** for understanding Sunvest's cryptographic primitives:
 
 1. **Start here**: Commit-reveal with SHA256 (this example)
 2. **Next**: Upgrade to Poseidon2 hashing (ZK-friendly)
@@ -332,7 +332,7 @@ This example is the **entry point** for understanding Cougr's cryptographic prim
 
 ## Resources
 
-- [Cougr Repository](https://github.com/salazarsebas/Cougr)
+- [Sunvest Repository](https://github.com/salazarsebas/Sunvest)
 - [Commit-Reveal Schemes](https://en.wikipedia.org/wiki/Commitment_scheme)
 - [battleship - canonical commit-reveal example](../battleship/)
 - [hidden_hand - ZK circuit example](../hidden_hand/)

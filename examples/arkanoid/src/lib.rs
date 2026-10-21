@@ -2,11 +2,11 @@
 
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, Symbol};
 
-// Cougr-Core ECS framework - demonstrates component and system patterns
+// Sunvest-Core ECS framework - demonstrates component and system patterns
 //
-// HOW COUGR-CORE SIMPLIFIES DEVELOPMENT VS VANILLA SOROBAN:
+// HOW Sunvest-CORE SIMPLIFIES DEVELOPMENT VS VANILLA SOROBAN:
 //
-// 1. COMPONENT PATTERN: Instead of monolithic state structs, Cougr-Core organizes
+// 1. COMPONENT PATTERN: Instead of monolithic state structs, Sunvest-Core organizes
 //    game data into reusable components (PaddleComponent, BallComponent, BricksComponent).
 //    This makes code more modular and easier to extend with new features.
 //
@@ -23,7 +23,7 @@ use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, Symbo
 // 5. REUSABILITY: Components and systems can be reused across different games,
 //    reducing development time for future projects.
 
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 
 // Game constants
 const PADDLE_WIDTH: i32 = 15;
@@ -36,7 +36,7 @@ const BRICK_ROWS: usize = 5;
 const BRICK_GRID_SIZE: usize = BRICK_COLS * BRICK_ROWS;
 const STARTING_LIVES: u32 = 3;
 
-/// Paddle component - demonstrates Cougr-Core Component pattern
+/// Paddle component - demonstrates Sunvest-Core Component pattern
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct PaddleComponent {
@@ -67,7 +67,7 @@ impl ComponentTrait for PaddleComponent {
     }
 }
 
-/// Ball component - demonstrates Cougr-Core Component pattern
+/// Ball component - demonstrates Sunvest-Core Component pattern
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct BallComponent {
@@ -103,7 +103,7 @@ impl ComponentTrait for BallComponent {
     }
 }
 
-/// Bricks component - demonstrates Cougr-Core Component pattern
+/// Bricks component - demonstrates Sunvest-Core Component pattern
 /// Grid of bricks represented as a Vec (Soroban Vec for on-chain storage)
 #[contracttype]
 #[derive(Clone, Debug)]
@@ -137,7 +137,7 @@ impl ComponentTrait for BricksComponent {
     }
 }
 
-/// Score component - demonstrates Cougr-Core Component pattern
+/// Score component - demonstrates Sunvest-Core Component pattern
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct ScoreComponent {
@@ -183,7 +183,7 @@ impl ComponentTrait for ScoreComponent {
     }
 }
 
-/// ECS World State - demonstrates how Cougr-Core organizes game data into components
+/// ECS World State - demonstrates how Sunvest-Core organizes game data into components
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct ECSWorldState {
@@ -215,7 +215,7 @@ pub struct ArkanoidContract;
 
 #[contractimpl]
 impl ArkanoidContract {
-    /// Initialize a new game using Cougr-Core ECS component pattern
+    /// Initialize a new game using Sunvest-Core ECS component pattern
     pub fn init_game(env: Env) -> GameState {
         // Initialize bricks grid
         let mut bricks_grid = soroban_sdk::Vec::new(&env);
@@ -265,7 +265,7 @@ impl ArkanoidContract {
         Self::world_to_game_state(&world_state)
     }
 
-    /// Update game tick - demonstrates Cougr-Core System pattern
+    /// Update game tick - demonstrates Sunvest-Core System pattern
     pub fn update_tick(env: Env) -> GameState {
         let mut world_state: ECSWorldState = env
             .storage()
@@ -312,7 +312,7 @@ impl ArkanoidContract {
         !world_state.score.game_active
     }
 
-    // ECS Systems - Following Cougr-Core System pattern
+    // ECS Systems - Following Sunvest-Core System pattern
 
     /// PhysicsSystem: Updates ball position based on velocity
     fn physics_system(world: &mut ECSWorldState) {

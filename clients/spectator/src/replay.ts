@@ -1,14 +1,14 @@
 import {
-  decodeCougrEvents,
-  decodeCougrPage,
+  decodeSunvestEvents,
+  decodeSunvestPage,
   isRichComponentChanged,
   resolveRichComponentUpdate,
-  type CougrEventUpdate,
+  type SunvestEventUpdate,
   type RichComponentChangedUpdate,
   type RichComponentRef,
   type SorobanRpcContractEvent,
   type SorobanRpcEventsPage,
-} from 'cougr-sdk-events';
+} from 'Sunvest-sdk-events';
 
 import {
   BOARD_COMPONENT,
@@ -68,13 +68,13 @@ export function createFixtureRichReader(
 }
 
 /**
- * Process a sequence of decoded Cougr updates and construct an ordered `ReplayTimeline`.
+ * Process a sequence of decoded Sunvest updates and construct an ordered `ReplayTimeline`.
  *
  * Directly consumes sdk-events types and uses `resolveRichComponentUpdate`
  * for rich event handling.
  */
 export async function buildMatchTimeline(
-  updates: readonly CougrEventUpdate[],
+  updates: readonly SunvestEventUpdate[],
   options: ReplayOptions = {},
 ): Promise<ReplayTimeline> {
   const targetEntity = options.targetEntityId ?? 1;
@@ -89,7 +89,7 @@ export async function buildMatchTimeline(
   const frames: TimelineFrame[] = [];
 
   for (let i = 0; i < updates.length; i += 1) {
-    const update = updates[i] as CougrEventUpdate;
+    const update = updates[i] as SunvestEventUpdate;
     if (update.entityId !== targetEntity) {
       // Still record updates for other entities if any, but focus match state on target
     }
@@ -194,14 +194,14 @@ export async function buildMatchTimeline(
 }
 
 /**
- * Replay an ordered timeline directly from raw Soroban RPC events using `cougr-sdk-events`.
+ * Replay an ordered timeline directly from raw Soroban RPC events using `Sunvest-sdk-events`.
  */
 export async function replayFromEvents(
   events: SorobanRpcContractEvent[],
   options: ReplayOptions = {},
 ): Promise<ReplayTimeline> {
-  // Uses sdk-events decodeCougrEvents directly
-  const updates = decodeCougrEvents(events);
+  // Uses sdk-events decodeSunvestEvents directly
+  const updates = decodeSunvestEvents(events);
 
   // Stable ordering by ledger then pagingToken if events were collected unordered
   const sorted = [...updates].sort((a, b) => {
@@ -219,7 +219,7 @@ export async function replayFromPage(
   page: SorobanRpcEventsPage,
   options: ReplayOptions = {},
 ): Promise<ReplayTimeline> {
-  const { updates } = decodeCougrPage(page);
+  const { updates } = decodeSunvestPage(page);
   return buildMatchTimeline(updates, options);
 }
 

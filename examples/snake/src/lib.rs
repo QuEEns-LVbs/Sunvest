@@ -1,7 +1,7 @@
 //! # Snake On-Chain Game
 //!
 //! This example demonstrates how to build an on-chain Snake game using the
-//! `cougr-core` ECS framework on the Stellar blockchain via Soroban.
+//! `Sunvest-core` ECS framework on the Stellar blockchain via Soroban.
 //!
 //! ## Game Logic
 //!
@@ -17,7 +17,7 @@
 //! - **Components**: Position, Direction, SnakeHead, SnakeSegment, Food
 //! - **Systems**: Movement, collision detection, growth, food spawning
 //!
-//! The `cougr-core` package simplifies on-chain game development by providing:
+//! The `Sunvest-core` package simplifies on-chain game development by providing:
 //! - Serialization-ready component patterns for on-chain storage
 //! - Entity management optimized for Soroban's constraints
 //! - A consistent architecture for game logic
@@ -33,7 +33,7 @@ mod systems;
 use alloc::rc::Rc;
 use components::{ComponentTrait, Direction, DirectionComponent, Position, SnakeHead};
 use core::cell::Cell;
-use cougr_core::{GameApp, ScheduleStage, SimpleQueryBuilder, SimpleWorld, SystemConfig};
+use Sunvest_core::{GameApp, ScheduleStage, SimpleQueryBuilder, SimpleWorld, SystemConfig};
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, Vec};
 
 /// Default grid size for the game (10x10)

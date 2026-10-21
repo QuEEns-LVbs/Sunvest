@@ -3,7 +3,7 @@
 extern crate alloc;
 use alloc::vec::Vec as RustVec;
 
-use cougr_core::zk::{experimental, Groth16Proof, Scalar, VerificationKey};
+use Sunvest_core::zk::{experimental, Groth16Proof, Scalar, VerificationKey};
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype, panic_with_error, symbol_short, Address,
     Bytes, BytesN, Env, Symbol, Vec,

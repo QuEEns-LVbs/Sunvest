@@ -1,9 +1,9 @@
-//! blind_auction - canonical Cougr ZK circuits example for sealed-bid reveals.
+//! blind_auction - canonical Sunvest ZK circuits example for sealed-bid reveals.
 
 #![no_std]
 
-use cougr_core::circuits::sealed_bid;
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::circuits::sealed_bid;
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, Address, BytesN, Env, Symbol,
 };

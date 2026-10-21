@@ -20,7 +20,7 @@ const RUST_KEYWORDS: &[&str] = &[
 
 /// Names Cargo refuses outright (`test` collides with the built-in test crate)
 /// or that would shadow the framework the generated project depends on.
-const RESERVED_NAMES: &[&str] = &["cougr", "cougr-core", "cougr_core", "cougr-cli", "test"];
+const RESERVED_NAMES: &[&str] = &["Sunvest", "Sunvest-core", "Sunvest_core", "Sunvest-cli", "test"];
 
 /// The longest name crates.io accepts.
 const MAX_NAME_LEN: usize = 64;
@@ -173,8 +173,8 @@ mod tests {
 
     #[test]
     fn rejects_reserved_names() {
-        assert!(ProjectName::parse("cougr").is_err());
-        assert!(ProjectName::parse("cougr-core").is_err());
+        assert!(ProjectName::parse("Sunvest").is_err());
+        assert!(ProjectName::parse("Sunvest-core").is_err());
     }
 
     #[test]

@@ -2,14 +2,14 @@
 
 {{description}}
 
-Generated with `cougr new --template {{template_id}}`, based on the canonical
-[`{{source_example}}`](https://github.com/salazarsebas/Cougr/tree/main/examples/{{source_example}})
+Generated with `Sunvest new --template {{template_id}}`, based on the canonical
+[`{{source_example}}`](https://github.com/salazarsebas/Sunvest/tree/main/examples/{{source_example}})
 example.
 
 ## Purpose and pattern
 
 A player enters the world with `spawn` and walks around it one step at a time
-with `move_entity`. It is the smallest complete Cougr game: typed ECS components
+with `move_entity`. It is the smallest complete Sunvest game: typed ECS components
 stored in a `SimpleWorld`, persisted through `SorobanGame`, with position changes
 published as indexed Soroban events for off-chain clients.
 
@@ -46,12 +46,12 @@ game state is a single read and a single write per call.
 
 1. A client calls `spawn` and stores the returned entity ID.
 2. The entity is placed at `(0, 0)` with a budget of 1,000 moves, and a
-   `(COUGR, set, position)` event is emitted.
+   `(Sunvest, set, position)` event is emitted.
 3. The client calls `move_entity` with a direction; the position shifts by one
    and the budget drops by one, emitting another position event.
 4. `position`, `moves`, and `entity_count` read state back without a write.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 | API | Why |
 | --- | --- |

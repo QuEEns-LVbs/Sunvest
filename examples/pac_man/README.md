@@ -1,13 +1,13 @@
 # Pac-Man On-Chain Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-A practical example demonstrating how to use the `cougr-core` package to implement on-chain game logic on the Stellar blockchain via Soroban.
+A practical example demonstrating how to use the `Sunvest-core` package to implement on-chain game logic on the Stellar blockchain via Soroban.
 
 ## Overview
 
-This example implements a complete Pac-Man game as a Soroban smart contract. The focus is exclusively on the smart contract logic (without graphical interface), showcasing how `cougr-core` simplifies on-chain game development.
+This example implements a complete Pac-Man game as a Soroban smart contract. The focus is exclusively on the smart contract logic (without graphical interface), showcasing how `Sunvest-core` simplifies on-chain game development.
 
 ### Features
 
@@ -112,8 +112,8 @@ stellar --version  # Should show Stellar CLI version
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/salazarsebas/Cougr.git
-cd Cougr/examples/pac_man
+git clone https://github.com/salazarsebas/Sunvest.git
+cd Sunvest/examples/pac_man
 ```
 
 ### 2. Update Dependencies
@@ -230,26 +230,26 @@ let state: GameState = env.storage()
     .expect("Game not initialized");
 ```
 
-### 3. Cougr-Core Integration
+### 3. Sunvest-Core Integration
 
-The contract uses cougr-core for ECS patterns and event handling:
+The contract uses Sunvest-core for ECS patterns and event handling:
 
 ```rust
-use cougr_core::component::{ComponentTrait, Position as CorePosition};
-use cougr_core::event::{CollisionEvent, Event, EventTrait};
+use Sunvest_core::component::{ComponentTrait, Position as CorePosition};
+use Sunvest_core::event::{CollisionEvent, Event, EventTrait};
 ```
 
-**Position Component**: Game positions integrate with cougr_core's Position:
+**Position Component**: Game positions integrate with Sunvest_core's Position:
 ```rust
 impl Position {
-    /// Convert to cougr_core Position for ECS integration
+    /// Convert to Sunvest_core Position for ECS integration
     pub fn to_core_position(&self) -> CorePosition {
         CorePosition::new(self.x, self.y)
     }
 }
 ```
 
-**Collision Events**: Ghost collisions use cougr_core's event system:
+**Collision Events**: Ghost collisions use Sunvest_core's event system:
 ```rust
 // Each ghost has an entity_id for collision tracking
 pub struct Ghost {
@@ -257,7 +257,7 @@ pub struct Ghost {
     // ...
 }
 
-// Create collision events using cougr_core
+// Create collision events using Sunvest_core
 let collision_event = CollisionEvent::new(
     PACMAN_ENTITY_ID,
     ghost.entity_id,
@@ -267,7 +267,7 @@ let collision_event = CollisionEvent::new(
 
 **Query Functions**: Get serialized component data:
 ```rust
-// Get Pac-Man's position as serialized cougr_core component
+// Get Pac-Man's position as serialized Sunvest_core component
 pub fn get_serialized_pacman_position(env: Env) -> Bytes {
     let core_pos = state.pacman_pos.to_core_position();
     core_pos.serialize(&env) // Uses ComponentTrait
@@ -526,7 +526,7 @@ The contract has been successfully deployed to Stellar Testnet:
 - [Soroban Documentation](https://developers.stellar.org/docs/build/smart-contracts)
 - [Soroban Hello World Tutorial](https://developers.stellar.org/docs/build/smart-contracts/getting-started/hello-world)
 - [Stellar CLI Documentation](https://developers.stellar.org/docs/tools/cli)
-- [Cougr Repository](https://github.com/salazarsebas/Cougr)
+- [Sunvest Repository](https://github.com/salazarsebas/Sunvest)
 - [Rust Testing Guide](https://doc.rust-lang.org/book/ch11-00-testing.html)
 
 ## License

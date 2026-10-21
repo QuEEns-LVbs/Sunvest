@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       publish:
-        description: 'Publish the current cougr-cli version to crates.io'
+        description: 'Publish the current Sunvest-cli version to crates.io'
         required: true
         type: boolean
         default: false
@@ -66,19 +66,19 @@ jobs:
         working-directory: ./cli
         run: |
           # cli/Cargo.toml is a member of the root workspace, so `cargo metadata`
-          # returns every workspace package, not just this one. Select cougr-cli
+          # returns every workspace package, not just this one. Select Sunvest-cli
           # explicitly instead of trusting packages[0] (which resolves to the
-          # workspace root package, cougr-core).
+          # workspace root package, Sunvest-core).
           metadata="$(cargo metadata --no-deps --format-version 1)"
-          echo "name=$(echo "$metadata" | jq -r '.packages[] | select(.name == "cougr-cli") | .name')" >> "$GITHUB_OUTPUT"
-          echo "version=$(echo "$metadata" | jq -r '.packages[] | select(.name == "cougr-cli") | .version')" >> "$GITHUB_OUTPUT"
+          echo "name=$(echo "$metadata" | jq -r '.packages[] | select(.name == "Sunvest-cli") | .name')" >> "$GITHUB_OUTPUT"
+          echo "version=$(echo "$metadata" | jq -r '.packages[] | select(.name == "Sunvest-cli") | .version')" >> "$GITHUB_OUTPUT"
 
       - name: Check crates.io version
         id: crates
         run: |
           # crates.io rejects requests with no descriptive User-Agent (403)
           response="$(curl -fsSL \
-            -H "User-Agent: cougr-cli-publish-workflow (+https://github.com/salazarsebas/Cougr)" \
+            -H "User-Agent: Sunvest-cli-publish-workflow (+https://github.com/salazarsebas/Sunvest)" \
             "https://crates.io/api/v1/crates/${{ steps.crate.outputs.name }}")" || true
           published=false
 
@@ -163,6 +163,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${{ steps.crate.outputs.tag }}" \
-            --title "cougr-cli v${{ steps.crate.outputs.version }}" \
+            --title "Sunvest-cli v${{ steps.crate.outputs.version }}" \
             --notes "${{ steps.changelog.outputs.notes }}" \
             --generate-notes

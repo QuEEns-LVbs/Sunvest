@@ -1,7 +1,7 @@
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::{contracttype, symbol_short, Env, Symbol};
 
-/// Paddle component - demonstrates Cougr-Core Component pattern
+/// Paddle component - demonstrates Sunvest-Core Component pattern
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct PaddleComponent {
@@ -9,7 +9,7 @@ pub struct PaddleComponent {
     pub y_position: i32,
 }
 
-// Implement Cougr-Core ComponentTrait for PaddleComponent
+// Implement Sunvest-Core ComponentTrait for PaddleComponent
 impl ComponentTrait for PaddleComponent {
     fn component_type() -> Symbol {
         symbol_short!("paddle")
@@ -43,7 +43,7 @@ impl ComponentTrait for PaddleComponent {
     }
 }
 
-/// Ball component - demonstrates Cougr-Core Component pattern
+/// Ball component - demonstrates Sunvest-Core Component pattern
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct BallComponent {
@@ -53,7 +53,7 @@ pub struct BallComponent {
     pub vy: i32,
 }
 
-// Implement Cougr-Core ComponentTrait for BallComponent
+// Implement Sunvest-Core ComponentTrait for BallComponent
 impl ComponentTrait for BallComponent {
     fn component_type() -> Symbol {
         symbol_short!("ball")
@@ -80,7 +80,7 @@ impl ComponentTrait for BallComponent {
     }
 }
 
-/// Score component - demonstrates Cougr-Core Component pattern
+/// Score component - demonstrates Sunvest-Core Component pattern
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct ScoreComponent {
@@ -89,7 +89,7 @@ pub struct ScoreComponent {
     pub game_active: bool,
 }
 
-// Implement Cougr-Core ComponentTrait for ScoreComponent
+// Implement Sunvest-Core ComponentTrait for ScoreComponent
 impl ComponentTrait for ScoreComponent {
     fn component_type() -> Symbol {
         symbol_short!("score")
@@ -129,8 +129,8 @@ impl ComponentTrait for ScoreComponent {
     }
 }
 
-/// ECS World State - serializable version using Cougr-Core component pattern
-/// This demonstrates how Cougr-Core organizes game data into components
+/// ECS World State - serializable version using Sunvest-Core component pattern
+/// This demonstrates how Sunvest-Core organizes game data into components
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct ECSWorldState {

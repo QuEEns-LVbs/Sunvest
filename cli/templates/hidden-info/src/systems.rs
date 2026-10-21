@@ -1,12 +1,12 @@
 //! Circuit wiring and table rules for {{crate_name}}.
 //!
-//! `cougr_core::circuits::hidden_cards` builds a `GameCircuitSpec` - the public
+//! `Sunvest_core::circuits::hidden_cards` builds a `GameCircuitSpec` - the public
 //! input layout and verification key for a hidden-card deal. Rebuilding it from
 //! the stored [`TableConfig`] on every call, rather than caching a spec, keeps
 //! one source of truth for what a valid proof must satisfy.
 
-use cougr_core::circuits::{hidden_cards, GameCircuitSpec};
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::circuits::{hidden_cards, GameCircuitSpec};
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{BytesN, Env};
 
 use crate::components::TableConfig;

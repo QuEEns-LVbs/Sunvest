@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Full Cougr Circom pipeline: compile → setup → prove → verify.
+# Full Sunvest Circom pipeline: compile → setup → prove → verify.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SCRIPTS="$ROOT/scripts"
 # shellcheck source=lib.sh
 source "$SCRIPTS/lib.sh"
-cougr_circuits_export_path
+Sunvest_circuits_export_path
 
 export PATH="${CIRCOM_PATH:-}:$PATH"
 export CIRCOM="${CIRCOM:-circom}"

@@ -1,21 +1,21 @@
-# Cougr Patterns
+# Sunvest Patterns
 
 ## Purpose
 
-This document captures the recommended architectural patterns for new Soroban game contracts built on Cougr.
+This document captures the recommended architectural patterns for new Soroban game contracts built on Sunvest.
 
 The goal is to standardize how teams structure worlds, systems, stages, and storage choices instead of relying on ad-hoc example interpretation.
 
 ## Find a pattern by problem
 
-Start here if you know what you're trying to build but not which Cougr module answers it. Each row links to the module-level doc for full detail, and to a concrete, current example that demonstrates it.
+Start here if you know what you're trying to build but not which Sunvest module answers it. Each row links to the module-level doc for full detail, and to a concrete, current example that demonstrates it.
 
 | I want... | Use | Example | Read more |
 |---|---|---|---|
 | **Fairness** (a roll, a draw, an outcome no one can predict or bias) | `circuits::FairDiceBuilder` - on-chain Groth16-verified randomness (Experimental) | [`dice_duel`](../examples/dice_duel) | [Hidden Information Guidance](#hidden-information-guidance) below, [PRIVACY_MODEL.md](./PRIVACY_MODEL.md) |
 | **Hidden information** (cards, ship positions, sealed bids - state some players shouldn't see) | `privacy::stable` commit-reveal + Merkle primitives | [`battleship`](../examples/battleship) (canonical), [`rock_paper_scissors`](../examples/rock_paper_scissors), [`hidden_hand`](../examples/hidden_hand), [`blind_auction`](../examples/blind_auction) | [Hidden Information Guidance](#hidden-information-guidance) below, [PRIVACY_MODEL.md](./PRIVACY_MODEL.md) |
 | **To gate an action behind a role** (admin-only, minter-only, etc.) | `AccessControl` - role-based authorization with per-role admin delegation | - | [STANDARDS_LAYER.md § AccessControl](./STANDARDS_LAYER.md#accesscontrol) |
-| **Off-chain-friendly real-time movement** (clients track state without polling) | `impl_component_observed!` - emits a `(COUGR, set, <component>)` event on every change | [`spawn_and_move`](../examples/spawn_and_move) (start here), [`snake`](../examples/snake) | [System Design](#system-design) and [Query Guidance](#query-guidance) below, `docs/ECS_CORE.md` |
+| **Off-chain-friendly real-time movement** (clients track state without polling) | `impl_component_observed!` - emits a `(Sunvest, set, <component>)` event on every change | [`spawn_and_move`](../examples/spawn_and_move) (start here), [`snake`](../examples/snake) | [System Design](#system-design) and [Query Guidance](#query-guidance) below, `docs/ECS_CORE.md` |
 | **A passwordless sign-in** (Face ID / Touch ID instead of a seed phrase) | `secp256r1` passkey signer, composed through `AccountKernel` | [`guild_arena`](../examples/guild_arena) | [ACCOUNT_KERNEL.md § Signers](./ACCOUNT_KERNEL.md#signers) |
 | **A session players approve once, not per-transaction** | Session signer + `SessionPolicy` (scope, expiry, operation budget) | [`session_arena`](../examples/session_arena) | [ACCOUNT_KERNEL.md § Session Model](./ACCOUNT_KERNEL.md#session-model) |
 | **Account recovery if a device is lost** | `GuardianPolicy` + `ActiveDevicePolicy` | [`guild_arena`](../examples/guild_arena) | [ACCOUNT_KERNEL.md § Policies](./ACCOUNT_KERNEL.md#policies) |
@@ -28,7 +28,7 @@ Start here if you know what you're trying to build but not which Cougr module an
 | **To pick table vs. sparse storage** | Table for hot-loop state, sparse for infrequent markers | - | [Storage Guidance](#storage-guidance) below |
 | **A thin, explicit contract entrypoint / gameplay loop** | `GameApp` + explicit stage placement | [`spawn_and_move`](../examples/spawn_and_move), [`snake`](../examples/snake) | [Default Entry Point](#default-entry-point) and [Stage Layout](#stage-layout) below |
 
-Everything below this point is the module-level architectural guidance the table above links into - organized by Cougr's internal structure rather than by problem, for readers who already know which area they're working in.
+Everything below this point is the module-level architectural guidance the table above links into - organized by Sunvest's internal structure rather than by problem, for readers who already know which area they're working in.
 
 ## Default Entry Point
 
@@ -45,7 +45,7 @@ This keeps the "contract entrypoint" thin and the gameplay loop explicit.
 
 ## Stage Layout
 
-Cougr's recommended schedule is:
+Sunvest's recommended schedule is:
 
 - `Startup`: one-time entity/resource setup
 - `PreUpdate`: input decoding, action validation, turn preparation

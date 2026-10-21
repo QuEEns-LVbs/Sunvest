@@ -1,4 +1,4 @@
-class_name CougrStellarCliSigner
+class_name SunvestStellarCliSigner
 
 # Signs an unsigned envelope by handing it to `stellar tx sign`.
 #
@@ -10,7 +10,7 @@ class_name CougrStellarCliSigner
 #
 # This is the default signer. Assign any object with a matching
 # `sign(envelope, network_passphrase)` method to
-# CougrCheckpointClient.signer to sign somewhere else, such as a hardware wallet
+# SunvestCheckpointClient.signer to sign somewhere else, such as a hardware wallet
 # or a remote signer.
 
 const DEFAULT_BINARY := "stellar"
@@ -18,10 +18,10 @@ const DEFAULT_BINARY := "stellar"
 ## Environment variable naming the CLI identity, secret key, or seed phrase to
 ## sign with. The value is expanded by the shell, so this process never builds a
 ## Godot argument out of it and the key stays out of the project.
-const DEFAULT_KEY_ENV := "COUGR_SIGNING_KEY"
+const DEFAULT_KEY_ENV := "Sunvest_SIGNING_KEY"
 
-const _REQUEST_PATH := "user://cougr_unsigned.xdr"
-const _RESPONSE_PATH := "user://cougr_signed.xdr"
+const _REQUEST_PATH := "user://Sunvest_unsigned.xdr"
+const _RESPONSE_PATH := "user://Sunvest_signed.xdr"
 
 ## Stellar CLI binary name, or an absolute path when it is not on PATH.
 var binary := DEFAULT_BINARY
@@ -37,11 +37,11 @@ var key_env := DEFAULT_KEY_ENV
 ## binary, and an unknown identity all surface the same way here.
 func sign(envelope_xdr: PackedByteArray, network_passphrase: String) -> PackedByteArray:
 	if envelope_xdr.is_empty():
-		push_error("Cougr: cannot sign an empty envelope")
+		push_error("Sunvest: cannot sign an empty envelope")
 		return PackedByteArray()
 	if OS.get_environment(key_env).is_empty():
 		push_error(
-			"Cougr: set %s to the Stellar CLI identity or testnet secret key to sign with" % key_env
+			"Sunvest: set %s to the Stellar CLI identity or testnet secret key to sign with" % key_env
 		)
 		return PackedByteArray()
 	if not _store(_REQUEST_PATH, Marshalls.raw_to_base64(envelope_xdr)):
@@ -58,21 +58,21 @@ func sign(envelope_xdr: PackedByteArray, network_passphrase: String) -> PackedBy
 	var exit_code := OS.execute("/bin/sh", ["-c", command], output, true)
 	if exit_code != 0:
 		push_error(
-			"Cougr: `%s tx sign` failed with exit code %d: %s"
+			"Sunvest: `%s tx sign` failed with exit code %d: %s"
 			% [binary, exit_code, "\n".join(output)]
 		)
 		return PackedByteArray()
 
 	var signed := Marshalls.base64_to_raw(_load(_RESPONSE_PATH))
 	if signed.is_empty():
-		push_error("Cougr: `%s tx sign` wrote no envelope to its output" % binary)
+		push_error("Sunvest: `%s tx sign` wrote no envelope to its output" % binary)
 	return signed
 
 
 func _store(path: String, contents: String) -> bool:
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
-		push_error("Cougr: cannot write %s: %s" % [path, error_string(FileAccess.get_open_error())])
+		push_error("Sunvest: cannot write %s: %s" % [path, error_string(FileAccess.get_open_error())])
 		return false
 	file.store_string(contents)
 	file.close()
@@ -82,7 +82,7 @@ func _store(path: String, contents: String) -> bool:
 func _load(path: String) -> String:
 	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null:
-		push_error("Cougr: cannot read %s: %s" % [path, error_string(FileAccess.get_open_error())])
+		push_error("Sunvest: cannot read %s: %s" % [path, error_string(FileAccess.get_open_error())])
 		return ""
 	var contents := file.get_as_text()
 	file.close()

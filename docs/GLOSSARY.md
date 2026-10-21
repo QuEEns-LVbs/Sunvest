@@ -1,8 +1,8 @@
-# Cougr Glossary
+# Sunvest Glossary
 
 ## Purpose
 
-This document defines every Cougr-specific term precisely. Terms are used consistently across architecture docs, API contracts, examples, and the maturity model. If a term is not listed here, it is used in its ordinary English or Rust/Soroban sense.
+This document defines every Sunvest-specific term precisely. Terms are used consistently across architecture docs, API contracts, examples, and the maturity model. If a term is not listed here, it is used in its ordinary English or Rust/Soroban sense.
 
 ---
 
@@ -32,7 +32,7 @@ Maturity level for features that are usable and actively supported but expected 
 ## C
 
 ### Canonical example
-A maintained reference architecture held to the full [EXAMPLE_STANDARD.md](../examples/EXAMPLE_STANDARD.md). Stays current as `cougr-core` evolves.
+A maintained reference architecture held to the full [EXAMPLE_STANDARD.md](../examples/EXAMPLE_STANDARD.md). Stays current as `Sunvest-core` evolves.
 
 ### Change tracker
 Per-component dirty-flag system that records which entities had components modified since the last sweep. Used by incremental storage to persist only dirty entities.
@@ -47,13 +47,13 @@ Pattern for hidden information. A player commits to a secret value (publishing a
 Typed or raw data attached to an ECS entity. Defined via one of three macros: `impl_component!` (fixed-size primitives), `impl_component_observed!` (same + Soroban events on every `set`), or `impl_rich_component!` (complex XDR types like `Address`, `Vec`, `String`). Per ECS convention, never called "entity data" or "property."
 
 ### Contract
-A Soroban smart contract built on Cougr. The project standard is to say "contract" after first use, never "smart contract" in subsequent references.
+A Soroban smart contract built on Sunvest. The project standard is to say "contract" after first use, never "smart contract" in subsequent references.
 
 ### Contract layer
 The `game::SorobanGame` integration layer that bridges the ECS world model and Soroban contract entrypoints.
 
 ### Curated surface
-The defended set of public APIs that are part of Cougr's `1.0` stable contract. Documented in [API_CONTRACT.md](API_CONTRACT.md). Not every public Rust symbol is curated; only the documented stable namespaces are.
+The defended set of public APIs that are part of Sunvest's `1.0` stable contract. Documented in [API_CONTRACT.md](API_CONTRACT.md). Not every public Rust symbol is curated; only the documented stable namespaces are.
 
 ---
 
@@ -70,14 +70,14 @@ The defended set of public APIs that are part of Cougr's `1.0` stable contract. 
 An opaque runtime identity in the ECS. Entities have no data of their own; components are attached to them. Created via `world.spawn_entity()`, destroyed via `world.despawn_entity()`.
 
 ### Experimental
-Maturity level for features that are exploratory, fast-moving, and not part of Cougr's stable promise. May change or be removed without compatibility guarantees. See [MATURITY_MODEL.md](MATURITY_MODEL.md).
+Maturity level for features that are exploratory, fast-moving, and not part of Sunvest's stable promise. May change or be removed without compatibility guarantees. See [MATURITY_MODEL.md](MATURITY_MODEL.md).
 
 ---
 
 ## G
 
 ### GameApp
-App-level orchestration that owns a `SimpleWorld`, scheduler, plugin registration, and runtime resources in one place. The default entrypoint for complex games. Lives in `cougr_core::app`.
+App-level orchestration that owns a `SimpleWorld`, scheduler, plugin registration, and runtime resources in one place. The default entrypoint for complex games. Lives in `Sunvest_core::app`.
 
 ---
 
@@ -97,7 +97,7 @@ Callbacks triggered on component `add` / `remove` events. A synchronous mechanis
 Macro for fixed-size primitive components (e.g., `i32`, `u32`, `u64`, `bool`, `bytes32`). Stores directly in table storage.
 
 ### impl_component_observed!
-Same as `impl_component!` but emits a structured `(COUGR, set, <name>)` Soroban event on every mutation. Used when off-chain indexers need to track state changes without polling.
+Same as `impl_component!` but emits a structured `(Sunvest, set, <name>)` Soroban event on every mutation. Used when off-chain indexers need to track state changes without polling.
 
 ### impl_rich_component!
 Macro for complex types using Soroban's XDR codec. Supports `Address`, `Vec`, `String`, `Option`, and nested structs. Requires `#[contracttype]` on the struct.
@@ -116,7 +116,7 @@ Persistence layer that only flushes entities with dirty components (tracked by t
 ## M
 
 ### Maturity model
-The Stable / Beta / Experimental classification system governing compatibility promises, documentation depth, and test coverage across Cougr's public surfaces. Defined in [MATURITY_MODEL.md](MATURITY_MODEL.md). These three terms must be used identically everywhere - never synonyms ("production-ready" for Stable, "unstable" for Experimental, etc.).
+The Stable / Beta / Experimental classification system governing compatibility promises, documentation depth, and test coverage across Sunvest's public surfaces. Defined in [MATURITY_MODEL.md](MATURITY_MODEL.md). These three terms must be used identically everywhere - never synonyms ("production-ready" for Stable, "unstable" for Experimental, etc.).
 
 ### Merkle proof
 An inclusion proof against a Merkle tree root. Used in hidden-information games (fog-of-war, private inventory) to prove state membership without full disclosure. Supported as a stable primitive in `privacy::stable`.
@@ -126,7 +126,7 @@ An inclusion proof against a Merkle tree root. Used in hidden-information games 
 ## O
 
 ### Observed component
-A component defined with `impl_component_observed!` that emits structured Soroban events (topic prefix `COUGR`) on every `set` operation. The canonical choice when off-chain clients need to react to state changes.
+A component defined with `impl_component_observed!` that emits structured Soroban events (topic prefix `Sunvest`) on every `set` operation. The canonical choice when off-chain clients need to react to state changes.
 
 ### Observers
 Event-driven reaction mechanism. Unlike hooks (synchronous, component-lifecycle), observers respond to arbitrary application-level events across system boundaries.
@@ -146,7 +146,7 @@ Reusable authorization check in the account kernel. Base implementations: `Inten
 ## Q
 
 ### Query
-A declarative selection over entities by component presence. Cougr provides `SimpleQuery` / `SimpleQueryBuilder` for `SimpleWorld` and `ArchetypeQueryBuilder` for `ArchetypeWorld`. Both support `with_components`, `without_components`, and `with_any_components` filters.
+A declarative selection over entities by component presence. Sunvest provides `SimpleQuery` / `SimpleQueryBuilder` for `SimpleWorld` and `ArchetypeQueryBuilder` for `ArchetypeWorld`. Both support `with_components`, `without_components`, and `with_any_components` filters.
 
 ### Query cache
 Version-tagged result cache that invalidates on world mutation. Avoids re-scanning entities when the same query runs with no intervening writes.
@@ -156,7 +156,7 @@ Version-tagged result cache that invalidates on world mutation. Avoids re-scanni
 ## R
 
 ### Replay domain
-Nonce tracking namespace. Cougr uses two replay domains: per-account nonce tracking (for direct owner auth and passkey auth) and per-session nonce tracking (for session intents).
+Nonce tracking namespace. Sunvest uses two replay domains: per-account nonce tracking (for direct owner auth and passkey auth) and per-session nonce tracking (for session intents).
 
 ### Rich component
 A component using Soroban's XDR codec (via `impl_rich_component!`). Supports `Address`, `Vec`, `String`, `Option`, and nested structs. Stored in Soroban instance storage, not the ECS `Map`, but shares the same entity ID space.
@@ -193,7 +193,7 @@ Trait providing `load_world` and `save_world` as default methods, eliminating re
 Storage tier for infrequent marker components, administrative tags, and data accessed via targeted lookups rather than broad scans. Complement to table storage.
 
 ### Stable
-Maturity level for features that are SemVer-protected, documented with invariants and intended usage, covered by focused tests, and safe to present as part of Cougr's long-term public contract. See [MATURITY_MODEL.md](MATURITY_MODEL.md).
+Maturity level for features that are SemVer-protected, documented with invariants and intended usage, covered by focused tests, and safe to present as part of Sunvest's long-term public contract. See [MATURITY_MODEL.md](MATURITY_MODEL.md).
 
 ### Standards layer
 Reusable contract primitives (Ownable, AccessControl, Pausable, ExecutionGuard, RecoveryGuard, BatchExecutor, DelayedExecutionPolicy) keyed by `Symbol` for deterministic storage. Stable. Also exposed as `ops`, the preferred domain alias.
@@ -223,4 +223,4 @@ Stellar Protocol 25 host functions for Groth16 (BN254) and BLS12-381 cryptograph
 ## Z
 
 ### ZK proofs (zero-knowledge proofs)
-Cryptographic proofs enabling hidden-state verification on-chain. Cougr bundles Groth16 (BN254 pairing), BLS12-381, Poseidon2 hashing, Merkle trees, Pedersen commitments, and prebuilt game circuits. Stable subset in `privacy::stable`; advanced verification in `privacy::experimental`.
+Cryptographic proofs enabling hidden-state verification on-chain. Sunvest bundles Groth16 (BN254 pairing), BLS12-381, Poseidon2 hashing, Merkle trees, Pedersen commitments, and prebuilt game circuits. Stable subset in `privacy::stable`; advanced verification in `privacy::experimental`.

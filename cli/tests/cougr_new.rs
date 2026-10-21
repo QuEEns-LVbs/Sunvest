@@ -1,12 +1,12 @@
-//! End-to-end tests that drive the compiled `cougr` binary.
+//! End-to-end tests that drive the compiled `Sunvest` binary.
 //!
 //! The fast tests assert on the generated tree and the CLI's exit codes. The
 //! `#[ignore]`d `generated_projects_pass_cargo_test` compiles all four templates
-//! against the published `cougr-core` - it is the real definition-of-done check,
+//! against the published `Sunvest-core` - it is the real definition-of-done check,
 //! run in CI and locally with:
 //!
 //! ```bash
-//! cargo test -p cougr-cli -- --ignored --nocapture
+//! cargo test -p Sunvest-cli -- --ignored --nocapture
 //! ```
 
 use std::path::Path;
@@ -14,15 +14,15 @@ use std::process::{Command, Output};
 
 const TEMPLATES: [&str; 4] = ["starter", "turn-based", "hidden-info", "session-auth"];
 
-fn cougr(args: &[&str]) -> Output {
-    Command::new(env!("CARGO_BIN_EXE_cougr"))
+fn Sunvest(args: &[&str]) -> Output {
+    Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(args)
         .output()
-        .expect("run the cougr binary")
+        .expect("run the Sunvest binary")
 }
 
 fn generate(name: &str, template: &str, parent: &Path) -> Output {
-    cougr(&[
+    Sunvest(&[
         "new",
         name,
         "--template",
@@ -68,7 +68,7 @@ fn every_template_generates_a_complete_project() {
 #[test]
 fn starter_is_the_default_template() {
     let dir = tempfile::tempdir().unwrap();
-    let output = cougr(&[
+    let output = Sunvest(&[
         "new",
         "demo",
         "--path",
@@ -100,11 +100,11 @@ fn success_output_names_the_next_commands() {
 #[test]
 fn success_output_without_path_uses_bare_crate_name() {
     let dir = tempfile::tempdir().unwrap();
-    let output = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let output = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .current_dir(dir.path())
         .args(["new", "demo"])
         .output()
-        .expect("run the cougr binary");
+        .expect("run the Sunvest binary");
     let stdout = String::from_utf8_lossy(&output.stdout);
 
     assert!(stdout.contains("cd demo"));
@@ -159,7 +159,7 @@ fn an_existing_directory_is_never_overwritten() {
 
 #[test]
 fn add_list_shows_the_v1_pieces() {
-    let output = cougr(&["add", "--list"]);
+    let output = Sunvest(&["add", "--list"]);
     assert!(output.status.success(), "{}", stderr(&output));
     let listing = String::from_utf8_lossy(&output.stdout);
     for piece in ["session-auth", "hidden-hand", "standards/pausable"] {
@@ -169,7 +169,7 @@ fn add_list_shows_the_v1_pieces() {
 
 #[test]
 fn add_list_rejects_a_piece_name_at_parse_time() {
-    let output = cougr(&["add", "--list", "session-auth"]);
+    let output = Sunvest(&["add", "--list", "session-auth"]);
 
     assert!(!output.status.success());
     assert_eq!(
@@ -188,7 +188,7 @@ fn add_wires_a_piece_and_refuses_to_overwrite_it() {
     assert!(generated.status.success(), "{}", stderr(&generated));
     let project = dir.path().join("demo");
 
-    let added = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let added = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .arg("add")
         .arg("session-auth")
         .current_dir(&project)
@@ -200,7 +200,7 @@ fn add_wires_a_piece_and_refuses_to_overwrite_it() {
         .unwrap()
         .contains("pub mod session_auth;"));
 
-    let second = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let second = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(["add", "session-auth"])
         .current_dir(&project)
         .output()
@@ -213,10 +213,10 @@ fn add_wires_a_piece_and_refuses_to_overwrite_it() {
 fn add_outside_a_project_reports_the_error_and_a_hint() {
     let dir = tempfile::tempdir().unwrap();
 
-    // Run `cougr add session-auth` in a directory that contains no Cargo.toml
+    // Run `Sunvest add session-auth` in a directory that contains no Cargo.toml
     // or src/lib.rs - simulates the common mistake of running from the repo
     // root instead of the generated project subdirectory.
-    let output = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let output = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(["add", "session-auth"])
         .current_dir(dir.path())
         .output()
@@ -227,13 +227,13 @@ fn add_outside_a_project_reports_the_error_and_a_hint() {
     assert!(message.starts_with("error:"), "{message}");
     assert!(!message.contains("panicked"), "{message}");
     assert!(
-        message.contains("is not a Cougr project"),
+        message.contains("is not a Sunvest project"),
         "expected the InvalidProject message: {message}"
     );
     assert!(message.contains("help:"), "expected a hint: {message}");
     assert!(
-        message.contains("cougr new"),
-        "expected the hint to mention `cougr new`: {message}"
+        message.contains("Sunvest new"),
+        "expected the hint to mention `Sunvest new`: {message}"
     );
 }
 
@@ -244,9 +244,9 @@ fn add_with_path_from_outside_the_project() {
     assert!(generated.status.success(), "{}", stderr(&generated));
     let project = dir.path().join("demo");
 
-    // `--path` lets `cougr add` target the generated project while the process
+    // `--path` lets `Sunvest add` target the generated project while the process
     // runs from outside it: `current_dir` is the tempdir that holds `demo`.
-    let added = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let added = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(["add", "session-auth", "--path"])
         .arg(&project)
         .current_dir(dir.path())
@@ -259,7 +259,7 @@ fn add_with_path_from_outside_the_project() {
         .contains("pub mod session_auth;"));
 }
 
-/// Compile every template against the published `cougr-core`.
+/// Compile every template against the published `Sunvest-core`.
 ///
 /// Ignored by default because it downloads and compiles the Soroban SDK.
 #[test]
@@ -281,7 +281,7 @@ fn generated_projects_pass_cargo_test() {
 }
 
 // ---------------------------------------------------------------------------
-// cougr check - cdylib crate-type tests
+// Sunvest check - cdylib crate-type tests
 // ---------------------------------------------------------------------------
 
 /// Helper: generate a fresh project and return its path inside the TempDir.
@@ -298,13 +298,13 @@ fn generate_project(template: &str) -> (tempfile::TempDir, std::path::PathBuf) {
     (dir, project)
 }
 
-/// `cougr check --path <project>` must pass for every template as generated.
+/// `Sunvest check --path <project>` must pass for every template as generated.
 #[test]
 fn check_passes_for_every_template_with_default_cargo_toml() {
     for template in TEMPLATES {
         let (_dir, project) = generate_project(template);
 
-        let out = Command::new(env!("CARGO_BIN_EXE_cougr"))
+        let out = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
             .args(["check", "--path"])
             .arg(&project)
             .output()
@@ -312,13 +312,13 @@ fn check_passes_for_every_template_with_default_cargo_toml() {
 
         assert!(
             out.status.success(),
-            "`cougr check` failed for template `{template}` (unmodified Cargo.toml):\n{}",
+            "`Sunvest check` failed for template `{template}` (unmodified Cargo.toml):\n{}",
             String::from_utf8_lossy(&out.stderr)
         );
     }
 }
 
-/// `cougr check` must fail with a clear message when crate-type is removed from [lib].
+/// `Sunvest check` must fail with a clear message when crate-type is removed from [lib].
 #[test]
 fn check_fails_when_cdylib_crate_type_is_removed() {
     let (_dir, project) = generate_project("starter");
@@ -333,7 +333,7 @@ fn check_fails_when_cdylib_crate_type_is_removed() {
         .join("\n");
     std::fs::write(&cargo_toml_path, patched).unwrap();
 
-    let out = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let out = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(["check", "--path"])
         .arg(&project)
         .output()
@@ -341,7 +341,7 @@ fn check_fails_when_cdylib_crate_type_is_removed() {
 
     assert!(
         !out.status.success(),
-        "`cougr check` should have failed after removing crate-type but it succeeded"
+        "`Sunvest check` should have failed after removing crate-type but it succeeded"
     );
 
     let message = String::from_utf8_lossy(&out.stderr).to_string();
@@ -355,7 +355,7 @@ fn check_fails_when_cdylib_crate_type_is_removed() {
     );
 }
 
-/// `cougr check` must fail with a clear message when the entire [lib] section is removed.
+/// `Sunvest check` must fail with a clear message when the entire [lib] section is removed.
 #[test]
 fn check_fails_when_lib_section_is_removed_entirely() {
     let (_dir, project) = generate_project("starter");
@@ -370,7 +370,7 @@ fn check_fails_when_lib_section_is_removed_entirely() {
         .join("\n");
     std::fs::write(&cargo_toml_path, patched).unwrap();
 
-    let out = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let out = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(["check", "--path"])
         .arg(&project)
         .output()
@@ -378,7 +378,7 @@ fn check_fails_when_lib_section_is_removed_entirely() {
 
     assert!(
         !out.status.success(),
-        "`cougr check` should have failed after removing [lib] section but it succeeded"
+        "`Sunvest check` should have failed after removing [lib] section but it succeeded"
     );
 
     let message = String::from_utf8_lossy(&out.stderr).to_string();

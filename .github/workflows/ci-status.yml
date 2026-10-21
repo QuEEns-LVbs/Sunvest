@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   comment:
-    if: github.repository == 'salazarsebas/Cougr'
+    if: github.repository == 'salazarsebas/Sunvest'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

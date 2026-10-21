@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 # shellcheck source=lib.sh
 source "$(dirname "$0")/lib.sh"
-cougr_circuits_export_path
+Sunvest_circuits_export_path
 ARTIFACTS="$ROOT/artifacts"
 WITNESS_NODE="${WITNESS_NODE:-node}"
 KEYS="$ROOT/keys"

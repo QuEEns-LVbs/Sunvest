@@ -1,12 +1,12 @@
-//! Byte-layout cross-check vectors for the Cougr checkpoint Godot addon.
+//! Byte-layout cross-check vectors for the Sunvest checkpoint Godot addon.
 //!
-//! The addon in `clients/godot/addons/cougr_checkpoint` encodes Soroban
+//! The addon in `clients/godot/addons/Sunvest_checkpoint` encodes Soroban
 //! invocation payloads in GDScript, because a Godot project cannot take a
 //! dependency on the Rust Soroban toolchain. This crate rebuilds the same two
 //! invocations through `soroban_sdk`, from the same inputs, and pins the
 //! resulting bytes.
 //!
-//! `clients/godot/addons/cougr_checkpoint/tests/run_tests.gd` asserts the
+//! `clients/godot/addons/Sunvest_checkpoint/tests/run_tests.gd` asserts the
 //! identical hex under a headless Godot run, so the GDScript encoder and the
 //! Soroban SDK encoder cannot drift apart. The pinned values are the assertion
 //! targets in both directions: change one side and CI on the other side fails.
@@ -133,7 +133,7 @@ pub fn challenger_address() -> String {
 
 /// Strkey contract address for the vector contract id. This is the form a
 /// deployer copies out of `stellar contract deploy`, so it is what the addon
-/// takes as `COUGR_CONTRACT_ID`.
+/// takes as `Sunvest_CONTRACT_ID`.
 pub fn contract_address() -> String {
     strkey::encode_contract(&key_array(CONTRACT_ID_HEX))
 }
@@ -448,7 +448,7 @@ mod tests {
     use super::*;
     use soroban_sdk::xdr::{AccountId, PublicKey};
 
-    /// Vectors pinned by `addons/cougr_checkpoint/tests/run_tests.gd`. Both
+    /// Vectors pinned by `addons/Sunvest_checkpoint/tests/run_tests.gd`. Both
     /// sides assert these exact strings.
     const COMMIT_ARGS_HEX: &str = "00000001c0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedf00000011636f6d6d69745f636865636b706f696e74000000000000040000001200000000000000008182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa00000000300000400000000050123456789abcdef0000000300001068";
     const DISPUTE_ARGS_HEX: &str = "00000001c0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedf00000012646973707574655f636865636b706f696e74000000000003000000120000000000000000a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0000000030000040000000005fedcba9876543210";

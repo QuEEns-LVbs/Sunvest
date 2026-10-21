@@ -1,6 +1,6 @@
 #![no_std]
 #![doc = r#"
-Cougr is a monolithic-on-the-outside ECS framework for Soroban-compatible applications.
+Sunvest is a monolithic-on-the-outside ECS framework for Soroban-compatible applications.
 
 The public API is intentionally split into:
 
@@ -20,8 +20,8 @@ The public API is intentionally split into:
 # Golden Path
 
 ```rust
-use cougr_core::app::{named_system, GameApp, ScheduleStage};
-use cougr_core::{Position, SystemConfig};
+use Sunvest_core::app::{named_system, GameApp, ScheduleStage};
+use Sunvest_core::{Position, SystemConfig};
 use soroban_sdk::Env;
 
 let env = Env::default();
@@ -100,7 +100,7 @@ pub use archetype_world::{ArchetypeQuery, ArchetypeQueryBuilder, ArchetypeWorld}
 pub use commands::CommandQueue;
 pub use component::{Component, ComponentId, ComponentStorage, ComponentTrait, Position};
 pub use ecs::{RuntimeWorld, RuntimeWorldMut, WorldBackend};
-pub use error::{CougrError, CougrResult};
+pub use error::{SunvestError, SunvestResult};
 pub use event::{Event, EventReader, EventWriter};
 pub use plugin::{GameApp, Plugin, PluginGroup};
 pub use query::{QueryStorage, SimpleQuery, SimpleQueryBuilder};
@@ -109,7 +109,7 @@ pub use resource::ResourceTrait;
 pub use scheduler::{ScheduleError, ScheduleStage, SimpleScheduler, SystemConfig, SystemGroup};
 pub use simple_world::SimpleWorld;
 
-/// Default gameplay runtime surface for new Cougr projects.
+/// Default gameplay runtime surface for new Sunvest projects.
 pub mod app {
     pub use super::{
         CommandQueue, GameApp, Plugin, PluginGroup, Resource, ResourceTrait, RuntimeWorld,

@@ -3,7 +3,7 @@
 //! Tests empty world operations, non-existent entities, double operations,
 //! component data boundaries, and other corner cases.
 
-use cougr_core::{
+use Sunvest_core::{
     query::SimpleQueryCache,
     runtime::{ComponentEvent, ObservedWorld},
     CommandQueue, ComponentStorage, GameApp, Plugin, SimpleWorld,

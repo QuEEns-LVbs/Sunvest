@@ -11,7 +11,7 @@ use soroban_sdk::{Bytes, Symbol};
 ///
 /// # Example
 /// ```
-/// use cougr_core::runtime::ChangeTracker;
+/// use Sunvest_core::runtime::ChangeTracker;
 /// use soroban_sdk::symbol_short;
 ///
 /// let entity_id = 1;
@@ -143,7 +143,7 @@ impl Default for ChangeTracker {
 ///
 /// # Example
 /// ```
-/// use cougr_core::{SimpleWorld, runtime::TrackedWorld};
+/// use Sunvest_core::{SimpleWorld, runtime::TrackedWorld};
 /// use soroban_sdk::{symbol_short, Bytes, Env};
 ///
 /// let env = Env::default();

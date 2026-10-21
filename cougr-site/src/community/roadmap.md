@@ -8,8 +8,8 @@
 
 The public roadmap will be maintained here once established. It will track:
 
-- Near-term: `cougr-cli` (`cougr new`, `cougr add`, `cougr check`)
+- Near-term: `Sunvest-cli` (`Sunvest new`, `Sunvest add`, `Sunvest check`)
 - Medium-term: TypeScript client SDK, resource-cost reporting in test harness
 - Long-term: Visual editor, showcase gallery, hosted-service option
 
-**Tracked in:** [`salazarsebas/Cougr` issues](https://github.com/salazarsebas/Cougr/issues)
+**Tracked in:** [`salazarsebas/Sunvest` issues](https://github.com/salazarsebas/Sunvest/issues)

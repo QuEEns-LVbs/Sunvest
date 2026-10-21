@@ -1,5 +1,5 @@
 {
-  "generatedBy": "packages/sdk-events/fixtures (cougr-core events on soroban-sdk Env::default(), no network)",
+  "generatedBy": "packages/sdk-events/fixtures (Sunvest-core events on soroban-sdk Env::default(), no network)",
   "events": [
     {
       "kind": "set",

@@ -13,4 +13,4 @@ Will cover:
 - How maintainer status is granted and revoked
 - The relationship between the existing `CONTRIBUTING.md` Public API Checklist and final authority on API decisions
 
-**Tracked in:** [`salazarsebas/Cougr` issues](https://github.com/salazarsebas/Cougr/issues)
+**Tracked in:** [`salazarsebas/Sunvest` issues](https://github.com/salazarsebas/Sunvest/issues)

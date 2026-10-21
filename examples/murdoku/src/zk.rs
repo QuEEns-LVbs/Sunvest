@@ -25,15 +25,15 @@
 //!
 //! # Dependencies
 //!
-//! Requires the `zk` feature flag (which enables `hazmat-crypto` on cougr-core):
+//! Requires the `zk` feature flag (which enables `hazmat-crypto` on Sunvest-core):
 //! ```toml
 //! murdoku = { features = ["zk"] }
 //! ```
 
 use alloc::vec::Vec as AllocVec;
 
-use cougr_core::privacy::experimental::{verify_groth16, Groth16Proof, VerificationKey};
-use cougr_core::privacy::Scalar;
+use Sunvest_core::privacy::experimental::{verify_groth16, Groth16Proof, VerificationKey};
+use Sunvest_core::privacy::Scalar;
 use soroban_sdk::xdr::FromXdr;
 use soroban_sdk::{panic_with_error, Address, Bytes, BytesN, Env, Symbol, Vec};
 

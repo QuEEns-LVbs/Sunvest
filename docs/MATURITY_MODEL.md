@@ -1,8 +1,8 @@
-# Cougr Maturity Model
+# Sunvest Maturity Model
 
 ## Purpose
 
-This document defines how Cougr classifies public surfaces at and after `1.0`.
+This document defines how Sunvest classifies public surfaces at and after `1.0`.
 
 The goal is straightforward: stability, documentation, and compatibility promises must match the actual implementation.
 
@@ -15,7 +15,7 @@ Stable features are:
 - SemVer-protected
 - documented with invariants and intended usage
 - covered by focused tests, including negative paths where relevant
-- safe to present as part of Cougr's long-term public contract
+- safe to present as part of Sunvest's long-term public contract
 
 Stable features must not contain:
 
@@ -44,7 +44,7 @@ Beta is the right classification for modules that have real implementation value
 Experimental features are:
 
 - exploratory or fast-moving
-- not part of Cougr's stable promise
+- not part of Sunvest's stable promise
 - allowed to change or be removed without compatibility guarantees
 
 Experimental is the default for features where:

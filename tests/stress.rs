@@ -3,7 +3,7 @@
 //! Tests with 50-100+ entities to verify performance and correctness
 //! under load.
 
-use cougr_core::{query::SimpleQueryCache, CommandQueue, ComponentStorage, SimpleWorld};
+use Sunvest_core::{query::SimpleQueryCache, CommandQueue, ComponentStorage, SimpleWorld};
 use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 
 // ---------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 #[cfg(test)]
-use cougr_core::accounts::SessionKey;
-use cougr_core::accounts::{AccountError, AccountKernel, GameAction, SessionBuilder, SessionScope};
+use Sunvest_core::accounts::SessionKey;
+use Sunvest_core::accounts::{AccountError, AccountKernel, GameAction, SessionBuilder, SessionScope};
 #[cfg(test)]
 use soroban_sdk::testutils::Address as _;
 use soroban_sdk::{symbol_short, Address, Bytes, BytesN, Env, Symbol};
@@ -43,7 +43,7 @@ pub fn authorize_action(
     nonce: u64,
     expires_at: u64,
 ) -> Result<(), AccountError> {
-    let intent = cougr_core::accounts::SignedIntent::session(
+    let intent = Sunvest_core::accounts::SignedIntent::session(
         env,
         account.clone(),
         key_id,
@@ -58,7 +58,7 @@ pub fn authorize_action(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use cougr_core::accounts::SessionStorage;
+    use Sunvest_core::accounts::SessionStorage;
     use soroban_sdk::{contract, contractimpl};
 
     #[contract]

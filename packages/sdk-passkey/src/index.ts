@@ -1,5 +1,5 @@
 /**
- * cougr-sdk-passkey: WebAuthn registration and assertion mapping for the
+ * Sunvest-sdk-passkey: WebAuthn registration and assertion mapping for the
  * secp256r1 passkey storage and verification already on chain.
  *
  * The pure mapper is the whole API surface: `mapRegistration` turns a WebAuthn

@@ -4,13 +4,13 @@
 # Space Invaders - On-Chain Game Example
 
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
 ## Purpose and pattern
 
 
-This example demonstrates a shooter entity-update loop on Soroban with Cougr ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
+This example demonstrates a shooter entity-update loop on Soroban with Sunvest ECS concepts. It remains transitional while the arcade examples converge on the canonical `snake` `GameApp` architecture.
 
 ## Public contract API
 
@@ -45,7 +45,7 @@ contract entrypoint
 
 ## Overview
 
-This example demonstrates how to build on-chain game logic on the Stellar blockchain using **cougr-core's ECS architecture**. The game focuses exclusively on smart contract logic (no graphical interface) and includes:
+This example demonstrates how to build on-chain game logic on the Stellar blockchain using **Sunvest-core's ECS architecture**. The game focuses exclusively on smart contract logic (no graphical interface) and includes:
 
 | Feature | Description |
 |---------|-------------|
@@ -58,17 +58,17 @@ This example demonstrates how to build on-chain game logic on the Stellar blockc
 
 ---
 
-## Why Cougr-Core?
+## Why Sunvest-Core?
 
-**Cougr-Core** provides an ECS (Entity-Component-System) architecture specifically designed for Soroban smart contracts. Here's how it benefits this project:
+**Sunvest-Core** provides an ECS (Entity-Component-System) architecture specifically designed for Soroban smart contracts. Here's how it benefits this project:
 
-### Benefits of Using Cougr-Core
+### Benefits of Using Sunvest-Core
 
 | Benefit | Description | Example in This Project |
 |---------|-------------|------------------------|
 | **Modular Components** | Reusable data structures attached to entities | `EntityPosition`, `Velocity`, `Health` used by Ship, Invaders, and Bullets |
 | **Separation of Concerns** | Logic (Systems) separated from data (Components) | Movement System updates all entities with Velocity |
-| **Type Safety** | Rust's type system prevents component misuse | `CougrPosition` ensures consistent coordinate handling |
+| **Type Safety** | Rust's type system prevents component misuse | `SunvestPosition` ensures consistent coordinate handling |
 | **WASM Optimization** | ECS optimizes memory access patterns for WASM | Efficient iteration over entity components |
 | **Scalability** | Easy to add new features without refactoring | Adding new entity types only requires new components |
 | **On-Chain Ready** | Designed for blockchain state persistence | Components serialize to Soroban storage |
@@ -76,8 +76,8 @@ This example demonstrates how to build on-chain game logic on the Stellar blockc
 ### ECS Architecture in Practice
 
 ```rust
-// Using cougr-core's Position component
-use cougr_core::Position as CougrPosition;
+// Using Sunvest-core's Position component
+use Sunvest_core::Position as SunvestPosition;
 
 // Entity with Position, Velocity, and Health components
 pub struct Bullet {
@@ -117,7 +117,7 @@ Ship, invader, bullet, score, and lives state is currently compacted in contract
 4. Query public getters for score, position, active state, or terminal status.
 5. Stop when the game-over/completed condition is reached, or reset/reinitialize where supported.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `ComponentTrait` and custom component modules document the ECS data boundary.
 - `SimpleWorld`, `SimpleQueryBuilder`, `GameApp`, `ScheduleStage`, or `SystemConfig` are used where this transitional example has already adopted the maintained runtime shape.
@@ -173,7 +173,7 @@ stellar contract build
 | `get_ship_position` | `i32` | Ship X coordinate |
 | `check_game_over` | `bool` | Game over status |
 | `get_active_invaders` | `u32` | Remaining invader count |
-| `get_entity_count` | `u32` | Cougr-core entity count |
+| `get_entity_count` | `u32` | Sunvest-core entity count |
 
 ---
 
@@ -260,7 +260,7 @@ stellar contract invoke --id $CONTRACT_ID --network <NETWORK> -- get_score
 
 ```
 examples/space_invaders/
-├── Cargo.toml          # Dependencies including cougr-core
+├── Cargo.toml          # Dependencies including Sunvest-core
 ├── README.md           # This documentation
 └── src/
     ├── lib.rs          # Contract entry points & ECS systems

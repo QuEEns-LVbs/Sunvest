@@ -7,7 +7,7 @@ mod systems;
 mod test;
 
 use components::{GameStatus, Obstacle, ObstacleKind, PlayerMode, Position, Progress, Velocity};
-use cougr_core::{ComponentTrait, SimpleWorld};
+use Sunvest_core::{ComponentTrait, SimpleWorld};
 use soroban_sdk::{contract, contractimpl, symbol_short, Address, Env};
 
 #[contract]

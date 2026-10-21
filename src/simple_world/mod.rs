@@ -27,8 +27,8 @@ pub type EntityId = u32;
 ///
 /// # Example
 /// ```
-/// use cougr_core::component::ComponentStorage;
-/// use cougr_core::simple_world::SimpleWorld;
+/// use Sunvest_core::component::ComponentStorage;
+/// use Sunvest_core::simple_world::SimpleWorld;
 /// use soroban_sdk::{symbol_short, Bytes, Env};
 ///
 /// let env = Env::default();
@@ -276,8 +276,8 @@ impl SimpleWorld {
     ///
     /// # Example
     /// ```
-    /// use cougr_core::component::Position;
-    /// use cougr_core::simple_world::SimpleWorld;
+    /// use Sunvest_core::component::Position;
+    /// use Sunvest_core::simple_world::SimpleWorld;
     /// use soroban_sdk::Env;
     ///
     /// let env = Env::default();
@@ -296,8 +296,8 @@ impl SimpleWorld {
     ///
     /// # Example
     /// ```
-    /// use cougr_core::component::Position;
-    /// use cougr_core::simple_world::SimpleWorld;
+    /// use Sunvest_core::component::Position;
+    /// use Sunvest_core::simple_world::SimpleWorld;
     /// use soroban_sdk::Env;
     ///
     /// let env = Env::default();
@@ -331,8 +331,8 @@ impl SimpleWorld {
     ///
     /// # Example
     /// ```no_run
-    /// use cougr_core::impl_rich_component;
-    /// use cougr_core::simple_world::SimpleWorld;
+    /// use Sunvest_core::impl_rich_component;
+    /// use Sunvest_core::simple_world::SimpleWorld;
     /// use soroban_sdk::{contracttype, Env, String};
     ///
     /// #[contracttype]
@@ -373,7 +373,7 @@ impl SimpleWorld {
     ///
     /// The component type must implement [`ObservableComponentTrait`] (via
     /// [`impl_component_observed!`]) and derive `#[contracttype]`. The event
-    /// has topics `(COUGR, set, component_symbol)` and carries the
+    /// has topics `(Sunvest, set, component_symbol)` and carries the
     /// deserialized struct as data.
     ///
     /// [`ObservableComponentTrait`]: crate::ecs_events::ObservableComponentTrait
@@ -394,7 +394,7 @@ impl SimpleWorld {
     /// Remove a component and emit a structured Soroban `del` event if the
     /// component was present.
     ///
-    /// The event has topics `(COUGR, del, component_type)` and carries the
+    /// The event has topics `(Sunvest, del, component_type)` and carries the
     /// entity ID as data.
     ///
     /// Returns `true` if a component was removed.
@@ -442,7 +442,7 @@ impl SimpleWorld {
     ///
     /// # Example
     /// ```no_run
-    /// use cougr_core::simple_world::SimpleWorld;
+    /// use Sunvest_core::simple_world::SimpleWorld;
     /// use soroban_sdk::{symbol_short, Env};
     ///
     /// let env = Env::default();
@@ -460,7 +460,7 @@ impl SimpleWorld {
     ///
     /// # Example
     /// ```no_run
-    /// use cougr_core::simple_world::SimpleWorld;
+    /// use Sunvest_core::simple_world::SimpleWorld;
     /// use soroban_sdk::{symbol_short, Env};
     ///
     /// let env = Env::default();
@@ -475,7 +475,7 @@ impl SimpleWorld {
     /// Store a rich component and emit a
     /// [`RichComponentChangedEvent`](crate::ecs_events::RichComponentChangedEvent).
     ///
-    /// Off-chain indexers subscribed to `("COUGR", "rich", <type>)` topics
+    /// Off-chain indexers subscribed to `("Sunvest", "rich", <type>)` topics
     /// receive the notification and can query instance storage for the full
     /// updated value.
     pub fn set_rich_observed<T>(&mut self, env: &Env, entity_id: EntityId, component: &T)

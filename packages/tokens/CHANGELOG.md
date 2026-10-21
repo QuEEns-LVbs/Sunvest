@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `cougr-tokens`. This package versions independently of `cougr-core`, per
+All notable changes to `Sunvest-tokens`. This package versions independently of `Sunvest-core`, per
 the policy in [README.md](./README.md#versioning-policy).
 
 ## 1.1.0

@@ -1,16 +1,16 @@
 ---
-name: cougr-game-starter
-description: Build new game projects from scratch with cougr-core. Use when Developer needs to scaffold a fresh Rust/Soroban game, add cougr-core as a dependency, design ECS components and systems, implement contract APIs, structure tests, or turn a game idea into a working prototype without relying on prior repository context.
+name: Sunvest-game-starter
+description: Build new game projects from scratch with Sunvest-core. Use when Developer needs to scaffold a fresh Rust/Soroban game, add Sunvest-core as a dependency, design ECS components and systems, implement contract APIs, structure tests, or turn a game idea into a working prototype without relying on prior repository context.
 ---
 
-# Cougr Game Starter
+# Sunvest Game Starter
 
-Build a new game as a small, shippable vertical slice. Treat `cougr-core` as the architectural foundation, not as decoration added after the game logic is already tangled.
+Build a new game as a small, shippable vertical slice. Treat `Sunvest-core` as the architectural foundation, not as decoration added after the game logic is already tangled.
 
 ## Workflow
 
 1. Classify the game before writing code.
-2. Scaffold a minimal project and add `cougr-core`.
+2. Scaffold a minimal project and add `Sunvest-core`.
 3. Model the game state in ECS terms.
 4. Implement contract APIs as thin entrypoints over game logic.
 5. Add tests that prove the loop works.
@@ -45,11 +45,11 @@ If the user asks for a large game, implement the thinnest coherent slice first a
 
 ## Step 2: Scaffold The Project
 
-Scaffold with the `cougr` CLI. Do not hand-write the project layout, `Cargo.toml`, or a starter contract skeleton, `cougr new` already generates a canonical `lib.rs` / `components.rs` / `systems.rs` layout with a passing test suite, and hand-rolling one only reproduces what the CLI does correctly.
+Scaffold with the `Sunvest` CLI. Do not hand-write the project layout, `Cargo.toml`, or a starter contract skeleton, `Sunvest new` already generates a canonical `lib.rs` / `components.rs` / `systems.rs` layout with a passing test suite, and hand-rolling one only reproduces what the CLI does correctly.
 
 ```bash
-cargo install cougr-cli
-cougr new <name> --template <template>
+cargo install Sunvest-cli
+Sunvest new <name> --template <template>
 cd <name>
 cargo test
 ```
@@ -65,7 +65,7 @@ Pick the template from the classification in Step 1:
 
 If no template fits closely, scaffold with `starter` and restructure from there rather than building a project by hand.
 
-Use [references/bootstrap.md](references/bootstrap.md) for guidance beyond what the CLI generates: build target flags, dependency strategy for local development against an unpublished `cougr-core`, and how to extend the generated layout.
+Use [references/bootstrap.md](references/bootstrap.md) for guidance beyond what the CLI generates: build target flags, dependency strategy for local development against an unpublished `Sunvest-core`, and how to extend the generated layout.
 
 ## Step 3: Model The Game In ECS Terms
 
@@ -148,9 +148,9 @@ Use [references/prototype-checklist.md](references/prototype-checklist.md) as th
 - If a mechanic is complex, document the rule in the local project `README`.
 - If the user asks for a prototype, optimize for playability and structure, not premature genericity.
 
-## Cougr-Specific Guidance
+## Sunvest-Specific Guidance
 
-- Use `cougr-core` to structure state and logic, not just as a dependency checkbox.
+- Use `Sunvest-core` to structure state and logic, not just as a dependency checkbox.
 - Start with `SimpleWorld` or straightforward component-oriented organization unless scale clearly requires more.
 - Use ECS decomposition even when persistence is serialized as a single contract state object.
 - Add advanced capabilities such as ZK flows, session keys, recovery, or multi-device support only when the game design actually benefits from them.

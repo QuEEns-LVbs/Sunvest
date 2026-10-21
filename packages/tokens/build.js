@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Cougr design tokens build.
+ * Sunvest design tokens build.
  *
  * Reads `tokens.json` (the single source of truth, mirroring docs/BRAND.md) and
  * writes two generated artifacts into `dist/`:
@@ -77,7 +77,7 @@ function buildCss({ version, shared, themed }) {
   const lightOverrideDecls = declarations(themed, (t) => t.light, '  ');
 
   return `/*
- * Cougr design tokens v${version}
+ * Sunvest design tokens v${version}
  * ${BANNER}
  *
  * Theming contract:
@@ -120,7 +120,7 @@ function buildJs({ version, shared, themed }) {
   const darkProps = jsObject(themed, (t) => t.dark);
 
   return `/*
- * Cougr design tokens v${version}
+ * Sunvest design tokens v${version}
  * ${BANNER}
  *
  * For consumers that need literal token values at build time: anything

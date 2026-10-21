@@ -1,16 +1,16 @@
 [book]
-authors = ["Cougr Contributors"]
+authors = ["Sunvest Contributors"]
 language = "en"
 src = "src"
-title = "Cougr Documentation"
+title = "Sunvest Documentation"
 
 [build]
 build-dir = "book"
 create-missing = false
 
 [output.html]
-git-repository-url = "https://github.com/salazarsebas/Cougr"
-edit-url-template = "https://github.com/salazarsebas/Cougr/edit/main/{path}"
+git-repository-url = "https://github.com/salazarsebas/Sunvest"
+edit-url-template = "https://github.com/salazarsebas/Sunvest/edit/main/{path}"
 additional-css = ["theme/showcase.css"]
 
 [output.linkcheck]

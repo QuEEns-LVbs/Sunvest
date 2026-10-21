@@ -1,4 +1,4 @@
-# Cougr 1.0 API Freeze
+# Sunvest 1.0 API Freeze
 
 ## Purpose
 

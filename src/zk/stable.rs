@@ -1,4 +1,4 @@
-//! Stable privacy surface for Cougr.
+//! Stable privacy surface for Sunvest.
 //!
 //! This module groups the privacy primitives whose contracts are intentionally
 //! documented and treated as the stable privacy subset during phase 2.

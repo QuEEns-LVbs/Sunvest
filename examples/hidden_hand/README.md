@@ -43,7 +43,7 @@ The `TableConfig` containing the card configuration is stored in **Instance Stor
 2. **Dealing**: The dealer generates a hand commitment and a proof off-chain.
 3. **Verification**: The contract calls `verify_deal(player, deck_root, hand_commitment, proof)` to validate that the deal is correct before proceeding with gameplay.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `circuits::hidden_cards`: Fetches the circuit layout, verification key, and verify wrapper for Groth16 hidden cards.
 - `zk::Groth16Proof`: Data structure representing the cryptographic proof.

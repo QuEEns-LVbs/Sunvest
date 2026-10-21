@@ -1,6 +1,6 @@
 #![no_std]
 
-use cougr_core::privacy::stable::{
+use Sunvest_core::privacy::stable::{
     MerkleProofVerifier, OnChainMerkleProof, Sha256MerkleProofVerifier, SparseMerkleTree,
 };
 use soroban_sdk::{
@@ -190,8 +190,8 @@ impl TreasureHuntContract {
             panic_with_error!(&env, TreasureHuntError::InvalidProof);
         }
 
-        // cougr-core 1.1.0's `verify_inclusion` doesn't yet check that the
-        // proof's path actually walks to `leaf_index` (see cougr-core
+        // Sunvest-core 1.1.0's `verify_inclusion` doesn't yet check that the
+        // proof's path actually walks to `leaf_index` (see Sunvest-core
         // issue #433): a proof for a different real position can be
         // relabelled to claim this one and still verify. Until the
         // published crate carries the fix, pin the depth and recheck the

@@ -1,348 +1,364 @@
-<p align="center">
-  <img src="public/Cougr.png" width="120" alt="Cougr logo" />
-</p>
+# Sunvest
 
-<h1 align="center">Cougr</h1>
+**A solar companion app for Nigeria: track your power system, earn XLM for verified clean energy, invest in community solar projects, and send money to friends, all on the Stellar Network.**
 
-<p align="center">
-  <strong>The on-chain game engine for Stellar - ECS, privacy, and account abstraction in one crate</strong>
-</p>
+![License: MIT](https://img.shields.io/badge/License-MIT-green) ![Network: Stellar](https://img.shields.io/badge/Network-Stellar-blue) ![Contracts: Soroban](https://img.shields.io/badge/Contracts-Soroban-purple) ![Monorepo: pnpm](https://img.shields.io/badge/Monorepo-pnpm-orange) ![Build: Turborepo](https://img.shields.io/badge/Build-Turborepo-black)
 
-<p align="center">
-  <a href="https://crates.io/crates/cougr-core"><img src="https://img.shields.io/crates/v/cougr-core.svg" alt="crates.io" /></a>
-  <a href="https://github.com/salazarsebas/Cougr/actions/workflows/core.yml"><img src="https://github.com/salazarsebas/Cougr/actions/workflows/core.yml/badge.svg" alt="Core CI" /></a>
-  <a href="https://stellar.org"><img src="https://img.shields.io/badge/Stellar-Soroban-blue?logo=stellar" alt="Stellar" /></a>
-  <a href="https://www.rust-lang.org"><img src="https://img.shields.io/badge/Rust-1.91%2B-orange?logo=rust" alt="Rust" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="License" /></a>
-</p>
+> Sun plus invest. Sunvest turns every kilowatt-hour you generate into something you can see, prove, and earn from.
 
-Cougr is the framework for building on-chain games on Stellar. It gives you an
-Entity Component System (ECS), built-in ZK proof tooling, session keys, and contract
-standards - all compiled to a single `no_std` crate that runs natively on Soroban.
+---
 
-## Why Cougr on Stellar
+## What is Sunvest?
 
-| Capability | Cougr on Stellar |
+Millions of Nigerians depend on solar panels, inverters, and batteries because the grid is unreliable. Yet most of them cannot easily see how their system performs, how much money it saves compared to petrol or diesel generators, or whether it is failing. Meanwhile, Stellar needs everyday, real-world applications in Africa that go beyond trading.
+
+Sunvest connects the two. Users link their solar system (or log it manually), and the app turns real energy data into three useful things:
+
+1. **Insight:** a clear dashboard of generation, consumption, battery health, and money saved.
+2. **Proof:** verified readings anchored on Stellar by Soroban smart contracts.
+3. **Earnings and opportunity:** XLM rewards for clean energy, and the ability to invest small amounts in real community solar projects.
+
+| Problem today | Sunvest's answer |
 |---|---|
-| Language | Rust |
-| ECS runtime | `SimpleWorld`, `ArchetypeWorld`, `GameApp` |
-| ZK / hidden state | Groth16 + BLS12-381 + Merkle **on-chain** (X-Ray host fns) |
-| Account abstraction | Session keys, passkeys, social recovery |
-| Contract standards | Ownable, AccessControl, Pausable, guards, batch |
-| State indexing | Structured Soroban events (`COUGR` topic prefix) |
-| Deployment tooling | `stellar contract build/deploy` (native CLI) |
-| Local dev chain | Stellar local network / Quickstart |
-| Client SDK | Soroban CLI + community SDKs |
+| People don't know how their solar system is performing | Live dashboard, alerts, and an AI energy advisor |
+| Clean energy use is never rewarded | Sponsor-funded XLM rewards for verified generation |
+| Small savers cannot invest in energy projects | Fractional stakes in community solar installations |
+| Crypto apps in Nigeria focus on speculation | A daily-use utility that gives people a real reason to hold a Stellar wallet |
+| Sending money and staying in touch are separate apps | Built-in chat, payments, and referrals |
+| Hard to trust solar installers | Installer credentials issued as non-transferable Stellar assets |
 
-Stellar's strengths translate directly to better games:
-- **3–5 second finality** at fractions of a cent per transaction
-- **X-Ray host functions** run Groth16 and BLS12-381 verification on the host, not in WASM - ZK games are cheap
-- **Passkey / WebAuthn** auth via `secp256r1` lets players use Face ID rather than seed phrases
+---
 
-## Installation
+## Feature Overview
 
-```toml
-[dependencies]
-cougr-core = "1.1.0"
-soroban-sdk = "25.1.0"
+### 1. Solar Link
+- Connect a supported inverter or battery through the manufacturer's cloud API or a low-cost smart meter. Supported brands will expand over time (for example Victron, Growatt, and Deye).
+- **Manual mode** for users without connected hardware: enter meter readings and get the same insights.
+- Live dashboard: solar generation, household consumption, battery level, grid or generator use.
+- **Money Saved tracker:** compares your solar usage against generator fuel and grid tariffs.
+- Alerts for low battery, abnormal consumption, and possible panel faults.
+
+### 2. Proof-of-Sun Rewards
+- Verified energy readings are hashed and anchored on Stellar through a Soroban contract.
+- Users earn small **XLM rewards** for verified clean energy generated, funded by sponsors such as solar companies, impact funders, and carbon-credit buyers.
+- Anti-fraud checks compare readings against expected output for the location and weather, flagging impossible numbers.
+
+### 3. Sun Shares (community solar investing)
+- Users can buy small stakes in real solar installations, such as a school, clinic, or market, using USDC or XLM.
+- Returns come from energy sold or saved and are distributed automatically by a Soroban contract.
+- Launches as a **regulated pilot with a licensed partner** (see [Compliance](#compliance-and-responsible-design)).
+
+### 4. Friends, payments, and referrals
+- Send and request XLM or USDC using a username, with local-currency on and off ramps through Stellar anchors.
+- Chat with built-in payments, for example splitting a solar installment or fuel bill.
+- **Referral rewards** are paid only when the referred friend connects a real system and produces verified data, which prevents fake-account farming.
+
+### 5. Sun Feed (community)
+- A focused feed for tips, troubleshooting, installer reviews, and project updates.
+- Groups by city, system type, or installer.
+- Verified installers display on-chain credential badges.
+
+### 6. AI Energy Advisor
+- Ask questions such as "Why is my battery draining so fast?" or "Can I run a freezer on my system?" and get answers based on your own usage data.
+- Recommends system sizing, appliance changes, and best times to run heavy loads.
+- **Daily Digest:** a plain-language summary of solar, Nigerian energy, and crypto news.
+- Advice is informational only and does not replace a qualified installer.
+
+### 7. Market Pulse (read-only)
+- Watchlist for energy-sector stocks (Nigerian and foreign), XLM, and major crypto assets.
+- News and price alerts only. **No trading and no payouts tied to price movements.**
+
+---
+
+## Monorepo Structure
+
+```
+sunvest/
+├── packages/
+│   ├── contracts/     # @sunvest/contracts — Soroban smart contracts (Rust)
+│   ├── gateway/       # @sunvest/gateway   — Device data ingestion and verification (TypeScript)
+│   ├── api/           # @sunvest/api       — Backend API, chat, and payments (Node.js)
+│   ├── brain/         # @sunvest/brain     — AI advisor and news digest (TypeScript + Python)
+│   └── app/           # @sunvest/app       — Mobile-first PWA / React Native client
+├── docs/              # Architecture, methodology, API reference
+├── scripts/           # Testnet bootstrap, seed data, deploy helpers
+├── audits/            # Smart contract audit reports
+├── pnpm-workspace.yaml
+├── turbo.json
+└── README.md          ← you are here
 ```
 
-Or scaffold a whole project with the CLI:
+---
 
+## Packages
+
+### @sunvest/contracts
+Soroban smart contracts written in Rust, deployable to Stellar Testnet and Mainnet.
+
+| Contract | Purpose |
+|---|---|
+| `SunProof` | Anchors hashes of verified energy readings per device and period |
+| `RewardPool` | Holds sponsor funds and releases XLM rewards against verified readings |
+| `SunShares` | Manages community solar projects, investor stakes, and revenue distribution |
+| `ReferralVault` | Tracks referrals and pays rewards once verification conditions are met |
+| `InstallerRegistry` | Issues and revokes installer credentials |
+
+```
+packages/contracts/
+├── src/
+│   ├── sun_proof.rs
+│   ├── reward_pool.rs
+│   ├── sun_shares.rs
+│   ├── referral_vault.rs
+│   └── installer_registry.rs
+├── tests/
+├── Cargo.toml
+└── README.md
+```
+
+**Stack:** Rust · Soroban SDK · Stellar CLI
+
+### @sunvest/gateway
+Collects readings from connected devices, validates them, and submits proofs on-chain.
+
+**Responsibilities**
+- Pull data from inverter cloud APIs and smart meters, or receive manual entries
+- Normalise readings into a single format
+- Run anti-fraud checks (expected output by location, time, and weather)
+- Batch hashes and submit them to `SunProof`
+- Expose health metrics for monitoring
+
+```
+packages/gateway/
+├── src/
+│   ├── connectors/      # One adapter per inverter brand
+│   ├── validator.ts     # Anomaly and fraud checks
+│   ├── batcher.ts       # Daily proof batching
+│   ├── submitter.ts     # Soroban invocation
+│   └── metrics.ts
+├── Dockerfile
+├── package.json
+└── README.md
+```
+
+**Stack:** TypeScript · @stellar/stellar-sdk · Docker · Prometheus
+
+### @sunvest/api
+The backend for accounts, feed, chat, referrals, and payments.
+
+**Key endpoints**
+```
+POST /v1/auth/challenge                 SEP-10 wallet challenge
+POST /v1/devices                        Link a solar device
+GET  /v1/devices/:id/stats              Generation, usage, savings
+POST /v1/readings                       Submit a manual reading
+GET  /v1/rewards                        Reward history and pending claims
+GET  /v1/projects                       Community solar projects
+POST /v1/projects/:id/invest            Invest in a project
+POST /v1/referrals                      Create a referral link
+GET  /v1/feed                           Community feed
+POST /v1/payments/send                  Send XLM or USDC to a friend
+GET  /v1/market/watchlist               Read-only market data
+```
+
+**Stack:** Node.js · Fastify · WebSockets · PostgreSQL · Redis · @stellar/stellar-sdk
+
+### @sunvest/brain
+The AI layer, kept separate so models can be swapped or upgraded independently.
+
+```
+packages/brain/
+├── src/
+│   ├── advisor/          # Energy Q&A using the user's own data
+│   ├── sizing/           # System and appliance recommendations
+│   ├── digest/           # Daily news summarisation
+│   └── fraud_signals/    # Optional model-based anomaly scoring
+├── package.json
+└── README.md
+```
+
+**Stack:** TypeScript · Python · Anthropic Claude API · pgvector
+
+### @sunvest/app
+The user-facing app, built mobile-first for low-bandwidth devices with offline support.
+
+| Screen | Description |
+|---|---|
+| `/` | Home dashboard: power, battery, savings, daily reward |
+| `/devices` | Connect and manage solar systems |
+| `/rewards` | XLM earnings and pending claims |
+| `/invest` | Browse and fund community solar projects |
+| `/wallet` | Balances, send, receive, on and off ramp |
+| `/chat` | Messages and payment requests |
+| `/feed` | Community posts and installer reviews |
+| `/advisor` | AI Energy Advisor |
+| `/market` | Read-only watchlist and news |
+| `/refer` | Referral link and status |
+
+**Stack:** Next.js (PWA) or React Native · TailwindCSS · @stellar/stellar-sdk · Freighter / LOBSTR / xBull · Recharts
+
+---
+
+## How It Works
+
+```
+User / Device           Gateway                    Stellar / Soroban
+     │                     │                              │
+     ├─ Solar data ───────▶│ validate + normalise         │
+     │                     ├─ daily batch hash ──────────▶ SunProof.anchor()
+     │                     │                              │
+     │◀──── XLM reward ────┼──────────────────────────────┤ RewardPool.release()
+     │                     │                              │
+     ├─ Invest (USDC/XLM) ─┼─────────────────────────────▶ SunShares.invest()
+     │◀──── revenue share ─┼──────────────────────────────┤ SunShares.distribute()
+     │                     │                              │
+     ├─ Refer a friend ────┼─────────────────────────────▶ ReferralVault.register()
+     │◀──── bonus once friend's data is verified ─────────┤
+```
+
+---
+
+## Why Stellar?
+
+- **Low fees:** micro-rewards and small payments are practical, which would be hard on higher-cost networks.
+- **Real-world anchors:** Stellar's anchor ecosystem (SEP-24 and SEP-31) supports moving between Naira and USDC.
+- **Soroban smart contracts:** rewards, investment payouts, and referral rules need programmable logic.
+- **Asset controls:** authorization flags and clawback allow revocable, non-transferable installer credentials.
+- **Wallet reach:** SEP-10 authentication and mobile wallets avoid the need for a traditional bank account.
+
+---
+
+## Token Economics
+
+Sunvest creates **no proprietary token**. Everything runs on XLM and Stellar USDC.
+
+| Action | Asset | Funded by |
+|---|---|---|
+| Verified clean energy generated | XLM | Sponsor-funded reward pools |
+| Successful referral (friend connects and verifies a system) | XLM | Referral budget in `RewardPool` |
+| Community solar investment | USDC / XLM | Investors |
+| Revenue share from solar projects | USDC | Energy sales or savings from each project |
+| Installer credential issuance | XLM | Small issuance fee |
+| Platform fee | USDC | Small percentage on investments and payments |
+
+Rewards are capped per user per day so that the reward pool stays sustainable.
+
+---
+
+## Pilot Goal and Reward Funding
+
+**Measurable target:** 10,000 verified kWh anchored on Stellar during the pilot, from real households and small businesses.
+
+**How rewards are funded (not just promised):**
+- Sponsors such as solar companies and impact funders that want proof of real clean energy use
+- Carbon-credit buyers who need verifiable generation data
+- A small platform fee on investments and payments
+
+If sponsor funding runs low, rewards scale down through daily caps rather than being promised and left unpaid.
+
+---
+
+## Compliance and Responsible Design
+
+- **Investing:** Sun Shares involves investment products. The pilot will be run with a licensed partner and in line with Nigerian regulations. Features may be limited by region until compliance is confirmed.
+- **No speculation rewards:** Market Pulse is read-only. Sunvest does not pay rewards for share or crypto price movements.
+- **Privacy:** energy data is personal. Only hashes go on-chain, raw readings stay off-chain, and users control what is shared.
+- **AI limits:** the Advisor offers guidance, not electrical engineering sign-off. Safety-related advice always recommends a qualified installer.
+- **Fraud resistance:** rewards depend on verified readings, anomaly checks, and daily caps.
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js ≥ 20
+- pnpm ≥ 9
+- Rust stable + Stellar CLI
+- Python ≥ 3.11 (for AI workers)
+- A funded Stellar Testnet account (use Friendbot or Stellar Laboratory)
+
+### Install
 ```bash
-cargo install cougr-cli
-
-cougr new my-game --template starter
-cd my-game
-cargo test
+git clone https://github.com/sunvest-protocol/sunvest.git
+cd sunvest
+pnpm install
 ```
 
-`cougr new` generates a contract crate following the canonical
-`lib.rs` / `components.rs` / `systems.rs` layout with a passing `GameHarness`
-test suite. Four templates are available - `starter`, `turn-based`,
-`hidden-info`, and `session-auth` - each derived from a canonical example. See
-[`cli/README.md`](cli/README.md).
-
-## Quick start - your first on-chain game in 30 lines
-
-```toml
-# Cargo.toml
-[lib]
-crate-type = ["cdylib", "rlib"]
-
-[dependencies]
-cougr-core = "1.1.0"
-soroban-sdk = "25.1.0"
-```
-
-```rust
-#![no_std]
-
-use cougr_core::component::ComponentTrait;
-use cougr_core::game::SorobanGame;
-use cougr_core::{impl_component_observed, impl_soroban_game};
-use soroban_sdk::{contract, contractimpl, contracttype, Env};
-
-// 1. Define a component - one macro call, no boilerplate
-#[contracttype]
-#[derive(Clone, Debug)]
-pub struct Position { pub x: i32, pub y: i32 }
-impl_component_observed!(Position, "position", Table, { x: i32, y: i32 });
-//  ↑ Emits a (COUGR, set, position) Soroban event on every change
-//    so off-chain clients track state without polling.
-
-// 2. Wire the contract to an ECS world - one macro call
-#[contract]
-pub struct MyGame;
-impl_soroban_game!(MyGame, "world");
-
-// 3. Write game logic in plain Rust
-#[contractimpl]
-impl MyGame {
-    pub fn spawn(env: Env) -> u32 {
-        let mut world = MyGame::load_world(&env);
-        let player = world.spawn_entity();
-        world.set_typed_observed(&env, player, &Position { x: 0, y: 0 });
-        MyGame::save_world(&env, &world);
-        player
-    }
-
-    pub fn move_right(env: Env, player_id: u32) {
-        let mut world = MyGame::load_world(&env);
-        let mut pos: Position = world.get_typed(&env, player_id).unwrap();
-        pos.x += 1;
-        world.set_typed_observed(&env, player_id, &pos);
-        MyGame::save_world(&env, &world);
-    }
-
-    pub fn position(env: Env, player_id: u32) -> Option<Position> {
-        MyGame::load_world(&env).get_typed(&env, player_id)
-    }
-}
-```
-
+### Environment
 ```bash
-# Build, test, deploy
-cargo test
+cp .env.example .env
+# Set STELLAR_NETWORK=testnet, HORIZON_URL, SOROBAN_RPC_URL,
+# DATABASE_URL, REDIS_URL, ANTHROPIC_API_KEY
+```
+
+### Run in development
+```bash
+pnpm dev
+# or run a single package
+pnpm --filter @sunvest/app dev
+pnpm --filter @sunvest/gateway dev
+```
+
+### Build and test
+```bash
+pnpm turbo build
+pnpm turbo test
+cd packages/contracts && cargo test
+```
+
+### Deploy contracts to Testnet
+```bash
+cd packages/contracts
 stellar contract build
-stellar contract deploy --wasm target/wasm32-unknown-unknown/release/my_game.wasm \
-  --source alice --network testnet
+bash ../../scripts/deploy_testnet.sh
 ```
 
-## Components: two patterns for every case
+---
 
-**Simple components** - fixed-size primitives, fastest storage, optional event emission:
+## Roadmap
 
-```rust
-use cougr_core::{impl_component, impl_component_observed};
-use soroban_sdk::contracttype;
-
-// No events (internal state)
-#[contracttype] #[derive(Clone, Debug)]
-pub struct Velocity { pub dx: i32, pub dy: i32 }
-impl_component!(Velocity, "velocity", Table, { dx: i32, dy: i32 });
-
-// With events (indexer-friendly)
-#[contracttype] #[derive(Clone, Debug)]
-pub struct Health { pub current: u32, pub max: u32 }
-impl_component_observed!(Health, "health", Table, { current: u32, max: u32 });
-```
-
-**Rich components** - Soroban XDR codec, supports `Address`, `Vec`, `String`, `Option`,
-nested structs. Use when a component contains types not expressible as fixed-size bytes:
-
-```rust
-use cougr_core::impl_rich_component;
-use soroban_sdk::{contracttype, Address, Vec};
-
-// Address field - requires XDR / impl_rich_component!
-#[contracttype] #[derive(Clone, Debug)]
-pub struct Ownership { pub owner: Address, pub co_owners: Vec<Address> }
-impl_rich_component!(Ownership, "ownership");
-
-// Inventory with dynamic items
-#[contracttype] #[derive(Clone, Debug)]
-pub struct Inventory { pub items: Vec<u32>, pub capacity: u32 }
-impl_rich_component!(Inventory, "inventory");
-```
-
-## ECS runtime
-
-```rust
-use cougr_core::simple_world::SimpleWorld;
-use soroban_sdk::Env;
-
-let env = Env::default();
-let mut world = SimpleWorld::new(&env);
-
-// Spawn entities
-let knight = world.spawn_entity();  // → 1
-let dragon = world.spawn_entity();  // → 2
-
-// Set components (typed, with storage-tier routing)
-world.set_typed(&env, knight, &Health { current: 100, max: 100 });
-world.set_typed(&env, dragon, &Health { current: 500, max: 500 });
-
-// Query entities that have a component
-let env_ref = &env;
-let combatants = world.get_entities_with_component(&Health::component_type(), env_ref);
-
-// Remove and despawn
-world.remove_typed::<Health>(knight);
-world.despawn_entity(dragon);
-```
-
-`ArchetypeWorld` is available for larger entity counts and batch queries. Both backends
-share the same `ComponentTrait` interface.
-
-## GameApp - plugin-based composition
-
-For complex games, `GameApp` provides stage-based scheduling and plugin registration:
-
-```rust
-use cougr_core::app::{named_system, GameApp, ScheduleStage};
-use cougr_core::SystemConfig;
-use soroban_sdk::Env;
-
-let env = Env::default();
-let mut app = GameApp::new(&env);
-
-app.add_systems((
-    named_system("physics", |world, env| {
-        // runs every tick in Update
-    })
-    .in_stage(ScheduleStage::Update),
-
-    named_system("scoring", |world, env| {
-        // runs after physics in PostUpdate
-    })
-    .with_config(SystemConfig::new().in_stage(ScheduleStage::PostUpdate)),
-));
-
-app.run(&env).unwrap();
-```
-
-## Zero-knowledge and hidden state
-
-Cougr bundles the full ZK toolchain for on-chain games - all verification runs on
-Stellar's X-Ray host functions at host speed:
-
-```rust
-use cougr_core::privacy::stable::*;
-
-// Groth16 proof verification (BN254)
-let result = verify_groth16(&env, &proof, &vk, &public_inputs);
-
-// Commit-reveal for hidden moves
-let commitment = pedersen_commit(&env, &secret_value, &blinding_factor);
-// ... reveal later and verify
-
-// Merkle proof for fog-of-war or inventory ownership
-let valid = verify_merkle_proof(&env, &root, &leaf, &proof_path);
-```
-
-Stable ZK primitives: Groth16, BLS12-381, SHA256 Merkle, Poseidon Merkle, Pedersen commitments.
-
-## Account abstraction
-
-```rust
-use cougr_core::auth::*;
-
-// Session keys - players approve a scoped key for a game session,
-// then interact without signing every transaction
-let session = SessionBuilder::new(&env, &player_address)
-    .with_scope(&[contract_id])
-    .with_expiry(env.ledger().timestamp() + 3600)
-    .build();
-
-// Social recovery - guardians can restore access
-// Multi-device - per-device policies with revocation
-// Passkey / WebAuthn - Face ID / Touch ID via secp256r1
-```
-
-## Contract standards (`ops`)
-
-Drop-in security primitives, identical to OpenZeppelin on EVM:
-
-```rust
-use cougr_core::ops::*;
-
-// Ownership
-let ownable = Ownable::new(&env, symbol_short!("owner"));
-ownable.transfer_ownership(&env, &new_owner);
-
-// Role-based access
-let acl = AccessControl::new(&env, symbol_short!("acl"));
-acl.grant_role(&env, &MINTER_ROLE, &minter_address);
-
-// Emergency stop
-let pause = Pausable::new(&env, symbol_short!("pause"));
-pause.pause(&env);
-```
-
-## Project status
-
-| Area | Status |
+| Phase | Focus |
 |---|---|
-| ECS runtime (`SimpleWorld`, `ArchetypeWorld`, `GameApp`) | Stable |
-| Standards (`ops`) | Stable |
-| Privacy primitives (`privacy::stable`, `zk::stable`) | Stable |
-| Accounts and session keys (`auth`) | Beta |
-| Advanced ZK (`privacy::experimental`) | Experimental |
+| **1. Foundation** | Wallet login, manual readings, dashboard, send and receive, referrals |
+| **2. Proof-of-Sun** | Device connectors, `SunProof`, sponsor-funded `RewardPool` |
+| **3. Community** | Sun Feed, chat, installer credentials, AI Energy Advisor |
+| **4. Sun Shares pilot** | One or two community solar projects with a licensed partner |
+| **5. Growth** | Daily Digest, Market Pulse, more inverter brands, local-currency ramps |
+| **6. Mainnet** | Security audit, bug bounty, public launch |
 
-## Repository layout
+---
 
-| Path | Purpose |
-|---|---|
-| `src/` | Core framework |
-| `cli/` | `cougr-cli` - the `cougr` binary and its embedded project templates |
-| `examples/spawn_and_move/` | Canonical starter - spawn + movement with ECS events |
-| `examples/tic_tac_toe/` | Turn-based game with rich components and address ownership |
-| `examples/*/` | 20+ standalone game contracts (asteroids, chess, battleship, ...) |
-| `internal/` | Crates compiled into `cougr-core` via include: ZK circuit builders, session UX, and the test sandbox |
-| `tests/` | Integration, edge-case, and stress coverage |
-| `docs/` | Architecture, API contract, maturity model, threat model |
-| `docs/strategy/` | Product, business, and repository strategy documents |
-| `research/` | ZK and account abstraction design notes |
-| `cougr-site/` | Source for the [documentation site](https://salazarsebas.github.io/Cougr/) (mdBook) and the example showcase gallery |
-| `packages/tokens/` | Design tokens (color, type, spacing) shared by the docs site and the showcase |
-| `tools/preview-gen/` | Generates SVG previews for the showcase from example scenario data |
-| `skills/` | `skills.sh`-compatible AI assistant Skills for building games with `cougr-core` |
-| `scripts/` | Repository hygiene and release tooling |
+## Open Source and Contributing
 
-## Development
+Sunvest is open source under the MIT license. Good places to start:
+- Add a connector for a new inverter brand
+- Improve the anti-fraud validation rules
+- Translate the app into Hausa, Yoruba, Igbo, and Pidgin
+- Write tests for Soroban contracts
+- Improve documentation and onboarding guides
 
 ```bash
-cargo fmt --check
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test
-stellar contract build
+git checkout -b feat/your-feature
+pnpm turbo test
+pnpm turbo lint
+# Open a PR against `main`
 ```
 
-## Compatibility
+See `CONTRIBUTING.md` and `docs/architecture.md` for details.
 
-| Item | Value |
-|---|---|
-| Rust | 1.91+ (MSRV enforced in CI) |
-| Edition | 2021 |
-| License | MIT |
-| Workspace SDK | `soroban-sdk` 29.0.1 |
-| Target | `wasm32v1-none` (Soroban WASM) |
+---
 
-The installation examples above use the published `cougr-core` 1.1.0 release
-and therefore remain on SDK 25.1.0. The workspace is moving to SDK 29 ahead of
-the next core release.
+## Security
 
-## Documentation
+- Smart contracts will be audited before Mainnet; reports will be published in `audits/`.
+- Responsible disclosure: security@sunvest.example
 
-- **[salazarsebas.github.io/Cougr](https://salazarsebas.github.io/Cougr/)** - the full documentation site, including the example showcase gallery
-- [ARCHITECTURE.md](ARCHITECTURE.md) - module structure and design rationale
-- [CHANGELOG.md](CHANGELOG.md) - release history
-- [ROADMAP.md](ROADMAP.md) - phased roadmap and current status
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) - community standards and enforcement
-- [docs/ECS_CORE.md](docs/ECS_CORE.md) - ECS runtime model
-- [docs/PRIVACY_MODEL.md](docs/PRIVACY_MODEL.md) - ZK proof tiers
-- [docs/ACCOUNT_KERNEL.md](docs/ACCOUNT_KERNEL.md) - session keys and recovery
-- [docs/PATTERNS.md](docs/PATTERNS.md) - recommended gameplay patterns
-- [docs/ONCHAIN_OFFCHAIN_BOUNDARY.md](docs/ONCHAIN_OFFCHAIN_BOUNDARY.md) - deciding what belongs on-chain
-- [examples/README.md](examples/README.md) - example catalog and usage guide
+---
+
+## License
+
+MIT © 2026 Sunvest Contributors
+
+---
+
+*Built on Stellar · Powered by Soroban · Clean energy, proven and rewarded.*

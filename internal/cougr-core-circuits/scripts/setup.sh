@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 # shellcheck source=lib.sh
 source "$(dirname "$0")/lib.sh"
-cougr_circuits_export_path
+Sunvest_circuits_export_path
 ARTIFACTS="$ROOT/artifacts"
 KEYS="$ROOT/keys"
 
@@ -31,6 +31,6 @@ for circuit in hidden_cards fog_of_war fair_dice sealed_bid; do
   echo "setup $circuit (test pot12)..."
   snarkjs groth16 setup "$r1cs" "$PTAU" "$KEYS/${circuit}_0000.zkey"
   snarkjs zkey contribute "$KEYS/${circuit}_0000.zkey" "$KEYS/${circuit}_final.zkey" \
-    --name="cougr-test" -v -e="$(head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+    --name="Sunvest-test" -v -e="$(head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n')"
   snarkjs zkey export verificationkey "$KEYS/${circuit}_final.zkey" "$KEYS/${circuit}_vk.json"
 done

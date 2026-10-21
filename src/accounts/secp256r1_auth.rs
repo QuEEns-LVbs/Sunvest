@@ -8,7 +8,7 @@
 //!
 //! # Example
 //! ```no_run
-//! use cougr_core::accounts::{verify_secp256r1, Secp256r1Key, Secp256r1Storage};
+//! use Sunvest_core::accounts::{verify_secp256r1, Secp256r1Key, Secp256r1Storage};
 //! use soroban_sdk::{symbol_short, testutils::Address as _, Address, Bytes, BytesN, Env};
 //!
 //! let env = Env::default();
@@ -24,7 +24,7 @@
 //! let message = Bytes::new(&env);
 //! let signature = BytesN::from_array(&env, &[0u8; 64]);
 //! verify_secp256r1(&env, &passkey_pubkey, &message, &signature)?;
-//! # Ok::<(), cougr_core::accounts::AccountError>(())
+//! # Ok::<(), Sunvest_core::accounts::AccountError>(())
 //! ```
 
 use soroban_sdk::{contracttype, Address, Bytes, BytesN, Env, Symbol, Vec};

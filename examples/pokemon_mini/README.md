@@ -1,9 +1,9 @@
 # Pokemon Mini On-Chain Game
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-A Pokemon-style mini game implemented as a Soroban smart contract using the **cougr-core** ECS framework on the Stellar blockchain.
+A Pokemon-style mini game implemented as a Soroban smart contract using the **Sunvest-core** ECS framework on the Stellar blockchain.
 
 ## Overview
 
@@ -18,7 +18,7 @@ This example demonstrates how to build deterministic on-chain game logic with:
 
 ---
 
-## Why cougr-core?
+## Why Sunvest-core?
 
 | Aspect | Benefit |
 |--------|---------|
@@ -196,7 +196,7 @@ stellar contract invoke --id $CONTRACT_ID --source alice --network testnet -- ba
 
 ```
 examples/pokemon_mini/
-├── Cargo.toml          # Dependencies (cougr-core, soroban-sdk)
+├── Cargo.toml          # Dependencies (Sunvest-core, soroban-sdk)
 ├── README.md           # This documentation
 ├── .gitignore          # Ignore rules
 └── src/
@@ -214,11 +214,11 @@ examples/pokemon_mini/
 |----------|------|
 | Soroban Docs | [developers.stellar.org](https://developers.stellar.org/docs/build/smart-contracts) |
 | Stellar CLI | [CLI Documentation](https://developers.stellar.org/docs/tools/cli) |
-| Cougr Repository | [github.com/salazarsebas/Cougr](https://github.com/salazarsebas/Cougr) |
+| Sunvest Repository | [github.com/salazarsebas/Sunvest](https://github.com/salazarsebas/Sunvest) |
 
 
 ---
 
 ## License
 
-Part of the Cougr project. See main repository for license information.
+Part of the Sunvest project. See main repository for license information.

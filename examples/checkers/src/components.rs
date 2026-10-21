@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::{contracterror, contracttype, symbol_short, Address, Bytes, Env, Symbol, Vec};
 
 pub(crate) const BOARD_SIZE: u32 = 64;

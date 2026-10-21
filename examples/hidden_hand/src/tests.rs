@@ -1,6 +1,6 @@
 use super::*;
-use cougr_core::circuits::{hidden_cards, test_fixtures, CircuitId};
-use cougr_core::test::GameHarness;
+use Sunvest_core::circuits::{hidden_cards, test_fixtures, CircuitId};
+use Sunvest_core::test::GameHarness;
 use soroban_sdk::{testutils::Address as _, Address, BytesN, Env};
 
 fn player_id_for_test(player: &Address) -> u32 {

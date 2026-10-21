@@ -1,10 +1,10 @@
-# Cougr Preview Generator
+# Sunvest Preview Generator
 
-`tools/preview-gen` is a lightweight Node.js CLI that generates SVG preview images for Cougr contract-only examples. Previews are driven by actual scenario/test state data, not hand-drawn art or mocked screenshots.
+`tools/preview-gen` is a lightweight Node.js CLI that generates SVG preview images for Sunvest contract-only examples. Previews are driven by actual scenario/test state data, not hand-drawn art or mocked screenshots.
 
 ## Design Rationale
 
-Most Cougr examples are headless smart contracts with no frontend. A showcase gallery needs a visual preview per entry. Rather than faking screenshots or hand-drawing images, this tool extracts final-state data from each example's existing test assertions and renders it as a deterministic, reproducible SVG.
+Most Sunvest examples are headless smart contracts with no frontend. A showcase gallery needs a visual preview per entry. Rather than faking screenshots or hand-drawing images, this tool extracts final-state data from each example's existing test assertions and renders it as a deterministic, reproducible SVG.
 
 **Board/grid games** (Tic-Tac-Toe, Checkers, Battleship, …) get a full state renderer.  
 **Real-time arcade games** (Snake, Asteroids, Pong, …) get a branded category-icon fallback, explicitly labeled as such - not faked.
@@ -105,7 +105,7 @@ export function render(state) {
   // Build SVG string using template literals.
   // Use COLORS object for a consistent dark-mode palette.
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" ...>`;
-  // ... draw board, pieces, status bar, Cougr watermark
+  // ... draw board, pieces, status bar, Sunvest watermark
   svg += `</svg>`;
   return svg;
 }
@@ -115,7 +115,7 @@ export function render(state) {
 - Dark background (`BRAND.colorBg`)
 - Board area with subtle grid lines (`LINE.stroke` at `LINE.gridOpacity`)
 - Status bar at the bottom (64–80px) showing turn/result
-- `COUGR · GAME_NAME` watermark in the status bar
+- `Sunvest · GAME_NAME` watermark in the status bar
 - No external image references or fonts (SVG must render without network access)
 
 ### Step 4 - Register the renderer

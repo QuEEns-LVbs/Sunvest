@@ -5,12 +5,12 @@ use crate::simple_world::EntityId;
 
 /// Soroban event emitted when a component is set on an entity.
 ///
-/// Topics: `("COUGR", "set", component_type_symbol)`
+/// Topics: `("Sunvest", "set", component_type_symbol)`
 /// Data: `{ "data": Bytes, "entity_id": u32 }`
 ///
-/// Frontends can subscribe to all component mutations via the `COUGR`+`set`
+/// Frontends can subscribe to all component mutations via the `Sunvest`+`set`
 /// prefix, or to a specific component type by also filtering on the third topic.
-#[contractevent(topics = ["COUGR", "set"])]
+#[contractevent(topics = ["Sunvest", "set"])]
 pub struct ComponentSetEvent {
     #[topic]
     pub component_type: Symbol,
@@ -20,9 +20,9 @@ pub struct ComponentSetEvent {
 
 /// Soroban event emitted when a component is removed from an entity.
 ///
-/// Topics: `("COUGR", "del", component_type_symbol)`
+/// Topics: `("Sunvest", "del", component_type_symbol)`
 /// Data: `{ "entity_id": u32 }`
-#[contractevent(topics = ["COUGR", "del"])]
+#[contractevent(topics = ["Sunvest", "del"])]
 pub struct ComponentRemovedEvent {
     #[topic]
     pub component_type: Symbol,
@@ -32,13 +32,13 @@ pub struct ComponentRemovedEvent {
 /// Soroban event emitted when a rich component is set on an entity via
 /// [`SimpleWorld::set_rich_observed`](crate::simple_world::SimpleWorld::set_rich_observed).
 ///
-/// Topics: `("COUGR", "rich", component_type_symbol)`
+/// Topics: `("Sunvest", "rich", component_type_symbol)`
 /// Data: `{ "entity_id": u32 }`
 ///
 /// Rich components are stored using Soroban's XDR codec. The full value is
 /// not embedded in the event - off-chain indexers should query the contract's
 /// instance storage for the updated value after receiving this notification.
-#[contractevent(topics = ["COUGR", "rich"])]
+#[contractevent(topics = ["Sunvest", "rich"])]
 pub struct RichComponentChangedEvent {
     #[topic]
     pub component_type: Symbol,

@@ -5,7 +5,7 @@
 //! a single signed intent stays valid. Widening a session's powers should be a
 //! visible edit to this file, not a change buried in a contract entrypoint.
 
-use cougr_core::accounts::{GameAction, SessionBuilder, SessionScope};
+use Sunvest_core::accounts::{GameAction, SessionBuilder, SessionScope};
 use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 
 /// The only action a session key may authorize.

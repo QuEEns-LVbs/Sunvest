@@ -1,10 +1,10 @@
-# Cougr Voice & Terminology Guide
+# Sunvest Voice & Terminology Guide
 
 ## Purpose
 
-This guide captures the small set of enforced terminology and voice rules that Cougr documentation follows. New documentation, examples, marketing copy, and showcase text must conform to these rules.
+This guide captures the small set of enforced terminology and voice rules that Sunvest documentation follows. New documentation, examples, marketing copy, and showcase text must conform to these rules.
 
-These rules are derived from actual usage in Cougr's strongest existing documentation - they codify what the project already does implicitly, not invented conventions.
+These rules are derived from actual usage in Sunvest's strongest existing documentation - they codify what the project already does implicitly, not invented conventions.
 
 ---
 
@@ -35,11 +35,11 @@ These rules are derived from actual usage in Cougr's strongest existing document
 
 ### 1. Honest-by-default
 
-State gaps plainly rather than marketing around them. If a feature is Beta, say "Beta" - not "stable with some evolution expected." If a verification path is Experimental, say "Experimental" - not "advanced but reliable." This is Cougr's strongest differentiator as a documentation culture.
+State gaps plainly rather than marketing around them. If a feature is Beta, say "Beta" - not "stable with some evolution expected." If a verification path is Experimental, say "Experimental" - not "advanced but reliable." This is Sunvest's strongest differentiator as a documentation culture.
 
 ### 2. Precise over playful
 
-Cougr is infrastructure (an on-chain game engine), not a game itself. Documentation should read closer to Linear or Vercel's developer docs than to a flashy Web3 project's landing page. Avoid:
+Sunvest is infrastructure (an on-chain game engine), not a game itself. Documentation should read closer to Linear or Vercel's developer docs than to a flashy Web3 project's landing page. Avoid:
 - Game-themed metaphors for technical concepts ("power up your contract!")
 - Exclamation points in technical explanations
 - Unnecessary superlatives
@@ -59,9 +59,9 @@ When a new namespace alias exists (`ops` for `standards`, `auth` for `accounts`,
 | Element | Formatting |
 |---|---|
 | Rust types, macros, traits, function names | Code font / backticks |
-| Namespace paths (`cougr_core::app`) | Code font / backticks |
+| Namespace paths (`Sunvest_core::app`) | Code font / backticks |
 | Maturity tiers (Stable, Beta, Experimental) | Title case, no backticks |
-| The project name "Cougr" | Title case, no backticks |
+| The project name "Sunvest" | Title case, no backticks |
 | ECS terms (component, system, entity, world) | Lowercase when used conceptually, code font when referring to the Rust type |
 | Example names (`spawn_and_move`) | Code font / backticks |
 

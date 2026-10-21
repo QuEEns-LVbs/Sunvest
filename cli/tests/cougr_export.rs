@@ -7,7 +7,7 @@ fn export(config: &str) -> (tempfile::TempDir, Output) {
     let dir = tempfile::tempdir().unwrap();
     let config_path = dir.path().join("config.json");
     fs::write(&config_path, config).unwrap();
-    let output = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let output = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(["export", "demo", "--config"])
         .arg(&config_path)
         .arg("--path")
@@ -52,7 +52,7 @@ fn default_export_matches_new_template() {
     assert!(stdout.contains(&expected_cd));
     assert!(stdout.contains("cargo test"));
     assert!(stdout.contains("stellar contract build"));
-    let check = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let check = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .arg("check")
         .arg("--path")
         .arg(&project)
@@ -85,7 +85,7 @@ fn non_default_export_applies_config() {
     assert!(fs::read_to_string(project.join("README.md"))
         .unwrap()
         .contains("5×4"));
-    let check = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let check = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .arg("check")
         .arg("--path")
         .arg(&project)
@@ -123,7 +123,7 @@ fn export_never_overwrites_existing_directory() {
         r#"{"board_width":3,"board_height":3,"win_length":3}"#,
     )
     .unwrap();
-    let output = Command::new(env!("CARGO_BIN_EXE_cougr"))
+    let output = Command::new(env!("CARGO_BIN_EXE_Sunvest"))
         .args(["export", "demo", "--config"])
         .arg(&config_path)
         .arg("--path")

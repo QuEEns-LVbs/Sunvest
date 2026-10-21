@@ -6,7 +6,7 @@
 //! deals each seat has proven - everything a proof is checked against, and
 //! nothing that would leak a hand.
 
-use cougr_core::impl_component;
+use Sunvest_core::impl_component;
 use soroban_sdk::{contracttype, symbol_short, Address, Env, Symbol};
 
 /// Public parameters of the table, frozen at `init_table` so every later proof

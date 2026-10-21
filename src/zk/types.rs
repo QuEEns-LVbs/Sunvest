@@ -2,7 +2,7 @@ use soroban_sdk::{contracttype, BytesN, Vec};
 
 /// A BN254 G1 affine point (compressed, 64 bytes serialized).
 ///
-/// Wraps the soroban-sdk `Bn254G1Affine` for use in Cougr contract types.
+/// Wraps the soroban-sdk `Bn254G1Affine` for use in Sunvest contract types.
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct G1Point {

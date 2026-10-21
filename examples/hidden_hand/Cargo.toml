@@ -3,7 +3,7 @@ name = "hidden_hand"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "Canonical Cougr ZK example: hidden card deals via cougr_core::circuits::hidden_cards"
+description = "Canonical Sunvest ZK example: hidden card deals via Sunvest_core::circuits::hidden_cards"
 license = "MIT"
 
 [lib]
@@ -11,11 +11,11 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 soroban-sdk = "29.0.1"
-cougr-core = { path = "../../" }
+Sunvest-core = { path = "../../" }
 
 [dev-dependencies]
 soroban-sdk = { version = "29.0.1", features = ["testutils"] }
-cougr-core = { path = "../../", features = ["testutils"] }
+Sunvest-core = { path = "../../", features = ["testutils"] }
 
 [profile.release]
 opt-level = "z"

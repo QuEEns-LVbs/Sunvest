@@ -50,7 +50,7 @@ jobs:
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
         with:
-          shared-key: cougr-workspace
+          shared-key: Sunvest-workspace
 
       - name: Check formatting
         run: cargo fmt --check
@@ -59,14 +59,14 @@ jobs:
         run: cargo clippy --all-targets --all-features -- -D warnings
 
       - name: Run tests
-        run: cargo test --workspace --features testutils --exclude cougr-cli
+        run: cargo test --workspace --features testutils --exclude Sunvest-cli
 
       - name: Run hygiene check (cli)
-        run: cargo run -p cougr-cli -- check --path .
+        run: cargo run -p Sunvest-cli -- check --path .
 
       - name: Run verified check (canonical examples)
         continue-on-error: true
-        run: cargo run -p cougr-cli -- check --path . --verified --canonical-only --output verified.json
+        run: cargo run -p Sunvest-cli -- check --path . --verified --canonical-only --output verified.json
 
       - name: Upload verified badge report
         if: always()

@@ -1,6 +1,6 @@
 use crate::{BattleshipContract, BattleshipContractClient, Phase};
-use cougr_core::privacy::stable::{to_on_chain_proof, MerkleTree};
-use cougr_core::test::{GameHarness, PlayerSlot, Scenario};
+use Sunvest_core::privacy::stable::{to_on_chain_proof, MerkleTree};
+use Sunvest_core::test::{GameHarness, PlayerSlot, Scenario};
 use soroban_sdk::{Bytes, BytesN, Env};
 
 fn build_merkle_tree(env: &Env, board: &[u32; 100]) -> (BytesN<32>, MerkleTree) {

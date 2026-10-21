@@ -15,7 +15,7 @@ use crate::simple_world::EntityId;
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::impl_rich_component;
+/// use Sunvest_core::impl_rich_component;
 /// use soroban_sdk::{contracttype, String, Vec};
 ///
 /// #[contracttype]
@@ -37,12 +37,12 @@ pub trait RichComponentTrait {
 
 /// Computes the Soroban instance-storage key for a rich component.
 ///
-/// Uses a namespaced tuple key `(cougr_rc, entity_id, component_sym)` to
+/// Uses a namespaced tuple key `(Sunvest_rc, entity_id, component_sym)` to
 /// avoid collisions with other contract storage keys.
 pub(crate) fn rich_component_key(
     _env: &Env,
     entity_id: EntityId,
     component_sym: Symbol,
 ) -> (Symbol, u32, Symbol) {
-    (symbol_short!("cougr_rc"), entity_id, component_sym)
+    (symbol_short!("Sunvest_rc"), entity_id, component_sym)
 }

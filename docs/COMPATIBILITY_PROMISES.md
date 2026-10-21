@@ -1,14 +1,14 @@
-# Cougr Compatibility Promises
+# Sunvest Compatibility Promises
 
 ## Purpose
 
-This document defines the compatibility story Cougr is prepared to defend at `1.0`.
+This document defines the compatibility story Sunvest is prepared to defend at `1.0`.
 
 It turns the maturity model into explicit expectations for adopters, contributors, and maintainers.
 
 ## `1.0` Baseline
 
-Cougr `1.0.0` freezes a scoped stable surface inside a broader public crate.
+Sunvest `1.0.0` freezes a scoped stable surface inside a broader public crate.
 
 That means:
 
@@ -18,7 +18,7 @@ That means:
 
 ## Stable Surfaces
 
-The following surfaces are treated as Cougr's strongest `1.0` compatibility commitments:
+The following surfaces are treated as Sunvest's strongest `1.0` compatibility commitments:
 
 - root ECS onboarding and runtime entrypoints documented in [API_CONTRACT.md](API_CONTRACT.md)
 - `prelude`

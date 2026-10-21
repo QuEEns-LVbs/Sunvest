@@ -6,18 +6,18 @@ import {
 } from './xdr.ts';
 
 /**
- * The three event families `src/ecs_events.rs` publishes under the `COUGR`
+ * The three event families `src/ecs_events.rs` publishes under the `Sunvest`
  * namespace:
  *
  * | Topics                          | Emitted by                       | Payload              |
  * | ------------------------------- | -------------------------------- | -------------------- |
- * | `("COUGR", "set", <component>)` | `World::set_typed_observed`      | `entity_id`, `data`  |
- * | `("COUGR", "del", <component>)` | `World::remove_observed`         | `entity_id`          |
- * | `("COUGR", "rich", <component>)`| `World::set_rich_observed`       | `entity_id` only     |
+ * | `("Sunvest", "set", <component>)` | `World::set_typed_observed`      | `entity_id`, `data`  |
+ * | `("Sunvest", "del", <component>)` | `World::remove_observed`         | `entity_id`          |
+ * | `("Sunvest", "rich", <component>)`| `World::set_rich_observed`       | `entity_id` only     |
  */
-export type CougrEventFamily = 'set' | 'del' | 'rich';
+export type SunvestEventFamily = 'set' | 'del' | 'rich';
 
-export const COUGR_NAMESPACE = 'COUGR';
+export const Sunvest_NAMESPACE = 'Sunvest';
 
 /**
  * A contract event as returned by Soroban RPC `getEvents` (protocol 23 shape).
@@ -43,8 +43,8 @@ export interface SorobanRpcEventsPage {
   cursor?: string;
 }
 
-export interface CougrEventBase {
-  family: CougrEventFamily;
+export interface SunvestEventBase {
+  family: SunvestEventFamily;
   /** `component_type` symbol from the third topic (`"position"`, ...). */
   componentType: string;
   entityId: number;
@@ -58,8 +58,8 @@ export interface CougrEventBase {
   raw: SorobanRpcContractEvent;
 }
 
-/** `("COUGR", "set", component)` — carries the serialized component bytes. */
-export interface ComponentSetUpdate extends CougrEventBase {
+/** `("Sunvest", "set", component)` — carries the serialized component bytes. */
+export interface ComponentSetUpdate extends SunvestEventBase {
   family: 'set';
   /**
    * The exact bytes produced by `ComponentTrait::serialize`. This is the same
@@ -69,13 +69,13 @@ export interface ComponentSetUpdate extends CougrEventBase {
   data: Uint8Array;
 }
 
-/** `("COUGR", "del", component)` — the component was removed. */
-export interface ComponentDeleteUpdate extends CougrEventBase {
+/** `("Sunvest", "del", component)` — the component was removed. */
+export interface ComponentDeleteUpdate extends SunvestEventBase {
   family: 'del';
 }
 
 /**
- * `("COUGR", "rich", component)` — the component changed but the new value is
+ * `("Sunvest", "rich", component)` — the component changed but the new value is
  * **not** in the event.
  *
  * Rich components use Soroban's XDR codec and live in instance storage, so the
@@ -83,7 +83,7 @@ export interface ComponentDeleteUpdate extends CougrEventBase {
  * `true` so the compiler forces every consumer to branch on it: a client
  * cannot read `.data` off this record because it does not exist.
  */
-export interface RichComponentChangedUpdate extends CougrEventBase {
+export interface RichComponentChangedUpdate extends SunvestEventBase {
   family: 'rich';
   requiresFollowUpRead: true;
   followUp: {
@@ -94,34 +94,34 @@ export interface RichComponentChangedUpdate extends CougrEventBase {
   };
 }
 
-export type CougrEventUpdate =
+export type SunvestEventUpdate =
   | ComponentSetUpdate
   | ComponentDeleteUpdate
   | RichComponentChangedUpdate;
 
-/** True when the event's first two topics are `("COUGR", set|del|rich)`. */
-export function isCougrEvent(event: SorobanRpcContractEvent): boolean {
-  return decodeCougrTopics(event) !== null;
+/** True when the event's first two topics are `("Sunvest", set|del|rich)`. */
+export function isSunvestEvent(event: SorobanRpcContractEvent): boolean {
+  return decodeSunvestTopics(event) !== null;
 }
 
-export interface CougrTopics {
-  family: CougrEventFamily;
+export interface SunvestTopics {
+  family: SunvestEventFamily;
   componentType: string;
   /** Decoded third topic, kept for callers that want the raw ScVal. */
   componentTypeScVal: ScVal;
 }
 
 /**
- * Decode the `COUGR` topics of an event, or return `null` when this is not a
- * Cougr component event. Never throws on non-Cougr events: a page of RPC
+ * Decode the `Sunvest` topics of an event, or return `null` when this is not a
+ * Sunvest component event. Never throws on non-Sunvest events: a page of RPC
  * events from a shared contract can contain anything.
  */
-export function decodeCougrTopics(event: SorobanRpcContractEvent): CougrTopics | null {
+export function decodeSunvestTopics(event: SorobanRpcContractEvent): SunvestTopics | null {
   const topics = event.topic;
   if (!Array.isArray(topics) || topics.length < 3) return null;
   try {
     const namespace = scValToNative(decodeScValBase64(topics[0] as string));
-    if (namespace !== COUGR_NAMESPACE) return null;
+    if (namespace !== Sunvest_NAMESPACE) return null;
     const family = scValToNative(decodeScValBase64(topics[1] as string));
     if (family !== 'set' && family !== 'del' && family !== 'rich') return null;
     const componentTypeScVal = decodeScValBase64(topics[2] as string);
@@ -151,17 +151,17 @@ function readEventData(value: ScVal): EventData {
   if (value.type === 'map') {
     const native = scValToNative(value);
     if (typeof native !== 'object' || native === null || Array.isArray(native)) {
-      throw new TypeError('Cougr event value map did not decode to an object');
+      throw new TypeError('Sunvest event value map did not decode to an object');
     }
     const record = native as { [key: string]: ScValNative };
     const entityId = record['entity_id'];
     if (typeof entityId !== 'number') {
-      throw new TypeError('Cougr event is missing a numeric `entity_id` field');
+      throw new TypeError('Sunvest event is missing a numeric `entity_id` field');
     }
     const data = record['data'];
     if (data === undefined) return { entityId };
     if (!(data instanceof Uint8Array)) {
-      throw new TypeError('Cougr `set` event `data` is not XDR bytes');
+      throw new TypeError('Sunvest `set` event `data` is not XDR bytes');
     }
     return { entityId, data };
   }
@@ -171,20 +171,20 @@ function readEventData(value: ScVal): EventData {
   if (value.type === 'u64' || value.type === 'i64') {
     return { entityId: Number(value.value) };
   }
-  throw new TypeError(`Unexpected Cougr event value type: ${value.type}`);
+  throw new TypeError(`Unexpected Sunvest event value type: ${value.type}`);
 }
 
 /**
- * Decode one RPC event into a typed Cougr update, or `null` when the event is
- * not one of the three `COUGR` families.
+ * Decode one RPC event into a typed Sunvest update, or `null` when the event is
+ * not one of the three `Sunvest` families.
  */
-export function decodeCougrEvent(event: SorobanRpcContractEvent): CougrEventUpdate | null {
-  const topics = decodeCougrTopics(event);
+export function decodeSunvestEvent(event: SorobanRpcContractEvent): SunvestEventUpdate | null {
+  const topics = decodeSunvestTopics(event);
   if (topics === null) return null;
   const value = decodeScValBase64(event.value);
   const data = readEventData(value);
 
-  const base: CougrEventBase = {
+  const base: SunvestEventBase = {
     family: topics.family,
     componentType: topics.componentType,
     entityId: data.entityId,
@@ -200,7 +200,7 @@ export function decodeCougrEvent(event: SorobanRpcContractEvent): CougrEventUpda
   if (topics.family === 'set') {
     if (data.data === undefined) {
       throw new TypeError(
-        `Cougr "set" event for ${topics.componentType} did not carry component bytes`,
+        `Sunvest "set" event for ${topics.componentType} did not carry component bytes`,
       );
     }
     return { ...base, family: 'set', data: data.data };
@@ -223,27 +223,27 @@ export function decodeCougrEvent(event: SorobanRpcContractEvent): CougrEventUpda
   };
 }
 
-/** Decode every Cougr event in an RPC page; non-Cougr events are dropped. */
-export function decodeCougrEvents(events: SorobanRpcContractEvent[]): CougrEventUpdate[] {
-  const updates: CougrEventUpdate[] = [];
+/** Decode every Sunvest event in an RPC page; non-Sunvest events are dropped. */
+export function decodeSunvestEvents(events: SorobanRpcContractEvent[]): SunvestEventUpdate[] {
+  const updates: SunvestEventUpdate[] = [];
   for (const event of events) {
-    const update = decodeCougrEvent(event);
+    const update = decodeSunvestEvent(event);
     if (update !== null) updates.push(update);
   }
   return updates;
 }
 
 /** Decode a full `getEvents` page, preserving the page metadata. */
-export function decodeCougrPage(page: SorobanRpcEventsPage): {
-  updates: CougrEventUpdate[];
+export function decodeSunvestPage(page: SorobanRpcEventsPage): {
+  updates: SunvestEventUpdate[];
   page: SorobanRpcEventsPage;
 } {
-  return { updates: decodeCougrEvents(page.events), page };
+  return { updates: decodeSunvestEvents(page.events), page };
 }
 
 /** Narrow an update to the rich family (where a follow-up read is required). */
 export function isRichComponentChanged(
-  update: CougrEventUpdate,
+  update: SunvestEventUpdate,
 ): update is RichComponentChangedUpdate {
   return update.family === 'rich';
 }

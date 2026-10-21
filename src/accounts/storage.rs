@@ -14,7 +14,7 @@ const SESSION_KEYS_PREFIX: &str = "sess_keys";
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::accounts::{SessionKey, SessionScope, SessionStorage};
+/// use Sunvest_core::accounts::{SessionKey, SessionScope, SessionStorage};
 /// use soroban_sdk::{symbol_short, testutils::Address as _, Address, BytesN, Env, Vec};
 ///
 /// let env = Env::default();

@@ -1,6 +1,6 @@
 //! Integration tests for {{crate_name}}.
 //!
-//! These run through `cougr_core::test::GameHarness`, the sandbox the canonical
+//! These run through `Sunvest_core::test::GameHarness`, the sandbox the canonical
 //! examples use. `env.mock_all_auths()` stands in for the one wallet prompt a
 //! real owner would answer at `approve_session`; every `tap` after that is
 //! authorized by the session key, not the wallet.
@@ -9,7 +9,7 @@ use crate::components::Score;
 use crate::systems::{validate_request, SessionPolicyError, MAX_SESSION_LIFETIME};
 use crate::{{ContractName}};
 use crate::{{ContractName}}Client;
-use cougr_core::test::{GameHarness, MockSession};
+use Sunvest_core::test::{GameHarness, MockSession};
 use soroban_sdk::testutils::{Address as _, Ledger as _};
 use soroban_sdk::{Address, Env};
 

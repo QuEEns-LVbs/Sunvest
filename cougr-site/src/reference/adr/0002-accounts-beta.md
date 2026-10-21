@@ -10,7 +10,7 @@ The account kernel, typed intents, replay domains, passkey support, and session 
 
 ## Decision
 
-Cougr will keep `accounts` as a Beta namespace at `1.0` even though the kernel exists and is tested.
+Sunvest will keep `accounts` as a Beta namespace at `1.0` even though the kernel exists and is tested.
 
 ## Consequences
 

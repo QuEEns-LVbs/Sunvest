@@ -4,8 +4,8 @@
 //! the Tap Battle game, including passkey identity, tap tracking, power-ups,
 //! round management, and player profiles.
 //!
-//! **Cougr-Core Integration**: Components follow the ECS pattern from
-//! cougr-core, with passkey authentication via `secp256r1_auth` and
+//! **Sunvest-Core Integration**: Components follow the ECS pattern from
+//! Sunvest-core, with passkey authentication via `secp256r1_auth` and
 //! session management via `SessionBuilder`.
 
 use soroban_sdk::{contracttype, Address, BytesN};
@@ -170,7 +170,7 @@ pub enum DataKey {
     Profile(Address),
     /// Flag indicating if a round is active
     RoundActive,
-    /// Count of cougr-core entities (ECS integration)
+    /// Count of Sunvest-core entities (ECS integration)
     EntityCount,
 }
 

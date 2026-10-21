@@ -1,6 +1,6 @@
 //! Integration tests for {{crate_name}}.
 //!
-//! These run through `cougr_core::test::GameHarness`, the sandbox the canonical
+//! These run through `Sunvest_core::test::GameHarness`, the sandbox the canonical
 //! examples use: it registers the contract in a fresh `Env`, hands back the
 //! contract ID for the generated client, and pairs with `Scenario` for
 //! multi-turn play and `WorldFixture` for injecting pre-built world state.
@@ -9,7 +9,7 @@ use crate::components::{Moves, Position, EAST, NORTH, SOUTH};
 use crate::systems::{step, MoveError};
 use crate::{{ContractName}};
 use crate::{{ContractName}}Client;
-use cougr_core::test::{GameHarness, Scenario, SnapshotAssert, WorldFixture};
+use Sunvest_core::test::{GameHarness, Scenario, SnapshotAssert, WorldFixture};
 use soroban_sdk::Env;
 
 fn harness() -> GameHarness {

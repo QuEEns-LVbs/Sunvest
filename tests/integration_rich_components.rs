@@ -6,9 +6,9 @@
 //! Rich component storage uses `env.storage().instance()` which requires a
 //! contract context. Tests run inside `env.as_contract()` to satisfy this.
 
-use cougr_core::impl_rich_component;
-use cougr_core::rich_component::RichComponentTrait;
-use cougr_core::simple_world::SimpleWorld;
+use Sunvest_core::impl_rich_component;
+use Sunvest_core::rich_component::RichComponentTrait;
+use Sunvest_core::simple_world::SimpleWorld;
 use soroban_sdk::{contract, contractimpl, contracttype, Env, String, Vec};
 
 // ─── Minimal test contract ────────────────────────────────────────────────────
@@ -205,7 +205,7 @@ fn test_nested_struct_with_enum_roundtrip() {
 
 #[test]
 fn test_rich_and_primitive_components_on_same_entity() {
-    use cougr_core::component::Position;
+    use Sunvest_core::component::Position;
 
     let env = Env::default();
     let addr = make_contract(&env);

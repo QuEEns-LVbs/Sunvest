@@ -13,7 +13,7 @@ pub const MAX_DEPTH: u32 = 20;
 ///
 /// # Example
 /// ```
-/// use cougr_core::zk::stable::MerkleTree;
+/// use Sunvest_core::zk::stable::MerkleTree;
 /// use soroban_sdk::Env;
 ///
 /// let env = Env::default();
@@ -21,7 +21,7 @@ pub const MAX_DEPTH: u32 = 20;
 /// let tree = MerkleTree::from_leaves(&env, &leaves)?;
 /// let proof = tree.proof(2)?;
 /// assert_eq!(proof.leaf_index, 2);
-/// # Ok::<(), cougr_core::zk::ZKError>(())
+/// # Ok::<(), Sunvest_core::zk::ZKError>(())
 /// ```
 pub struct MerkleTree {
     depth: u32,

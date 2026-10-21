@@ -1,8 +1,8 @@
-# Cougr Feature Flags
+# Sunvest Feature Flags
 
 ## Purpose
 
-This document groups Cougr feature flags by maturity and intended usage.
+This document groups Sunvest feature flags by maturity and intended usage.
 
 ## Current Flags
 

@@ -1,14 +1,14 @@
 # Reversi
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
-An on-chain Reversi (Othello) game built with the [Cougr](../../README.md) ECS framework on Stellar Soroban.
+An on-chain Reversi (Othello) game built with the [Sunvest](../../README.md) ECS framework on Stellar Soroban.
 
 ## Purpose and pattern
 
 This example demonstrates a turn-based, perfect-information board game where every move
-mutates shared board state and can trigger automatic turn-skipping. It showcases Cougr's
+mutates shared board state and can trigger automatic turn-skipping. It showcases Sunvest's
 `ComponentTrait` pattern for typed, byte-serializable game state - components are plain
 Rust structs annotated with `#[contracttype]` that implement `ComponentTrait` directly,
 rather than being scanned through `SimpleWorld`/`SimpleQueryBuilder`. This is a lighter-weight
@@ -64,9 +64,9 @@ with no per-entry TTL management.
    (`pass_count` reaches 2) or the board fills, `EndConditionSystem` sets status to finished.
 5. Either player calls `get_score` to read the final piece counts and winner.
 
-## Cougr APIs used
+## Sunvest APIs used
 
-- `cougr_core::component::ComponentTrait` - gives each component (`BoardComponent`,
+- `Sunvest_core::component::ComponentTrait` - gives each component (`BoardComponent`,
   `TurnComponent`, `GameStatusComponent`, `ScoreComponent`) a `component_type()` symbol and
   byte-level `serialize`/`deserialize`, chosen here because the game has a single fixed set
   of components per instance rather than a dynamic entity population that would benefit from

@@ -285,7 +285,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
-name = "cougr-core"
+name = "Sunvest-core"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "afc489e355664841b5fb4d0b19e014c3be1a9b81cd1cd9f7ad29f02fe54a4135"
@@ -1586,7 +1586,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 name = "sudoku"
 version = "0.1.0"
 dependencies = [
- "cougr-core",
+ "Sunvest-core",
  "soroban-sdk",
 ]
 

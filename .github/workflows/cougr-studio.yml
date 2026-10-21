@@ -1,6 +1,6 @@
-name: Cougr Studio
+name: Sunvest Studio
 
-# Path-scoped to the studio tree, on the pattern of .github/workflows/cougr-site.yml.
+# Path-scoped to the studio tree, on the pattern of .github/workflows/Sunvest-site.yml.
 # Rust-only changes must not trigger this workflow, and it deliberately does not
 # run the Rust `clippy -D warnings` gate — the studio is TypeScript/JavaScript
 # tooling, not a crate.
@@ -11,21 +11,21 @@ on:
     paths:
       - 'studio/**'
       - 'packages/tokens/tokens.json'
-      - '.github/workflows/cougr-studio.yml'
+      - '.github/workflows/Sunvest-studio.yml'
   pull_request:
     branches: [main, develop]
     paths:
       - 'studio/**'
       - 'packages/tokens/tokens.json'
-      - '.github/workflows/cougr-studio.yml'
+      - '.github/workflows/Sunvest-studio.yml'
 
 concurrency:
-  group: cougr-studio-${{ github.workflow }}-${{ github.ref }}
+  group: Sunvest-studio-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   studio:
-    name: Test cougr-studio
+    name: Test Sunvest-studio
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

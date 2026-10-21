@@ -7,7 +7,7 @@ mod systems;
 use alloc::rc::Rc;
 use components::{BirdState, ComponentTrait, PipeConfig, PipeMarker};
 use core::cell::Cell;
-use cougr_core::{GameApp, ScheduleStage, SimpleQueryBuilder, SimpleWorld, SystemConfig};
+use Sunvest_core::{GameApp, ScheduleStage, SimpleQueryBuilder, SimpleWorld, SystemConfig};
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, Vec};
 use systems::{Position, Velocity};
 

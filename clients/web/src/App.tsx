@@ -59,7 +59,7 @@ export default function App() {
   const turnText = !state ? "No match loaded" : state.status !== 0 ? statusLabel(state.status) : myTurn ? "Your turn" : "Opponent's turn";
 
   return <main className="shell"><section className="card">
-    <p className="eyebrow">Cougr · turn-based reference client</p>
+    <p className="eyebrow">Sunvest · turn-based reference client</p>
     <h1>3×3 Soroban match</h1>
     <p className="muted">Direct RPC client for the generated turn-based contract. Freighter signs wallet transactions.</p>
 

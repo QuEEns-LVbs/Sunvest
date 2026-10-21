@@ -232,7 +232,7 @@ fn test_rule_invariants() {
 }
 
 #[test]
-fn test_cougr_integration() {
+fn test_Sunvest_integration() {
     let env = Env::default();
     env.mock_all_auths();
     let contract_id = env.register(MurdokuContract, ());

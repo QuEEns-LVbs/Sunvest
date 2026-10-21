@@ -1,6 +1,6 @@
-//! Murdoku game components using cougr-core's ComponentTrait
+//! Murdoku game components using Sunvest-core's ComponentTrait
 
-use cougr_core::component::{ComponentStorage, ComponentTrait};
+use Sunvest_core::component::{ComponentStorage, ComponentTrait};
 use soroban_sdk::xdr::{FromXdr, ToXdr};
 use soroban_sdk::{contracttype, symbol_short, Bytes, Env, String, Symbol, Vec};
 

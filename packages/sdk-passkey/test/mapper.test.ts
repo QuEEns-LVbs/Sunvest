@@ -66,12 +66,12 @@ test('parseClientDataJSON rejects anything that is not the three required string
 
 test('checkClientData accepts a registrable parent of the origin as rpId', () => {
   const data = parseClientDataJSON(
-    JSON.stringify({ type: 'webauthn.get', challenge: 'abc', origin: 'https://cougr.test' }),
+    JSON.stringify({ type: 'webauthn.get', challenge: 'abc', origin: 'https://Sunvest.test' }),
   );
   checkClientData(data, {
     type: 'webauthn.get',
     challenge: 'abc',
-    origin: 'https://cougr.test',
+    origin: 'https://Sunvest.test',
     rpId: 'test',
   });
 
@@ -80,7 +80,7 @@ test('checkClientData accepts a registrable parent of the origin as rpId', () =>
       checkClientData(data, {
         type: 'webauthn.get',
         challenge: 'abc',
-        origin: 'https://cougr.test',
+        origin: 'https://Sunvest.test',
         rpId: 'teste',
       }),
     (error: unknown) => codeOf(error) === 'RP_ID_MISMATCH',
@@ -94,7 +94,7 @@ test('checkClientData accepts a registrable parent of the origin as rpId', () =>
       checkClientData(data, {
         type: 'webauthn.create',
         challenge: 'abc',
-        origin: 'https://cougr.test',
+        origin: 'https://Sunvest.test',
       }),
     (error: unknown) => codeOf(error) === 'WRONG_TYPE',
   );

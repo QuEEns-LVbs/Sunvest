@@ -1,13 +1,13 @@
 # Treasure Hunt (Merkle Map Pattern)
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 A single-player exploration game demonstrating **hidden information** using Merkle map commitments and sparse fog-of-war on Stellar Soroban. The full map is committed off-chain, and players prove cell contents via Merkle inclusion proofs as they explore.
 
 ## Status
 
-**Transitional** - uses `cougr-core = "1.1.0"` and `privacy::stable` Merkle primitives (`MerkleTree`, `SparseMerkleTree`, `verify_inclusion`, `OnChainMerkleProof`). See [battleship](../battleship/) for the canonical hidden-information reference.
+**Transitional** - uses `Sunvest-core = "1.1.0"` and `privacy::stable` Merkle primitives (`MerkleTree`, `SparseMerkleTree`, `verify_inclusion`, `OnChainMerkleProof`). See [battleship](../battleship/) for the canonical hidden-information reference.
 
 ## The Hidden Information Pattern
 
@@ -56,7 +56,7 @@ Use **ZK circuits** when the game logic itself must remain private - proving val
 
 ### Migration note (`explore` proof parameter)
 
-`explore` now accepts `cougr_core::privacy::stable::OnChainMerkleProof` instead of `Vec<BytesN<32>>`. Build proofs with `Sha256MerkleProofVerifier::to_on_chain_proof` (or `to_on_chain_proof` helper) before calling the contract.
+`explore` now accepts `Sunvest_core::privacy::stable::OnChainMerkleProof` instead of `Vec<BytesN<32>>`. Build proofs with `Sha256MerkleProofVerifier::to_on_chain_proof` (or `to_on_chain_proof` helper) before calling the contract.
 | `get_state` | - | Return complete `GameState` |
 | `is_explored` | `x: u32`, `y: u32` | Check if a cell has been revealed |
 
@@ -174,7 +174,7 @@ stellar contract deploy \
 
 ## Resources
 
-- [Cougr Repository](https://github.com/salazarsebas/Cougr)
+- [Sunvest Repository](https://github.com/salazarsebas/Sunvest)
 - [Merkle Trees](https://en.wikipedia.org/wiki/Merkle_tree)
 - [battleship - canonical commit-reveal example](../battleship/)
 - [hidden_hand - ZK circuit example](../hidden_hand/)

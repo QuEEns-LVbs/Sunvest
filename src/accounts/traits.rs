@@ -4,11 +4,11 @@ use super::error::AccountError;
 use super::intent::{AuthResult, SignedIntent};
 use super::types::{AccountCapabilities, GameAction, SessionKey, SessionScope};
 
-/// Core account trait for Cougr game accounts.
+/// Core account trait for Sunvest game accounts.
 ///
 /// All account types (Classic G-address and Contract C-address) implement
 /// this trait to provide unified authorization for game actions.
-pub trait CougrAccount {
+pub trait SunvestAccount {
     /// Returns the Stellar address of this account.
     fn address(&self) -> &Address;
 
@@ -23,7 +23,7 @@ pub trait CougrAccount {
 }
 
 /// Explicit intent-based authorization interface used by the account kernel.
-pub trait IntentAccount: CougrAccount {
+pub trait IntentAccount: SunvestAccount {
     fn authorize_intent(
         &mut self,
         env: &Env,
@@ -35,7 +35,7 @@ pub trait IntentAccount: CougrAccount {
 ///
 /// This trait provides session key functionality for gasless gameplay.
 /// Only contract accounts (C-addresses) support this capability.
-pub trait SessionKeyProvider: CougrAccount {
+pub trait SessionKeyProvider: SunvestAccount {
     /// Create a new session key with the given scope.
     fn create_session(
         &mut self,

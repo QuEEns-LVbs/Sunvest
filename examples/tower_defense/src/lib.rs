@@ -3,7 +3,7 @@
 //! # Tower Defense On-Chain Game
 //!
 //! This example demonstrates how to build a tower defense game using the
-//! `cougr-core` ECS framework on the Stellar blockchain via Soroban.
+//! `Sunvest-core` ECS framework on the Stellar blockchain via Soroban.
 //!
 //! ## Game Features
 //!
@@ -20,7 +20,7 @@
 //! - **Components**: Position, Enemy stats, Tower stats, Wave state, Base health
 //! - **Systems**: Wave spawning, Path progression, Targeting, Attack resolution
 //!
-//! The `cougr-core` package simplifies on-chain game development by providing:
+//! The `Sunvest-core` package simplifies on-chain game development by providing:
 //! - Serialization-ready component patterns for on-chain storage
 //! - Entity management optimized for Soroban's constraints
 //! - A consistent architecture for game logic
@@ -29,7 +29,7 @@ mod components;
 mod systems;
 
 use components::{BaseComponent, WaveComponent};
-use cougr_core::SimpleWorld;
+use Sunvest_core::SimpleWorld;
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env};
 
 // ============================================================================

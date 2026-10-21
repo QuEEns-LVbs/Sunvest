@@ -1,14 +1,14 @@
-# Cougr Threat Model
+# Sunvest Threat Model
 
 ## Purpose
 
-This document defines the current threat model baseline for Cougr at `1.0`.
+This document defines the current threat model baseline for Sunvest at `1.0`.
 
 It is not a claim of formal verification or exhaustive review. It exists so the repository is explicit about what must be defended, where trust assumptions live, and which subsystems need extra scrutiny before production use.
 
 ## Security Objectives
 
-Cougr aims to preserve:
+Sunvest aims to preserve:
 
 - authorization correctness for gameplay and account actions
 - replay resistance for session-like or delegated actions
@@ -46,7 +46,7 @@ Assume the following threat classes:
 
 ## Out-of-Scope Guarantees
 
-Cougr does not currently guarantee:
+Sunvest does not currently guarantee:
 
 - audit-backed production readiness across all public modules
 - complete replay resistance across every future integration pattern
@@ -80,7 +80,7 @@ Primary risks:
 Current posture:
 
 - replay-sensitive behavior is explicit in the kernel and storage model
-- integrations must still review how their own action semantics map onto Cougr's replay domains
+- integrations must still review how their own action semantics map onto Sunvest's replay domains
 
 ### ECS State Integrity
 

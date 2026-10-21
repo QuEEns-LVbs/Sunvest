@@ -4,7 +4,7 @@ use super::error::AccountError;
 use super::intent::{AuthResult, SignedIntent};
 use super::kernel::AccountKernel;
 use super::storage::SessionStorage;
-use super::traits::{CougrAccount, IntentAccount, SessionKeyProvider};
+use super::traits::{SunvestAccount, IntentAccount, SessionKeyProvider};
 use super::types::{AccountCapabilities, GameAction, SessionKey, SessionScope};
 
 /// A Contract Stellar account (C-address).
@@ -28,7 +28,7 @@ impl ContractAccount {
     }
 }
 
-impl CougrAccount for ContractAccount {
+impl SunvestAccount for ContractAccount {
     fn address(&self) -> &Address {
         &self.address
     }

@@ -1,4 +1,4 @@
-class_name CougrCheckpointPayload
+class_name SunvestCheckpointPayload
 
 # Byte layout for the checkpoint contract's two state-changing methods, plus the
 # read-only `get_state` invocation.
@@ -6,13 +6,13 @@ class_name CougrCheckpointPayload
 # The layout is not written down here from memory. Every function below is
 # pinned by clients/godot/checkpoint_vectors, which rebuilds the same bytes
 # through soroban_sdk from the same inputs, and
-# addons/cougr_checkpoint/tests/run_tests.gd asserts the hex on this side. Change
+# addons/Sunvest_checkpoint/tests/run_tests.gd asserts the hex on this side. Change
 # one side and the other side's CI fails.
 #
 # Functions return an empty PackedByteArray when an argument cannot be encoded.
 # Callers must treat that as a failure rather than submitting a partial payload.
 
-const Xdr := preload("res://addons/cougr_checkpoint/soroban_xdr.gd")
+const Xdr := preload("res://addons/Sunvest_checkpoint/soroban_xdr.gd")
 
 ## `EnvelopeType` discriminant for a v1 transaction envelope.
 const ENVELOPE_TYPE_TX := 2
@@ -60,7 +60,7 @@ static func scval_address(address: String) -> PackedByteArray:
 ## Encodes a `u32` as an `SCVal`.
 static func scval_u32(value: int) -> PackedByteArray:
 	if value < 0 or value > 0xffffffff:
-		push_error("Cougr: %d does not fit in a u32" % value)
+		push_error("Sunvest: %d does not fit in a u32" % value)
 		return PackedByteArray()
 	var out := Xdr.u32(SCV_U32)
 	out.append_array(Xdr.u32(value))
@@ -90,7 +90,7 @@ static func u64_argument(value) -> PackedByteArray:
 			return Xdr.decode_hex(value, 8)
 		_:
 			push_error(
-				"Cougr: a u64 argument must be an int or a 16 character hex string, got %s"
+				"Sunvest: a u64 argument must be an int or a 16 character hex string, got %s"
 				% type_string(typeof(value))
 			)
 			return PackedByteArray()
@@ -170,7 +170,7 @@ static func encode_auth(entries: Array) -> PackedByteArray:
 	for entry in entries:
 		var raw := Marshalls.base64_to_raw(entry)
 		if raw.is_empty():
-			push_error("Cougr: an authorization entry from simulation was empty")
+			push_error("Sunvest: an authorization entry from simulation was empty")
 			return PackedByteArray()
 		out.append_array(raw)
 	return out
@@ -193,13 +193,13 @@ static func invoke_transaction(
 	fee: int = DEFAULT_INCLUSION_FEE
 ) -> PackedByteArray:
 	if source_key.size() != 32:
-		push_error("Cougr: source account key must be 32 bytes, got %d" % source_key.size())
+		push_error("Sunvest: source account key must be 32 bytes, got %d" % source_key.size())
 		return PackedByteArray()
 	if sequence < 0:
-		push_error("Cougr: sequence number must not be negative, got %d" % sequence)
+		push_error("Sunvest: sequence number must not be negative, got %d" % sequence)
 		return PackedByteArray()
 	if args.is_empty():
-		push_error("Cougr: the invocation arguments were not encoded")
+		push_error("Sunvest: the invocation arguments were not encoded")
 		return PackedByteArray()
 
 	var out := Xdr.u32(Xdr.KEY_TYPE_ED25519)  # MuxedAccount: a plain ed25519 account
@@ -224,7 +224,7 @@ static func invoke_transaction(
 ## by the signer, so the envelope this returns is unsigned.
 static func envelope(transaction: PackedByteArray) -> PackedByteArray:
 	if transaction.is_empty():
-		push_error("Cougr: cannot wrap an empty transaction")
+		push_error("Sunvest: cannot wrap an empty transaction")
 		return PackedByteArray()
 	var out := Xdr.u32(ENVELOPE_TYPE_TX)
 	out.append_array(transaction)
@@ -250,7 +250,7 @@ static func transaction_ext(soroban_data: PackedByteArray) -> PackedByteArray:
 ## not part of what is signed.
 static func signing_payload(network_passphrase: String, transaction: PackedByteArray) -> PackedByteArray:
 	if transaction.is_empty():
-		push_error("Cougr: cannot build a signing payload for an empty transaction")
+		push_error("Sunvest: cannot build a signing payload for an empty transaction")
 		return PackedByteArray()
 	var out := Xdr.sha256(network_passphrase.to_utf8_buffer())
 	out.append_array(Xdr.u32(ENVELOPE_TYPE_TX))

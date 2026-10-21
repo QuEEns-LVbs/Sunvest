@@ -1,4 +1,4 @@
-//! Emits one `COUGR` event of each family through the real `cougr-core` event
+//! Emits one `Sunvest` event of each family through the real `Sunvest-core` event
 //! types, then writes their XDR to stdout.
 //!
 //! This is the source of `packages/sdk-events/fixtures/events.json`. It runs on
@@ -10,7 +10,7 @@
 //!
 //! The decoder tests never execute Rust; they read the committed JSON.
 
-use cougr_core::ecs_events::{ComponentRemovedEvent, ComponentSetEvent, RichComponentChangedEvent};
+use Sunvest_core::ecs_events::{ComponentRemovedEvent, ComponentSetEvent, RichComponentChangedEvent};
 use soroban_sdk::{
     contract, contractimpl,
     testutils::Events,

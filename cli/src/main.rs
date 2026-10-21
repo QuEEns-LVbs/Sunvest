@@ -1,14 +1,14 @@
-//! `cougr` - command-line tooling for the Cougr ECS framework.
+//! `Sunvest` - command-line tooling for the Sunvest ECS framework.
 //!
 //! Exposes the project, export, check, and environment commands:
 //!
-//! - [`cougr new`] - scaffold a Soroban game contract wired to `cougr-core` from
+//! - [`Sunvest new`] - scaffold a Soroban game contract wired to `Sunvest-core` from
 //!   one of four embedded templates.
-//! - [`cougr add`] - add an embedded capability to an existing Cougr project.
-//! - [`cougr check`] - run repository hygiene checks against `examples/`, or
+//! - [`Sunvest add`] - add an embedded capability to an existing Sunvest project.
+//! - [`Sunvest check`] - run repository hygiene checks against `examples/`, or
 //!   with `--verified`, the full canonical-quality checklist for the
-//!   "Cougr Verified" badge.
-//! - [`cougr doctor`] - validate the local development environment (Rust
+//!   "Sunvest Verified" badge.
+//! - [`Sunvest doctor`] - validate the local development environment (Rust
 //!   toolchain, `wasm32v1-none` target, Stellar CLI).
 
 mod check;
@@ -30,9 +30,9 @@ use crate::template::Template;
 
 #[derive(Parser)]
 #[command(
-    name = "cougr",
+    name = "Sunvest",
     version,
-    about = "Tooling for building on-chain games with cougr-core",
+    about = "Tooling for building on-chain games with Sunvest-core",
     propagate_version = true
 )]
 struct Cli {
@@ -49,7 +49,7 @@ enum Command {
     ///
     /// With --verified, runs the full canonical-quality checklist from
     /// EXAMPLE_STANDARD.md and produces pass/fail data suitable for the
-    /// "Cougr Verified" badge in the showcase.
+    /// "Sunvest Verified" badge in the showcase.
     Check {
         /// Explicit path to the repository root.
         #[arg(short, long)]
@@ -59,7 +59,7 @@ enum Command {
         #[arg(short, long)]
         example: Option<String>,
 
-        /// Run the full canonical-quality checklist for the "Cougr Verified" badge.
+        /// Run the full canonical-quality checklist for the "Sunvest Verified" badge.
         #[arg(long)]
         verified: bool,
 
@@ -80,9 +80,9 @@ enum Command {
         output: Option<String>,
     },
 
-    /// Check the local development environment for Cougr prerequisites.
+    /// Check the local development environment for Sunvest prerequisites.
     ///
-    /// Verifies that all tools required to build and deploy a Cougr project
+    /// Verifies that all tools required to build and deploy a Sunvest project
     /// are installed and meet the minimum versions:
     ///
     ///   - cargo (sanity check)
@@ -94,7 +94,7 @@ enum Command {
     /// non-zero if any check fails.
     Doctor,
 
-    /// Create a new Cougr game contract crate.
+    /// Create a new Sunvest game contract crate.
     New {
         /// Name of the project. Becomes the crate name and the directory name.
         name: String,
@@ -108,7 +108,7 @@ enum Command {
         path: Option<std::path::PathBuf>,
     },
 
-    /// Export a studio turn-based config using the `cougr new` template path.
+    /// Export a studio turn-based config using the `Sunvest new` template path.
     Export {
         /// Name of the generated project.
         name: String,
@@ -122,7 +122,7 @@ enum Command {
         path: Option<std::path::PathBuf>,
     },
 
-    /// Add an embedded capability to the current Cougr project.
+    /// Add an embedded capability to the current Sunvest project.
     Add {
         /// Piece name, such as `session-auth` or `standards/pausable`.
         piece: Option<String>,

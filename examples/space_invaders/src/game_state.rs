@@ -3,14 +3,14 @@
 //! This module defines all the data structures needed to represent
 //! the game state on-chain using Soroban's storage.
 //!
-//! **Cougr-Core Integration**: This module demonstrates how to use
-//! cougr-core's ECS components for game entity data management.
+//! **Sunvest-Core Integration**: This module demonstrates how to use
+//! Sunvest-core's ECS components for game entity data management.
 
 use soroban_sdk::contracttype;
 
-// Import cougr-core Position component for entity position tracking
-// This demonstrates proper integration of cougr-core into game logic
-pub use cougr_core::Position as CougrPosition;
+// Import Sunvest-core Position component for entity position tracking
+// This demonstrates proper integration of Sunvest-core into game logic
+pub use Sunvest_core::Position as SunvestPosition;
 
 /// Direction for ship movement
 #[contracttype]
@@ -45,8 +45,8 @@ impl InvaderType {
     }
 }
 
-/// Entity position component - wraps cougr-core's Position
-/// This demonstrates the ECS component pattern from cougr-core
+/// Entity position component - wraps Sunvest-core's Position
+/// This demonstrates the ECS component pattern from Sunvest-core
 #[contracttype]
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct EntityPosition {
@@ -61,22 +61,22 @@ impl EntityPosition {
         Self { x, y }
     }
 
-    /// Convert to cougr-core Position for ECS integration
-    pub fn to_cougr_position(&self) -> CougrPosition {
-        CougrPosition {
+    /// Convert to Sunvest-core Position for ECS integration
+    pub fn to_Sunvest_position(&self) -> SunvestPosition {
+        SunvestPosition {
             x: self.x,
             y: self.y,
         }
     }
 
-    /// Create from cougr-core Position
-    pub fn from_cougr_position(pos: &CougrPosition) -> Self {
+    /// Create from Sunvest-core Position
+    pub fn from_Sunvest_position(pos: &SunvestPosition) -> Self {
         Self { x: pos.x, y: pos.y }
     }
 }
 
 /// Velocity component for moving entities
-/// Follows cougr-core's ECS component pattern
+/// Follows Sunvest-core's ECS component pattern
 #[contracttype]
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Velocity {
@@ -99,7 +99,7 @@ impl Velocity {
 }
 
 /// Health component for entities that can be damaged
-/// Follows cougr-core's ECS component pattern
+/// Follows Sunvest-core's ECS component pattern
 #[contracttype]
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Health {
@@ -132,11 +132,11 @@ impl Health {
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct Invader {
-    /// Position component (cougr-core pattern)
+    /// Position component (Sunvest-core pattern)
     pub position: EntityPosition,
     /// Type of invader
     pub invader_type: InvaderType,
-    /// Health component (cougr-core pattern)
+    /// Health component (Sunvest-core pattern)
     pub health: Health,
     /// Whether the invader is still alive
     pub active: bool,
@@ -168,9 +168,9 @@ impl Invader {
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct Bullet {
-    /// Position component (cougr-core pattern)
+    /// Position component (Sunvest-core pattern)
     pub position: EntityPosition,
-    /// Velocity component (cougr-core pattern)
+    /// Velocity component (Sunvest-core pattern)
     pub velocity: Velocity,
     /// Whether the bullet is still active
     pub active: bool,
@@ -215,7 +215,7 @@ impl Bullet {
 #[contracttype]
 #[derive(Clone, Debug)]
 pub struct Ship {
-    /// Position component (cougr-core pattern)
+    /// Position component (Sunvest-core pattern)
     pub position: EntityPosition,
     /// Health component (lives)
     pub health: Health,
@@ -325,8 +325,8 @@ pub enum DataKey {
     EnemyBullets,
     /// Flag indicating if game has been initialized
     Initialized,
-    /// Count of cougr-core entities (demonstrates ECS integration)
+    /// Count of Sunvest-core entities (demonstrates ECS integration)
     EntityCount,
-    /// Cougr-core World state (serialized)
+    /// Sunvest-core World state (serialized)
     WorldState,
 }

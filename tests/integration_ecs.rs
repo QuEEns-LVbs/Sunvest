@@ -2,8 +2,8 @@
 //!
 //! Tests full game-loop patterns: spawn -> add components -> run systems -> query -> verify.
 
-use cougr_core::scheduler::SimpleScheduler;
-use cougr_core::{
+use Sunvest_core::scheduler::SimpleScheduler;
+use Sunvest_core::{
     query::SimpleQueryCache, CommandQueue, ComponentStorage, GameApp, Plugin, SimpleWorld,
 };
 use soroban_sdk::{symbol_short, Bytes, Env};

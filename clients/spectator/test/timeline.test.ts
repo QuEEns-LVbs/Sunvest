@@ -147,6 +147,6 @@ test('ReplayTimeline formats state log and full log cleanly', () => {
   assert.match(singleLog, /Turn State: moves=0/);
 
   const fullLog = timeline.formatFullLog();
-  assert.match(fullLog, /COUGR SPECTATOR REPLAY TIMELINE/);
+  assert.match(fullLog, /Sunvest SPECTATOR REPLAY TIMELINE/);
   assert.match(fullLog, /Outcome: X Wins!/);
 });

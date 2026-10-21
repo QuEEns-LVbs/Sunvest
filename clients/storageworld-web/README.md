@@ -1,6 +1,6 @@
 # clients/storageworld-web
 
-Freighter web client for the **storageworld** Cougr template.
+Freighter web client for the **storageworld** Sunvest template.
 
 Reads a StorageWorld-backed match directly from Soroban RPC and submits moves
 signed by the connected Freighter wallet. Two entities are rendered so that a
@@ -12,8 +12,8 @@ visible in the UI after each move.
 ## Template name caveat
 
 This client is built against the interface documented in
-[issue #330](https://github.com/salazarsebas/Cougr/issues/330) and
-[PR #358](https://github.com/salazarsebas/Cougr/pull/358), which have **not**
+[issue #330](https://github.com/salazarsebas/Sunvest/issues/330) and
+[PR #358](https://github.com/salazarsebas/Sunvest/pull/358), which have **not**
 merged to `main` as of the commit this client was written against. The template
 working name is **storageworld**. If PR #358 lands under a different name or
 directory, update the following before deploying:
@@ -48,8 +48,8 @@ Once PR #358 merges and the `storageworld` template is available on `main`:
 
 ```bash
 # Scaffold a new game from the template
-cargo install cougr-cli
-cougr new my-storageworld-game --template storageworld
+cargo install Sunvest-cli
+Sunvest new my-storageworld-game --template storageworld
 cd my-storageworld-game
 
 # Build and deploy to Testnet

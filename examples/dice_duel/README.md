@@ -44,7 +44,7 @@ Dice duel config and player roll history are stored in **Instance Storage** on-c
 2. **Roll**: Players roll dice off-chain and calculate proof.
 3. **Submit**: Players call `submit_roll` to verify and record the roll on-chain.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `circuits::fair_dice`: Implements the dice roll verification boundary specifications.
 - `zk::Groth16Proof`: Holds proof payload.

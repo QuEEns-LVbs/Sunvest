@@ -1,6 +1,6 @@
 # Reference
 
-The **Reference** section contains low-level documentation for Cougr's modules, the API surface, and architectural decision records.
+The **Reference** section contains low-level documentation for Sunvest's modules, the API surface, and architectural decision records.
 
 | Document | Description |
 |---|---|
@@ -11,8 +11,8 @@ The **Reference** section contains low-level documentation for Cougr's modules, 
 | [Feature Flags](FEATURE_FLAGS.md) | `hazmat-crypto`, `testutils`, `debug` - what each enables |
 | [Performance Guide](PERFORMANCE.md) | Resource cost intuition, benchmarks, optimization patterns |
 | [API Contract](API_CONTRACT.md) | Public API guarantees and stability promises |
-| [Compatibility Promises](COMPATIBILITY_PROMISES.md) | What Cougr will and won't break between releases |
-| [Migration Guide](MIGRATION_GUIDE.md) | How to update your game for new cougr-core versions |
+| [Compatibility Promises](COMPATIBILITY_PROMISES.md) | What Sunvest will and won't break between releases |
+| [Migration Guide](MIGRATION_GUIDE.md) | How to update your game for new Sunvest-core versions |
 | [CLI Reference](cli-reference.md) | 🔜 Ships with the CLI |
 | [Client SDK Reference](sdk-reference.md) | 🔜 Ships with the TypeScript SDK |
 | [ADRs](adr/README.md) | Architecture Decision Records |

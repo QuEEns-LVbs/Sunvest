@@ -3,7 +3,7 @@
 //! Tests session key lifecycle, BatchBuilder with MockAccount,
 //! SessionStorage persistence, recovery flow, and DeviceManager.
 
-use cougr_core::accounts::{
+use Sunvest_core::accounts::{
     AccountError, DeviceManager, DevicePolicy, MultiDeviceProvider, RecoverableAccount,
     RecoveryConfig, RecoveryProvider, SessionKey, SessionScope, SessionStorage,
 };

@@ -1,7 +1,7 @@
 use crate::components::{Direction, DirectionComponent, Food, Position, SnakeSegment};
-use cougr_core::component::ComponentTrait;
-use cougr_core::simple_world::{EntityId, SimpleWorld};
-use cougr_core::SimpleQueryBuilder;
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::simple_world::{EntityId, SimpleWorld};
+use Sunvest_core::SimpleQueryBuilder;
 use soroban_sdk::{symbol_short, Env, Vec};
 
 /// Segment data for sorting (entity_id, index, x, y)

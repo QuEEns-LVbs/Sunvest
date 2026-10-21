@@ -1,12 +1,12 @@
 # Getting Started
 
-> **This page is synced from the main Cougr repository.** To edit it, open a PR against [`salazarsebas/Cougr`](https://github.com/salazarsebas/Cougr).
+> **This page is synced from the main Sunvest repository.** To edit it, open a PR against [`salazarsebas/Sunvest`](https://github.com/salazarsebas/Sunvest).
 
 ---
 
 ## Prerequisites
 
-Before you can build a Cougr game, you need the following tools installed:
+Before you can build a Sunvest game, you need the following tools installed:
 
 | Tool | Install command |
 |---|---|
@@ -17,8 +17,8 @@ Before you can build a Cougr game, you need the following tools installed:
 ## Clone and run the starter example
 
 ```bash
-git clone https://github.com/salazarsebas/Cougr
-cd Cougr/examples/spawn_and_move
+git clone https://github.com/salazarsebas/Sunvest
+cd Sunvest/examples/spawn_and_move
 cargo test
 ```
 

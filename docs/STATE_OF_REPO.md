@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document is a high-signal status snapshot of Cougr after the `1.0.0`
+This document is a high-signal status snapshot of Sunvest after the `1.0.0`
 publication.
 
 It is meant to answer:
@@ -15,7 +15,7 @@ It is meant to answer:
 
 Published crate:
 
-- https://crates.io/crates/cougr-core
+- https://crates.io/crates/Sunvest-core
 
 The current defended product story is:
 

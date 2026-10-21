@@ -6,11 +6,11 @@ Accepted
 
 ## Context
 
-Cougr exposes a broad API. Without curation, adopters can easily mistake public visibility for stable-contract inclusion.
+Sunvest exposes a broad API. Without curation, adopters can easily mistake public visibility for stable-contract inclusion.
 
 ## Decision
 
-Cougr keeps a curated onboarding path at the crate root and explicitly separates:
+Sunvest keeps a curated onboarding path at the crate root and explicitly separates:
 
 - root-level ECS onboarding re-exports
 - `standards` as a Stable namespace

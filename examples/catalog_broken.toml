@@ -4,41 +4,41 @@
 #  - Invalid category
 #  - Invalid maturity
 #  - Nonexistent directory
-#  - Empty cougr_features
+#  - Empty Sunvest_features
 #  - Nonexistent screenshot
 
 [example.missing_name]
 category = "arcade"
 maturity = "canonical"
-cougr_features = ["ecs"]
+Sunvest_features = ["ecs"]
 
 [example.bad_category]
 name = "tic_tac_toe"
 category = "sports"
 maturity = "canonical"
-cougr_features = ["ecs"]
+Sunvest_features = ["ecs"]
 
 [example.bad_maturity]
 name = "snake"
 category = "arcade"
 maturity = "obsolete"
-cougr_features = ["ecs"]
+Sunvest_features = ["ecs"]
 
 [example.nonexistent_dir]
 name = "this_does_not_exist"
 category = "other"
 maturity = "canonical"
-cougr_features = ["ecs"]
+Sunvest_features = ["ecs"]
 
 [example.empty_features]
 name = "spawn_and_move"
 category = "other"
 maturity = "canonical"
-cougr_features = []
+Sunvest_features = []
 
 [example.missing_screenshot]
 name = "battleship"
 category = "hidden-information"
 maturity = "canonical"
-cougr_features = ["privacy"]
+Sunvest_features = ["privacy"]
 screenshot = "screenshots/ghost.png"

@@ -1,6 +1,6 @@
 use soroban_sdk::contracterror;
 
-/// Error types for the Cougr ZK subsystem.
+/// Error types for the Sunvest ZK subsystem.
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
 #[repr(u32)]

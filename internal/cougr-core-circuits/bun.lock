@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "cougr-core-circuits-toolchain",
+      "name": "Sunvest-core-circuits-toolchain",
       "devDependencies": {
         "circomlib": "2.0.5",
         "circomlibjs": "0.1.7",

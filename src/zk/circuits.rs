@@ -12,8 +12,8 @@ use super::types::{Groth16Proof, Scalar, VerificationKey};
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::zk::{G1Point, G2Point};
-/// use cougr_core::zk::experimental::{Groth16Proof, MovementCircuit, VerificationKey};
+/// use Sunvest_core::zk::{G1Point, G2Point};
+/// use Sunvest_core::zk::experimental::{Groth16Proof, MovementCircuit, VerificationKey};
 /// use soroban_sdk::{BytesN, Env, Vec};
 ///
 /// let env = Env::default();
@@ -33,7 +33,7 @@ use super::types::{Groth16Proof, Scalar, VerificationKey};
 /// let proof = Groth16Proof { a: g1.clone(), b: vk.beta.clone(), c: g1 };
 /// let circuit = MovementCircuit::new(vk, 10);
 /// let _valid = circuit.verify_move(&env, &proof, 0, 0, 3, 4)?;
-/// # Ok::<(), cougr_core::zk::ZKError>(())
+/// # Ok::<(), Sunvest_core::zk::ZKError>(())
 /// ```
 pub struct MovementCircuit {
     pub vk: VerificationKey,
@@ -201,8 +201,8 @@ impl TurnSequenceCircuit {
 ///
 /// # Example
 /// ```no_run
-/// use cougr_core::zk::{G1Point, G2Point};
-/// use cougr_core::zk::experimental::{
+/// use Sunvest_core::zk::{G1Point, G2Point};
+/// use Sunvest_core::zk::experimental::{
 ///     bytes32_to_scalar, u32_to_scalar, CustomCircuit, GameCircuit, Groth16Proof, VerificationKey,
 /// };
 /// use soroban_sdk::{BytesN, Env, Vec};
@@ -226,7 +226,7 @@ impl TurnSequenceCircuit {
 /// let circuit = CustomCircuit::new(vk, inputs);
 /// let proof = Groth16Proof { a: g1.clone(), b: circuit.verification_key().beta.clone(), c: g1 };
 /// let _valid = circuit.verify_with_inputs(&env, &proof, circuit.public_inputs())?;
-/// # Ok::<(), cougr_core::zk::ZKError>(())
+/// # Ok::<(), Sunvest_core::zk::ZKError>(())
 /// ```
 pub struct CustomCircuit {
     vk: VerificationKey,

@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
-  cougrEventFilter,
+  SunvestEventFilter,
   createGetEvents,
   type SorobanRpcContractEvent,
 } from '../src/index.ts';
@@ -39,7 +39,7 @@ function capture() {
 test('createGetEvents posts a getEvents JSON-RPC call', async () => {
   const { calls, fetchLike } = capture();
   const getEvents = createGetEvents({ url: 'https://rpc.example', fetch: fetchLike });
-  const result = await getEvents({ startLedger: 400, filters: [cougrEventFilter()], limit: 50 });
+  const result = await getEvents({ startLedger: 400, filters: [SunvestEventFilter()], limit: 50 });
 
   assert.equal(result.latestLedger, 500);
   assert.equal(result.events.length, 1);

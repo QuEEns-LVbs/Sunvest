@@ -12,7 +12,7 @@
 
 #![cfg(feature = "testutils")]
 
-use cougr_core::accounts::passkey::{Secp256r1Key, Secp256r1Storage};
+use Sunvest_core::accounts::passkey::{Secp256r1Key, Secp256r1Storage};
 use soroban_sdk::{
     contract, contractimpl, symbol_short, testutils::Address as _, Address, Bytes, BytesN, Env,
 };
@@ -20,13 +20,13 @@ use soroban_sdk::{
 /// Committed vector file the TypeScript package also reads.
 const VECTORS: &str = include_str!("../packages/sdk-passkey/vectors/passkey-vectors.json");
 
-const RP_ID: &str = "cougr.test";
+const RP_ID: &str = "Sunvest.test";
 const AUTHENTICATOR_DATA: &str =
     "eaa0b50ba841022d6923e590d437995d33b44578283e596a28141f89a6ba61e00500000001";
 const CLIENT_DATA_JSON: &str = concat!(
     r#"{"type":"webauthn.get","challenge":"#,
     r#""AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8","#,
-    r#""origin":"https://cougr.test"}"#,
+    r#""origin":"https://Sunvest.test"}"#,
 );
 const CLIENT_DATA_HASH: &str = "dc242e782390c6cd5f5626eabd52486db5e916cd7905c388ccf6d75838ba0797";
 const MESSAGE_HEX: &str = concat!(
@@ -152,7 +152,7 @@ fn assertion_message_matches_the_typescript_mapper() {
     message.append(&Bytes::from_array(&env, &client_data_hash));
     let emitted = hex(&message.to_alloc_vec());
 
-    println!("cougr sdk-passkey message vector: {emitted}");
+    println!("Sunvest sdk-passkey message vector: {emitted}");
     assert_eq!(emitted, MESSAGE_HEX);
     assert!(
         VECTORS.contains(MESSAGE_HEX),
@@ -184,7 +184,7 @@ fn der_signatures_become_raw_coordinates() {
         (DER_SIGNATURE_TWO, RAW_SIGNATURE_TWO),
     ] {
         let emitted = hex(&der_to_raw(&unhex(der)).expect("vector signature must decode"));
-        println!("cougr sdk-passkey raw signature vector: {emitted}");
+        println!("Sunvest sdk-passkey raw signature vector: {emitted}");
         assert_eq!(emitted, raw);
         assert!(VECTORS.contains(raw), "the raw signature vector is stale");
     }

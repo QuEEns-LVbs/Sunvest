@@ -1,6 +1,6 @@
-//! Experimental privacy and proof-verification surface for Cougr.
+//! Experimental privacy and proof-verification surface for Sunvest.
 //!
-//! These exports remain intentionally outside Cougr's stable privacy promise.
+//! These exports remain intentionally outside Sunvest's stable privacy promise.
 
 pub use super::advanced::{
     apply_fog_of_war_transition, apply_state_channel_transition, close_state_channel,

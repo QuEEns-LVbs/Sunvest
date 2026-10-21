@@ -1,5 +1,5 @@
 use crate::components::*;
-use cougr_core::{ComponentTrait, SimpleWorld};
+use Sunvest_core::{ComponentTrait, SimpleWorld};
 use soroban_sdk::{symbol_short, Env};
 
 // Physics constants (scaled by 1000)
@@ -226,10 +226,10 @@ pub fn mode_system(world: &mut SimpleWorld, env: &Env) {
     }
 }
 
-/// Exercises the Cougr `GameApp` tick path for this transitional example.
+/// Exercises the Sunvest `GameApp` tick path for this transitional example.
 #[cfg(test)]
 pub fn run_gameapp_tick(env: &Env) {
-    use cougr_core::{GameApp, ScheduleStage, SystemConfig};
+    use Sunvest_core::{GameApp, ScheduleStage, SystemConfig};
 
     let mut app = GameApp::new(env);
     app.add_system_with_config(

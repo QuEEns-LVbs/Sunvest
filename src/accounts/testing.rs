@@ -2,7 +2,7 @@ use soroban_sdk::{Address, Env};
 
 use super::error::AccountError;
 use super::intent::{AuthMethod, AuthResult, SignedIntent};
-use super::traits::{CougrAccount, IntentAccount};
+use super::traits::{SunvestAccount, IntentAccount};
 use super::types::{AccountCapabilities, GameAction};
 
 /// A mock account for testing that always authorizes actions.
@@ -38,7 +38,7 @@ impl MockAccount {
     }
 }
 
-impl CougrAccount for MockAccount {
+impl SunvestAccount for MockAccount {
     fn address(&self) -> &Address {
         &self.address
     }

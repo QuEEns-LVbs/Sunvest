@@ -314,12 +314,12 @@ fn test_contract_hello() {
     assert_eq!(result, symbol_short!("world"));
 }
 
-// Integration test demonstrating cougr-core usage
+// Integration test demonstrating Sunvest-core usage
 #[test]
-fn test_cougr_core_integration() {
+fn test_Sunvest_core_integration() {
     let env = Env::default();
 
-    // Create a simple cougr-core world and persist a typed component.
+    // Create a simple Sunvest-core world and persist a typed component.
     let mut world = SimpleWorld::new(&env);
     let player = PlayerComponent::new(1, 2, 3);
     let player_entity_id = world.spawn_entity();

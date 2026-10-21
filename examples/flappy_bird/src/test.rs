@@ -2,7 +2,7 @@
 
 use super::*;
 
-use cougr_core::{GameApp, ScheduleStage, SimpleWorld, SystemConfig};
+use Sunvest_core::{GameApp, ScheduleStage, SimpleWorld, SystemConfig};
 use soroban_sdk::Env;
 
 #[test]

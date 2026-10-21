@@ -1,11 +1,11 @@
 # AI Dungeon Master Arena Example
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
 This example demonstrates a complex gameplay loop on Stellar/Soroban using:
 1.  **x402-style Paid Actions**: Premium encounters or rerolls purchased in-game via a request-driven model.
-2.  **stellar-zk (via Cougr-Core)**: Proof-backed validation of sensitive encounter progression and reward eligibility.
+2.  **stellar-zk (via Sunvest-Core)**: Proof-backed validation of sensitive encounter progression and reward eligibility.
 
 ## Features
 
@@ -26,7 +26,7 @@ The example follows an ECS-like structure (Entity Component System):
 
 ## stellar-zk Integration
 
-This contract uses `cougr-core::zk` which is built for high-performance on-chain verification compatible with `stellar-zk` generated circuits.
+This contract uses `Sunvest-core::zk` which is built for high-performance on-chain verification compatible with `stellar-zk` generated circuits.
 - The `verify_run_proof` function takes a `Groth16Proof` and public inputs.
 - It validates the proof against a stored `VerificationKey` (which would correspond to the circuit built for your arena logic).
 - Successful validation unlocks pending rewards and confirms floor progression.

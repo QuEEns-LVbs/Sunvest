@@ -1,4 +1,4 @@
-//! Shared context resolution for `cougr check` and `cougr check --verified`.
+//! Shared context resolution for `Sunvest check` and `Sunvest check --verified`.
 //!
 //! Determines the repository root and which examples to check, supporting
 //! auto-detection from cwd, explicit `--path`, and `--example` flags.

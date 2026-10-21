@@ -3,7 +3,7 @@ use soroban_sdk::{Address, Env};
 use super::error::AccountError;
 use super::intent::{AuthResult, SignedIntent};
 use super::kernel::AccountKernel;
-use super::traits::{CougrAccount, IntentAccount};
+use super::traits::{SunvestAccount, IntentAccount};
 use super::types::{AccountCapabilities, GameAction};
 
 /// A Classic Stellar account (G-address).
@@ -21,7 +21,7 @@ impl ClassicAccount {
     }
 }
 
-impl CougrAccount for ClassicAccount {
+impl SunvestAccount for ClassicAccount {
     fn address(&self) -> &Address {
         &self.address
     }

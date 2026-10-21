@@ -63,7 +63,7 @@ export default function App() {
   const finalize = () => { const problem = requirePlayer(); if (problem) { setError(problem); return; } void run(() => finalizeMatch(player), "Match finalised."); };
 
   return <main className="shell"><section className="card">
-    <p className="eyebrow">Cougr · checkpoint reference client</p>
+    <p className="eyebrow">Sunvest · checkpoint reference client</p>
     <h1>Checkpoint match</h1>
     <p className="muted">Direct RPC client for the checkpoint template. Ticks stay off chain; the contract stores a tick index, state hash, and score per checkpoint, with a dispute window.</p>
 

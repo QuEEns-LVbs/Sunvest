@@ -3,14 +3,14 @@ name = "geometry_dash"
 version = "0.1.0"
 edition = "2021"
 publish = false
-authors = ["Cougr Contributors"]
-description = "Geometry Dash on-chain game example using cougr-core ECS framework"
+authors = ["Sunvest Contributors"]
+description = "Geometry Dash on-chain game example using Sunvest-core ECS framework"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-cougr-core = "1.1.0"
+Sunvest-core = "1.1.0"
 soroban-sdk = "25.1.0"
 
 [dev-dependencies]

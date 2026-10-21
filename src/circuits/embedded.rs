@@ -1,6 +1,6 @@
 //! Pipeline-embedded test VKs and proofs for on-chain Groth16 verification.
 //!
-//! Regenerate via `internal/cougr-core-circuits`: `bun run pipeline`.
+//! Regenerate via `internal/Sunvest-core-circuits`: `bun run pipeline`.
 
 #[cfg(any(test, feature = "testutils"))]
 use soroban_sdk::BytesN;

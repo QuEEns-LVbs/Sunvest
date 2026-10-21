@@ -1,6 +1,6 @@
 use super::*;
-use cougr_core::circuits::{fair_dice, test_fixtures, CircuitId};
-use cougr_core::test::{GameHarness, Scenario};
+use Sunvest_core::circuits::{fair_dice, test_fixtures, CircuitId};
+use Sunvest_core::test::{GameHarness, Scenario};
 use soroban_sdk::{testutils::Address as _, Address, Env};
 
 #[test]

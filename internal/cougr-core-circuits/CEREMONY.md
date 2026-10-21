@@ -2,7 +2,7 @@
 
 ## Who this is for
 
-Anyone preparing to deploy a Cougr ZK game circuit (`hidden_cards`, `fog_of_war`, `fair_dice`, `sealed_bid`, or a
+Anyone preparing to deploy a Sunvest ZK game circuit (`hidden_cards`, `fog_of_war`, `fair_dice`, `sealed_bid`, or a
 custom circuit built the same way) to **mainnet**. If you are only running examples, tests, or a testnet demo, you
 do not need this document - `scripts/setup.sh` already gives you a working test key.
 
@@ -59,7 +59,7 @@ project. Whichever you choose:
 
 ## Phase 2: Circuit-specific ceremony
 
-This is the phase that's specific to each Cougr circuit and is what `scripts/setup.sh` currently does with one
+This is the phase that's specific to each Sunvest circuit and is what `scripts/setup.sh` currently does with one
 contributor. For production, replace that single step with a real multi-party ceremony:
 
 ### 1. Initialize

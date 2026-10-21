@@ -54,7 +54,7 @@ jobs:
             'FAIL: example.bad_category: invalid category "sports"'
             'FAIL: example.bad_maturity: invalid maturity "obsolete"'
             'FAIL: example.nonexistent_dir: example directory "this_does_not_exist"'
-            'FAIL: example.empty_features: cougr_features must be a non-empty list'
+            'FAIL: example.empty_features: Sunvest_features must be a non-empty list'
             'FAIL: example.missing_screenshot: screenshot file "screenshots/ghost.png" not found'
             'FAIL: Missing required canonical example:'
           )

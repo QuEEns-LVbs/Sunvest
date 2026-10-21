@@ -1,15 +1,15 @@
-//! Cougr components for the Sokoban puzzle.
+//! Sunvest components for the Sokoban puzzle.
 //!
-//! `Position` is re-exported from `cougr_core::component` rather than
+//! `Position` is re-exported from `Sunvest_core::component` rather than
 //! redefined here. The gameplay-specific components below are small markers
 //! so the archetypes really do differ by signature: a wall, a crate and a
 //! goal each live in their own archetype, and `OnGoal` moves a crate into a
 //! fourth archetype the moment it settles on a goal tile.
 
-use cougr_core::{impl_component, impl_marker_component};
+use Sunvest_core::{impl_component, impl_marker_component};
 use soroban_sdk::contracttype;
 
-pub use cougr_core::component::Position;
+pub use Sunvest_core::component::Position;
 
 /// Marks the single entity the authorized caller controls with `push`.
 pub struct Player;

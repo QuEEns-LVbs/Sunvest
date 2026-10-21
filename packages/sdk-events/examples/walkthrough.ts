@@ -8,13 +8,13 @@
 import { readFileSync } from 'node:fs';
 
 import {
-  cougrEventFilter,
-  pageCougrEvents,
+  SunvestEventFilter,
+  pageSunvestEvents,
   resolveRichComponentUpdate,
   isRichComponentChanged,
   serializeCursor,
   parseCursor,
-  type CougrEventUpdate,
+  type SunvestEventUpdate,
   type GetEventsFn,
   type GetEventsRequest,
   type SorobanRpcContractEvent,
@@ -31,10 +31,10 @@ const fixtures = JSON.parse(
   readFileSync(new URL('../fixtures/events.json', import.meta.url), 'utf8'),
 ) as FixtureFile;
 
-// ── step 1: build a COUGR topic filter ───────────────────────────────────────
+// ── step 1: build a Sunvest topic filter ───────────────────────────────────────
 
 export function buildFilter(contractId: string) {
-  return cougrEventFilter({ contractIds: [contractId] });
+  return SunvestEventFilter({ contractIds: [contractId] });
 }
 
 // ── step 2: fake RPC server backed by fixture events ─────────────────────────
@@ -60,9 +60,9 @@ export function makeFixtureServer(): GetEventsFn {
 // ── step 3: page through events, persist/resume cursor ───────────────────────
 
 export interface WalkthroughResult {
-  page1Updates: CougrEventUpdate[];
+  page1Updates: SunvestEventUpdate[];
   resumedCursor: string;           // serialized cursor after page 1
-  page2Updates: CougrEventUpdate[];
+  page2Updates: SunvestEventUpdate[];
   richResolved: { componentType: string; entityId: number; value: unknown };
 }
 
@@ -72,7 +72,7 @@ export async function runWalkthrough(): Promise<WalkthroughResult> {
   const getEvents = makeFixtureServer();
 
   // ── page 1 ────────────────────────────────────────────────────────────────
-  const gen = pageCougrEvents(getEvents, {
+  const gen = pageSunvestEvents(getEvents, {
     filters: [filter],
     startLedger: 100,
     maxPages: 1,
@@ -85,7 +85,7 @@ export async function runWalkthrough(): Promise<WalkthroughResult> {
   const resumedCursor = serializeCursor(firstPage.cursor);
 
   // ── page 2: resume from persisted cursor ──────────────────────────────────
-  const gen2 = pageCougrEvents(getEvents, {
+  const gen2 = pageSunvestEvents(getEvents, {
     filters: [filter],
     cursor: parseCursor(resumedCursor),
     maxPages: 1,

@@ -112,7 +112,7 @@ test('a wrong origin is rejected', async () => {
         clientDataJSON: vectors.assertion.clientDataJSON,
         signatureHex: vectors.signatureVectors[0].derHex,
       },
-      { ...context, origin: 'https://cougr.test.evil.example' },
+      { ...context, origin: 'https://Sunvest.test.evil.example' },
     ),
     (error: unknown) => codeOf(error) === 'ORIGIN_MISMATCH',
   );

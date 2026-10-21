@@ -1,15 +1,15 @@
-//! session_arena - canonical Cougr session UX example.
+//! session_arena - canonical Sunvest session UX example.
 //!
 //! Flow: `approve_session` once → `tap` many times without wallet prompts →
 //! `renew_session` before expiry → `fallback_tap` when session is stale.
 
 #![no_std]
 
-use cougr_core::accounts::{
+use Sunvest_core::accounts::{
     GameAction, ReplayProtection, SessionBuilder, SessionStorage, SignedIntent,
 };
-use cougr_core::impl_component;
-use cougr_core::session::{ActiveSession, SessionManager};
+use Sunvest_core::impl_component;
+use Sunvest_core::session::{ActiveSession, SessionManager};
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Address, Env, Symbol};
 
 #[contracttype]

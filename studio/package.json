@@ -1,8 +1,8 @@
 {
-  "name": "cougr-studio",
+  "name": "Sunvest-studio",
   "version": "0.1.0",
   "private": true,
-  "description": "Cougr studio sandbox view: renders any legal TurnBasedConfig board, the Soroban finality wait, and RPC/friendbot error states against recorded fixtures.",
+  "description": "Sunvest studio sandbox view: renders any legal TurnBasedConfig board, the Soroban finality wait, and RPC/friendbot error states against recorded fixtures.",
   "type": "module",
   "exports": {
     ".": "./src/view.js",

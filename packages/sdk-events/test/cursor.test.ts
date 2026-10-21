@@ -5,8 +5,8 @@ import test from 'node:test';
 import {
   advanceCursor,
   newEventCursor,
-  pageCougrEvents,
-  type CougrEventPage,
+  pageSunvestEvents,
+  type SunvestEventPage,
   type EventCursor,
   type GetEventsFn,
   type GetEventsRequest,
@@ -71,7 +71,7 @@ test('advanceCursor falls back to the last event paging token', () => {
   assert.equal(next.ledger, 42);
 });
 
-test('pageCougrEvents decodes pages and can be paused after one page', async () => {
+test('pageSunvestEvents decodes pages and can be paused after one page', async () => {
   const first = page(
     [rpcEvent({ ledger: 100, pagingToken: '100-1', id: '100-1' }), rpcEvent({ ledger: 101, pagingToken: '101-1', id: '101-1' })],
     'page-1',
@@ -79,8 +79,8 @@ test('pageCougrEvents decodes pages and can be paused after one page', async () 
   const second = page([rpcEvent({ ledger: 102, pagingToken: '102-1', id: '102-1' })], 'page-2');
   const { getEvents, requests } = fakeServer([first, second]);
 
-  const iterator = pageCougrEvents(getEvents, { startLedger: 100, maxPages: 2 });
-  const firstPage = (await iterator.next()).value as CougrEventPage;
+  const iterator = pageSunvestEvents(getEvents, { startLedger: 100, maxPages: 2 });
+  const firstPage = (await iterator.next()).value as SunvestEventPage;
   assert.equal(firstPage.updates.length, 2);
   assert.equal(firstPage.cursor.pagingToken, 'page-1');
   assert.equal(requests[0]?.startLedger, 100);
@@ -90,8 +90,8 @@ test('pageCougrEvents decodes pages and can be paused after one page', async () 
   const persisted = JSON.parse(JSON.stringify(firstPage.cursor)) as EventCursor;
 
   // Resume from the persisted cursor with a fresh generator.
-  const resumed = pageCougrEvents(getEvents, { cursor: persisted, maxPages: 1 });
-  const secondPage = (await resumed.next()).value as CougrEventPage;
+  const resumed = pageSunvestEvents(getEvents, { cursor: persisted, maxPages: 1 });
+  const secondPage = (await resumed.next()).value as SunvestEventPage;
   assert.equal(requests[1]?.cursor, 'page-1');
   assert.equal(requests[1]?.startLedger, undefined);
   assert.equal(secondPage.updates.length, 1);
@@ -99,15 +99,15 @@ test('pageCougrEvents decodes pages and can be paused after one page', async () 
   assert.equal(secondPage.cursor.pagingToken, 'page-2');
 });
 
-test('pageCougrEvents skips paging tokens the client already saw', async () => {
+test('pageSunvestEvents skips paging tokens the client already saw', async () => {
   const repeated = rpcEvent({ ledger: 100, pagingToken: '100-1', id: '100-1' });
   const { getEvents } = fakeServer([
     page([repeated], undefined),
     page([repeated, rpcEvent({ ledger: 101, pagingToken: '101-1', id: '101-1' })], undefined),
   ]);
   const seen = new Set<string>(['100-1']);
-  const pages: CougrEventPage[] = [];
-  for await (const eventPage of pageCougrEvents(getEvents, { startLedger: 100, maxPages: 2, seenPagingTokens: seen })) {
+  const pages: SunvestEventPage[] = [];
+  for await (const eventPage of pageSunvestEvents(getEvents, { startLedger: 100, maxPages: 2, seenPagingTokens: seen })) {
     pages.push(eventPage);
   }
   assert.equal(pages[0]?.updates.length, 0);
@@ -115,11 +115,11 @@ test('pageCougrEvents skips paging tokens the client already saw', async () => {
   assert.equal(pages[1]?.updates[0]?.pagingToken, '101-1');
 });
 
-test('pageCougrEvents stops when the stream stops advancing', async () => {
+test('pageSunvestEvents stops when the stream stops advancing', async () => {
   const stuck = rpcEvent({ ledger: 100, pagingToken: '100-1', id: '100-1' });
   const { getEvents, requests } = fakeServer([page([stuck], '100-1'), page([stuck], '100-1')]);
-  const pages: CougrEventPage[] = [];
-  for await (const eventPage of pageCougrEvents(getEvents, { startLedger: 100 })) {
+  const pages: SunvestEventPage[] = [];
+  for await (const eventPage of pageSunvestEvents(getEvents, { startLedger: 100 })) {
     pages.push(eventPage);
   }
   // Second page yields the same token, so the loop must not spin forever.
@@ -127,9 +127,9 @@ test('pageCougrEvents stops when the stream stops advancing', async () => {
   assert.equal(requests.length, 2);
 });
 
-test('pageCougrEvents requires a start ledger or cursor', async () => {
+test('pageSunvestEvents requires a start ledger or cursor', async () => {
   const { getEvents } = fakeServer([]);
-  const iterator = pageCougrEvents(getEvents, {});
+  const iterator = pageSunvestEvents(getEvents, {});
   await assert.rejects(async () => {
     await iterator.next();
   }, /startLedger or a resume cursor/);

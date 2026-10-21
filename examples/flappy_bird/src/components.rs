@@ -1,6 +1,6 @@
 use soroban_sdk::{contracttype, Bytes, Env};
 
-/// ComponentTrait from cougr-core
+/// ComponentTrait from Sunvest-core
 /// Components must implement serialization for on-chain storage
 pub trait ComponentTrait {
     fn serialize(&self, env: &Env) -> Bytes;

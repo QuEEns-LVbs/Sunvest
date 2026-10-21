@@ -1,6 +1,6 @@
 import {
-  decodeCougrEvents,
-  type CougrEventUpdate,
+  decodeSunvestEvents,
+  type SunvestEventUpdate,
   type RichComponentChangedUpdate,
   type SorobanRpcEventsPage,
 } from './events.ts';
@@ -53,7 +53,7 @@ export function parseCursor(serialized: string): EventCursor {
 export function advanceCursor(
   cursor: EventCursor,
   page: SorobanRpcEventsPage,
-  updates: readonly CougrEventUpdate[] = decodeCougrEvents(page.events),
+  updates: readonly SunvestEventUpdate[] = decodeSunvestEvents(page.events),
 ): EventCursor {
   const lastUpdate = updates.length > 0 ? updates[updates.length - 1] : undefined;
   const pagingToken = page.cursor ?? lastUpdate?.pagingToken ?? cursor.pagingToken;
@@ -61,7 +61,7 @@ export function advanceCursor(
   return newEventCursor({ pagingToken, ledger });
 }
 
-export interface CougrPageOptions {
+export interface SunvestPageOptions {
   /** Filter passed through to `getEvents`; defaults to all three families. */
   filters?: SorobanEventFilter[];
   /** Required on a cold start; ignored when `cursor.pagingToken` is set. */
@@ -74,9 +74,9 @@ export interface CougrPageOptions {
   seenPagingTokens?: Set<string>;
 }
 
-export interface CougrEventPage {
-  /** New, deduplicated Cougr updates from this page. */
-  updates: CougrEventUpdate[];
+export interface SunvestEventPage {
+  /** New, deduplicated Sunvest updates from this page. */
+  updates: SunvestEventUpdate[];
   /** Persist this and pass it back to resume exactly after this page. */
   cursor: EventCursor;
   latestLedger: number;
@@ -85,16 +85,16 @@ export interface CougrEventPage {
 }
 
 /**
- * Walk `getEvents` page by page, decoding each page into typed Cougr updates.
+ * Walk `getEvents` page by page, decoding each page into typed Sunvest updates.
  *
  * The generator yields after every page so a consumer can persist
  * `page.cursor` before asking for more work. Breaking out of the loop is safe:
  * resuming with the yielded cursor continues from the next page.
  */
-export async function* pageCougrEvents(
+export async function* pageSunvestEvents(
   getEvents: GetEventsFn,
-  options: CougrPageOptions = {},
-): AsyncGenerator<CougrEventPage, void, void> {
+  options: SunvestPageOptions = {},
+): AsyncGenerator<SunvestEventPage, void, void> {
   let cursor = newEventCursor(options.cursor ?? { ledger: options.startLedger ?? null });
   const seen = options.seenPagingTokens ?? new Set<string>();
   let pages = 0;
@@ -109,12 +109,12 @@ export async function* pageCougrEvents(
     } else if (cursor.ledger !== null) {
       request.startLedger = cursor.ledger;
     } else {
-      throw new TypeError('pageCougrEvents needs a startLedger or a resume cursor');
+      throw new TypeError('pageSunvestEvents needs a startLedger or a resume cursor');
     }
 
     const page = await getEvents(request);
-    const decoded = decodeCougrEvents(page.events);
-    const fresh: CougrEventUpdate[] = [];
+    const decoded = decodeSunvestEvents(page.events);
+    const fresh: SunvestEventUpdate[] = [];
     for (const update of decoded) {
       if (seen.has(update.pagingToken)) continue;
       seen.add(update.pagingToken);
@@ -145,7 +145,7 @@ export type RichComponentReader<T> = (ref: RichComponentRef) => Promise<T>;
  * out of the event.
  *
  * Rich components live in the contract's instance storage, keyed by
- * `(cougr_rc, entity_id, component_type)`. That key is an implementation
+ * `(Sunvest_rc, entity_id, component_type)`. That key is an implementation
  * detail, so the SDK does not guess it: pass a reader that calls the
  * contract's own read system (or `getLedgerEntries` with the key you know).
  */

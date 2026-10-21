@@ -4,19 +4,19 @@
 //! public entrypoints remain available and that stable versus experimental
 //! namespaces stay explicit.
 
-use cougr_core::accounts::{
+use Sunvest_core::accounts::{
     verify_secp256r1, ClassicAccount, GameAction, Secp256r1Key, Secp256r1Storage, SessionBuilder,
 };
-use cougr_core::standards::{
+use Sunvest_core::standards::{
     AccessControl, BatchExecutor, DelayedExecutionPolicy, ExecutionGuard, Ownable, Ownable2Step,
     Pausable, RecoveryGuard, StandardsError,
 };
-use cougr_core::zk::experimental::{
+use Sunvest_core::zk::experimental::{
     bytes32_to_scalar, open_state_channel, u32_to_scalar, CustomCircuit, FogOfWarSnapshot,
     GameCircuit, MovementCircuit, RecursiveProofLayout,
 };
-use cougr_core::zk::stable::{encode_commit_reveal, CommitReveal, COMMIT_REVEAL_TYPE};
-use cougr_core::{
+use Sunvest_core::zk::stable::{encode_commit_reveal, CommitReveal, COMMIT_REVEAL_TYPE};
+use Sunvest_core::{
     ArchetypeQueryBuilder, GameApp, Position, QueryStorage, RuntimeWorld, RuntimeWorldMut,
     ScheduleStage, SimpleQueryBuilder, SimpleWorld, SystemConfig, WorldBackend,
 };
@@ -61,8 +61,8 @@ fn sanctioned_root_api_supports_game_app_and_simple_query_flow() {
 #[test]
 fn sanctioned_app_module_supports_runtime_registration_flow() {
     let env = Env::default();
-    let mut app = cougr_core::app::GameApp::new(&env);
-    app.add_systems(cougr_core::app::named_context_system(
+    let mut app = Sunvest_core::app::GameApp::new(&env);
+    app.add_systems(Sunvest_core::app::named_context_system(
         "spawn_player",
         |context| {
             let entity = context.world_mut().spawn_entity();
@@ -75,7 +75,7 @@ fn sanctioned_app_module_supports_runtime_registration_flow() {
 
     app.run(&env).unwrap();
 
-    let query = cougr_core::app::SimpleQueryBuilder::new(&env)
+    let query = Sunvest_core::app::SimpleQueryBuilder::new(&env)
         .with_component(symbol_short!("position"))
         .build();
     assert_eq!(query.execute(app.world(), &env).len(), 1);
@@ -84,17 +84,17 @@ fn sanctioned_app_module_supports_runtime_registration_flow() {
 #[test]
 fn sanctioned_app_module_supports_grouped_system_registration() {
     let env = Env::default();
-    let mut app = cougr_core::app::GameApp::new(&env);
+    let mut app = Sunvest_core::app::GameApp::new(&env);
 
     app.add_systems((
-        cougr_core::app::named_system("spawn_player", |world: &mut SimpleWorld, env: &Env| {
+        Sunvest_core::app::named_system("spawn_player", |world: &mut SimpleWorld, env: &Env| {
             let entity = world.spawn_entity();
             world.set_typed(env, entity, &Position::new(1, 1));
         })
         .in_stage(ScheduleStage::Update)
         .in_set("spawn"),
-        cougr_core::app::named_context_system("mark_spawned", |context| {
-            let query = cougr_core::app::SimpleQueryBuilder::new(context.env())
+        Sunvest_core::app::named_context_system("mark_spawned", |context| {
+            let query = Sunvest_core::app::SimpleQueryBuilder::new(context.env())
                 .with_component(symbol_short!("position"))
                 .build();
             let entities = query.execute(context.world(), context.env());
@@ -114,7 +114,7 @@ fn sanctioned_app_module_supports_grouped_system_registration() {
 
     app.run(&env).unwrap();
 
-    let query = cougr_core::app::SimpleQueryBuilder::new(&env)
+    let query = Sunvest_core::app::SimpleQueryBuilder::new(&env)
         .with_component(symbol_short!("position"))
         .with_any_component(symbol_short!("tag"))
         .include_sparse()
@@ -125,7 +125,7 @@ fn sanctioned_app_module_supports_grouped_system_registration() {
 #[test]
 fn sanctioned_root_api_supports_archetype_query_builder() {
     let env = Env::default();
-    let mut world = cougr_core::ArchetypeWorld::new(&env);
+    let mut world = Sunvest_core::ArchetypeWorld::new(&env);
     let entity = world.spawn_entity();
     world.set_typed(&env, entity, &Position::new(9, 9));
 
@@ -150,7 +150,7 @@ fn exercise_runtime_world_mut<W: RuntimeWorldMut>(world: &mut W, env: &Env) {
 fn sanctioned_root_api_exposes_shared_runtime_mut_contract() {
     let env = Env::default();
     let mut simple = SimpleWorld::new(&env);
-    let mut archetype = cougr_core::ArchetypeWorld::new(&env);
+    let mut archetype = Sunvest_core::ArchetypeWorld::new(&env);
 
     exercise_runtime_world_mut(&mut simple, &env);
     exercise_runtime_world_mut(&mut archetype, &env);
@@ -161,7 +161,7 @@ fn sanctioned_root_api_supports_plugin_groups() {
     struct NoopA;
     struct NoopB;
 
-    impl cougr_core::Plugin for NoopA {
+    impl Sunvest_core::Plugin for NoopA {
         fn name(&self) -> &'static str {
             "noop_a"
         }
@@ -169,7 +169,7 @@ fn sanctioned_root_api_supports_plugin_groups() {
         fn build(&self, _app: &mut GameApp) {}
     }
 
-    impl cougr_core::Plugin for NoopB {
+    impl Sunvest_core::Plugin for NoopB {
         fn name(&self) -> &'static str {
             "noop_b"
         }
@@ -199,32 +199,32 @@ fn stable_zk_namespace_exposes_stable_commit_reveal_flow() {
 fn privacy_namespace_exposes_split_maturity_explicitly() {
     let env = Env::default();
     let commitment = BytesN::from_array(&env, &[3u8; 32]);
-    let encoded = cougr_core::privacy::stable::encode_commit_reveal(&env, &commitment, 55, false);
+    let encoded = Sunvest_core::privacy::stable::encode_commit_reveal(&env, &commitment, 55, false);
     assert_eq!(encoded.len(), 41);
 
     let _exp_fn: fn(
         &Env,
-        &cougr_core::privacy::VerificationKey,
-        &cougr_core::privacy::Groth16Proof,
-        &[cougr_core::privacy::Scalar],
-    ) -> Result<bool, cougr_core::privacy::ZKError> =
-        cougr_core::privacy::experimental::verify_groth16;
+        &Sunvest_core::privacy::VerificationKey,
+        &Sunvest_core::privacy::Groth16Proof,
+        &[Sunvest_core::privacy::Scalar],
+    ) -> Result<bool, Sunvest_core::privacy::ZKError> =
+        Sunvest_core::privacy::experimental::verify_groth16;
 }
 
 #[test]
 fn experimental_zk_namespace_exposes_proof_helpers_explicitly() {
     let env = Env::default();
-    let g1 = cougr_core::zk::G1Point {
+    let g1 = Sunvest_core::zk::G1Point {
         bytes: BytesN::from_array(&env, &[0u8; 64]),
     };
-    let g2 = cougr_core::zk::G2Point {
+    let g2 = Sunvest_core::zk::G2Point {
         bytes: BytesN::from_array(&env, &[0u8; 128]),
     };
     let mut ic = Vec::new(&env);
     for _ in 0..6 {
         ic.push_back(g1.clone());
     }
-    let vk = cougr_core::zk::VerificationKey {
+    let vk = Sunvest_core::zk::VerificationKey {
         alpha: g1.clone(),
         beta: g2.clone(),
         gamma: g2.clone(),
@@ -290,13 +290,13 @@ fn accounts_namespace_exposes_curated_beta_entrypoints() {
         &BytesN<65>,
         &Bytes,
         &BytesN<64>,
-    ) -> Result<(), cougr_core::accounts::AccountError> = verify_secp256r1;
+    ) -> Result<(), Sunvest_core::accounts::AccountError> = verify_secp256r1;
 }
 
 #[test]
 fn auth_namespace_mirrors_beta_accounts_surface() {
     let env = Env::default();
-    let _session_builder = cougr_core::auth::SessionBuilder::new(&env)
+    let _session_builder = Sunvest_core::auth::SessionBuilder::new(&env)
         .allow_action(symbol_short!("move"))
         .max_operations(3);
 }
@@ -321,34 +321,34 @@ fn standards_namespace_exposes_reusable_contract_primitives() {
 
 #[test]
 fn ops_namespace_mirrors_standards_surface() {
-    let _guard = cougr_core::ops::ExecutionGuard::new(symbol_short!("exec"));
-    let _ownable = cougr_core::ops::Ownable::new(symbol_short!("own"));
+    let _guard = Sunvest_core::ops::ExecutionGuard::new(symbol_short!("exec"));
+    let _ownable = Sunvest_core::ops::Ownable::new(symbol_short!("own"));
 }
 
 #[test]
 fn session_module_exposes_manager_and_status() {
-    assert_eq!(cougr_core::session::RENEWAL_HINT_SECONDS, 300);
-    let _ = cougr_core::session::SessionManager::cleanup_expired;
+    assert_eq!(Sunvest_core::session::RENEWAL_HINT_SECONDS, 300);
+    let _ = Sunvest_core::session::SessionManager::cleanup_expired;
 }
 
 #[test]
 fn circuits_module_exposes_game_builders() {
     let env = Env::default();
-    let _ = cougr_core::circuits::hidden_cards(&env, 52, 5).unwrap();
-    let _ = cougr_core::circuits::fog_of_war(&env, 32, 32, 3).unwrap();
+    let _ = Sunvest_core::circuits::hidden_cards(&env, 52, 5).unwrap();
+    let _ = Sunvest_core::circuits::fog_of_war(&env, 32, 32, 3).unwrap();
     let seed = BytesN::from_array(&env, &[1u8; 32]);
-    let _ = cougr_core::circuits::fair_dice(&env, 6, &seed).unwrap();
-    let _ = cougr_core::circuits::sealed_bid(&env, 1000).unwrap();
-    assert_eq!(cougr_core::circuits::MODULE_VERSION, "0.1.0-circuits");
+    let _ = Sunvest_core::circuits::fair_dice(&env, 6, &seed).unwrap();
+    let _ = Sunvest_core::circuits::sealed_bid(&env, 1000).unwrap();
+    assert_eq!(Sunvest_core::circuits::MODULE_VERSION, "0.1.0-circuits");
 }
 
 #[test]
 fn competitive_layers_expose_version_markers() {
-    assert_eq!(cougr_core::session::MODULE_VERSION, "0.1.0-session");
+    assert_eq!(Sunvest_core::session::MODULE_VERSION, "0.1.0-session");
 }
 
 #[test]
 #[cfg(feature = "testutils")]
 fn test_sandbox_module_available_with_testutils() {
-    assert_eq!(cougr_core::test::MODULE_VERSION, "0.1.0-sandbox");
+    assert_eq!(Sunvest_core::test::MODULE_VERSION, "0.1.0-sandbox");
 }

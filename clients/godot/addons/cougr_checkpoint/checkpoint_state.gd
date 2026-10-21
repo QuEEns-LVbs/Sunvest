@@ -1,4 +1,4 @@
-class_name CougrCheckpointState
+class_name SunvestCheckpointState
 
 # Decodes the value `get_state` returns.
 #
@@ -6,7 +6,7 @@ class_name CougrCheckpointState
 # `SCV_MAP` keyed by field name, with the keys sorted. The decoder is checked
 # against a value built by soroban_sdk in clients/godot/checkpoint_vectors.
 
-const Xdr := preload("res://addons/cougr_checkpoint/soroban_xdr.gd")
+const Xdr := preload("res://addons/Sunvest_checkpoint/soroban_xdr.gd")
 
 ## `STATUS_RUNNING` and friends, from the checkpoint template's components.
 const STATUS_RUNNING := 0
@@ -25,7 +25,7 @@ const _MINIMUM_BYTES := 12
 ## Nested classes cannot see the enclosing class's constants in GDScript, so the
 ## tags the cursor needs live here and are reached as `Cursor.SCV_MAP`.
 class Cursor:
-	const Xdr := preload("res://addons/cougr_checkpoint/soroban_xdr.gd")
+	const Xdr := preload("res://addons/Sunvest_checkpoint/soroban_xdr.gd")
 
 	const SCV_BOOL := 0
 	const SCV_VOID := 1
@@ -84,7 +84,7 @@ class Cursor:
 	func string() -> String:
 		var length := u32()
 		if length < 0 or remaining() < length:
-			push_error("Cougr: truncated string in match state")
+			push_error("Sunvest: truncated string in match state")
 			return ""
 		var value := bytes.slice(offset, offset + length).get_string_from_utf8()
 		offset += length + (4 - (length % 4)) % 4
@@ -96,20 +96,20 @@ class Cursor:
 			SC_ADDRESS_TYPE_ACCOUNT:
 				var key_type := u32()
 				if key_type != Xdr.KEY_TYPE_ED25519 or remaining() < 32:
-					push_error("Cougr: malformed account address in match state")
+					push_error("Sunvest: malformed account address in match state")
 					return ""
 				var key := bytes.slice(offset, offset + 32)
 				offset += 32
 				return Xdr.encode_account(key)
 			SC_ADDRESS_TYPE_CONTRACT:
 				if remaining() < 32:
-					push_error("Cougr: truncated contract address in match state")
+					push_error("Sunvest: truncated contract address in match state")
 					return ""
 				var hash := bytes.slice(offset, offset + 32)
 				offset += 32
 				return Xdr.encode_contract(hash)
 			_:
-				push_error("Cougr: unknown SCAddress type in match state")
+				push_error("Sunvest: unknown SCAddress type in match state")
 				return ""
 
 
@@ -133,7 +133,7 @@ class Cursor:
 			SCV_ADDRESS:
 				return address()
 			_:
-				push_error("Cougr: unsupported ScVal tag %d in match state" % tag)
+				push_error("Sunvest: unsupported ScVal tag %d in match state" % tag)
 				return null
 
 
@@ -155,7 +155,7 @@ static func status_name(status: int) -> String:
 static func decode(scval_xdr: PackedByteArray) -> Dictionary:
 	if scval_xdr.size() < _MINIMUM_BYTES:
 		push_error(
-			"Cougr: match state must be at least %d bytes, got %d"
+			"Sunvest: match state must be at least %d bytes, got %d"
 			% [_MINIMUM_BYTES, scval_xdr.size()]
 		)
 		return {}
@@ -163,17 +163,17 @@ static func decode(scval_xdr: PackedByteArray) -> Dictionary:
 	var cursor := Cursor.new(scval_xdr)
 	if cursor.u32() != Cursor.SCV_MAP:
 		push_error(
-			"Cougr: get_state did not return an SCV_MAP, which is how a contracttype struct encodes"
+			"Sunvest: get_state did not return an SCV_MAP, which is how a contracttype struct encodes"
 		)
 		return {}
 	if cursor.u32() != 1:
-		push_error("Cougr: get_state returned an empty match state")
+		push_error("Sunvest: get_state returned an empty match state")
 		return {}
 
 	var entry_count := cursor.u32()
 	if entry_count != FIELDS.size():
 		push_error(
-			"Cougr: match state has %d fields, MatchState has %d" % [entry_count, FIELDS.size()]
+			"Sunvest: match state has %d fields, MatchState has %d" % [entry_count, FIELDS.size()]
 		)
 		return {}
 
@@ -181,13 +181,13 @@ static func decode(scval_xdr: PackedByteArray) -> Dictionary:
 	for _entry in range(entry_count):
 		var key = cursor.value()
 		if typeof(key) != TYPE_STRING:
-			push_error("Cougr: a match state key was not a symbol")
+			push_error("Sunvest: a match state key was not a symbol")
 			return {}
 		fields[key] = cursor.value()
 
 	var problem := _validate(fields)
 	if problem != "":
-		push_error("Cougr: %s" % problem)
+		push_error("Sunvest: %s" % problem)
 		return {}
 
 	var status: int = fields["status"]

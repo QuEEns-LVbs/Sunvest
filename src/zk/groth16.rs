@@ -32,7 +32,7 @@ use super::types::{Groth16Proof, Scalar, VerificationKey};
 /// This verifier does **not** currently promise stronger normalization or
 /// subgroup-validation guarantees beyond what Soroban's BN254 host types
 /// enforce when decoding points and scalars. For that reason the Groth16
-/// verification flow remains part of Cougr's experimental privacy surface.
+/// verification flow remains part of Sunvest's experimental privacy surface.
 pub fn validate_groth16_contract(
     vk: &VerificationKey,
     public_inputs: &[Scalar],

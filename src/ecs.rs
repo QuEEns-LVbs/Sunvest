@@ -1,6 +1,6 @@
 //! Curated ECS runtime surface.
 //!
-//! This module defines the stable conceptual model for Cougr's Soroban-first ECS path:
+//! This module defines the stable conceptual model for Sunvest's Soroban-first ECS path:
 //!
 //! - `SimpleWorld` and `ArchetypeWorld` are the supported runtime backends
 //! - `GameApp` is the recommended orchestration entrypoint
@@ -13,14 +13,14 @@ use crate::query::QueryStorage;
 use crate::simple_world::{EntityId, SimpleWorld};
 use soroban_sdk::{Env, Symbol, Vec};
 
-/// Supported runtime backends for Cougr's ECS layer.
+/// Supported runtime backends for Sunvest's ECS layer.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum WorldBackend {
     Simple,
     Archetype,
 }
 
-/// Shared read-only runtime contract for Cougr world backends.
+/// Shared read-only runtime contract for Sunvest world backends.
 ///
 /// This trait does not attempt to erase every difference between `SimpleWorld`
 /// and `ArchetypeWorld`. It captures the stable overlap that gameplay systems
@@ -38,7 +38,7 @@ pub trait RuntimeWorld {
     ) -> Vec<EntityId>;
 }
 
-/// Shared mutable runtime contract for Cougr's Soroban-first world backends.
+/// Shared mutable runtime contract for Sunvest's Soroban-first world backends.
 ///
 /// This trait represents the stable gameplay mutation surface common to
 /// `SimpleWorld` and `ArchetypeWorld`. It is intentionally narrower than the

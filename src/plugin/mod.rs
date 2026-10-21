@@ -18,8 +18,8 @@ use soroban_sdk::{Env, Symbol};
 ///
 /// # Example
 /// ```no_run
-/// # use cougr_core::plugin::{GameApp, Plugin};
-/// # use cougr_core::simple_world::SimpleWorld;
+/// # use Sunvest_core::plugin::{GameApp, Plugin};
+/// # use Sunvest_core::simple_world::SimpleWorld;
 /// # use soroban_sdk::Env;
 /// # fn gravity_system(_world: &mut SimpleWorld, _env: &Env) {}
 /// # fn collision_system(_world: &mut SimpleWorld, _env: &Env) {}
@@ -45,15 +45,15 @@ pub trait PluginGroup {
 
 /// Soroban-first application builder and runtime.
 ///
-/// `GameApp` is the recommended entrypoint for new Cougr projects:
+/// `GameApp` is the recommended entrypoint for new Sunvest projects:
 /// it owns the `SimpleWorld`, the validated `SimpleScheduler`, and hook
 /// registration in one place.
 ///
 /// # Example
 /// ```no_run
-/// # use cougr_core::plugin::{GameApp, Plugin};
-/// # use cougr_core::scheduler::{ScheduleStage, SystemConfig};
-/// # use cougr_core::simple_world::SimpleWorld;
+/// # use Sunvest_core::plugin::{GameApp, Plugin};
+/// # use Sunvest_core::scheduler::{ScheduleStage, SystemConfig};
+/// # use Sunvest_core::simple_world::SimpleWorld;
 /// # use soroban_sdk::Env;
 /// # struct PhysicsPlugin;
 /// # struct ScoringPlugin;

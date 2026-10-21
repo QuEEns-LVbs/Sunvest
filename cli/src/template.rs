@@ -2,7 +2,7 @@
 //!
 //! The four templates are derived from the canonical examples named in
 //! `examples/EXAMPLE_STANDARD.md` and are compiled into the binary with
-//! `rust-embed`, so `cougr new` works with no network access and no checkout of
+//! `rust-embed`, so `Sunvest new` works with no network access and no checkout of
 //! this repository.
 //!
 //! Template files carry two spelling conventions that [`output_path`] undoes on
@@ -10,7 +10,7 @@
 //!
 //! * `Cargo.toml.tmpl` → `Cargo.toml`, because Cargo skips subdirectories that
 //!   contain a manifest when packaging a crate, which would drop the template
-//!   manifests from the published `cougr-cli`.
+//!   manifests from the published `Sunvest-cli`.
 //! * `gitignore` → `.gitignore`, because a real dotfile in `templates/` would be
 //!   applied to this repository rather than shipped as content.
 
@@ -27,14 +27,14 @@ use crate::name::ProjectName;
 #[folder = "templates/"]
 struct Assets;
 
-/// The `cougr-core` release generated projects depend on, pinned to the current
-/// major/minor. `cougr-cli` and `cougr-core` share a release cadence, so this is
+/// The `Sunvest-core` release generated projects depend on, pinned to the current
+/// major/minor. `Sunvest-cli` and `Sunvest-core` share a release cadence, so this is
 /// this crate's own `major.minor`; the `core_version_tracks_cli_version` test
 /// fails if the two ever drift apart.
-pub const COUGR_CORE_VERSION: &str = "1.1";
+pub const Sunvest_CORE_VERSION: &str = "1.1";
 
-/// SDK required by the currently published `cougr-core` release. Keep this on
-/// 25 until a release of `cougr-core` requiring SDK 29 is published.
+/// SDK required by the currently published `Sunvest-core` release. Keep this on
+/// 25 until a release of `Sunvest-core` requiring SDK 29 is published.
 pub const SOROBAN_SDK_VERSION: &str = "25.1.0";
 
 /// The studio export schema. This is the sole integration point for the
@@ -122,7 +122,7 @@ impl Template {
         self.render_with_config(name, None)
     }
 
-    /// Render the same embedded assets used by `cougr new`, optionally applying
+    /// Render the same embedded assets used by `Sunvest new`, optionally applying
     /// the studio match configuration to the turn-based template.
     pub fn render_with_config(
         self,
@@ -172,7 +172,7 @@ impl Template {
             .replace("{{description}}", self.summary())
             .replace("{{template_id}}", self.id())
             .replace("{{source_example}}", self.source_example())
-            .replace("{{cougr_core_version}}", COUGR_CORE_VERSION)
+            .replace("{{Sunvest_core_version}}", Sunvest_CORE_VERSION)
             .replace("{{soroban_sdk_version}}", SOROBAN_SDK_VERSION)
             .replace("{{board_width}}", &config.board_width.to_string())
             .replace("{{board_height}}", &config.board_height.to_string())
@@ -219,7 +219,7 @@ mod tests {
 
     #[test]
     fn core_version_tracks_cli_version() {
-        assert_eq!(COUGR_CORE_VERSION, major_minor(env!("CARGO_PKG_VERSION")));
+        assert_eq!(Sunvest_CORE_VERSION, major_minor(env!("CARGO_PKG_VERSION")));
         assert_eq!(major_minor("2.0.13"), "2.0");
         assert_eq!(major_minor("10.24.0-rc.1"), "10.24");
     }
@@ -290,8 +290,8 @@ mod tests {
             assert!(
                 manifest
                     .contents
-                    .contains(&format!("cougr-core = \"{COUGR_CORE_VERSION}\"")),
-                "`{}` must depend on the published cougr-core",
+                    .contains(&format!("Sunvest-core = \"{Sunvest_CORE_VERSION}\"")),
+                "`{}` must depend on the published Sunvest-core",
                 template.id()
             );
             assert!(
@@ -313,7 +313,7 @@ mod tests {
                 .find(|f| f.path == "src/test.rs")
                 .expect("every template has a test module");
             assert!(
-                test.contents.contains("cougr_core::test::GameHarness"),
+                test.contents.contains("Sunvest_core::test::GameHarness"),
                 "`{}` must test through GameHarness",
                 template.id()
             );

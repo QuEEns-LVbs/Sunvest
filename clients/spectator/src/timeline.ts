@@ -1,4 +1,4 @@
-import type { CougrEventUpdate } from 'cougr-sdk-events';
+import type { SunvestEventUpdate } from 'Sunvest-sdk-events';
 import {
   formatBoardAscii,
   statusToLabel,
@@ -23,7 +23,7 @@ export interface MatchState {
 }
 
 /**
- * A discrete step in the match timeline corresponding to a decoded Cougr event.
+ * A discrete step in the match timeline corresponding to a decoded Sunvest event.
  */
 export interface TimelineFrame {
   step: number;
@@ -31,7 +31,7 @@ export interface TimelineFrame {
   ledgerClosedAt: string;
   txHash: string;
   pagingToken: string;
-  update: CougrEventUpdate;
+  update: SunvestEventUpdate;
   action: string;
   state: MatchState;
 }
@@ -196,7 +196,7 @@ export class ReplayTimeline {
     const summary = this.getSummary();
     const header = [
       '=================================================================',
-      '               COUGR SPECTATOR REPLAY TIMELINE                   ',
+      '               Sunvest SPECTATOR REPLAY TIMELINE                   ',
       '=================================================================',
       `Total steps: ${summary.totalSteps} | Moves: ${summary.moveCount} | Status: ${summary.status}`,
       summary.winner ? `Outcome: ${summary.winner === 'Draw' ? 'Draw' : `${summary.winner} Wins!`}` : 'In progress',

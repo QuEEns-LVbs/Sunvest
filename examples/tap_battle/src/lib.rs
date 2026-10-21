@@ -1,7 +1,7 @@
 //! Tap Battle - On-Chain Mobile-First Competitive Tapping Game
 //!
 //! This smart contract implements a competitive tapping game on the Stellar
-//! blockchain using cougr-core's ECS framework and passkey authentication.
+//! blockchain using Sunvest-core's ECS framework and passkey authentication.
 //!
 //! # Mobile-First Authentication Flow
 //! This example demonstrates the complete passkey → session → gameplay flow:
@@ -14,7 +14,7 @@
 //!    through the session key with no per-transaction wallet prompts
 //! 4. **Result**: Scores compared, winner declared, stats recorded on-chain
 //!
-//! # Cougr-Core Integration
+//! # Sunvest-Core Integration
 //! - `secp256r1_auth`: Passkey registration and signature verification
 //! - `SessionManager`: Scoped session creation, execution, renewal, and status queries
 //! - ECS Components: `PasskeyIdentity`, `TapCounter`, `PowerUp`, `RoundState`
@@ -29,7 +29,7 @@ mod types;
 #[cfg(test)]
 mod test;
 
-use cougr_core::SimpleWorld;
+use Sunvest_core::SimpleWorld;
 use soroban_sdk::{contract, contractimpl, symbol_short, Address, Bytes, BytesN, Env, Symbol};
 
 // Re-export types for external use
@@ -50,7 +50,7 @@ impl TapBattleContract {
     /// * `player` - The player's Stellar address
     /// * `pubkey` - SEC-1 uncompressed secp256r1 public key (65 bytes)
     pub fn register_passkey(env: Env, player: Address, pubkey: BytesN<65>) {
-        // Create cougr-core ECS World for entity management
+        // Create Sunvest-core ECS World for entity management
         let mut world = SimpleWorld::new(&env);
         let _player_entity = world.spawn_entity();
 
@@ -126,14 +126,14 @@ impl TapBattleContract {
         owner: Address,
         key_id: BytesN<32>,
         expires_in: u64,
-    ) -> cougr_core::session::ActiveSession {
+    ) -> Sunvest_core::session::ActiveSession {
         owner.require_auth();
         let new_expires = env.ledger().timestamp().saturating_add(expires_in);
-        let key = cougr_core::session::SessionManager::renew(&env, &owner, &key_id, new_expires)
+        let key = Sunvest_core::session::SessionManager::renew(&env, &owner, &key_id, new_expires)
             .expect("renewed");
-        let status = cougr_core::session::SessionManager::status(&env, &owner, &key.key_id)
+        let status = Sunvest_core::session::SessionManager::status(&env, &owner, &key.key_id)
             .expect("session status");
-        cougr_core::session::ActiveSession::from_status(&status, key.scope.expires_at)
+        Sunvest_core::session::ActiveSession::from_status(&status, key.scope.expires_at)
     }
 
     /// Read session health for UI renewal prompts.
@@ -141,19 +141,19 @@ impl TapBattleContract {
         env: Env,
         owner: Address,
         key_id: BytesN<32>,
-    ) -> cougr_core::session::SessionStatus {
-        cougr_core::session::SessionManager::status(&env, &owner, &key_id).expect("session status")
+    ) -> Sunvest_core::session::SessionStatus {
+        Sunvest_core::session::SessionManager::status(&env, &owner, &key_id).expect("session status")
     }
 
     /// Tap using session first, falling back to direct owner auth when expired.
     pub fn fallback_tap(env: Env, owner: Address, key_id: BytesN<32>) -> TapResult {
-        let session = cougr_core::accounts::SessionStorage::load(&env, &owner, &key_id)
+        let session = Sunvest_core::accounts::SessionStorage::load(&env, &owner, &key_id)
             .expect("session missing");
-        let action = cougr_core::accounts::GameAction {
+        let action = Sunvest_core::accounts::GameAction {
             system_name: symbol_short!("tap"),
             data: Bytes::new(&env),
         };
-        let session_intent = cougr_core::accounts::SignedIntent::session(
+        let session_intent = Sunvest_core::accounts::SignedIntent::session(
             &env,
             owner.clone(),
             &key_id,
@@ -161,14 +161,14 @@ impl TapBattleContract {
             session.next_nonce,
             env.ledger().timestamp().saturating_add(60),
         );
-        let direct_intent = cougr_core::accounts::SignedIntent::direct(
+        let direct_intent = Sunvest_core::accounts::SignedIntent::direct(
             &env,
             owner.clone(),
             action,
-            cougr_core::accounts::ReplayProtection::next_account_nonce(&env, &owner),
+            Sunvest_core::accounts::ReplayProtection::next_account_nonce(&env, &owner),
             env.ledger().timestamp().saturating_add(60),
         );
-        cougr_core::session::SessionManager::fallback_execute(
+        Sunvest_core::session::SessionManager::fallback_execute(
             &env,
             &session_intent,
             &direct_intent,
@@ -180,7 +180,7 @@ impl TapBattleContract {
 
     /// Get the latest session key ID for a player.
     pub fn get_latest_session_key(env: Env, player: Address) -> BytesN<32> {
-        let keys = cougr_core::accounts::SessionStorage::load_all(&env, &player);
+        let keys = Sunvest_core::accounts::SessionStorage::load_all(&env, &player);
         keys.last().expect("no active session").key_id
     }
 
@@ -214,7 +214,7 @@ impl TapBattleContract {
         game::get_profile(&env, &player)
     }
 
-    /// Get the cougr-core entity count (demonstrates ECS integration).
+    /// Get the Sunvest-core entity count (demonstrates ECS integration).
     pub fn get_entity_count(env: Env) -> u32 {
         env.storage()
             .instance()

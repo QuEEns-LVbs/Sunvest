@@ -1,8 +1,8 @@
-# Cougr Performance Guide
+# Sunvest Performance Guide
 
 ## Purpose
 
-This document explains the current performance model for Cougr's Soroban-first ECS path.
+This document explains the current performance model for Sunvest's Soroban-first ECS path.
 
 It is not a promise of fixed gas costs. It is a guide to the data structures and tradeoffs that determine query and scheduling behavior.
 

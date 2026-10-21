@@ -34,9 +34,9 @@ It runs the same checks as CI for the parts of the repository your branch change
 - `make fix` applies the automatic fixes: `cargo fmt` and the docs site sync.
 - `make check-all` runs every check, whatever you changed.
 - If a tool is missing (for example `stellar`, `mdbook`, or `cargo-deny`), `make check` tells you how to install it. Skipped checks still run in CI.
-- CI tests your branch merged into `main`. Keep it current with `git fetch upstream && git rebase upstream/main` (add the remote once with `git remote add upstream https://github.com/salazarsebas/Cougr.git`).
+- CI tests your branch merged into `main`. Keep it current with `git fetch upstream && git rebase upstream/main` (add the remote once with `git remote add upstream https://github.com/salazarsebas/Sunvest.git`).
 
-If you use an AI assistant, see [AGENTS.md](https://github.com/salazarsebas/Cougr/blob/main/AGENTS.md).
+If you use an AI assistant, see [AGENTS.md](https://github.com/salazarsebas/Sunvest/blob/main/AGENTS.md).
 
 ## Documentation Expectations
 
@@ -71,7 +71,7 @@ When adding a new example:
   python3 scripts/validate_catalog.py
   ```
 
-  The validator checks required fields, allowed `category` and `maturity` values, that each `name` maps to a directory under `examples/`, that `cougr_features` is a non-empty list, and that any `screenshot` path exists. `examples/catalog_broken.toml` is a deliberately invalid fixture; running the validator against it must exit non-zero, which is how CI confirms the rules still fire:
+  The validator checks required fields, allowed `category` and `maturity` values, that each `name` maps to a directory under `examples/`, that `Sunvest_features` is a non-empty list, and that any `screenshot` path exists. `examples/catalog_broken.toml` is a deliberately invalid fixture; running the validator against it must exit non-zero, which is how CI confirms the rules still fire:
 
   ```bash
   python3 scripts/validate_catalog.py examples/catalog_broken.toml  # expected to fail

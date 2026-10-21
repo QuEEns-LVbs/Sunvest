@@ -1,4 +1,4 @@
-use cougr_core::component::ComponentTrait;
+use Sunvest_core::component::ComponentTrait;
 use soroban_sdk::{contracttype, symbol_short, Address, Bytes, Env, Symbol, Vec};
 
 /// Board dimensions: 7 columns x 6 rows

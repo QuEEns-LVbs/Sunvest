@@ -1,6 +1,6 @@
 //! Integration tests for the reusable standards layer.
 
-use cougr_core::standards::{
+use Sunvest_core::standards::{
     AccessControl, BatchExecutor, DelayedExecutionPolicy, ExecutionGuard, Ownable, Ownable2Step,
     Pausable, RecoveryGuard, StandardsError, DEFAULT_ADMIN_ROLE_NAME,
 };

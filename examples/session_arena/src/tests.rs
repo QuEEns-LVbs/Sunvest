@@ -1,5 +1,5 @@
 use super::*;
-use cougr_core::test::{GameHarness, MockSession};
+use Sunvest_core::test::{GameHarness, MockSession};
 use soroban_sdk::{
     testutils::{Address as _, Ledger as _},
     Address, Env,

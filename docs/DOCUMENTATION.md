@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document records the documentation quality bar for `cougr-core` after the
+This document records the documentation quality bar for `Sunvest-core` after the
 `1.0.0` crates.io publication.
 
 ## Installation Source
@@ -11,7 +11,7 @@ Released documentation should point users to the published crate:
 
 ```toml
 [dependencies]
-cougr-core = "1.0.0"
+Sunvest-core = "1.0.0"
 ```
 
 Do not present repository dependencies as the default installation path in
@@ -29,7 +29,7 @@ The build should finish without broken intra-doc link warnings.
 
 ## Missing Docs Strategy
 
-Cougr has a broad public API, so missing-doc enforcement should be introduced
+Sunvest has a broad public API, so missing-doc enforcement should be introduced
 gradually instead of enabling a crate-wide hard gate all at once.
 
 Priority order:

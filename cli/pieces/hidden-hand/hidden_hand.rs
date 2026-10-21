@@ -1,7 +1,7 @@
 //! Hidden-information helpers copied from the `hidden_hand` example.
 
-use cougr_core::circuits::{hidden_cards, GameCircuitSpec};
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::circuits::{hidden_cards, GameCircuitSpec};
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{BytesN, Env};
 
 /// Largest table accepted by this helper, keeping proof costs predictable.

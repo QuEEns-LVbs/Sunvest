@@ -1,7 +1,7 @@
 {
-  "name": "cougr-preview-gen",
+  "name": "Sunvest-preview-gen",
   "version": "1.0.0",
-  "description": "Generate SVG preview images for Cougr contract-only examples from scenario state data.",
+  "description": "Generate SVG preview images for Sunvest contract-only examples from scenario state data.",
   "type": "module",
   "bin": {
     "preview-gen": "./generate.js"

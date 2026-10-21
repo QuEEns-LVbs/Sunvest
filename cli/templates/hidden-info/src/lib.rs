@@ -1,4 +1,4 @@
-//! {{crate_name}} - a Cougr game contract generated from the `{{template_id}}` template.
+//! {{crate_name}} - a Sunvest game contract generated from the `{{template_id}}` template.
 //!
 //! Players take a seat at a table, then prove - without revealing a single card
 //! - that the hand they hold was really dealt from the committed deck. The
@@ -21,9 +21,9 @@ mod test;
 use components::{seat_entity, seat_key, table_key, DealsVerified, TableConfig};
 use systems::{validate_config, verify_deal, TableError};
 
-use cougr_core::game::SorobanGame;
-use cougr_core::impl_soroban_game;
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::impl_soroban_game;
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{contract, contractimpl, Address, BytesN, Env};
 
 #[contract]

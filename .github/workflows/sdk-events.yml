@@ -1,6 +1,6 @@
 name: SDK Events CI
 
-# Path-scoped to the TypeScript events SDK. Like cougr-site.yml, this workflow
+# Path-scoped to the TypeScript events SDK. Like Sunvest-site.yml, this workflow
 # only runs for its own tree and its own file, and it never runs the Rust
 # clippy gate: a Rust-only change must not trigger it.
 on:

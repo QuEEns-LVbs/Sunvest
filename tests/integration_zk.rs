@@ -3,13 +3,13 @@
 //! Tests ZK components lifecycle, commit-reveal flow, cleanup systems,
 //! and byte encoding round-trips.
 
-use cougr_core::zk::experimental::{
+use Sunvest_core::zk::experimental::{
     cleanup_verified_system, encode_verified_marker, VERIFIED_MARKER_TYPE,
 };
-use cougr_core::zk::stable::{
+use Sunvest_core::zk::stable::{
     commit_reveal_deadline_system, encode_commit_reveal, COMMIT_REVEAL_TYPE, HIDDEN_STATE_TYPE,
 };
-use cougr_core::SimpleWorld;
+use Sunvest_core::SimpleWorld;
 use soroban_sdk::{symbol_short, Bytes, BytesN, Env, Symbol};
 
 // ---------------------------------------------------------------------------
@@ -249,7 +249,7 @@ fn test_multiple_commit_reveals_different_entities() {
 
 #[test]
 fn test_verification_key_from_raw_bytes_roundtrip() {
-    use cougr_core::zk::experimental::VerificationKey;
+    use Sunvest_core::zk::experimental::VerificationKey;
     let env = Env::default();
 
     let alpha: [u8; 64] = {
@@ -283,7 +283,7 @@ fn test_verification_key_from_raw_bytes_roundtrip() {
 
 #[test]
 fn test_groth16_proof_from_raw_bytes_roundtrip() {
-    use cougr_core::zk::experimental::Groth16Proof;
+    use Sunvest_core::zk::experimental::Groth16Proof;
     let env = Env::default();
 
     let a: [u8; 64] = {
@@ -310,7 +310,7 @@ fn test_groth16_proof_from_raw_bytes_roundtrip() {
 
 #[test]
 fn test_verification_key_from_raw_bytes_empty_ic() {
-    use cougr_core::zk::experimental::VerificationKey;
+    use Sunvest_core::zk::experimental::VerificationKey;
     let env = Env::default();
 
     let vk = VerificationKey::from_raw_bytes(
@@ -326,7 +326,7 @@ fn test_verification_key_from_raw_bytes_empty_ic() {
 
 #[test]
 fn test_batch_proof_context_record_and_finalize() {
-    use cougr_core::zk::experimental::{hash_state_root, BatchProofContext};
+    use Sunvest_core::zk::experimental::{hash_state_root, BatchProofContext};
     use soroban_sdk::Bytes;
 
     let env = Env::default();
@@ -350,7 +350,7 @@ fn test_batch_proof_context_record_and_finalize() {
 
 #[test]
 fn test_hash_state_root_empty_is_deterministic() {
-    use cougr_core::zk::experimental::hash_state_root;
+    use Sunvest_core::zk::experimental::hash_state_root;
     use soroban_sdk::Bytes;
 
     let env = Env::default();
@@ -363,7 +363,7 @@ fn test_hash_state_root_empty_is_deterministic() {
 
 #[test]
 fn test_hash_state_root_differs_by_content() {
-    use cougr_core::zk::experimental::hash_state_root;
+    use Sunvest_core::zk::experimental::hash_state_root;
     use soroban_sdk::Bytes;
 
     let env = Env::default();
@@ -377,8 +377,8 @@ fn test_hash_state_root_differs_by_content() {
 
 #[test]
 fn test_bls12_381_aggregate_signatures_empty_fails() {
-    use cougr_core::zk::experimental::bls12_381_aggregate_signatures;
-    use cougr_core::zk::ZKError;
+    use Sunvest_core::zk::experimental::bls12_381_aggregate_signatures;
+    use Sunvest_core::zk::ZKError;
 
     let env = Env::default();
     let result = bls12_381_aggregate_signatures(&env, &[]);
@@ -387,8 +387,8 @@ fn test_bls12_381_aggregate_signatures_empty_fails() {
 
 #[test]
 fn test_bls12_381_verify_aggregated_empty_fails() {
-    use cougr_core::zk::experimental::bls12_381_verify_aggregated;
-    use cougr_core::zk::{Bls12381G1Point, Bls12381G2Point, ZKError};
+    use Sunvest_core::zk::experimental::bls12_381_verify_aggregated;
+    use Sunvest_core::zk::{Bls12381G1Point, Bls12381G2Point, ZKError};
 
     let env = Env::default();
     let g1 = Bls12381G1Point {
@@ -404,8 +404,8 @@ fn test_bls12_381_verify_aggregated_empty_fails() {
 
 #[test]
 fn test_bls12_381_verify_aggregated_mismatched_lengths_fails() {
-    use cougr_core::zk::experimental::bls12_381_verify_aggregated;
-    use cougr_core::zk::{Bls12381G1Point, Bls12381G2Point, ZKError};
+    use Sunvest_core::zk::experimental::bls12_381_verify_aggregated;
+    use Sunvest_core::zk::{Bls12381G1Point, Bls12381G2Point, ZKError};
 
     let env = Env::default();
     let sig = Bls12381G1Point {
@@ -425,8 +425,8 @@ fn test_bls12_381_verify_aggregated_mismatched_lengths_fails() {
 
 #[test]
 fn test_bls12_381_verify_aggregated_same_msg_empty_pubkeys_fails() {
-    use cougr_core::zk::experimental::bls12_381_verify_aggregated_same_msg;
-    use cougr_core::zk::{Bls12381G1Point, Bls12381G2Point, ZKError};
+    use Sunvest_core::zk::experimental::bls12_381_verify_aggregated_same_msg;
+    use Sunvest_core::zk::{Bls12381G1Point, Bls12381G2Point, ZKError};
 
     let env = Env::default();
     let sig = Bls12381G1Point {

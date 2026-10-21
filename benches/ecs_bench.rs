@@ -6,11 +6,11 @@
 use std::time::Instant;
 use std::vec::Vec as StdVec;
 
-use cougr_core::archetype_world::ArchetypeWorld;
-use cougr_core::component::ComponentStorage;
-use cougr_core::query::{SimpleQueryBuilder, SimpleQueryCache};
-use cougr_core::scheduler::{ScheduleStage, SimpleScheduler, SystemConfig};
-use cougr_core::simple_world::SimpleWorld;
+use Sunvest_core::archetype_world::ArchetypeWorld;
+use Sunvest_core::component::ComponentStorage;
+use Sunvest_core::query::{SimpleQueryBuilder, SimpleQueryCache};
+use Sunvest_core::scheduler::{ScheduleStage, SimpleScheduler, SystemConfig};
+use Sunvest_core::simple_world::SimpleWorld;
 use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 
 const SPAWN_COUNTS: [usize; 3] = [100, 250, 500];
@@ -385,7 +385,7 @@ fn bench_backend_mutation_comparison() {
 }
 
 fn main() {
-    println!("=== Cougr ECS Benchmarks ===");
+    println!("=== Sunvest ECS Benchmarks ===");
     bench_spawn_entities();
     bench_component_insert_and_lookup();
     bench_query_paths();

@@ -1,7 +1,7 @@
-//! `cougr doctor` - validate the local development environment.
+//! `Sunvest doctor` - validate the local development environment.
 //!
 //! Checks that the toolchain, compilation targets, and external tools required
-//! to build and deploy a Cougr project are all present and meet the minimum
+//! to build and deploy a Sunvest project are all present and meet the minimum
 //! versions declared by the CLI manifest.
 //!
 //! Each check reports **pass**, **fail**, or **warn**, with remediation for
@@ -9,7 +9,7 @@
 //! diagnostic instead of reporting a missing target. Only failures cause a
 //! non-zero exit.
 //!
-//! This function is also called non-fatally from `cougr new` to surface
+//! This function is also called non-fatally from `Sunvest new` to surface
 //! environment problems before the developer discovers them at build time.
 
 use std::fmt;
@@ -356,7 +356,7 @@ fn print_result(r: &CheckResult) {
 /// Returns `Ok(())` when every check passes, or an error summary when one or
 /// more checks fail.  Warnings do not cause a non-zero exit.
 pub fn run() -> Result<(), DoctorError> {
-    println!("cougr doctor - environment check");
+    println!("Sunvest doctor - environment check");
     println!();
 
     let results = [
@@ -387,7 +387,7 @@ pub fn run() -> Result<(), DoctorError> {
 
 /// Run all checks silently; print a one-line warning only when something fails.
 ///
-/// This is called from `cougr new` as a non-fatal advisory step.  It never
+/// This is called from `Sunvest new` as a non-fatal advisory step.  It never
 /// returns an error: the caller should continue regardless of the outcome.
 pub fn run_as_warning() {
     let results = [
@@ -404,7 +404,7 @@ pub fn run_as_warning() {
         let failed = total - passed;
         eprintln!(
             "warning: {failed} environment check(s) failed. \
-             Run `cougr doctor` for details and fix commands."
+             Run `Sunvest doctor` for details and fix commands."
         );
     }
 }
@@ -550,7 +550,7 @@ mod tests {
         assert_eq!(min_rust(), parse_msrv(MIN_RUST));
         assert!(
             min_rust().is_some(),
-            "cli/Cargo.toml must declare rust-version so `cougr doctor` can enforce it"
+            "cli/Cargo.toml must declare rust-version so `Sunvest doctor` can enforce it"
         );
     }
 

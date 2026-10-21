@@ -4,13 +4,13 @@ on:
   push:
     branches: [main, develop]
     paths:
-      - 'internal/cougr-core-circuits/**'
+      - 'internal/Sunvest-core-circuits/**'
       - 'src/circuits/generated.rs'
       - '.github/workflows/circom.yml'
   pull_request:
     branches: [main, develop]
     paths:
-      - 'internal/cougr-core-circuits/**'
+      - 'internal/Sunvest-core-circuits/**'
       - 'src/circuits/generated.rs'
       - '.github/workflows/circom.yml'
 
@@ -29,7 +29,7 @@ jobs:
     timeout-minutes: 25
     defaults:
       run:
-        working-directory: internal/cougr-core-circuits
+        working-directory: internal/Sunvest-core-circuits
     steps:
       - uses: actions/checkout@v4
 
@@ -56,7 +56,7 @@ jobs:
       - name: Cache pot14 ptau
         uses: actions/cache@v4
         with:
-          path: internal/cougr-core-circuits/keys/pot14_final.ptau
+          path: internal/Sunvest-core-circuits/keys/pot14_final.ptau
           key: pot14-final-${{ runner.os }}-v1
 
       - name: Run full Circom pipeline
@@ -70,6 +70,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: cougr-circuit-vks-test
-          path: internal/cougr-core-circuits/exported/*_vk.json
+          name: Sunvest-circuit-vks-test
+          path: internal/Sunvest-core-circuits/exported/*_vk.json
           retention-days: 14

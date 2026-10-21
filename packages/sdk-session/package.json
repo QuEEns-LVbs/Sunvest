@@ -1,7 +1,7 @@
 {
-  "name": "cougr-sdk-session",
+  "name": "Sunvest-sdk-session",
   "version": "0.1.0",
-  "description": "TypeScript session client that mirrors cougr-core's SessionBuilder, expiry, and replay nonce rules and matches the Rust engine against committed cross-language vectors.",
+  "description": "TypeScript session client that mirrors Sunvest-core's SessionBuilder, expiry, and replay nonce rules and matches the Rust engine against committed cross-language vectors.",
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -16,7 +16,7 @@
     "test": "node --test test/*.test.ts"
   },
   "keywords": [
-    "cougr",
+    "Sunvest",
     "soroban",
     "session-keys",
     "replay-protection",

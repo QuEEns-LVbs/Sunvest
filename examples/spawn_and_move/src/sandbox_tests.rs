@@ -1,7 +1,7 @@
 #![cfg(test)]
 
 use crate::{SpawnAndMove, SpawnAndMoveClient, EAST, NORTH, SOUTH};
-use cougr_core::test::{GameHarness, Scenario, SnapshotAssert, WorldFixture};
+use Sunvest_core::test::{GameHarness, Scenario, SnapshotAssert, WorldFixture};
 use soroban_sdk::Env;
 
 #[test]

@@ -31,8 +31,8 @@ pub type ObserverFn = fn(event: &ComponentEvent, world: &SimpleWorld, env: &Env)
 ///
 /// # Example
 /// ```
-/// use cougr_core::runtime::{ComponentEvent, ObserverRegistry};
-/// use cougr_core::SimpleWorld;
+/// use Sunvest_core::runtime::{ComponentEvent, ObserverRegistry};
+/// use Sunvest_core::SimpleWorld;
 /// use soroban_sdk::{symbol_short, Env};
 ///
 /// fn on_position_added(_event: &ComponentEvent, _world: &SimpleWorld, _env: &Env) {}
@@ -93,8 +93,8 @@ impl Default for ObserverRegistry {
 ///
 /// # Example
 /// ```
-/// use cougr_core::runtime::{ComponentEvent, ObservedWorld};
-/// use cougr_core::SimpleWorld;
+/// use Sunvest_core::runtime::{ComponentEvent, ObservedWorld};
+/// use Sunvest_core::SimpleWorld;
 /// use soroban_sdk::{symbol_short, Bytes, Env};
 ///
 /// fn my_observer(_event: &ComponentEvent, _world: &SimpleWorld, _env: &Env) {}

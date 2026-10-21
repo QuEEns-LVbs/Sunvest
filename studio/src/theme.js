@@ -3,13 +3,13 @@
  *
  * The board and the run panels are rendered as standalone HTML/SVG fragments,
  * so a host page's CSS custom properties never reach them. That is why this
- * module reads literal values from `cougr-tokens` rather than emitting
+ * module reads literal values from `Sunvest-tokens` rather than emitting
  * `var(--color-bg)` into the markup — the same reason `tools/preview-gen`
  * resolves its tokens at generation time.
  *
  * The package is imported by relative path because this repository has no npm
  * workspace and `studio/` is intentionally install-free. A host app in its own
- * repository pins `cougr-tokens` as a normal dependency instead. The built
+ * repository pins `Sunvest-tokens` as a normal dependency instead. The built
  * `dist/` is not committed, so run `node ../packages/tokens/build.js` (or
  * `npm run build:tokens`) before importing this module.
  *

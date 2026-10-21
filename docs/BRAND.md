@@ -1,9 +1,9 @@
-# Cougr Brand
+# Sunvest Brand
 
 Part of the design system called for in [docs/strategy/09-design-strategy.md](./strategy/09-design-strategy.md)
 (design tokens + logo system) and closes out
-[#259](https://github.com/salazarsebas/Cougr/issues/259). Scope, per that strategy doc: a small,
-fixed vocabulary - not a large palette or a decorative visual language. Cougr reads as
+[#259](https://github.com/salazarsebas/Sunvest/issues/259). Scope, per that strategy doc: a small,
+fixed vocabulary - not a large palette or a decorative visual language. Sunvest reads as
 infrastructure, closer to Linear or Vercel's register than a game or a "blockchain-cold" brand.
 
 This document is the single source of truth for color, type, spacing, and the logo system. Anything
@@ -109,8 +109,8 @@ is a consistency risk, not a flexibility win.
 
 ## Logo system
 
-`public/Cougr.png` (the original raster mascot) is retained for backward compatibility, but
-`public/Cougr.svg` is now the source-of-truth vector mark. It was produced by quantizing the
+`public/Sunvest.png` (the original raster mascot) is retained for backward compatibility, but
+`public/Sunvest.svg` is now the source-of-truth vector mark. It was produced by quantizing the
 original artwork to this system's four logo tones and tracing each color region, rather than by
 hand - so it reproduces the actual mascot (ear shape, muzzle, eye, coat shading) instead of a
 freehand approximation.
@@ -133,13 +133,13 @@ recolor of the icon itself was needed.
 
 | File | Variant | Use |
 |---|---|---|
-| `public/Cougr.svg` | icon-only, full color | favicon, avatar, any square slot |
-| `public/brand/cougr-mono.svg` | icon-only, single color (`fill="currentColor"`) | watermarks, 1-color print, contexts that set their own color via CSS |
-| `public/brand/cougr-lockup-light.svg` | icon + "COUGR" wordmark, ink text | README header, light site header |
-| `public/brand/cougr-lockup-dark.svg` | icon + "COUGR" wordmark, cream text | dark site header |
+| `public/Sunvest.svg` | icon-only, full color | favicon, avatar, any square slot |
+| `public/brand/Sunvest-mono.svg` | icon-only, single color (`fill="currentColor"`) | watermarks, 1-color print, contexts that set their own color via CSS |
+| `public/brand/Sunvest-lockup-light.svg` | icon + "Sunvest" wordmark, ink text | README header, light site header |
+| `public/brand/Sunvest-lockup-dark.svg` | icon + "Sunvest" wordmark, cream text | dark site header |
 | `public/brand/favicon-32.png`, `favicon-16.png` | rasterized icon-only | `<link rel="icon">` - SVG favicons aren't universally supported yet, so both are provided |
 | `public/brand/apple-touch-icon-180.png` | rasterized icon-only | `<link rel="apple-touch-icon">` |
-| `public/brand/cougr-icon-512.png` | rasterized icon-only | social/OG image, app icon source |
+| `public/brand/Sunvest-icon-512.png` | rasterized icon-only | social/OG image, app icon source |
 
 All SVGs are plain vector paths (no external font or asset references), so they render identically
 anywhere without extra dependencies.

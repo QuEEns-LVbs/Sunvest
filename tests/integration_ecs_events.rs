@@ -9,10 +9,10 @@
 //! non-panicking execution are what these tests verify; event topic shape is
 //! validated by the macro expansion and the `#[contracttype]` constraint.
 
-use cougr_core::component::ComponentTrait;
-use cougr_core::ecs_events::ObservableComponentTrait;
-use cougr_core::impl_component_observed;
-use cougr_core::simple_world::SimpleWorld;
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::ecs_events::ObservableComponentTrait;
+use Sunvest_core::impl_component_observed;
+use Sunvest_core::simple_world::SimpleWorld;
 use soroban_sdk::{contracttype, Env};
 
 // ─── Test component types ─────────────────────────────────────────────────────
@@ -109,7 +109,7 @@ fn test_remove_component_observed_returns_false_when_absent() {
 
 #[test]
 fn test_plain_set_typed_does_not_emit_events() {
-    use cougr_core::component::Position;
+    use Sunvest_core::component::Position;
     use soroban_sdk::testutils::Events;
 
     let env = Env::default();

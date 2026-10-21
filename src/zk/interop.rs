@@ -1,7 +1,7 @@
-//! Snarkjs/Circom interoperability constructors for Cougr ZK types.
+//! Snarkjs/Circom interoperability constructors for Sunvest ZK types.
 //!
 //! Eliminates the manual byte-wiring needed to go from snarkjs output to
-//! Cougr types. Use `include_bytes!` to embed raw point bytes as compile-time
+//! Sunvest types. Use `include_bytes!` to embed raw point bytes as compile-time
 //! constants in your contract.
 //!
 //! ## Expected byte layout
@@ -16,7 +16,7 @@
 //!
 //! ## Example
 //! ```no_run
-//! use cougr_core::zk::{Groth16Proof, VerificationKey};
+//! use Sunvest_core::zk::{Groth16Proof, VerificationKey};
 //! use soroban_sdk::Env;
 //!
 //! // embed at build time:

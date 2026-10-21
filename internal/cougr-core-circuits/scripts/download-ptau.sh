@@ -41,7 +41,7 @@ PTAU_0="$KEYS/pot${POWER}_0000.ptau"
 PTAU_1="$KEYS/pot${POWER}_0001.ptau"
 snarkjs powersoftau new bn128 "$POWER" "$PTAU_0" -v
 snarkjs powersoftau contribute "$PTAU_0" "$PTAU_1" \
-  --name="cougr-local" -v -e="cougr-local-$(date +%s)"
+  --name="Sunvest-local" -v -e="Sunvest-local-$(date +%s)"
 snarkjs powersoftau prepare phase2 "$PTAU_1" "$PTAU"
 rm -f "$PTAU_0" "$PTAU_1"
 echo "generated $PTAU"

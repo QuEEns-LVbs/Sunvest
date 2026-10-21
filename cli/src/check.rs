@@ -1,4 +1,4 @@
-//! Hygiene check logic for `cougr check`.
+//! Hygiene check logic for `Sunvest check`.
 //!
 //! Mirrors the checks in `scripts/verify_hygiene.sh` and
 //! `scripts/enforce_hygiene.sh`, ported to Rust for cross-platform
@@ -18,7 +18,7 @@ use std::process::{exit, Command};
 
 /// Run hygiene checks.
 pub fn run(ctx: &CheckContext) -> Result<()> {
-    println!("=== Cougr Hygiene Check ===");
+    println!("=== Sunvest Hygiene Check ===");
     println!("Repository root : {}", ctx.repo_root.display());
     if ctx.examples.len() == 1 {
         println!("Checking example: {}", ctx.examples[0].name);
@@ -72,7 +72,7 @@ pub fn run(ctx: &CheckContext) -> Result<()> {
     }
 }
 
-/// Check a standalone project produced by `cougr new` or `cougr export`.
+/// Check a standalone project produced by `Sunvest new` or `Sunvest export`.
 /// Repository-only tracked-artifact checks do not apply outside a checkout.
 pub fn run_generated(project: &Path) -> Result<()> {
     for required in [

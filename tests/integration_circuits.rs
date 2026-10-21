@@ -1,10 +1,10 @@
-//! Integration tests for `cougr_core::circuits` with real pipeline VKs and proofs.
+//! Integration tests for `Sunvest_core::circuits` with real pipeline VKs and proofs.
 
-use cougr_core::circuits::{
+use Sunvest_core::circuits::{
     fair_dice, fog_of_war, hidden_cards, sealed_bid, test_fixtures, CircuitId, CircuitParams,
 };
-use cougr_core::zk::experimental::{FogOfWarSnapshot, FogOfWarTransition};
-use cougr_core::zk::ZKError;
+use Sunvest_core::zk::experimental::{FogOfWarSnapshot, FogOfWarTransition};
+use Sunvest_core::zk::ZKError;
 use soroban_sdk::{BytesN, Env};
 
 #[test]

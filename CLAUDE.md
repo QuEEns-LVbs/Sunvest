@@ -4,7 +4,7 @@ Instructions for AI assistants (Claude Code and others) working in this reposito
 
 ## Before writing code
 
-Read the doc that governs the area you're touching, don't guess at Cougr's conventions from general Rust or general Soroban knowledge:
+Read the doc that governs the area you're touching, don't guess at Sunvest's conventions from general Rust or general Soroban knowledge:
 
 | Touching... | Read first |
 |---|---|
@@ -27,7 +27,7 @@ Read the doc that governs the area you're touching, don't guess at Cougr's conve
 - Prefer the standards layer (`Ownable`, `AccessControl`, `Pausable`, `ExecutionGuard`, `BatchExecutor`, ...) over hand-rolling the same guard again. Check [docs/STANDARDS_LAYER.md](docs/STANDARDS_LAYER.md) before writing a new one.
 - Choose `SimpleWorld` vs `ArchetypeWorld`, and table vs sparse storage, based on the actual query/mutation shape, not by default. See [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 - Use `impl_component_observed!` for state a client needs to react to without polling; plain `impl_component!` otherwise. Don't emit events nobody consumes.
-- New examples depend on the published `cougr-core` from crates.io, not a path dependency, unless they exercise an API that genuinely isn't published yet, in which case follow the exception format in [examples/EXAMPLE_STANDARD.md § 1.1](examples/EXAMPLE_STANDARD.md).
+- New examples depend on the published `Sunvest-core` from crates.io, not a path dependency, unless they exercise an API that genuinely isn't published yet, in which case follow the exception format in [examples/EXAMPLE_STANDARD.md § 1.1](examples/EXAMPLE_STANDARD.md).
 
 ## Clean code
 

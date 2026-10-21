@@ -2,7 +2,7 @@
 import os
 import re
 
-# cougr-site/ lives directly under the repo root, so the source docs are
+# Sunvest-site/ lives directly under the repo root, so the source docs are
 # always right next to this script's own directory. No network clone needed.
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SITE_DIR)

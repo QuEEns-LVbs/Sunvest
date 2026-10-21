@@ -47,7 +47,7 @@ for (const event of events) {
 
 const fixtures = {
   generatedBy:
-    'packages/sdk-events/fixtures (cougr-core events on soroban-sdk Env::default(), no network)',
+    'packages/sdk-events/fixtures (Sunvest-core events on soroban-sdk Env::default(), no network)',
   events: events.map(({ kind, topics, value }) => ({
     kind,
     event: {

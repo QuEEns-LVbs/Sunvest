@@ -1,16 +1,16 @@
-//! Snake game components using cougr-core's ComponentTrait
+//! Snake game components using Sunvest-core's ComponentTrait
 //!
 //! This module demonstrates how to create custom game components that integrate
-//! with the cougr-core ECS framework for Soroban smart contracts.
+//! with the Sunvest-core ECS framework for Soroban smart contracts.
 
 #[cfg(test)]
-pub use cougr_core::component::Component;
-pub use cougr_core::component::{ComponentStorage, ComponentTrait};
+pub use Sunvest_core::component::Component;
+pub use Sunvest_core::component::{ComponentStorage, ComponentTrait};
 use soroban_sdk::{contracttype, symbol_short, Bytes, Env, Symbol};
 
 /// Position component - represents a point on the grid
 ///
-/// Uses cougr-core's ComponentTrait for standardized serialization,
+/// Uses Sunvest-core's ComponentTrait for standardized serialization,
 /// enabling efficient on-chain storage in the Stellar ledger.
 #[derive(Clone, Debug, PartialEq)]
 pub struct Position {
@@ -23,7 +23,7 @@ impl Position {
         Self { x, y }
     }
 
-    /// Convert to a cougr-core Component for storage
+    /// Convert to a Sunvest-core Component for storage
     #[cfg(test)]
     pub fn to_component(&self, env: &Env) -> Component {
         Component::new(Self::component_type(), self.serialize(env))
@@ -125,7 +125,7 @@ impl Direction {
 
 /// Direction component - stores the current movement direction
 ///
-/// Wraps the Direction enum to implement cougr-core's ComponentTrait.
+/// Wraps the Direction enum to implement Sunvest-core's ComponentTrait.
 #[derive(Clone, Debug)]
 pub struct DirectionComponent {
     pub direction: Direction,
@@ -263,7 +263,7 @@ impl ComponentTrait for Food {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use cougr_core::component::ComponentTrait;
+    use Sunvest_core::component::ComponentTrait;
 
     #[test]
     fn test_position_serialization() {

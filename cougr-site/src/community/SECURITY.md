@@ -2,7 +2,7 @@
 
 ## Status
 
-Cougr now defines a `1.0.0` stable contract for a scoped subset of the crate. Not every public subsystem is part of that stable guarantee.
+Sunvest now defines a `1.0.0` stable contract for a scoped subset of the crate. Not every public subsystem is part of that stable guarantee.
 
 Security-sensitive areas include:
 
@@ -30,14 +30,14 @@ The explicit compatibility story lives in [docs/COMPATIBILITY_PROMISES.md](../re
 
 ## Threat Model Expectations
 
-Cougr does not currently claim:
+Sunvest does not currently claim:
 
 - external audit coverage
 - formal verification
 - full production guarantees across all auth and privacy paths
 - stable compatibility guarantees for experimental modules
 
-Before adopting Cougr in security-critical deployments, review at minimum:
+Before adopting Sunvest in security-critical deployments, review at minimum:
 
 - auth and signer flows
 - replay handling
@@ -60,9 +60,9 @@ If you find a security issue:
 
 The monitored disclosure channel is GitHub Private Vulnerability Reporting:
 
-https://github.com/salazarsebas/Cougr/security/advisories/new
+https://github.com/salazarsebas/Sunvest/security/advisories/new
 
-`security@cougr.dev` is reserved as a future dedicated inbox and is not yet independently staffed. Do not rely on it for acknowledgment SLAs.
+`security@Sunvest.dev` is reserved as a future dedicated inbox and is not yet independently staffed. Do not rely on it for acknowledgment SLAs.
 
 ## Supported Versions
 

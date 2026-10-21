@@ -4,15 +4,15 @@
 
 This document is the high-signal answer to one question:
 
-- now that Cougr `1.0.0` is published, what is guaranteed?
+- now that Sunvest `1.0.0` is published, what is guaranteed?
 
 It is intentionally shorter than the full release checklist.
 
 ## Current Assessment
 
-Cougr `1.0.0` is published as `cougr-core` on crates.io:
+Sunvest `1.0.0` is published as `Sunvest-core` on crates.io:
 
-- https://crates.io/crates/cougr-core
+- https://crates.io/crates/Sunvest-core
 
 The published crate has a defendable stable contract for its curated product
 surface. That guarantee still depends on maintaining strict scope control

@@ -2,11 +2,11 @@
 
 {{description}}
 
-Generated with `cougr new --template {{template_id}}`, based on the canonical
-[`{{source_example}}`](https://github.com/salazarsebas/Cougr/tree/main/examples/{{source_example}})
+Generated with `Sunvest new --template {{template_id}}`, based on the canonical
+[`{{source_example}}`](https://github.com/salazarsebas/Sunvest/tree/main/examples/{{source_example}})
 example.
 
-> **Beta**: `cougr_core::session` is a Beta API. Expect the surface to move
+> **Beta**: `Sunvest_core::session` is a Beta API. Expect the surface to move
 > before 2.0.
 
 ## Purpose and pattern
@@ -61,7 +61,7 @@ entrypoint.
 4. If a session lapses before renewal, `fallback_tap` authorizes the same move
    through direct owner auth so the turn is not lost.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 | API | Why |
 | --- | --- |

@@ -160,9 +160,9 @@ export function render(state) {
   <circle cx="${SIZE-50}" cy="${SIZE+30}" r="7" fill="${COLORS.p2_piece}"/>
   <text x="${SIZE-38}" y="${SIZE+35}" font-size="13" fill="${COLORS.p2_piece}">${p2}</text>
 
-  <!-- Cougr watermark -->
+  <!-- Sunvest watermark -->
   <text x="${SIZE/2}" y="${SIZE+65}" text-anchor="middle" font-size="10"
-        fill="${COLORS.text_muted}" letter-spacing="2">COUGR · CHECKERS · MOVE ${move_number}</text>
+        fill="${COLORS.text_muted}" letter-spacing="2">Sunvest · CHECKERS · MOVE ${move_number}</text>
 `;
 
   svg += `</svg>`;

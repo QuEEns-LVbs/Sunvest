@@ -53,10 +53,10 @@ explicit storage and TTL strategy.
 5. The two advancing players stake in their new match. The final settlement
    records the champion.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 None. This example isolates the Soroban token interface and bracket escrow
-pattern; it does not use Cougr ECS, scheduler, auth, or standards APIs.
+pattern; it does not use Sunvest ECS, scheduler, auth, or standards APIs.
 
 ## Build and test commands
 

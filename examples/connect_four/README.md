@@ -1,16 +1,16 @@
 # Connect Four
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see `snake`.
 
-An on-chain Connect Four game built with the [Cougr](../../README.md) ECS framework on
+An on-chain Connect Four game built with the [Sunvest](../../README.md) ECS framework on
 Stellar Soroban.
 
 ## Purpose and pattern
 
 This example demonstrates a turn-based, perfect-information board game driven by
 gravity-based piece placement: a move only specifies a column, and the contract resolves
-which row the piece lands in before checking for a win. It showcases Cougr's
+which row the piece lands in before checking for a win. It showcases Sunvest's
 `ComponentTrait` pattern for typed, byte-serializable game state - components are plain
 Rust structs annotated with `#[contracttype]` that implement `ComponentTrait` directly,
 rather than being scanned through `SimpleWorld`/`SimpleQueryBuilder`. This is a
@@ -74,15 +74,15 @@ per-entry TTL management.
    reads `get_winner` to see who won (or `None` for a draw).
 6. `reset_game` can be called at any point to start a fresh game with the same two players.
 
-## Cougr APIs used
+## Sunvest APIs used
 
-- `cougr_core::component::ComponentTrait` - gives each component (`BoardComponent`,
+- `Sunvest_core::component::ComponentTrait` - gives each component (`BoardComponent`,
   `GameStateComponent`) a `component_type()` symbol and explicit byte-level
   `serialize`/`deserialize`. This was chosen because the game has one fixed-shape
   `ECSWorldState` per contract instance (a single board, two fixed player slots, one game-
   state record) rather than a dynamic population of entities that would benefit from
   `SimpleWorld`/`SimpleQueryBuilder` scanning - per the guidance in
-  [`EXAMPLE_STANDARD.md` §8](../EXAMPLE_STANDARD.md#8-cougr-api-usage-guidance), `SimpleWorld`
+  [`EXAMPLE_STANDARD.md` §8](../EXAMPLE_STANDARD.md#8-Sunvest-api-usage-guidance), `SimpleWorld`
   and `SimpleQueryBuilder` are for examples that store and query entities by component type,
   which doesn't apply here. `PlayerComponent` is also `#[contracttype]` but does not
   implement `ComponentTrait`, since it is embedded directly in `ECSWorldState` rather than

@@ -12,7 +12,7 @@
 //!
 //! ## Example
 //! ```no_run
-//! use cougr_core::zk::experimental::{BatchProofContext, hash_state_root};
+//! use Sunvest_core::zk::experimental::{BatchProofContext, hash_state_root};
 //! use soroban_sdk::{Bytes, Env};
 //!
 //! let env = Env::default();

@@ -1,7 +1,7 @@
 {
-  "name": "cougr-core-circuits-toolchain",
+  "name": "Sunvest-core-circuits-toolchain",
   "private": true,
-  "description": "Off-chain Circom/snarkjs pipeline for Cougr game circuits (not published)",
+  "description": "Off-chain Circom/snarkjs pipeline for Sunvest game circuits (not published)",
   "scripts": {
     "fixtures": "bun scripts/generate-fixtures.mjs",
     "pipeline": "bash scripts/run-pipeline.sh",

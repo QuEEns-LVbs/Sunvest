@@ -16,7 +16,7 @@ pub type OnRemoveHook = fn(entity_id: EntityId, component_type: &Symbol);
 ///
 /// # Example
 /// ```
-/// use cougr_core::runtime::HookRegistry;
+/// use Sunvest_core::runtime::HookRegistry;
 /// use soroban_sdk::{symbol_short, Bytes, Symbol};
 ///
 /// fn on_add(_entity_id: u32, _ctype: &Symbol, _data: &Bytes) {}
@@ -91,8 +91,8 @@ impl Default for HookRegistry {
 ///
 /// # Example
 /// ```
-/// use cougr_core::runtime::HookedWorld;
-/// use cougr_core::SimpleWorld;
+/// use Sunvest_core::runtime::HookedWorld;
+/// use Sunvest_core::SimpleWorld;
 /// use soroban_sdk::{symbol_short, Bytes, Env, Symbol};
 ///
 /// fn on_add(_entity_id: u32, _ctype: &Symbol, _data: &Bytes) {}

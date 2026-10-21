@@ -1,6 +1,6 @@
 # Sokoban
 
-A push-crate puzzle contract demonstrating `ArchetypeWorld`, Cougr's archetype-grouped ECS backend, and `ArchetypeQueryBuilder`'s `without_component` query for win detection.
+A push-crate puzzle contract demonstrating `ArchetypeWorld`, Sunvest's archetype-grouped ECS backend, and `ArchetypeQueryBuilder`'s `without_component` query for win detection.
 
 ## Purpose and pattern
 
@@ -57,7 +57,7 @@ Every call reads and rewrites the whole world blob. That is a deliberate simplif
 3. Step 2 repeats until every crate carries `OnGoal`, at which point `level_meta().solved` becomes `true` and further `push` calls panic.
 4. `level_meta` and `player_position` can be read at any time without mutating state.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 | API | Maturity | Why |
 | --- | --- | --- |

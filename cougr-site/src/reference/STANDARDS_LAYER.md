@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The standards layer introduces reusable, storage-aware contract primitives in the style of OpenZeppelin building blocks, but shaped for Cougr's Soroban-oriented single-crate model.
+The standards layer introduces reusable, storage-aware contract primitives in the style of OpenZeppelin building blocks, but shaped for Sunvest's Soroban-oriented single-crate model.
 
 These modules are meant to be composed into application contracts and account flows without depending on any example project.
 
@@ -75,7 +75,7 @@ Where authorization matters:
 - `AccessControl` checks the caller against the relevant admin role
 - `Pausable`, `RecoveryGuard`, and similar state machines leave the surrounding authorization decision to the integrating contract
 
-This is intentional. Cougr keeps authorization visible at the integration boundary instead of burying it in generic helpers.
+This is intentional. Sunvest keeps authorization visible at the integration boundary instead of burying it in generic helpers.
 
 ## Error Semantics
 
@@ -97,4 +97,4 @@ Important failure modes include:
 
 Status: Stable
 
-The standards layer is part of Cougr's frozen `1.0` stable contract. Integrators should still supply their own caller-auth composition where required, but the module interfaces and documented failure semantics are now part of the defended public surface.
+The standards layer is part of Sunvest's frozen `1.0` stable contract. Integrators should still supply their own caller-auth composition where required, but the module interfaces and documented failure semantics are now part of the defended public surface.

@@ -1,8 +1,8 @@
 #![no_std]
 
-use cougr_core::component::ComponentTrait;
-use cougr_core::component::Position as CorePosition;
-use cougr_core::event::Event;
+use Sunvest_core::component::ComponentTrait;
+use Sunvest_core::component::Position as CorePosition;
+use Sunvest_core::event::Event;
 use soroban_sdk::{contract, contractimpl, Env, Vec};
 
 pub mod components;

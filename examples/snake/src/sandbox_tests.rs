@@ -1,7 +1,7 @@
 #![cfg(test)]
 
 use crate::{SnakeContract, SnakeContractClient};
-use cougr_core::test::{GameHarness, Scenario};
+use Sunvest_core::test::{GameHarness, Scenario};
 use soroban_sdk::Env;
 
 #[test]

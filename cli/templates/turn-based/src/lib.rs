@@ -1,4 +1,4 @@
-//! {{crate_name}} - a Cougr game contract generated from the `{{template_id}}` template.
+//! {{crate_name}} - a Sunvest game contract generated from the `{{template_id}}` template.
 //!
 //! Two players alternate placing marks on a configured board until one lines
 //! up {{win_length}} or the board fills. It is the reference shape for any turn-based
@@ -21,9 +21,9 @@ mod test;
 use components::{Board, Players, TurnState, GAME_ENTITY, O_WINS, X_WINS};
 use systems::{advance, mark_for_turn, validate_move, MoveError};
 
-use cougr_core::game::SorobanGame;
-use cougr_core::impl_soroban_game;
-use cougr_core::simple_world::SimpleWorld;
+use Sunvest_core::game::SorobanGame;
+use Sunvest_core::impl_soroban_game;
+use Sunvest_core::simple_world::SimpleWorld;
 use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Address, Env, Symbol, Vec};
 
 // ─── API return types ─────────────────────────────────────────────────────────

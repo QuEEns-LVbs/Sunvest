@@ -1,6 +1,6 @@
 # Zero-Knowledge Integration & Protocol 25 X-Ray Research
 
-> Deep research on adding native ZK integrations to the Cougr engine, with special attention to Stellar Protocol 25 (X-Ray).
+> Deep research on adding native ZK integrations to the Sunvest engine, with special attention to Stellar Protocol 25 (X-Ray).
 
 ---
 
@@ -10,7 +10,7 @@
 2. [Current State of ZK on Stellar](#2-current-state-of-zk-on-stellar)
 3. [ZK in On-Chain Gaming](#3-zk-in-on-chain-gaming)
 4. [ZK Integration Patterns for ECS](#4-zk-integration-patterns-for-ecs)
-5. [Integration Proposal for Cougr](#5-integration-proposal-for-cougr)
+5. [Integration Proposal for Sunvest](#5-integration-proposal-for-Sunvest)
 6. [References](#6-references)
 
 ---
@@ -455,11 +455,11 @@ impl GameCircuit for MovementCircuit {
 
 ---
 
-## 5. Integration Proposal for Cougr
+## 5. Integration Proposal for Sunvest
 
 ### Module Architecture: `src/zk/`
 
-ZK functionality lives as an internal module within the single `cougr-core` crate. This is a **major expansion** of the crate - adding a complete zero-knowledge proof layer with cryptographic primitives, pre-built game circuits, verification systems, and ECS-integrated components. The developer experience stays simple: one dependency, one import path, no workspace juggling.
+ZK functionality lives as an internal module within the single `Sunvest-core` crate. This is a **major expansion** of the crate - adding a complete zero-knowledge proof layer with cryptographic primitives, pre-built game circuits, verification systems, and ECS-integrated components. The developer experience stays simple: one dependency, one import path, no workspace juggling.
 
 ```
 src/zk/
@@ -502,7 +502,7 @@ src/zk/
 └── testing.rs              // MockProof, MockCircuit, test_verification_key for unit testing
 ```
 
-This adds **~25 new source files** to `cougr-core`, representing a complete ZK layer that makes Cougr the first ECS game engine with native zero-knowledge proof support. Developers access everything through `cougr_core::zk::*` - no extra crate to add, no version mismatches to manage.
+This adds **~25 new source files** to `Sunvest-core`, representing a complete ZK layer that makes Sunvest the first ECS game engine with native zero-knowledge proof support. Developers access everything through `Sunvest_core::zk::*` - no extra crate to add, no version mismatches to manage.
 
 ### ZK Components as First-Class Citizens
 

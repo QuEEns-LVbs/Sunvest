@@ -7,13 +7,13 @@ extends SceneTree
 #
 # Run from clients/godot, with no editor UI:
 #
-#   godot --headless --path . --script res://addons/cougr_checkpoint/tests/run_tests.gd
+#   godot --headless --path . --script res://addons/Sunvest_checkpoint/tests/run_tests.gd
 #
 # The Rust half of the check is `cargo test` in clients/godot/checkpoint_vectors.
 
-const Payload := preload("res://addons/cougr_checkpoint/checkpoint_payload.gd")
-const State := preload("res://addons/cougr_checkpoint/checkpoint_state.gd")
-const Xdr := preload("res://addons/cougr_checkpoint/soroban_xdr.gd")
+const Payload := preload("res://addons/Sunvest_checkpoint/checkpoint_payload.gd")
+const State := preload("res://addons/Sunvest_checkpoint/checkpoint_state.gd")
+const Xdr := preload("res://addons/Sunvest_checkpoint/soroban_xdr.gd")
 
 # --- Vector inputs, matching checkpoint_vectors/src/lib.rs -------------------
 

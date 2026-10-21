@@ -1,13 +1,13 @@
 use soroban_sdk::contracterror;
 
-/// Error types for the Cougr ECS framework.
+/// Error types for the Sunvest ECS framework.
 ///
 /// Uses `#[contracterror]` for Soroban contract compatibility.
 /// Each variant maps to a `u32` error code for on-chain error reporting.
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
 #[repr(u32)]
-pub enum CougrError {
+pub enum SunvestError {
     /// Entity with the given ID was not found
     EntityNotFound = 1,
     /// Component not found for the given entity
@@ -24,5 +24,5 @@ pub enum CougrError {
     StorageError = 7,
 }
 
-/// Convenience type alias for Results using CougrError
-pub type CougrResult<T> = Result<T, CougrError>;
+/// Convenience type alias for Results using SunvestError
+pub type SunvestResult<T> = Result<T, SunvestError>;

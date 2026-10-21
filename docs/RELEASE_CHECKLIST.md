@@ -2,14 +2,14 @@
 
 ## Purpose
 
-This checklist records the release hardening gate for Cougr's `1.0` line.
+This checklist records the release hardening gate for Sunvest's `1.0` line.
 
 It is intentionally practical: release readiness depends on evidence in the repo
 and a package that can be consumed from crates.io.
 
 Published crate:
 
-- https://crates.io/crates/cougr-core
+- https://crates.io/crates/Sunvest-core
 
 ## API Contract
 
@@ -62,7 +62,7 @@ The `1.0.0` release is acceptable because:
 
 Current repo status:
 
-- `cougr-core` `1.0.0` has been published
+- `Sunvest-core` `1.0.0` has been published
 - release story is coherent enough for a defended `1.0.0`
 - remaining gaps are compatibility and maturity gaps, not onboarding ambiguity
 - the only unchecked gate in this file should be an actually unrun verification step

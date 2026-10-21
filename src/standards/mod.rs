@@ -1,4 +1,4 @@
-//! Reusable contract standards for Cougr integrations.
+//! Reusable contract standards for Sunvest integrations.
 //!
 //! The standards layer is intentionally framework-oriented rather than
 //! example-specific. Each standard is storage-backed where persistence matters,

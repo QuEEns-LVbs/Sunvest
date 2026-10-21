@@ -1,4 +1,4 @@
-//! Embedded, editable capability pieces for `cougr add`.
+//! Embedded, editable capability pieces for `Sunvest add`.
 
 use std::fs;
 use std::path::Path;

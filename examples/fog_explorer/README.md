@@ -45,7 +45,7 @@ Player exploration commitments and map layouts are stored in **Instance Storage*
 2. **Registration**: Explorer calls `register_explorer` to record their initial map state.
 3. **Exploration**: Explorer calls `explore` with a Groth16 proof to update their visible tiles and progress.
 
-## Cougr APIs used
+## Sunvest APIs used
 
 - `circuits::fog_of_war`: Configures and handles verification of private line-of-sight map calculations.
 - `zk::experimental::{FogOfWarSnapshot, FogOfWarTransition}`: Input structs for ZK state transition logic.

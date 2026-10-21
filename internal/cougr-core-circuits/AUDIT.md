@@ -1,8 +1,8 @@
-# Cougr Game Circuits - Trusted Setup Policy
+# Sunvest Game Circuits - Trusted Setup Policy
 
 ## Scope
 
-This folder contains **development/test** Circom circuits for `cougr_core::circuits`.
+This folder contains **development/test** Circom circuits for `Sunvest_core::circuits`.
 Circuits use Poseidon commitments and game-specific constraints; production deploys
 still require an independent phase-2 ceremony per circuit variant.
 
@@ -31,7 +31,7 @@ still require an independent phase-2 ceremony per circuit variant.
   and publishing a verifiable ceremony record.
 - Store proving keys off-repo; embed only verification keys in contracts.
 - Record ceremony participants, entropy sources, and artifact hashes in your release notes.
-- Re-run Cougr integration tests after VK swap (`GameCircuitSpec::with_verification_key`). See
+- Re-run Sunvest integration tests after VK swap (`GameCircuitSpec::with_verification_key`). See
   [PRODUCTION_KEYS.md](./PRODUCTION_KEYS.md) for the step-by-step path from a ceremony's `<circuit>_vk.json` to
   `with_verification_key`, including a byte-layout pitfall worth checking before you ship.
 

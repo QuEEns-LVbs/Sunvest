@@ -4,7 +4,7 @@
 
 ## Site information architecture
 
-A single documentation site (see [10-repository-strategy.md](./10-repository-strategy.md) for why it becomes its own repository, `cougr-site`) with six top-level sections, in this order because it mirrors the developer journey in [08-ux-strategy.md](./08-ux-strategy.md):
+A single documentation site (see [10-repository-strategy.md](./10-repository-strategy.md) for why it becomes its own repository, `Sunvest-site`) with six top-level sections, in this order because it mirrors the developer journey in [08-ux-strategy.md](./08-ux-strategy.md):
 
 1. **Start** (landing page, Getting Started, Build Your First Game tutorial)
 2. **Learn** (concepts, patterns, guides)
@@ -17,7 +17,7 @@ A single documentation site (see [10-repository-strategy.md](./10-repository-str
 
 | Document | Status | Notes |
 |---|---|---|
-| Vision / Mission | **Gap** | The README states a value proposition but there is no standalone Vision doc separating "why Cougr exists" from "how to use it." Should be short, one page, and should state the on-chain-logic-layer positioning from [00-executive-summary.md](./00-executive-summary.md) plainly. |
+| Vision / Mission | **Gap** | The README states a value proposition but there is no standalone Vision doc separating "why Sunvest exists" from "how to use it." Should be short, one page, and should state the on-chain-logic-layer positioning from [00-executive-summary.md](./00-executive-summary.md) plainly. |
 | Architecture | Exists (`ARCHITECTURE.md`) | Strong. Needs to be surfaced on the site's Learn section, not just linked from the README. |
 | Roadmap | **Gap** | No `ROADMAP.md` exists anywhere. Should be a public, living version of [13-roadmap.md](./13-roadmap.md), updated quarterly, not a one-time publish. |
 | Glossary | **Gap** | Terms like component, system, world, archetype, session key, observed component, curated surface are used precisely in the code and docs but never defined in one place for a newcomer. |
@@ -31,9 +31,9 @@ A single documentation site (see [10-repository-strategy.md](./10-repository-str
 | Build Your First Game (tutorial) | **Gap, highest priority** | The single most important missing document per [08-ux-strategy.md](./08-ux-strategy.md). Sequential, one game, no branching. |
 | Game Patterns (by problem, not by module) | **Gap** | `PATTERNS.md` exists but is organized by API surface; needs a "by problem" companion or restructure per [08-ux-strategy.md](./08-ux-strategy.md) stage 4. |
 | On-Chain / Off-Chain Boundary Guide | **Gap, second priority** | Identified as the highest-leverage missing content in [04-onchain-gaming-research.md](./04-onchain-gaming-research.md). |
-| Smart Contract Patterns (Soroban-specific, not game-specific) | Partial (scattered across `PATTERNS.md`, `STANDARDS_LAYER.md`) | Should be consolidated into one Learn-section page distinguishing "Cougr patterns" from "general Soroban patterns" so readers know which parts are portable knowledge. |
+| Smart Contract Patterns (Soroban-specific, not game-specific) | Partial (scattered across `PATTERNS.md`, `STANDARDS_LAYER.md`) | Should be consolidated into one Learn-section page distinguishing "Sunvest patterns" from "general Soroban patterns" so readers know which parts are portable knowledge. |
 | Testing Guide | **Gap** | `GameHarness`/`Scenario`/`SnapshotAssert` exist and are used across 3,700+ lines of tests but have no standalone guide. Named explicitly in [08-ux-strategy.md](./08-ux-strategy.md) stage 5. |
-| Deployment Guide | Partial (README dev commands) | Should explicitly hand off to the `stellar` CLI with a short, current recipe, consistent with the decision in [06-product-strategy.md](./06-product-strategy.md) not to wrap deployment in Cougr's own CLI. |
+| Deployment Guide | Partial (README dev commands) | Should explicitly hand off to the `stellar` CLI with a short, current recipe, consistent with the decision in [06-product-strategy.md](./06-product-strategy.md) not to wrap deployment in Sunvest's own CLI. |
 
 ## Reference documents
 
@@ -43,7 +43,7 @@ A single documentation site (see [10-repository-strategy.md](./10-repository-str
 | ECS Core reference | Exists (`ECS_CORE.md`) | Good. |
 | Account Kernel reference | Exists (`ACCOUNT_KERNEL.md`) | Good, should gain the Beta-caveat callout treatment described in [11-skills-strategy.md](./11-skills-strategy.md). |
 | Standards Layer reference | Exists (`STANDARDS_LAYER.md`) | Good, should adopt the "OpenZeppelin of Soroban gaming" framing from [06-product-strategy.md](./06-product-strategy.md). |
-| Privacy Model / ZK reference | Exists (`PRIVACY_MODEL.md`) | Should prominently surface the trusted-setup production warning, not bury it in `internal/cougr-core-circuits/AUDIT.md` where a typical user won't find it. |
+| Privacy Model / ZK reference | Exists (`PRIVACY_MODEL.md`) | Should prominently surface the trusted-setup production warning, not bury it in `internal/Sunvest-core-circuits/AUDIT.md` where a typical user won't find it. |
 | Feature Flags reference | Exists (`FEATURE_FLAGS.md`) | Good. |
 | Performance guide | Exists (`PERFORMANCE.md`) | Good, should link the resource-cost reporting work from [04-onchain-gaming-research.md](./04-onchain-gaming-research.md) once built. |
 | Compatibility Promises / API Contract / Migration Guide | Exist | Good, keep as-is; these are exactly the kind of honest-by-default documents worth preserving as a norm. |
@@ -58,7 +58,7 @@ A single documentation site (see [10-repository-strategy.md](./10-repository-str
 | Color palette | **Gap** | Part of the branding guide. |
 | Typography | **Gap** | Part of the branding guide. |
 | Design tokens | **Gap** | Part of the branding guide. |
-| UI guidelines | **Gap** | For anyone building a client (frontend) against Cougr; should draw on the `murdoku` frontend as the first worked reference. |
+| UI guidelines | **Gap** | For anyone building a client (frontend) against Sunvest; should draw on the `murdoku` frontend as the first worked reference. |
 | UX guidelines | **Gap** | Player-facing UX guidance (wallet/session UX especially), distinct from developer UX covered in [08-ux-strategy.md](./08-ux-strategy.md). |
 | Accessibility | **Gap** | Should apply to both the docs site itself and guidance for client builders; currently entirely unaddressed anywhere in the project. |
 

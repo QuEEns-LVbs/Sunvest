@@ -1,16 +1,16 @@
 # Murdoku
 
-> **Transitional example**: This example uses an older Cougr pattern and is preserved
+> **Transitional example**: This example uses an older Sunvest pattern and is preserved
 > for compatibility reference. For the current recommended approach, see [`snake`](../snake/).
 
-Murdoku is a murder mystery logic puzzle built with the [Cougr](../../README.md) ECS framework on Stellar Soroban. It demonstrates how to combine Entity Component System (ECS) game state, Pollar social logins, session key authorization, and zero-knowledge proof verification for privacy-preserving puzzle solving.
+Murdoku is a murder mystery logic puzzle built with the [Sunvest](../../README.md) ECS framework on Stellar Soroban. It demonstrates how to combine Entity Component System (ECS) game state, Pollar social logins, session key authorization, and zero-knowledge proof verification for privacy-preserving puzzle solving.
 
 ## Purpose and Pattern
 
 Murdoku is an on-chain logic puzzle that combines Sudoku-style Latin square constraints with murder mystery storytelling. Players place suspects (e.g., characters, weapons, rooms) on a grid while satisfying constraints provided by clues (e.g., "The suspect with the knife is not in the same row as the butler"). 
 
-This example showcases the canonical reference architecture for a full-stack game within the Cougr ecosystem:
-* **Entity Component System (ECS)**: Separation of game state, input validation, puzzle constraint checks, and win conditions using the Cougr ECS engine.
+This example showcases the canonical reference architecture for a full-stack game within the Sunvest ecosystem:
+* **Entity Component System (ECS)**: Separation of game state, input validation, puzzle constraint checks, and win conditions using the Sunvest ECS engine.
 * **Social Authentication & Session Keys**: Account abstraction utilizing Pollar for embedded wallet logins and scoped session key creation (`SessionBuilder`) to support non-intrusive gameplay transactions.
 * **ZK Privacy Layer**: The solution is never stored in plaintext on-chain. Instead, puzzle creators submit a cryptographic commitment (Poseidon2 hash of the solution + salt) and a Groth16 verifier key. Players prove they know a valid solution by submitting a Groth16 zero-knowledge proof, without revealing the solution itself.
 
@@ -35,7 +35,7 @@ Browser (Vite + React)
   ├── components.rs - ECS components (Board, Suspect, GameState)
   ├── systems.rs - validation, move execution, and completion systems
   ├── types.rs - domain types (Clues, Suspects, GridConfiguration)
-  └── auth.rs - session keys, CougrAccount wiring
+  └── auth.rs - session keys, SunvestAccount wiring
         │
         ▼
   Stellar Testnet (Soroban RPC)
@@ -110,9 +110,9 @@ In ZK mode, the following additional storage keys are used:
 
 ---
 
-## Cougr APIs Used
+## Sunvest APIs Used
 
-Murdoku is built on the core APIs of the Cougr framework.
+Murdoku is built on the core APIs of the Sunvest framework.
 
 | API / Module | Used For | Location |
 |---|---|---|
@@ -285,4 +285,4 @@ cargo test --features zk
 
 ## Classification
 
-Marked as **Canonical**. Murdoku is the reference full-stack example for Cougr, showcasing how to build games that combine ECS, session-key-based social logins (via Pollar), and multi-step transaction authorization. Use this as the template for production-grade full-stack game contracts.
+Marked as **Canonical**. Murdoku is the reference full-stack example for Sunvest, showcasing how to build games that combine ECS, session-key-based social logins (via Pollar), and multi-step transaction authorization. Use this as the template for production-grade full-stack game contracts.

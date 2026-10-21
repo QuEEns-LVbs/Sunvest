@@ -1,9 +1,9 @@
-//! Pokémon Mini game components using cougr-core's ComponentTrait
+//! Pokémon Mini game components using Sunvest-core's ComponentTrait
 //!
 //! This module demonstrates how to create custom game components for a
 //! Pokémon-style mini game on the Stellar blockchain via Soroban.
 
-pub use cougr_core::component::{ComponentStorage, ComponentTrait};
+pub use Sunvest_core::component::{ComponentStorage, ComponentTrait};
 use soroban_sdk::{contracttype, symbol_short, Bytes, Env, Symbol};
 
 // ============================================================================

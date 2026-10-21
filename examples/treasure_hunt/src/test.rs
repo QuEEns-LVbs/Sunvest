@@ -1,5 +1,5 @@
 use super::*;
-use cougr_core::privacy::stable::{to_on_chain_proof, MerkleTree, OnChainMerkleProof};
+use Sunvest_core::privacy::stable::{to_on_chain_proof, MerkleTree, OnChainMerkleProof};
 extern crate alloc;
 use alloc::vec::Vec as StdVec;
 use soroban_sdk::{testutils::Address as _, Address, Env};

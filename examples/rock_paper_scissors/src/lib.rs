@@ -1,6 +1,6 @@
 #![no_std]
 
-use cougr_core::impl_component;
+use Sunvest_core::impl_component;
 use soroban_sdk::{
     contract, contractimpl, contracttype, symbol_short, Address, Bytes, BytesN, Env, Symbol,
 };
@@ -63,7 +63,7 @@ pub struct MatchState {
     pub round: u32,
 }
 
-impl cougr_core::component::ComponentTrait for MatchState {
+impl Sunvest_core::component::ComponentTrait for MatchState {
     fn component_type() -> Symbol {
         symbol_short!("match")
     }

@@ -4,14 +4,14 @@
 //! server would: build a policy, validate it, mutate the origin allowlist at
 //! runtime, and evaluate preflight and actual requests.
 
-use cougr_core::cors::{
+use Sunvest_core::cors::{
     CorsConfig, CorsError, OriginAllowlist, PreflightDecision, MAX_ALLOWED_MAX_AGE_SECONDS,
     MODULE_VERSION,
 };
 
 fn base_config() -> CorsConfig {
     let mut config = CorsConfig::new();
-    config.origins.add("https://app.cougr.test").unwrap();
+    config.origins.add("https://app.Sunvest.test").unwrap();
     config.allowed_methods = vec!["GET".to_string(), "POST".to_string()];
     config.allowed_headers = vec!["X-Game-Token".to_string()];
     config.exposed_headers = vec!["X-Game-Version".to_string()];
@@ -23,16 +23,16 @@ fn validated_policy_accepts_legitimate_preflight() {
     let config = base_config();
     config.validate().expect("baseline policy must validate");
 
-    let decision = config.evaluate_preflight("https://app.cougr.test", "POST", &["X-Game-Token"]);
+    let decision = config.evaluate_preflight("https://app.Sunvest.test", "POST", &["X-Game-Token"]);
     assert!(decision.allowed);
     assert_eq!(
         decision.allow_origin.as_deref(),
-        Some("https://app.cougr.test")
+        Some("https://app.Sunvest.test")
     );
     assert_eq!(decision.allow_methods.as_deref(), Some("GET, POST"));
     // Safelisted headers ride along without configuration.
     let with_safe = config.evaluate_preflight(
-        "https://app.cougr.test",
+        "https://app.Sunvest.test",
         "GET",
         &["accept-language", "X-Game-Token"],
     );
@@ -110,8 +110,8 @@ fn preflight_denies_disallowed_requests_without_headers() {
 
     for (origin, method, headers) in [
         ("https://intruder.example", "GET", &[][..]),
-        ("https://app.cougr.test", "DELETE", &[][..]),
-        ("https://app.cougr.test", "GET", &["X-Sneaky"][..]),
+        ("https://app.Sunvest.test", "DELETE", &[][..]),
+        ("https://app.Sunvest.test", "GET", &["X-Sneaky"][..]),
         ("garbage", "GET", &[][..]),
     ] {
         let decision = config.evaluate_preflight(origin, method, headers);
@@ -143,17 +143,17 @@ fn evaluate_methods_deny_after_runtime_mutation_breaks_validation() {
 
     assert!(
         config
-            .evaluate_preflight("https://app.cougr.test", "GET", &[])
+            .evaluate_preflight("https://app.Sunvest.test", "GET", &[])
             .allowed
     );
 
     config.allowed_methods.push("*".to_string());
     assert_eq!(config.validate(), Err(CorsError::CredentialsWithWildcard));
     assert_eq!(
-        config.evaluate_preflight("https://app.cougr.test", "GET", &[]),
+        config.evaluate_preflight("https://app.Sunvest.test", "GET", &[]),
         PreflightDecision::denied()
     );
-    assert_eq!(config.response_allow_origin("https://app.cougr.test"), None);
+    assert_eq!(config.response_allow_origin("https://app.Sunvest.test"), None);
 }
 
 #[test]

@@ -1,10 +1,10 @@
-//! Fair dice helpers for Cougr ZK circuits.
+//! Fair dice helpers for Sunvest ZK circuits.
 //!
 //! WARNING: This module uses embedded proving keys that are for TESTING ONLY.
 //! Do NOT use these keys in a production game; a trusted setup is required.
 
-use cougr_core::circuits::fair_dice;
-use cougr_core::zk::Groth16Proof;
+use Sunvest_core::circuits::fair_dice;
+use Sunvest_core::zk::Groth16Proof;
 use soroban_sdk::{BytesN, Env};
 
 /// Verify a dice roll against a seed commitment.
@@ -24,7 +24,7 @@ pub fn verify_roll(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use cougr_core::circuits::{test_fixtures, CircuitId};
+    use Sunvest_core::circuits::{test_fixtures, CircuitId};
     use soroban_sdk::Env;
 
     #[test]
