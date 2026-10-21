@@ -1,6 +1,13 @@
 # Rust
 target/
 
+# Node.js apps
+**/node_modules/
+**/dist/
+**/.next/
+**/coverage/
+*.tsbuildinfo
+
 # Cargo
 **/*.rs.bk
 *.pdb

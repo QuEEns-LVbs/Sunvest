@@ -74,17 +74,13 @@ Sunvest connects the two. Users link their solar system (or log it manually), an
 
 ```
 sunvest/
-├── packages/
-│   ├── contracts/     # @sunvest/contracts — Soroban smart contracts (Rust)
-│   ├── gateway/       # @sunvest/gateway   — Device data ingestion and verification (TypeScript)
-│   ├── api/           # @sunvest/api       — Backend API, chat, and payments (Node.js)
-│   ├── brain/         # @sunvest/brain     — AI advisor and news digest (TypeScript + Python)
-│   └── app/           # @sunvest/app       — Mobile-first PWA / React Native client
+├── backend/           # NestJS API
+├── frontend/          # Next.js app
+├── packages/          # Shared SDKs and design tokens
+├── clients/           # Stellar client examples
+├── src/               # Soroban game engine
 ├── docs/              # Architecture, methodology, API reference
-├── scripts/           # Testnet bootstrap, seed data, deploy helpers
-├── audits/            # Smart contract audit reports
-├── pnpm-workspace.yaml
-├── turbo.json
+├── Cargo.toml         # Rust workspace
 └── README.md          ← you are here
 ```
 
@@ -161,7 +157,7 @@ POST /v1/payments/send                  Send XLM or USDC to a friend
 GET  /v1/market/watchlist               Read-only market data
 ```
 
-**Stack:** Node.js · Fastify · WebSockets · PostgreSQL · Redis · @stellar/stellar-sdk
+**Stack:** Node.js · NestJS · WebSockets · PostgreSQL · Redis · @stellar/stellar-sdk
 
 ### @sunvest/brain
 The AI layer, kept separate so models can be swapped or upgraded independently.
@@ -195,7 +191,7 @@ The user-facing app, built mobile-first for low-bandwidth devices with offline s
 | `/market` | Read-only watchlist and news |
 | `/refer` | Referral link and status |
 
-**Stack:** Next.js (PWA) or React Native · TailwindCSS · @stellar/stellar-sdk · Freighter / LOBSTR / xBull · Recharts
+**Stack:** Next.js · TailwindCSS · @stellar/stellar-sdk · Freighter / LOBSTR / xBull · Recharts
 
 ---
 
@@ -281,7 +277,6 @@ If sponsor funding runs low, rewards scale down through daily caps rather than b
 ```bash
 git clone https://github.com/sunvest-protocol/sunvest.git
 cd sunvest
-pnpm install
 ```
 
 ### Environment
@@ -293,17 +288,17 @@ cp .env.example .env
 
 ### Run in development
 ```bash
-pnpm dev
-# or run a single package
-pnpm --filter @sunvest/app dev
-pnpm --filter @sunvest/gateway dev
+pnpm --dir backend start:dev
+pnpm --dir frontend dev
 ```
 
 ### Build and test
 ```bash
-pnpm turbo build
-pnpm turbo test
-cd packages/contracts && cargo test
+pnpm --dir backend build
+pnpm --dir backend test
+pnpm --dir frontend build
+pnpm --dir frontend lint
+cargo test --workspace
 ```
 
 ### Deploy contracts to Testnet
